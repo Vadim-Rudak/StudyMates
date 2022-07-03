@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#5281b9"
+    tools:context=".ui.door.view.Reg">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_top_window"
+        style="@style/CustomToolbarReg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="@string/reg_name_page"
+        app:titleTextColor="@color/white" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_top_window"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="-16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/InputLogin"
+                android:layout_width="369dp"
+                android:layout_height="61dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginHorizontal="15dp"
+                android:backgroundTint="#9CC0E4"
+                android:ems="10"
+                android:hint="@string/reg_text_inp1"
+                android:inputType="none|textPersonName"
+                android:maxLength="40"
+                android:textColor="@color/white"
+                android:textColorHint="#9CC0E4" />
+
+            <EditText
+                android:id="@+id/InputPassword"
+                android:layout_width="369dp"
+                android:layout_height="61dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginHorizontal="15dp"
+                android:backgroundTint="#9CC0E4"
+                android:ems="10"
+                android:hint="@string/reg_text_inp2"
+                android:inputType="textPersonName|textPassword"
+                android:maxLength="40"
+                android:textColor="@color/white"
+                android:textColorHint="#9CC0E4" />
+
+            <EditText
+                android:id="@+id/InputPassword2"
+                android:layout_width="369dp"
+                android:layout_height="61dp"
+                android:layout_marginTop="28dp"
+                android:layout_marginHorizontal="15dp"
+                android:backgroundTint="#9CC0E4"
+                android:ems="10"
+                android:hint="@string/reg_text_inp3"
+                android:inputType="textPersonName|textPassword"
+                android:maxLength="40"
+                android:textColor="@color/white"
+                android:textColorHint="#9CC0E4" />
+
+            <EditText
+                android:id="@+id/InputLastName"
+                android:layout_width="369dp"
+                android:layout_height="61dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginHorizontal="15dp"
+                android:backgroundTint="#9CC0E4"
+                android:ems="10"
+                android:hint="@string/reg_text_inp4"
+                android:inputType="none|textPersonName"
+                android:maxLength="40"
+                android:textColor="@color/white"
+                android:textColorHint="#9CC0E4" />
+
+            <EditText
+                android:id="@+id/InputName"
+                android:layout_width="369dp"
+                android:layout_height="61dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginHorizontal="15dp"
+                android:backgroundTint="#9CC0E4"
+                android:ems="10"
+                android:hint="@string/reg_text_inp5"
+                android:inputType="none|textPersonName"
+                android:maxLength="40"
+                android:textColor="@color/white"
+                android:textColorHint="#9CC0E4" />
+
+            <EditText
+                android:id="@+id/InputPatronymic"
+                android:layout_width="369dp"
+                android:layout_height="61dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginHorizontal="15dp"
+                android:backgroundTint="#9CC0E4"
+                android:ems="10"
+                android:hint="@string/reg_text_inp6"
+                android:inputType="none|textPersonName"
+                android:maxLength="40"
+                android:textColor="@color/white"
+                android:textColorHint="#9CC0E4" />
+
+            <EditText
+                android:id="@+id/InputDateBirthday"
+                android:layout_width="369dp"
+                android:layout_height="61dp"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="30dp"
+                android:backgroundTint="#9CC0E4"
+                android:ems="10"
+                android:hint="@string/reg_text_inp7"
+                android:inputType="date|none|textPersonName"
+                android:maxLength="40"
+                android:textColor="@color/white"
+                android:textColorHint="#9CC0E4" />
+
+            <EditText
+                android:id="@+id/InputNumClass"
+                android:layout_width="369dp"
+                android:layout_height="61dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginHorizontal="15dp"
+                android:backgroundTint="#9CC0E4"
+                android:ems="10"
+                android:hint="@string/reg_text_inp8"
+                android:inputType="none|textPersonName"
+                android:maxLength="40"
+                android:textColor="@color/white"
+                android:textColorHint="#9CC0E4" />
+
+            <Button
+                android:id="@+id/BtnReg"
+                android:layout_width="369dp"
+                android:layout_height="55dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_margin="20dp"
+                android:background="#6796CC"
+                android:text="@string/reg_text_btn"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

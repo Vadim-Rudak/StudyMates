@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:splitMotionEvents = "false"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="280dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <Button
+                android:id="@+id/BtnOtv1"
+                style="@style/button_numb_otvet"
+                android:text="@string/text_ot"
+                android:textAlignment="textStart" />
+
+            <Button
+                android:id="@+id/BtnOtv2"
+                style="@style/button_numb_otvet"
+                android:text="@string/text_ot"
+                android:textAlignment="textStart" />
+
+            <Button
+                android:id="@+id/BtnOtv3"
+                style="@style/button_numb_otvet"
+                android:text="@string/text_ot"
+                android:textAlignment="textStart" />
+
+            <Button
+                android:id="@+id/BtnOtv4"
+                style="@style/button_numb_otvet"
+                android:text="@string/text_ot"
+                android:textAlignment="textStart" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/TextQuestion"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
+            android:text="TextView"
+            android:textColor="#000000"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnOk"
+            android:layout_width="350dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="159dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="159dp"
+            android:background="@drawable/bg_but"
+            android:text="@string/text_vb"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+        <ImageView
+            android:id="@+id/image_ok_question"
+            android:layout_width="wrap_content"
+            android:layout_height="180dp"
+            android:src="@drawable/image_ok_quest"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.177" />
+
+        <TextView
+            android:id="@+id/Ok_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/fvg"
+            android:text="@string/text_ok_question"
+            android:textAlignment="center"
+            android:textColor="#6767bb"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/image_ok_question" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

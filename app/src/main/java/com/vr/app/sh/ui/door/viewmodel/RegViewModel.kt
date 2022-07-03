@@ -1,0 +1,91 @@
+package com.vr.app.sh.ui.door.viewmodel
+
+import android.app.AlertDialog
+import android.content.Context
+import android.content.DialogInterface
+import android.text.TextUtils
+import android.widget.Toast
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import com.vr.app.sh.data.api.NetworkService
+import com.vr.app.sh.domain.UseCase.InternetConnection
+import com.vr.app.sh.domain.UseCase.Registration
+import kotlinx.coroutines.*
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
+import org.json.JSONObject
+
+class RegViewModel(val registration: Registration,val internetConnection: InternetConnection): ViewModel() {
+
+    val errorMessage = MutableLiveData<String>()
+    val statusRegistration = MutableLiveData<Boolean>()
+    var job: Job? = null
+
+    fun errorMessage(textMessage:String,context: Context){
+        val alertDialog = AlertDialog.Builder(context)
+        alertDialog.setTitle("Ошибка")
+        alertDialog.setMessage(textMessage)
+        alertDialog.setPositiveButton("OK", DialogInterface.OnClickListener { dialogInterface, i ->
+            dialogInterface.dismiss()
+        })
+        alertDialog.show()
+    }
+
+    fun registration(
+        login:String,
+        password1:String,
+        password2:String,
+        name:String,
+        last_name:String,
+        patronymic:String,
+        date_birthday:String,
+        num_class: Int
+    ){
+        if (internetConnection.UseInternet()){
+            if (!TextUtils.isEmpty(login.trim())&&!TextUtils.isEmpty(password1.trim())
+                &&!TextUtils.isEmpty(password2.trim())){
+                if (password1.equals(password2)){
+                    job = CoroutineScope(Dispatchers.IO).launch {
+
+                        val reg = registration.execute(JSONObjectUser(login,password1,name,last_name,patronymic,
+                        date_birthday,num_class))
+
+                        withContext(Dispatchers.Main) {
+                            if (reg.status_reg == true) {
+                                statusRegistration.value = true
+                            } else {
+                                errorMessage.value = reg.message
+                            }
+                        }
+                    }
+                }else{
+                    errorMessage.value = "Пароли не совпадают"
+                }
+            }else{
+                errorMessage.value = "Заполните все поля"
+            }
+        }else{
+            errorMessage.value = "Нет подключения к интернету"
+        }
+    }
+
+    fun JSONObjectUser(login:String,password:String,name:String,last_name:String,patronymic:String,date_birthday:String,num_class:Int): RequestBody {
+        val jsonObject = JSONObject()
+        jsonObject.put("login", login)
+        jsonObject.put("password", password)
+        jsonObject.put("name", name)
+        jsonObject.put("last_name", last_name)
+        jsonObject.put("patronymic", patronymic)
+        jsonObject.put("date_birthday", date_birthday)
+        jsonObject.put("num_class", num_class)
+
+        val jsonObjectString = jsonObject.toString()
+        return jsonObjectString.toRequestBody("application/json".toMediaTypeOrNull())
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        job?.cancel()
+    }
+}

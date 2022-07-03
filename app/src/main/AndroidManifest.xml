@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.vr.app.sh">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:hardwareAccelerated="false"
+        android:icon="@drawable/book_image"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:requestLegacyExternalStorage="true"
+        android:roundIcon="@drawable/book_image"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.SH"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".ui.tests.view.addTest.AddQuestion"
+            android:exported="false"
+            android:theme="@style/Theme.Book"/>
+        <activity
+            android:name=".ui.tests.view.addTest.AddTest"
+            android:exported="false"
+            android:theme="@style/Theme.Book"/>
+        <activity
+            android:name=".ui.tests.view.result.ResultTest"
+            android:exported="false"
+            android:theme="@style/Theme.Book" />
+        <activity
+            android:name=".ui.tests.view.test.WindowTest"
+            android:exported="false"
+            android:theme="@style/Theme.Book" />
+        <activity
+            android:name=".ui.tests.view.listTests.WindowTestsNames"
+            android:exported="false"
+            android:theme="@style/Theme.Book" />
+        <activity
+            android:name=".ui.tests.view.subjects.ActivitySubjects"
+            android:exported="false"
+            android:theme="@style/Theme.Book" />
+        <activity
+            android:name=".ui.books.view.AddBook"
+            android:exported="false"
+            android:theme="@style/Theme.Book" />
+        <activity
+            android:name=".ui.books.view.ReadPDF"
+            android:exported="false"
+            android:theme="@style/Theme.Book" />
+        <activity
+            android:name=".ui.books.view.Books"
+            android:exported="false"
+            android:theme="@style/Theme.Book" />
+        <activity
+            android:name=".ui.menu.view.TopMenu"
+            android:exported="false"
+            android:theme="@style/Theme.Book" />
+        <activity
+            android:name=".ui.door.view.Reg"
+            android:exported="false"
+            android:theme="@style/Theme.Book" />
+        <activity
+            android:name=".ui.door.view.Authoriz"
+            android:exported="true"
+            android:theme="@style/Theme.Book">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

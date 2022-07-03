@@ -1,0 +1,155 @@
+<resources>
+
+    <string name="app_name">SchoolProg</string>
+    <string name="door_in_btn1">Войти</string>
+    <string name="door_in_btn2">Зарегистрироваться</string>
+    <string name="door_in_et1">Введите имя</string>
+    <string name="door_in_et2">Введите пароль</string>
+
+    <string name="reg_text_btn">Зарегистрироваться</string>
+    <string name="reg_text_inp1">Логин</string>
+    <string name="reg_text_inp2">Пароль</string>
+    <string name="reg_text_inp3">Подтвердите пароль</string>
+    <string name="reg_text_inp4">Фамилия</string>
+    <string name="reg_text_inp5">Имя</string>
+    <string name="reg_text_inp6">Отчество</string>
+    <string name="reg_text_inp7">Дата рождения</string>
+    <string name="reg_text_inp8">Номер класса</string>
+    <string name="reg_name_page">Регистрация нового пользователя</string>
+
+
+    <style name="CustomToolbarReg" parent="Theme.AppCompat">
+
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:background">#5281b9</item>
+        <item name="android:minHeight">?attr/actionBarSize</item>
+        <item name="android:theme">?attr/actionBarTheme</item>
+        <item name="fontFamily">@font/fvg</item>
+    </style>
+
+    <style name="CustomToolbarTopMenu" parent="Theme.AppCompat">
+
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:background">@drawable/toolbar_background</item>
+        <item name="android:minHeight">?attr/actionBarSize</item>
+        <item name="android:theme">?attr/actionBarTheme</item>
+        <item name="fontFamily">@font/fvg</item>
+    </style>
+
+
+    <style name="book_btn" parent="TextAppearance.AppCompat.Button">
+
+        <item name="android:layout_width">193dp</item>
+        <item name="android:layout_height">170dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@drawable/background_btn</item>
+        <item name="android:gravity">center|bottom</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="fontFamily">@font/fvg</item>
+        <item name="android:textColor">@drawable/text_color_btn</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:paddingBottom">20dp</item>
+
+    </style>
+
+    <string name="text_get_books_internet">Подождите, выполняется загрузка списка учебников</string>
+    <string name="TopMenu_btn1">Учебники</string>
+    <string name="TopMenu_btn2">Тесты</string>
+
+    <!-- Окно с выбором книг -->
+    <string name="text_successful_download">Книга успешно загружена</string>
+
+    <!-- Окно дабавление книги -->
+    <string name="text_toolbar_AddBook">Добавление книги</string>
+    <string name="nameBook_input_hint">Введите название книги</string>
+    <string name="info_to_getBook">Нажмите клавишу выбрать файл и в открывшемся катологе выберите книгу</string>
+    <string name="text_btn_getBook">выбрать файл</string>
+    <string name="text_btn_send">Отправить</string>
+    <string name="send_text">Подождите, выполняется загрузка файла на сервер</string>
+
+    <!-- Окно для редактирования учебника -->
+    <string name="btn_edit1">Редактирование информации о учебнике</string>
+    <string name="btn_edit2">Обновление файла учебника</string>
+    <string name="btn_edit3">Удаление учебника</string>
+
+    <!-- Окно выбора предметов -->
+    <string name="toolbar_sub">Предметы</string>
+    <string name="name_book_1">Беларуская мова</string>
+    <string name="name_book_2">Беларуская литаратура</string>
+    <string name="name_book_3">Русский язык</string>
+    <string name="name_book_4">Русская литература</string>
+    <string name="name_book_5">История Беларуси</string>
+    <string name="name_book_6">Английский язык</string>
+    <string name="name_book_7">Немецкий язык</string>
+    <string name="name_book_8">Французский язык</string>
+    <string name="name_book_9">Математика</string>
+    <string name="name_book_10">Информатика</string>
+    <string name="name_book_11">Человек и мир</string>
+    <string name="name_book_12">Всемирная история</string>
+    <string name="name_book_13">Обществоведение</string>
+    <string name="name_book_14">География</string>
+    <string name="name_book_15">Биология</string>
+    <string name="name_book_16">Физика</string>
+    <string name="name_book_17">Астрономия</string>
+    <string name="name_book_18">Химия</string>
+    <string name="name_book_19">Трудовое обучение</string>
+    <string name="name_book_20">Доп и мед подготовка</string>
+
+    <!-- Окно вопрса -->
+    <string name="text_save_res">Завершить тест</string>
+    <string name="text_ot">Ответ #1</string>
+    <string name="text_vb">ВЫБРАТЬ</string>
+    <string name="text_prop">ПРОПУСТИТЬ ВОПРОС</string>
+    <string name="text_ok_question">Ответ засчитан</string>
+
+    <style name="button_numb_otvet" parent="TextAppearance.AppCompat.Button">
+
+        <item name="android:background">#00FFFFFF</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <!-- Окно результата теста -->
+    <string name="toolbar_result">Результат теста</string>
+    <string name="znak">%</string>
+    <string name="text_res1">Ваш результат</string>
+    <string name="res_o1">Правильных</string>
+    <string name="res_o2">Неправильных</string>
+    <string name="res_o3">Пропущеных</string>
+    <string name="text_add_res">Сохранить результат</string>
+
+    <!-- Окно добавления теста -->
+    <string name="window_input1">Название теста</string>
+    <string name="window_input2">Колличество вопросов</string>
+    <string name="window_input_btn">Добавить вопросы</string>
+
+    <!-- Окно добавления вопроса -->
+    <string name="window_add_question_inp1">Введите вопрос</string>
+    <string name="window_add_question_inp2">Введите ответ №1</string>
+    <string name="window_add_question_inp3">Введите ответ №2</string>
+    <string name="window_add_question_inp4">Введите ответ №3</string>
+    <string name="window_add_question_inp5">Введите ответ №4</string>
+    <string name="window_add_question_inp6">Введите правильный ответ</string>
+    <string name="window_add_question_btn1">Добавить вопрос</string>
+    <string name="window_add_question_btn2">Завершить</string>
+    <string name="send_text_add_test">Подождите, выполняется загрузка теста на сервер</string>
+
+
+    <style name="CustomToolbar" parent="Theme.AppCompat">
+
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:background">@drawable/toolbar_background</item>
+        <item name="android:minHeight">?attr/actionBarSize</item>
+        <item name="android:theme">?attr/actionBarTheme</item>
+        <item name="fontFamily">@font/fvg</item>
+    </style>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+</resources>
