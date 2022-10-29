@@ -50,7 +50,7 @@ interface NetworkService {
 
         var networkService: NetworkService? = null
 
-        var BASE_URL = "http://192.168.52.1:8080"
+        var BASE_URL = "http://192.168.1.38:8080"
 
         fun getInstance() : NetworkService {
             if (networkService == null){

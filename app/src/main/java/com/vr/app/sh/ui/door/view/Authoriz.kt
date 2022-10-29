@@ -9,14 +9,15 @@ import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.vr.app.sh.R
-import com.vr.app.sh.data.api.NetworkService
-import com.vr.app.sh.data.repository.InternetRepoImpl
-import com.vr.app.sh.data.repository.UserRepoImpl
+import com.vr.app.sh.app.App
 import com.vr.app.sh.ui.base.AuthorizationViewModelFactory
 import com.vr.app.sh.ui.door.viewmodel.AuthViewModel
 import com.vr.app.sh.ui.menu.view.TopMenu
 
 class Authoriz : AppCompatActivity() {
+
+    @javax.inject.Inject
+    lateinit var factory: AuthorizationViewModelFactory
 
     lateinit var viewModel: AuthViewModel
 
@@ -29,10 +30,9 @@ class Authoriz : AppCompatActivity() {
         val login = findViewById<EditText>(R.id.TextUserName)
         val password = findViewById<EditText>(R.id.TextUserPassword)
 
-        val retrofitService = NetworkService.getInstance()
-        val mainRepository = InternetRepoImpl(retrofitService)
-        val userRepoImpl = UserRepoImpl(this)
-        viewModel = ViewModelProvider(this, AuthorizationViewModelFactory(mainRepository,userRepoImpl,this))
+        (applicationContext as App).appComponent.injectAuthoriz(this)
+
+        viewModel = ViewModelProvider(this, factory)
             .get(AuthViewModel::class.java)
 
         viewModel.errorMessage.observe(this){

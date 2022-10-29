@@ -3,12 +3,9 @@ package com.vr.app.sh.ui.books.view
 import android.graphics.pdf.PdfRenderer
 import android.os.Bundle
 import android.os.ParcelFileDescriptor
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
-import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayoutMediator
 import com.vr.app.sh.R
 import com.vr.app.sh.ui.books.adapter.ReadPDFadapter
 import java.io.File

@@ -3,14 +3,13 @@ package com.vr.app.sh.ui.tests.viewmodel
 import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
-import android.content.Intent
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.vr.app.sh.data.api.NetworkService
-import com.vr.app.sh.domain.UseCase.*
+import com.vr.app.sh.domain.UseCase.GetListQuestions
+import com.vr.app.sh.domain.UseCase.GetListTestsInClass
+import com.vr.app.sh.domain.UseCase.InternetConnection
+import com.vr.app.sh.domain.UseCase.SaveQuestionsInBD
 import com.vr.app.sh.ui.tests.adapter.BtnTestAdapter
-import com.vr.app.sh.ui.tests.view.test.WindowTest
 import kotlinx.coroutines.*
 
 class TestsOneClassViewModel(val getListTestsInClass: GetListTestsInClass, val getListQuestions: GetListQuestions,val saveQuestionsInBD: SaveQuestionsInBD, val internetConnection: InternetConnection, val num_class: Int): ViewModel() {

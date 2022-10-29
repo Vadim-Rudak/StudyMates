@@ -8,7 +8,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.text.TextUtils
-import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.widget.Button
@@ -19,9 +18,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.mikhaellopez.circularprogressbar.CircularProgressBar
 import com.vr.app.sh.R
-import com.vr.app.sh.data.api.NetworkService
-import com.vr.app.sh.data.repository.BookRepoImpl
-import com.vr.app.sh.data.repository.InternetRepoImpl
+import com.vr.app.sh.app.App
 import com.vr.app.sh.ui.base.AddBookViewModelFactory
 import com.vr.app.sh.ui.books.viewmodel.AddBookViewModel
 import kotlinx.coroutines.*
@@ -30,11 +27,17 @@ import java.io.File
 class AddBook : AppCompatActivity() {
 
     lateinit var pathBook:TextView
+
+    @javax.inject.Inject
+    lateinit var factory:AddBookViewModelFactory
+
     lateinit var viewModel: AddBookViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_book)
+
+        (applicationContext as App).appComponent.injectAddBook(this)
 
         val nameBook = findViewById<EditText>(R.id.name_book_add)
         val btn_find = findViewById<Button>(R.id.btn_find_pdf)
@@ -43,10 +46,7 @@ class AddBook : AppCompatActivity() {
         val textProgress = findViewById<TextView>(R.id.textProgress)
         pathBook = findViewById(R.id.textViewNameFile)
 
-        val retrofitService = NetworkService.getInstance()
-        val bookInternetRepo = InternetRepoImpl(retrofitService)
-        val bookRepo = BookRepoImpl(this)
-        viewModel = ViewModelProvider(this, AddBookViewModelFactory(bookRepo,bookInternetRepo,this))
+        viewModel = ViewModelProvider(this,factory)
             .get(AddBookViewModel::class.java)
 
         viewModel.errorMessage.observe(this){

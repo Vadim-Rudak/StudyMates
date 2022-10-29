@@ -3,17 +3,12 @@ package com.vr.app.sh.ui.books.view
 import android.graphics.Bitmap
 import android.graphics.pdf.PdfRenderer
 import android.os.Bundle
-import android.os.ParcelFileDescriptor
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import com.vr.app.sh.R
-import java.io.File
-import java.io.IOException
-
 
 class FragmentPagePDF(var pageNumber: Int, private val pdfRenderer:PdfRenderer) : Fragment() {
 

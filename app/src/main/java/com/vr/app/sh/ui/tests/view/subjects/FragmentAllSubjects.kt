@@ -1,32 +1,19 @@
 package com.vr.app.sh.ui.tests.view.subjects
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import com.vr.app.sh.R
-import com.vr.app.sh.data.api.NetworkService
-import com.vr.app.sh.data.repository.BookRepoImpl
-import com.vr.app.sh.data.repository.InternetRepoImpl
-import com.vr.app.sh.data.repository.TestsRepoImpl
-import com.vr.app.sh.domain.repository.TestsRepo
+import com.vr.app.sh.app.App
 import com.vr.app.sh.ui.base.AllSubjectsViewModelFactory
-import com.vr.app.sh.ui.base.BooksViewModelFactory
-import com.vr.app.sh.ui.books.viewmodel.SubjectsViewModel
 import com.vr.app.sh.ui.tests.view.listTests.WindowTestsNames
 import com.vr.app.sh.ui.tests.viewmodel.AllSubjectsViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 
 class FragmentAllSubjects() : Fragment(), View.OnClickListener {
@@ -53,6 +40,14 @@ class FragmentAllSubjects() : Fragment(), View.OnClickListener {
     lateinit var button20: Button
 
     lateinit var viewModel: AllSubjectsViewModel
+
+    @javax.inject.Inject
+    lateinit var factory: AllSubjectsViewModelFactory
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        (context.applicationContext as App).appComponent.injectFragmentAllSubjects(this)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -101,11 +96,8 @@ class FragmentAllSubjects() : Fragment(), View.OnClickListener {
         button20 = v.findViewById<Button>(R.id.sub_20)
         button20.setOnClickListener(this)
 
-        val retrofitService = NetworkService.getInstance()
-        val mainRepository = InternetRepoImpl(retrofitService)
-        val testsRepoImpl = TestsRepoImpl(requireContext())
-        viewModel = ViewModelProvider(this, AllSubjectsViewModelFactory(mainRepository, testsRepoImpl, requireContext())
-        ).get(AllSubjectsViewModel::class.java)
+        viewModel = ViewModelProvider(this, factory)
+            .get(AllSubjectsViewModel::class.java)
 
         viewModel.errorMessage.observe(viewLifecycleOwner){
             viewModel.errorMessage(it,requireContext())

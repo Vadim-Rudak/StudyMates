@@ -9,6 +9,7 @@ import retrofit2.Call
 import retrofit2.Response
 
 class InternetRepoImpl(private val networkService: NetworkService):DoorInSystemRepo,BookInternetRepo,TestsInternetRepo,QuestionsInternetRepo,ResultInternetRepo {
+
     override suspend fun Authorization(requestBody: RequestBody): Auth {
         if(NetworkService.getInstance().loginInServ(requestBody).isSuccessful){
             return networkService.auth().body()!!

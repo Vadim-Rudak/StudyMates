@@ -3,35 +3,31 @@ package com.vr.app.sh.ui.tests.view.listTests
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.vr.app.sh.R
-import com.vr.app.sh.data.api.NetworkService
-import com.vr.app.sh.data.repository.InternetRepoImpl
-import com.vr.app.sh.data.repository.QuestionsRepoImpl
-import com.vr.app.sh.data.repository.TestsRepoImpl
-import com.vr.app.sh.domain.repository.QuestionsRepo
-import com.vr.app.sh.domain.repository.TestsRepo
-import com.vr.app.sh.ui.base.AuthorizationViewModelFactory
+import com.vr.app.sh.app.App
 import com.vr.app.sh.ui.base.TestsOneClassViewModelFactory
-import com.vr.app.sh.ui.door.viewmodel.AuthViewModel
 import com.vr.app.sh.ui.tests.adapter.BtnTestAdapter
 import com.vr.app.sh.ui.tests.view.test.WindowTest
 import com.vr.app.sh.ui.tests.viewmodel.TestsOneClassViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class FragmentListTests(var num_class:Int) : Fragment() {
 
+    @javax.inject.Inject
+    lateinit var factory: TestsOneClassViewModelFactory
+
     lateinit var viewModel: TestsOneClassViewModel
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        (context.applicationContext as App).appComponent.injectFragmentListTests(this)
+    }
 
     override fun onStart() {
         super.onStart()
@@ -43,11 +39,9 @@ class FragmentListTests(var num_class:Int) : Fragment() {
         val layoutManager = LinearLayoutManager(activity)
         view.layoutManager = layoutManager
 
-        val retrofitService = NetworkService.getInstance()
-        val mainRepository = InternetRepoImpl(retrofitService)
-        val testsRepoImpl = TestsRepoImpl(requireContext())
-        val questionsRepoImpl = QuestionsRepoImpl(requireContext())
-        viewModel = ViewModelProvider(this, TestsOneClassViewModelFactory(mainRepository,testsRepoImpl,questionsRepoImpl,requireContext(),num_class))
+        factory.setClass(num_class)
+
+        viewModel = ViewModelProvider(this, factory)
             .get(TestsOneClassViewModel::class.java)
 
         viewModel.openTest.observe(viewLifecycleOwner){

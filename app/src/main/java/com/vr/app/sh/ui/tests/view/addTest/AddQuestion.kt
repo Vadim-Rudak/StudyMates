@@ -11,9 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.mikhaellopez.circularprogressbar.CircularProgressBar
 import com.vr.app.sh.R
-import com.vr.app.sh.data.api.NetworkService
-import com.vr.app.sh.data.repository.InternetRepoImpl
-import com.vr.app.sh.data.repository.TestsRepoImpl
+import com.vr.app.sh.app.App
 import com.vr.app.sh.domain.model.Question
 import com.vr.app.sh.ui.base.AddTestViewModelFactory
 import com.vr.app.sh.ui.tests.viewmodel.AddTestViewModel
@@ -21,11 +19,17 @@ import kotlinx.coroutines.*
 
 class AddQuestion : AppCompatActivity() {
 
+    @javax.inject.Inject
+    lateinit var factory: AddTestViewModelFactory
+
     lateinit var viewModel: AddTestViewModel
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_question)
+
+        (applicationContext as App).appComponent.injectAddQuestion(this)
 
         val TextQuestion = findViewById<EditText>(R.id.InputQuestion)
         val TextOtv1 = findViewById<EditText>(R.id.InputOtv1)
@@ -47,10 +51,8 @@ class AddQuestion : AppCompatActivity() {
         val textProgress = findViewById<TextView>(R.id.textProgressAddTest)
         val AddInServer = findViewById<Button>(R.id.BtnSave)
 
-        val retrofitService = NetworkService.getInstance()
-        val internetRepo = InternetRepoImpl(retrofitService)
-        val testsRepo = TestsRepoImpl(this)
-        viewModel = ViewModelProvider(this, AddTestViewModelFactory(testsRepo,internetRepo,this))
+
+        viewModel = ViewModelProvider(this, factory)
             .get(AddTestViewModel::class.java)
 
         viewModel.errorMessage.observe(this){

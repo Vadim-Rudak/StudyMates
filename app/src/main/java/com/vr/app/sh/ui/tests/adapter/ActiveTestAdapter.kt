@@ -5,7 +5,6 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.google.android.material.tabs.TabLayout
 import com.vr.app.sh.domain.repository.QuestionsRepo
-import com.vr.app.sh.ui.books.view.FragmentPagePDF
 import com.vr.app.sh.ui.tests.view.test.FragmentQuestion
 
 class ActiveTestAdapter(fm: FragmentManager, var questionsRepo: QuestionsRepo,var info_questions:Array<Int>, var tabLayout: TabLayout) : FragmentPagerAdapter(fm) {

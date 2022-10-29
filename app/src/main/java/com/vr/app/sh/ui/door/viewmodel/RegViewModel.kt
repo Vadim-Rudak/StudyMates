@@ -4,10 +4,8 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
 import android.text.TextUtils
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.vr.app.sh.data.api.NetworkService
 import com.vr.app.sh.domain.UseCase.InternetConnection
 import com.vr.app.sh.domain.UseCase.Registration
 import kotlinx.coroutines.*

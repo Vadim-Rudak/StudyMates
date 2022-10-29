@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -41,6 +42,11 @@ dependencies {
 
     implementation "androidx.viewpager2:viewpager2:1.0.0"
     implementation 'com.mikhaellopez:circularprogressbar:3.1.0'
+
+    //Dagger
+    implementation 'com.google.dagger:dagger:2.44'
+    kapt 'com.google.dagger:dagger-compiler:2.44'
+    implementation 'javax.inject:javax.inject:1'
 
     //Coroutine
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1"

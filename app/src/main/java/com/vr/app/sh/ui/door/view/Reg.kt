@@ -1,21 +1,21 @@
 package com.vr.app.sh.ui.door.view
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.ContactsContract
 import android.text.TextUtils
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.vr.app.sh.R
-import com.vr.app.sh.data.api.NetworkService
-import com.vr.app.sh.data.repository.InternetRepoImpl
+import com.vr.app.sh.app.App
 import com.vr.app.sh.ui.base.RegViewModelFactory
 import com.vr.app.sh.ui.door.viewmodel.RegViewModel
 
 class Reg : AppCompatActivity() {
+
+    @javax.inject.Inject
+    lateinit var factory: RegViewModelFactory
 
     lateinit var viewModel: RegViewModel
 
@@ -33,9 +33,9 @@ class Reg : AppCompatActivity() {
         val num_class = findViewById<EditText>(R.id.InputNumClass)
         val btn_send = findViewById<Button>(R.id.BtnReg)
 
-        val retrofitService = NetworkService.getInstance()
-        val mainRepository = InternetRepoImpl(retrofitService)
-        viewModel = ViewModelProvider(this,RegViewModelFactory(mainRepository,this))
+        (applicationContext as App).appComponent.injectReg(this)
+
+        viewModel = ViewModelProvider(this,factory)
             .get(RegViewModel::class.java)
 
         viewModel.errorMessage.observe(this){

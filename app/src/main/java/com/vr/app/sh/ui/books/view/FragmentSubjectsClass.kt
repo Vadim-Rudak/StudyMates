@@ -1,5 +1,6 @@
 package com.vr.app.sh.ui.books.view
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
@@ -11,36 +12,35 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mikhaellopez.circularprogressbar.CircularProgressBar
 import com.vr.app.sh.R
-import com.vr.app.sh.data.api.NetworkService
-import com.vr.app.sh.data.repository.BookRepoImpl
-import com.vr.app.sh.data.repository.InternetRepoImpl
-import com.vr.app.sh.domain.repository.BookRepo
+import com.vr.app.sh.app.App
 import com.vr.app.sh.ui.base.BooksViewModelFactory
-import com.vr.app.sh.ui.base.MenuViewModelFactory
 import com.vr.app.sh.ui.books.adapter.RecyclerViewAdapter
 import com.vr.app.sh.ui.books.viewmodel.SubjectsViewModel
-import com.vr.app.sh.ui.menu.viewModel.MenuViewModel
 import kotlinx.coroutines.*
-import okhttp3.ResponseBody
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import java.io.*
+import java.io.File
 
 class FragmentSubjectsClass() : Fragment() {
+
+    @javax.inject.Inject
+    lateinit var factory: BooksViewModelFactory
 
     var num_class:Int = 0
     lateinit var viewModel: SubjectsViewModel
     lateinit var adapter:RecyclerViewAdapter
 
+
     constructor(num_class:Int):this(){
         this.num_class = num_class
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        (context.applicationContext as App).appComponent.injectFragmentSubjectsClass(this)
     }
 
     override fun onStart() {
@@ -71,10 +71,9 @@ class FragmentSubjectsClass() : Fragment() {
         }
         val textProgress = view.findViewById<TextView>(R.id.textProgress)
 
-        val retrofitService = NetworkService.getInstance()
-        val mainRepository = InternetRepoImpl(retrofitService)
-        val bookRepoImpl = BookRepoImpl(requireContext())
-        viewModel = ViewModelProvider(this, BooksViewModelFactory(mainRepository,bookRepoImpl, requireContext(),num_class))
+        factory.addNumClass(num_class)
+
+        viewModel = ViewModelProvider(this, factory)
             .get(SubjectsViewModel::class.java)
 
         viewModel.progress.observe(viewLifecycleOwner){
