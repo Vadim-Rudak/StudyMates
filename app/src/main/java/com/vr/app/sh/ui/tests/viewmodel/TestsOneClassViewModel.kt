@@ -3,8 +3,11 @@ package com.vr.app.sh.ui.tests.viewmodel
 import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.vr.app.sh.data.model.Test
+import com.vr.app.sh.data.repository.RoomDB
 import com.vr.app.sh.domain.UseCase.GetListQuestions
 import com.vr.app.sh.domain.UseCase.GetListTestsInClass
 import com.vr.app.sh.domain.UseCase.InternetConnection
@@ -12,22 +15,14 @@ import com.vr.app.sh.domain.UseCase.SaveQuestionsInBD
 import com.vr.app.sh.ui.tests.adapter.BtnTestAdapter
 import kotlinx.coroutines.*
 
-class TestsOneClassViewModel(val getListTestsInClass: GetListTestsInClass, val getListQuestions: GetListQuestions,val saveQuestionsInBD: SaveQuestionsInBD, val internetConnection: InternetConnection, val num_class: Int): ViewModel() {
+class TestsOneClassViewModel(getListTestsInClass: GetListTestsInClass, val getListQuestions: GetListQuestions, val saveQuestionsInBD: SaveQuestionsInBD, val internetConnection: InternetConnection, val num_class: Int): ViewModel() {
 
     lateinit var name_test:String
     val adapter = BtnTestAdapter()
     val errorMessage = MutableLiveData<String>()
     val openTest = MutableLiveData<Boolean>()
+    val listTests:LiveData<List<Test>> = getListTestsInClass.execute(num_class)
     var job: Job? = null
-
-    init {
-        updateAdapter()
-    }
-
-    fun updateAdapter(){
-        adapter.setTests(getListTestsInClass.execute(num_class))
-        adapter.notifyDataSetChanged()
-    }
 
     fun errorMessage(textMessage:String,context: Context){
         val alertDialog = AlertDialog.Builder(context)

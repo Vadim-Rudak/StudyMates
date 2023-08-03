@@ -15,8 +15,8 @@ class DomainModule {
     }
 
     @Provides
-    fun provideSaveBookListInBD(bookRepoImpl:BookRepoImpl):SaveBookListInBD{
-        return SaveBookListInBD(bookRepoImpl)
+    fun provideSaveBookListInBD(daoBook: DAOBook):SaveBookListInBD{
+        return SaveBookListInBD(daoBook)
     }
 
     @Provides
@@ -25,8 +25,8 @@ class DomainModule {
     }
 
     @Provides
-    fun provideSaveTestsInBD(testsRepoImpl: TestsRepoImpl):SaveTestsInBD{
-        return SaveTestsInBD(testsRepoImpl)
+    fun provideSaveTestsInBD(daoTest: DAOTest):SaveTestsInBD{
+        return SaveTestsInBD(daoTest)
     }
 
     @Provides
@@ -50,13 +50,13 @@ class DomainModule {
     }
 
     @Provides
-    fun provideAuthSetUserInBD(userRepoImpl: UserRepoImpl):SetUserInBD{
-        return SetUserInBD(userRepoImpl)
+    fun provideAuthSetUserInBD(daoUser: DAOUser):SetUserInBD{
+        return SetUserInBD(daoUser = daoUser)
     }
 
     @Provides
-    fun provideGetListBookInClass(bookRepoImpl:BookRepoImpl):GetListBookInClass{
-        return GetListBookInClass(bookRepoImpl)
+    fun provideGetListBookInClass(daoBook: DAOBook):GetListBookInClass{
+        return GetListBookInClass(daoBook)
     }
 
     @Provides
@@ -75,13 +75,13 @@ class DomainModule {
     }
 
     @Provides
-    fun provideGetUserBD(userRepoImpl: UserRepoImpl):GetUserBD{
-        return GetUserBD(userRepoImpl)
+    fun provideGetUserBD(daoUser: DAOUser):GetUserBD{
+        return GetUserBD(daoUser = daoUser)
     }
 
     @Provides
-    fun provideGetListTestsInClass(testsRepoImpl: TestsRepoImpl):GetListTestsInClass{
-        return GetListTestsInClass(testsRepoImpl)
+    fun provideGetListTestsInClass(daoTest: DAOTest):GetListTestsInClass{
+        return GetListTestsInClass(daoTest)
     }
 
     @Provides
@@ -90,8 +90,13 @@ class DomainModule {
     }
 
     @Provides
-    fun provideSaveQuestionsInBD(questionsRepoImpl:QuestionsRepoImpl):SaveQuestionsInBD{
-        return SaveQuestionsInBD(questionsRepoImpl)
+    fun provideSaveQuestionsInBD(questionsDAO:DAOQuestions):SaveQuestionsInBD{
+        return SaveQuestionsInBD(questionsDAO)
+    }
+
+    @Provides
+    fun provideGetQuestionsFromBD(questionsDAO:DAOQuestions):GetListQuestionsBD{
+        return GetListQuestionsBD(questionsRepo = questionsDAO)
     }
 
 }

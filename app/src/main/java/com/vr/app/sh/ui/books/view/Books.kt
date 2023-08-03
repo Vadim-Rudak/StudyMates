@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -13,9 +14,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.vr.app.sh.R
-import com.vr.app.sh.data.repository.UserRepoImpl
+import com.vr.app.sh.app.USER_ROLE
+import com.vr.app.sh.data.repository.RoomDB
 import com.vr.app.sh.domain.UseCase.GetUserBD
-import com.vr.app.sh.domain.repository.UserRepo
 import com.vr.app.sh.ui.books.adapter.ViewPager2Adapter
 
 class Books : AppCompatActivity() {
@@ -34,11 +35,10 @@ class Books : AppCompatActivity() {
             tab.text = "${(position + 1)} КЛАСС"
         }.attach()
 
-        val userRepo:UserRepo = UserRepoImpl(this)
-        val getUserBD = GetUserBD(userRepo)
-
         val fab = findViewById<FloatingActionButton>(R.id.FabBook)
-        if (getUserBD.execute().role.equals("ADMIN")){
+
+        Log.d("FFF", " 111 $USER_ROLE")
+        if (USER_ROLE == "ADMIN"){
             fab.visibility = View.VISIBLE
         }else{
             fab.visibility = View.GONE

@@ -54,11 +54,12 @@ class AppModule(val context: Context) {
 
     @Provides
     fun provideBooksViewModelFactory(
+        context: Context,
         getListBookInClass: GetListBookInClass,
         getBookFile: GetBookFile,
         internetConnection: InternetConnection
     ): BooksViewModelFactory {
-        return BooksViewModelFactory(getListBookInClass, getBookFile, internetConnection)
+        return BooksViewModelFactory(context,getListBookInClass, getBookFile, internetConnection)
     }
 
     @Provides
@@ -95,5 +96,12 @@ class AppModule(val context: Context) {
         internetConnection: InternetConnection,
     ):TestsOneClassViewModelFactory{
         return TestsOneClassViewModelFactory(getListTestsInClass, getListQuestions, saveQuestionsInBD, internetConnection)
+    }
+
+    @Provides
+    fun provideOpenTestViewModelFactory(
+        getListQuestionsBD: GetListQuestionsBD
+    ):OpenTestViewModelFactory{
+        return OpenTestViewModelFactory(getListQuestionsBD)
     }
 }

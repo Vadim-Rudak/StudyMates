@@ -1,7 +1,6 @@
 package com.vr.app.sh.domain.UseCase
 
-import com.vr.app.sh.domain.model.Book
-import com.vr.app.sh.domain.model.Test
+import com.vr.app.sh.data.model.Test
 import com.vr.app.sh.domain.repository.TestsInternetRepo
 import retrofit2.Response
 

@@ -6,8 +6,8 @@ import android.content.DialogInterface
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.gson.Gson
+import com.vr.app.sh.data.model.Question
 import com.vr.app.sh.domain.UseCase.*
-import com.vr.app.sh.domain.model.Question
 import kotlinx.coroutines.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody

@@ -12,12 +12,11 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayout
 import com.vr.app.sh.R
-import com.vr.app.sh.domain.model.Question
-import com.vr.app.sh.domain.repository.QuestionsRepo
+import com.vr.app.sh.data.model.Question
 
-class FragmentQuestion(var num_question:Int, questionsRepo: QuestionsRepo, var info_questions:Array<Int>,var tabLayout: TabLayout) : Fragment(), View.OnClickListener {
+class FragmentQuestion(var num_question:Int,var listQuestions: List<Question>, var info_questions:Array<Int>,var tabLayout: TabLayout) : Fragment(), View.OnClickListener {
 
-    var listQuestions:ArrayList<Question> = questionsRepo.getQuestions()
+    //var listQuestions:List<Question> = questionsDAO.getQuestions()
     lateinit var textQuestion:TextView
     lateinit var btnOtv1:Button
     lateinit var btnOtv2:Button
@@ -86,7 +85,7 @@ class FragmentQuestion(var num_question:Int, questionsRepo: QuestionsRepo, var i
         btnOtv2.text = listQuestions[num_question].otv2
         btnOtv3.text = listQuestions[num_question].otv3
         btnOtv4.text = listQuestions[num_question].otv4
-        correctOtv = listQuestions[num_question].correctOtv.toString()
+        correctOtv = listQuestions[num_question].correct_otv.toString()
     }
 
     override fun onClick(view: View?) {

@@ -31,7 +31,6 @@ class FragmentSubjectsClass() : Fragment() {
 
     var num_class:Int = 0
     lateinit var viewModel: SubjectsViewModel
-    lateinit var adapter:RecyclerViewAdapter
 
 
     constructor(num_class:Int):this(){
@@ -41,12 +40,6 @@ class FragmentSubjectsClass() : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         (context.applicationContext as App).appComponent.injectFragmentSubjectsClass(this)
-    }
-
-    override fun onStart() {
-        super.onStart()
-        Log.d("FFF", "gfh")
-        viewModel.updateInfoInAdapter()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -117,9 +110,13 @@ class FragmentSubjectsClass() : Fragment() {
             }
         }
 
-        adapter = viewModel.adapter
-        recyclerView.adapter = adapter
-        adapter.setListener(object : RecyclerViewAdapter.Listener{
+        viewModel.listBooks.observe(viewLifecycleOwner){
+            viewModel.adapter.setBook(it)
+            Log.d("FFF", "size ${it.size}")
+        }
+
+        recyclerView.adapter = viewModel.adapter
+        viewModel.adapter.setListener(object : RecyclerViewAdapter.Listener{
             override fun Clicked(pos_book: Int, name_book: String, id_book: Int) {
                 val path = Environment.getExternalStorageDirectory().path + "/SchoolProg/Books/Class_" + num_class + "/" + name_book + ".pdf"
                 if (File(path).exists()){

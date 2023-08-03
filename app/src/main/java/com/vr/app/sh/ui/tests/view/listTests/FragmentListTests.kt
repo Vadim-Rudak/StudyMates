@@ -29,11 +29,6 @@ class FragmentListTests(var num_class:Int) : Fragment() {
         (context.applicationContext as App).appComponent.injectFragmentListTests(this)
     }
 
-    override fun onStart() {
-        super.onStart()
-        viewModel.updateAdapter()
-    }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_list_tests, container, false) as RecyclerView
         val layoutManager = LinearLayoutManager(activity)
@@ -43,6 +38,10 @@ class FragmentListTests(var num_class:Int) : Fragment() {
 
         viewModel = ViewModelProvider(this, factory)
             .get(TestsOneClassViewModel::class.java)
+
+        viewModel.listTests.observe(viewLifecycleOwner){
+            viewModel.adapter.setTests(it)
+        }
 
         viewModel.openTest.observe(viewLifecycleOwner){
             val intent = Intent(activity, WindowTest::class.java)

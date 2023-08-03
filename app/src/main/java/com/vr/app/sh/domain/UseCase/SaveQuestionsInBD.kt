@@ -1,10 +1,10 @@
 package com.vr.app.sh.domain.UseCase
 
-import com.vr.app.sh.domain.model.Question
-import com.vr.app.sh.domain.repository.QuestionsRepo
+import com.vr.app.sh.data.model.Question
+import com.vr.app.sh.data.repository.DAOQuestions
 
-class SaveQuestionsInBD(private val questionsRepo: QuestionsRepo) {
-    fun execute(ListQuestions:List<Question>){
-        return questionsRepo.saveQuestionsInDB(ListQuestions)
+class SaveQuestionsInBD(private val questionsDAO:DAOQuestions) {
+    suspend fun execute(ListQuestions:List<Question>){
+        return questionsDAO.saveNewQuestions(ListQuestions)
     }
 }

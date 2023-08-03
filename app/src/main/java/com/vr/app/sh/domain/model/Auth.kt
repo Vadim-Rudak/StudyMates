@@ -26,5 +26,5 @@ class Auth {
 
     @SerializedName("role")
     @Expose
-    var role: String? = null
+    var role: String? = ""
 }

@@ -6,10 +6,11 @@ import android.content.DialogInterface
 import android.text.TextUtils
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.vr.app.sh.app.USER_ROLE
+import com.vr.app.sh.data.model.User
 import com.vr.app.sh.domain.UseCase.Authorization
 import com.vr.app.sh.domain.UseCase.InternetConnection
 import com.vr.app.sh.domain.UseCase.SetUserInBD
-import com.vr.app.sh.domain.model.User
 import kotlinx.coroutines.*
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -38,7 +39,8 @@ class AuthViewModel(val authorization: Authorization,val setUserInBD: SetUserInB
                     val auth = authorization.execute(userInfo(login,password))
                     withContext(Dispatchers.Main){
                         if (auth.status == true){
-                            setUserInBD.execute(User(login,auth.role))
+                            setUserInBD.execute(User(id=0,user_name = login, role = auth.role))
+                            USER_ROLE = auth.role!!
                             statusAuth.value = true
                         }else{
                             errorMessage.value = auth.message

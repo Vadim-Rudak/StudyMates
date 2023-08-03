@@ -1,10 +1,10 @@
 package com.vr.app.sh.domain.UseCase
 
-import com.vr.app.sh.domain.model.User
-import com.vr.app.sh.domain.repository.UserRepo
+import com.vr.app.sh.data.model.User
+import com.vr.app.sh.data.repository.DAOUser
 
-class GetUserBD(private val userRepo: UserRepo) {
+class GetUserBD(private val daoUser: DAOUser) {
     fun execute(): User {
-        return userRepo.getUser()
+        return daoUser.getUser()[0]
     }
 }

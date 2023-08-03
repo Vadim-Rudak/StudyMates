@@ -1,5 +1,6 @@
 package com.vr.app.sh.ui.base
 
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.vr.app.sh.domain.UseCase.GetBookFile
@@ -8,6 +9,7 @@ import com.vr.app.sh.domain.UseCase.InternetConnection
 import com.vr.app.sh.ui.books.viewmodel.SubjectsViewModel
 
 class BooksViewModelFactory(
+    val context:Context,
     val getListBookInClass: GetListBookInClass,
     val getBookFile: GetBookFile,
     val internetConnection: InternetConnection
@@ -21,7 +23,7 @@ class BooksViewModelFactory(
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         return if (modelClass.isAssignableFrom(SubjectsViewModel::class.java)) {
-            SubjectsViewModel(getBookFile,getListBookInClass,internetConnection,num_class) as T
+            SubjectsViewModel(context,getBookFile,getListBookInClass,internetConnection,num_class) as T
         } else {
             throw IllegalArgumentException("ViewModel Not Found")
         }

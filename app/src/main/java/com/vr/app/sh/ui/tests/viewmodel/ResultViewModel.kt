@@ -33,7 +33,7 @@ class ResultViewModel(private val internetConnection: InternetConnection,private
     fun sendResult(test_id:Int,test_result:Int,num_correct_otv: Int,num_error_otv: Int,num_no_otv: Int){
         if (internetConnection.UseInternet()){
             job = CoroutineScope(Dispatchers.IO).launch {
-                val response = sendResult.execute(JSONResult(test_id, getUserBD.execute().name_user.toString(), test_result,
+                val response = sendResult.execute(JSONResult(test_id, getUserBD.execute().user_name, test_result,
                     num_correct_otv, num_error_otv, num_no_otv))
 
                 withContext(Dispatchers.Main) {

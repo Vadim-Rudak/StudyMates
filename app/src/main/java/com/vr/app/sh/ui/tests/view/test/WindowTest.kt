@@ -5,14 +5,26 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
 import com.vr.app.sh.R
-import com.vr.app.sh.data.repository.QuestionsRepoImpl
+import com.vr.app.sh.app.App
+import com.vr.app.sh.data.repository.RoomDB
+import com.vr.app.sh.ui.base.OpenTestViewModelFactory
 import com.vr.app.sh.ui.tests.adapter.ActiveTestAdapter
 import com.vr.app.sh.ui.tests.view.result.ResultTest
+import com.vr.app.sh.ui.tests.viewmodel.OpenTestViewModel
 
 class WindowTest : AppCompatActivity() {
+
+    @javax.inject.Inject
+    lateinit var factory: OpenTestViewModelFactory
+
+    lateinit var viewModel:OpenTestViewModel
+
+
+
 
     var num_correct_otv = 0
     var num_error_otv = 0
@@ -28,12 +40,20 @@ class WindowTest : AppCompatActivity() {
         val actionBar = supportActionBar
         actionBar?.title = intent.extras?.getString("name_test")
         val viewPager = findViewById<ViewPager>(R.id.pager_questions)
-        val questionsRepo = QuestionsRepoImpl(this)
         val tabLayout = findViewById<TabLayout>(R.id.tabs_active_test)
         tabLayout.setupWithViewPager(viewPager)
-        info_questions = Array(questionsRepo.getQuestions().size){ 3 }
-        test_id = questionsRepo.getQuestions()[0].testid
-        viewPager.adapter = ActiveTestAdapter(supportFragmentManager,questionsRepo,info_questions,tabLayout)
+
+        (applicationContext as App).appComponent.injectWindowTest(this)
+
+        viewModel = ViewModelProvider(this,factory)
+            .get(OpenTestViewModel::class.java)
+
+        viewModel.listQuestions.observe(this){
+            info_questions = Array(it.size){ 3 }
+            test_id = it[0].test_id
+            viewPager.adapter = ActiveTestAdapter(supportFragmentManager,it,info_questions,tabLayout)
+        }
+
     }
 
     private fun TestRes(){

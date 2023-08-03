@@ -1,5 +1,8 @@
 package com.vr.app.sh.data.api
 
+import com.vr.app.sh.data.model.Book
+import com.vr.app.sh.data.model.Question
+import com.vr.app.sh.data.model.Test
 import com.vr.app.sh.domain.model.*
 import com.vr.app.sh.ui.door.cookie.MyCookieJar
 import okhttp3.OkHttpClient
@@ -50,7 +53,7 @@ interface NetworkService {
 
         var networkService: NetworkService? = null
 
-        var BASE_URL = "http://192.168.1.38:8080"
+        var BASE_URL = "http://192.168.100.4:8080"
 
         fun getInstance() : NetworkService {
             if (networkService == null){

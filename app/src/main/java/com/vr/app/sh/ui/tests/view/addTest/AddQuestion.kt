@@ -12,7 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.mikhaellopez.circularprogressbar.CircularProgressBar
 import com.vr.app.sh.R
 import com.vr.app.sh.app.App
-import com.vr.app.sh.domain.model.Question
+import com.vr.app.sh.data.model.Question
 import com.vr.app.sh.ui.base.AddTestViewModelFactory
 import com.vr.app.sh.ui.tests.viewmodel.AddTestViewModel
 import kotlinx.coroutines.*
@@ -87,8 +87,10 @@ class AddQuestion : AppCompatActivity() {
             if(!TextUtils.isEmpty(TextQuestion.text.toString().trim())&&!TextUtils.isEmpty(TextOtv1.text.toString().trim())&&
                     !TextUtils.isEmpty(TextOtv2.text.toString().trim())&&!TextUtils.isEmpty(TextOtv3.text.toString().trim())&&
                     !TextUtils.isEmpty(TextOtv4.text.toString().trim())&&!TextUtils.isEmpty(TextCorrectOtv.text.toString().trim())){
-                viewModel.listQuestions.add(Question(TextQuestion.text.toString(), TextOtv1.text.toString(), TextOtv2.text.toString(),
-                    TextOtv3.text.toString(), TextOtv4.text.toString(), TextCorrectOtv.text.toString()))
+                viewModel.listQuestions.add(
+                    Question(0,TextQuestion.text.toString(), TextOtv1.text.toString(), TextOtv2.text.toString(),
+                    TextOtv3.text.toString(), TextOtv4.text.toString(), TextCorrectOtv.text.toString())
+                )
                 TextQuestion.setText("")
                 TextOtv1.setText("")
                 TextOtv2.setText("")

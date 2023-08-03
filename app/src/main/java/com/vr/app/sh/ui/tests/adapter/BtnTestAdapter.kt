@@ -7,21 +7,22 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.vr.app.sh.R
-import com.vr.app.sh.domain.model.Test
+import com.vr.app.sh.data.model.Test
 
 class BtnTestAdapter : RecyclerView.Adapter<BtnTestAdapter.ViewHolder>() {
     private var listener: Listener? = null
-    lateinit var testsList:List<Test>
+    var listTests:List<Test> = listOf()
 
     fun setTests(tests: List<Test>) {
-        this.testsList = tests
+        this.listTests = tests
+        notifyDataSetChanged()
     }
 
     interface Listener {
         fun Clicked(name_test: String?,id_test:Int, index: Int)
     }
 
-    override fun getItemCount(): Int = testsList.size
+    override fun getItemCount(): Int = listTests.size
 
     fun setListener(listener: Listener?) {
         this.listener = listener
@@ -36,13 +37,13 @@ class BtnTestAdapter : RecyclerView.Adapter<BtnTestAdapter.ViewHolder>() {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val cardView = holder.cardView
         val textView = cardView.findViewById<View>(R.id.text_btn_test) as TextView
-        textView.setText(testsList[position].nametest)
+        textView.setText(listTests[position].name_test)
         val num_test = cardView.findViewById<View>(R.id.num_test) as TextView
         val num = position + 1
         num_test.text = num.toString()
         cardView.setOnClickListener {
             if (listener != null) {
-                listener!!.Clicked(textView.text.toString(), testsList[position].id, position)
+                listener!!.Clicked(textView.text.toString(), listTests[position].id, position)
             }
         }
     }

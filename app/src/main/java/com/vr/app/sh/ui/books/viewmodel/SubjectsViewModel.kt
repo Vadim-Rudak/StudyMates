@@ -8,9 +8,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.vr.app.sh.R
+import com.vr.app.sh.data.model.Book
+import com.vr.app.sh.data.repository.RoomDB
 import com.vr.app.sh.domain.UseCase.GetBookFile
 import com.vr.app.sh.domain.UseCase.GetListBookInClass
 import com.vr.app.sh.domain.UseCase.InternetConnection
@@ -18,6 +21,7 @@ import com.vr.app.sh.ui.books.adapter.RecyclerViewAdapter
 import com.vr.app.sh.ui.books.view.AddBook
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import okhttp3.ResponseBody
@@ -26,22 +30,16 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.io.*
 
-class SubjectsViewModel(val getBookFile: GetBookFile, val getListBookInClass: GetListBookInClass,val internetConnection: InternetConnection,val numClass:Int): ViewModel() {
+class SubjectsViewModel(context: Context,val getBookFile: GetBookFile, val getListBookInClass: GetListBookInClass,val internetConnection: InternetConnection,val numClass:Int): ViewModel() {
 
     val download = MutableLiveData<Boolean>()
     var saveFileInMemory:Boolean = false
     var progress = MutableLiveData<Long>()
     val adapter = RecyclerViewAdapter()
     val errorMessage = MutableLiveData<String>()
+    var listBooks: LiveData<List<Book>> = getListBookInClass.execute(numClass)
+    //var job: Job? = null
 
-    init {
-        updateInfoInAdapter()
-    }
-
-    fun updateInfoInAdapter(){
-        adapter.setBook(getListBookInClass.execute(numClass))
-        adapter.notifyDataSetChanged()
-    }
 
     fun editMenu(context: Context){
         val alertDialog = AlertDialog.Builder(context)
@@ -178,4 +176,9 @@ class SubjectsViewModel(val getBookFile: GetBookFile, val getListBookInClass: Ge
             return false
         }
     }
+
+//    override fun onCleared() {
+//        super.onCleared()
+//        job?.cancel()
+//    }
 }

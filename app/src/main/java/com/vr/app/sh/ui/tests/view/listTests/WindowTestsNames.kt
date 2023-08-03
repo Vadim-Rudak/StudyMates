@@ -9,9 +9,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.vr.app.sh.R
-import com.vr.app.sh.data.repository.UserRepoImpl
+import com.vr.app.sh.app.USER_ROLE
+import com.vr.app.sh.data.repository.RoomDB
 import com.vr.app.sh.domain.UseCase.GetUserBD
-import com.vr.app.sh.domain.repository.UserRepo
 import com.vr.app.sh.ui.tests.adapter.PagerTestsAdapter
 import com.vr.app.sh.ui.tests.view.addTest.AddTest
 
@@ -28,12 +28,9 @@ class WindowTestsNames : AppCompatActivity() {
             tab.text = "${(position + 1)} КЛАСС"
         }.attach()
 
-        val userRepo: UserRepo = UserRepoImpl(this)
-        val getUserBD = GetUserBD(userRepo)
-
         val subject = intent.extras?.getString("sub")
         val addTest = findViewById<FloatingActionButton>(R.id.AddTest)
-        if (getUserBD.execute().role.equals("ADMIN")){
+        if (USER_ROLE == "ADMIN"){
             addTest.visibility = View.VISIBLE
         }else{
             addTest.visibility = View.GONE

@@ -1,11 +1,14 @@
 package com.vr.app.sh.di
 
 import android.content.Context
+import androidx.room.Room
 import com.vr.app.sh.data.api.NetworkService
-import com.vr.app.sh.data.repository.*
-import com.vr.app.sh.domain.UseCase.GetAllBookListInternet
-import com.vr.app.sh.domain.UseCase.InternetConnection
-import com.vr.app.sh.domain.UseCase.SaveBookListInBD
+import com.vr.app.sh.data.repository.DAOBook
+import com.vr.app.sh.data.repository.DAOQuestions
+import com.vr.app.sh.data.repository.DAOTest
+import com.vr.app.sh.data.repository.DAOUser
+import com.vr.app.sh.data.repository.InternetRepoImpl
+import com.vr.app.sh.data.repository.RoomDB
 import dagger.Module
 import dagger.Provides
 
@@ -18,23 +21,23 @@ class DataModule {
     }
 
     @Provides
-    fun provideUserRepoImpl(context: Context): UserRepoImpl {
-        return UserRepoImpl(context = context)
+    fun provideUserRepoImpl(context: Context): DAOUser {
+        return RoomDB.getDatabase(context = context).userDAO()
     }
 
     @Provides
-    fun provideBookRepoImpl(context: Context):BookRepoImpl{
-        return BookRepoImpl(context = context)
+    fun provideBookRepoImpl(context: Context):DAOBook{
+        return RoomDB.getDatabase(context = context).bookDAO()
     }
 
     @Provides
-    fun provideTestsRepoImpl(context: Context): TestsRepoImpl {
-        return TestsRepoImpl(context = context)
+    fun provideTestsRepoImpl(context: Context): DAOTest {
+        return RoomDB.getDatabase(context = context).testDAO()
     }
 
     @Provides
-    fun provideQuestionsRepoImpl(context: Context): QuestionsRepoImpl {
-        return QuestionsRepoImpl(context = context)
+    fun provideDAOQuestions(context: Context): DAOQuestions {
+        return RoomDB.getDatabase(context = context).questionsDAO()
     }
 
 }

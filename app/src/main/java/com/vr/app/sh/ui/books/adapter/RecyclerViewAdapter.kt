@@ -3,6 +3,7 @@ package com.vr.app.sh.ui.books.adapter
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.util.Base64
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,14 +12,15 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.vr.app.sh.R
-import com.vr.app.sh.domain.model.Book
+import com.vr.app.sh.data.model.Book
 
 class RecyclerViewAdapter : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
     private var listener: Listener? = null
-    lateinit var bookList:List<Book>
+    var bookList:List<Book> = listOf()
 
     fun setBook(books: List<Book>) {
         this.bookList = books
+        notifyDataSetChanged()
     }
 
     interface Listener {
@@ -42,13 +44,17 @@ class RecyclerViewAdapter : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val cardView = holder.cardView
         val imageView = cardView.findViewById<View>(R.id.image_btn_sub) as ImageView
-        if(!bookList[position].imagebook.equals("")){
-            imageView.setImageBitmap(Base64ToBitmap(bookList[position].imagebook))
+
+
+
+        /////////////////////////////////////////////////////////////////////////
+        if(bookList[position].image!=null){
+            imageView.setImageBitmap(Base64ToBitmap(bookList[position].image!!))
         }
         val id_book = cardView.findViewById<View>(R.id.text_id_book) as TextView
         id_book.text = bookList[position].id.toString()
         val name_book = cardView.findViewById<View>(R.id.text_btn_sub) as TextView
-        name_book.text = bookList[position].namebook
+        name_book.text = bookList[position].name
 
         cardView.setOnClickListener {
             if (listener != null) {
