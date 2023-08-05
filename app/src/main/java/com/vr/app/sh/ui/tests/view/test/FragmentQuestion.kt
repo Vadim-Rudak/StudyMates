@@ -16,7 +16,6 @@ import com.vr.app.sh.data.model.Question
 
 class FragmentQuestion(var num_question:Int,var listQuestions: List<Question>, var info_questions:Array<Int>,var tabLayout: TabLayout) : Fragment(), View.OnClickListener {
 
-    //var listQuestions:List<Question> = questionsDAO.getQuestions()
     lateinit var textQuestion:TextView
     lateinit var btnOtv1:Button
     lateinit var btnOtv2:Button

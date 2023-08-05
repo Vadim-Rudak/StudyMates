@@ -28,7 +28,7 @@
             android:exported="false"
             android:theme="@style/Theme.Book"/>
         <activity
-            android:name=".ui.tests.view.result.ResultTest"
+            android:name=".ui.tests.view.result.TestResultAct"
             android:exported="false"
             android:theme="@style/Theme.Book" />
         <activity

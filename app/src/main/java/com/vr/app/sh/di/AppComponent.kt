@@ -7,7 +7,7 @@ import com.vr.app.sh.ui.door.view.Reg
 import com.vr.app.sh.ui.menu.view.TopMenu
 import com.vr.app.sh.ui.tests.view.addTest.AddQuestion
 import com.vr.app.sh.ui.tests.view.listTests.FragmentListTests
-import com.vr.app.sh.ui.tests.view.result.ResultTest
+import com.vr.app.sh.ui.tests.view.result.TestResultAct
 import com.vr.app.sh.ui.tests.view.subjects.FragmentAllSubjects
 import com.vr.app.sh.ui.tests.view.test.WindowTest
 import dagger.Component
@@ -21,7 +21,7 @@ interface AppComponent {
     fun injectFragmentSubjectsClass(fragmentSubjectsClass: FragmentSubjectsClass)
     fun injectTopMenu(topMenu: TopMenu)
     fun injectReg(reg: Reg)
-    fun injectResultTest(resultTest: ResultTest)
+    fun injectResultTest(testResultAct: TestResultAct)
     fun injectFragmentListTests(fragmentListTests: FragmentListTests)
     fun injectWindowTest(windowTest: WindowTest)
 }

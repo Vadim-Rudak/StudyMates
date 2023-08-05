@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.DialogInterface
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.vr.app.sh.data.model.ResultTest
 import com.vr.app.sh.domain.UseCase.GetUserBD
 import com.vr.app.sh.domain.UseCase.InternetConnection
 import com.vr.app.sh.domain.UseCase.SendResult
@@ -30,11 +31,10 @@ class ResultViewModel(private val internetConnection: InternetConnection,private
         alertDialog.show()
     }
 
-    fun sendResult(test_id:Int,test_result:Int,num_correct_otv: Int,num_error_otv: Int,num_no_otv: Int){
+    fun sendResult(result:ResultTest){
         if (internetConnection.UseInternet()){
             job = CoroutineScope(Dispatchers.IO).launch {
-                val response = sendResult.execute(JSONResult(test_id, getUserBD.execute().user_name, test_result,
-                    num_correct_otv, num_error_otv, num_no_otv))
+                val response = sendResult.execute(JSONResult(result))
 
                 withContext(Dispatchers.Main) {
                     if (response.isSuccessful) {
@@ -49,14 +49,14 @@ class ResultViewModel(private val internetConnection: InternetConnection,private
         }
     }
 
-    fun JSONResult(id_test:Int,username:String,score:Int,num_correct_otv:Int,num_error_otv:Int,num_no_otv:Int): RequestBody {
+    fun JSONResult(resultTest:ResultTest): RequestBody {
         val jsonObject = JSONObject()
-        jsonObject.put("idtest", id_test)
-        jsonObject.put("username", username)
-        jsonObject.put("score", score)
-        jsonObject.put("num_correct_otv", num_correct_otv)
-        jsonObject.put("num_error_otv", num_error_otv)
-        jsonObject.put("num_no_otv", num_no_otv)
+        jsonObject.put("idtest", resultTest.test_id)
+        jsonObject.put("username", getUserBD.execute().user_name)
+        jsonObject.put("score", resultTest.all_result)
+        jsonObject.put("num_correct_otv", resultTest.num_correct_answer)
+        jsonObject.put("num_error_otv", resultTest.num_wrong_answer)
+        jsonObject.put("num_no_otv", resultTest.num_not_answer)
 
         val jsonObjectString = jsonObject.toString()
         return jsonObjectString.toRequestBody("application/json".toMediaTypeOrNull())
