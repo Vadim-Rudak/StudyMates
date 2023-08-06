@@ -9,6 +9,7 @@ import com.vr.app.sh.R
 import com.vr.app.sh.app.App
 import com.vr.app.sh.data.model.ResultTest
 import com.vr.app.sh.ui.base.ResultViewModelFactory
+import com.vr.app.sh.ui.other.UseAlert
 import com.vr.app.sh.ui.tests.viewmodel.ResultViewModel
 
 class TestResultAct : AppCompatActivity() {
@@ -48,7 +49,7 @@ class TestResultAct : AppCompatActivity() {
         }
 
         viewModel.errorMessage.observe(this){
-            viewModel.errorMessage(it,this)
+            UseAlert.errorMessage(it,this)
         }
 
         val btnSendResult = findViewById<Button>(R.id.save_res_btn)

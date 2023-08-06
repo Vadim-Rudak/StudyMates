@@ -13,6 +13,7 @@ import com.vr.app.sh.app.App
 import com.vr.app.sh.ui.base.AuthorizationViewModelFactory
 import com.vr.app.sh.ui.door.viewmodel.AuthViewModel
 import com.vr.app.sh.ui.menu.view.TopMenu
+import com.vr.app.sh.ui.other.UseAlert
 
 class Authoriz : AppCompatActivity() {
 
@@ -36,8 +37,7 @@ class Authoriz : AppCompatActivity() {
             .get(AuthViewModel::class.java)
 
         viewModel.errorMessage.observe(this){
-            viewModel.errorMessage(it,this)
-            Log.d("FFF",it)
+            UseAlert.errorMessage(it,this)
         }
 
         viewModel.statusAuth.observe(this){

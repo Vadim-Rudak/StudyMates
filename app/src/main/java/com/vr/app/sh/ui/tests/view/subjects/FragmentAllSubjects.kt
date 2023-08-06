@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.vr.app.sh.R
 import com.vr.app.sh.app.App
 import com.vr.app.sh.ui.base.AllSubjectsViewModelFactory
+import com.vr.app.sh.ui.other.UseAlert
 import com.vr.app.sh.ui.tests.view.listTests.WindowTestsNames
 import com.vr.app.sh.ui.tests.viewmodel.AllSubjectsViewModel
 
@@ -100,7 +101,7 @@ class FragmentAllSubjects() : Fragment(), View.OnClickListener {
             .get(AllSubjectsViewModel::class.java)
 
         viewModel.errorMessage.observe(viewLifecycleOwner){
-            viewModel.errorMessage(it,requireContext())
+            UseAlert.errorMessage(it,requireContext())
         }
 
         viewModel.statusTestsInBD.observe(viewLifecycleOwner) {

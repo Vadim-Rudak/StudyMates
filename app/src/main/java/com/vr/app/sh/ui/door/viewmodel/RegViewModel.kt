@@ -20,16 +20,6 @@ class RegViewModel(val registration: Registration,val internetConnection: Intern
     val statusRegistration = MutableLiveData<Boolean>()
     var job: Job? = null
 
-    fun errorMessage(textMessage:String,context: Context){
-        val alertDialog = AlertDialog.Builder(context)
-        alertDialog.setTitle("Ошибка")
-        alertDialog.setMessage(textMessage)
-        alertDialog.setPositiveButton("OK", DialogInterface.OnClickListener { dialogInterface, i ->
-            dialogInterface.dismiss()
-        })
-        alertDialog.show()
-    }
-
     fun registration(
         login:String,
         password1:String,

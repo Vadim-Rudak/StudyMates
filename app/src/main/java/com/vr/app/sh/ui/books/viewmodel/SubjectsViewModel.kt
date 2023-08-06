@@ -71,16 +71,6 @@ class SubjectsViewModel(context: Context,val getBookFile: GetBookFile, val getLi
         alertDialog.show()
     }
 
-    fun errorMessage(textMessage:String,context:Context){
-        val alertDialog = AlertDialog.Builder(context)
-        alertDialog.setTitle("Ошибка")
-        alertDialog.setMessage(textMessage)
-        alertDialog.setPositiveButton("OK", DialogInterface.OnClickListener { dialogInterface, i ->
-            dialogInterface.dismiss()
-        })
-        alertDialog.show()
-    }
-
     fun saveFileDialog(path: String,id_book: Int,context: Context){
         val alertDialog = AlertDialog.Builder(context)
         alertDialog.setTitle("Учебник не скачан, загрузить его?")

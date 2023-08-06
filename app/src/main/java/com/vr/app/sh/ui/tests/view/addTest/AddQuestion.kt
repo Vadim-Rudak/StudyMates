@@ -14,6 +14,7 @@ import com.vr.app.sh.R
 import com.vr.app.sh.app.App
 import com.vr.app.sh.data.model.Question
 import com.vr.app.sh.ui.base.AddTestViewModelFactory
+import com.vr.app.sh.ui.other.UseAlert
 import com.vr.app.sh.ui.tests.viewmodel.AddTestViewModel
 import kotlinx.coroutines.*
 
@@ -56,7 +57,7 @@ class AddQuestion : AppCompatActivity() {
             .get(AddTestViewModel::class.java)
 
         viewModel.errorMessage.observe(this){
-            viewModel.errorMessage(it,this)
+            UseAlert.errorMessage(it,this)
         }
 
         viewModel.vizibleProgressBar.observe(this){

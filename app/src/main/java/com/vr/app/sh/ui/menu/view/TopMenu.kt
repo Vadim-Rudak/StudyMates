@@ -19,6 +19,7 @@ import com.vr.app.sh.app.App
 import com.vr.app.sh.ui.base.MenuViewModelFactory
 import com.vr.app.sh.ui.books.view.Books
 import com.vr.app.sh.ui.menu.viewModel.MenuViewModel
+import com.vr.app.sh.ui.other.UseAlert
 import com.vr.app.sh.ui.tests.view.subjects.ActivitySubjects
 
 class TopMenu : AppCompatActivity() {
@@ -50,7 +51,7 @@ class TopMenu : AppCompatActivity() {
         }
 
         viewModel.errorMessage.observe(this){
-            viewModel.errorMessage(it,this)
+            UseAlert.errorMessage(it,this)
         }
 
         viewModel.loading.observe(this){

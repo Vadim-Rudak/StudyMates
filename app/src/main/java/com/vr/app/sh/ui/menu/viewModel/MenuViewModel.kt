@@ -57,16 +57,6 @@ class MenuViewModel(val getAllBookListInternet: GetAllBookListInternet,val saveB
         }
     }
 
-    fun errorMessage(textMessage:String,context: Context){
-        val alertDialog = AlertDialog.Builder(context)
-        alertDialog.setTitle("Ошибка")
-        alertDialog.setMessage(textMessage)
-        alertDialog.setPositiveButton("OK", DialogInterface.OnClickListener { dialogInterface, i ->
-            dialogInterface.dismiss()
-        })
-        alertDialog.show()
-    }
-
     override fun onCleared() {
         super.onCleared()
         job?.cancel()

@@ -21,16 +21,6 @@ class AuthViewModel(val authorization: Authorization,val setUserInBD: SetUserInB
     val statusAuth = MutableLiveData<Boolean>()
     var job: Job? = null
 
-    fun errorMessage(textMessage:String,context:Context){
-        val alertDialog = AlertDialog.Builder(context)
-        alertDialog.setTitle("Ошибка")
-        alertDialog.setMessage(textMessage)
-        alertDialog.setPositiveButton("OK", DialogInterface.OnClickListener { dialogInterface, i ->
-            dialogInterface.dismiss()
-        })
-        alertDialog.show()
-    }
-
     fun authorization(login:String,password:String){
         if (internetConnection.UseInternet()){
             if (!TextUtils.isEmpty(login.trim())&&!TextUtils.isEmpty(password.trim())){

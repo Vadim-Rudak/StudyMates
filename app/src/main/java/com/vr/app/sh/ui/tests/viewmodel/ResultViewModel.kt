@@ -21,16 +21,6 @@ class ResultViewModel(private val internetConnection: InternetConnection,private
     val errorMessage = MutableLiveData<String>()
     var job: Job? = null
 
-    fun errorMessage(textMessage:String,context: Context){
-        val alertDialog = AlertDialog.Builder(context)
-        alertDialog.setTitle("Ошибка")
-        alertDialog.setMessage(textMessage)
-        alertDialog.setPositiveButton("OK", DialogInterface.OnClickListener { dialogInterface, i ->
-            dialogInterface.dismiss()
-        })
-        alertDialog.show()
-    }
-
     fun sendResult(result:ResultTest){
         if (internetConnection.UseInternet()){
             job = CoroutineScope(Dispatchers.IO).launch {

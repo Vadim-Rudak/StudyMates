@@ -21,6 +21,7 @@ import com.vr.app.sh.R
 import com.vr.app.sh.app.App
 import com.vr.app.sh.ui.base.AddBookViewModelFactory
 import com.vr.app.sh.ui.books.viewmodel.AddBookViewModel
+import com.vr.app.sh.ui.other.UseAlert
 import kotlinx.coroutines.*
 import java.io.File
 
@@ -50,7 +51,7 @@ class AddBook : AppCompatActivity() {
             .get(AddBookViewModel::class.java)
 
         viewModel.errorMessage.observe(this){
-            viewModel.errorMessage(it,this)
+            UseAlert.errorMessage(it,this)
         }
 
         viewModel.vizibileProgressBar.observe(this){

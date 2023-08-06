@@ -23,16 +23,6 @@ class AddTestViewModel(val getListTestsInternet: GetListTestsInternet,val saveTe
     val vizibleProgressBar = MutableLiveData<Boolean>()
     var job: Job? = null
 
-    fun errorMessage(textMessage:String,context: Context){
-        val alertDialog = AlertDialog.Builder(context)
-        alertDialog.setTitle("Ошибка")
-        alertDialog.setMessage(textMessage)
-        alertDialog.setPositiveButton("OK", DialogInterface.OnClickListener { dialogInterface, i ->
-            dialogInterface.dismiss()
-        })
-        alertDialog.show()
-    }
-
     fun sendTestWithQuestions(name_subject:String,num_class:Int,name_test: String){
         if (internetConnection.UseInternet()){
             vizibleProgressBar.value = true

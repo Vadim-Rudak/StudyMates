@@ -1,19 +1,19 @@
 package com.vr.app.sh.ui.tests.viewmodel
 
-import android.app.AlertDialog
-import android.content.Context
-import android.content.DialogInterface
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.vr.app.sh.data.model.Test
-import com.vr.app.sh.data.repository.RoomDB
 import com.vr.app.sh.domain.UseCase.GetListQuestions
 import com.vr.app.sh.domain.UseCase.GetListTestsInClass
 import com.vr.app.sh.domain.UseCase.InternetConnection
 import com.vr.app.sh.domain.UseCase.SaveQuestionsInBD
 import com.vr.app.sh.ui.tests.adapter.BtnTestAdapter
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class TestsOneClassViewModel(getListTestsInClass: GetListTestsInClass, val getListQuestions: GetListQuestions, val saveQuestionsInBD: SaveQuestionsInBD, val internetConnection: InternetConnection, val num_class: Int): ViewModel() {
 
@@ -23,16 +23,6 @@ class TestsOneClassViewModel(getListTestsInClass: GetListTestsInClass, val getLi
     val openTest = MutableLiveData<Boolean>()
     val listTests:LiveData<List<Test>> = getListTestsInClass.execute(num_class)
     var job: Job? = null
-
-    fun errorMessage(textMessage:String,context: Context){
-        val alertDialog = AlertDialog.Builder(context)
-        alertDialog.setTitle("Ошибка")
-        alertDialog.setMessage(textMessage)
-        alertDialog.setPositiveButton("OK", DialogInterface.OnClickListener { dialogInterface, i ->
-            dialogInterface.dismiss()
-        })
-        alertDialog.show()
-    }
 
     fun saveQuestionsInDB(test_id:Int,nameTest:String){
         if (internetConnection.UseInternet()){

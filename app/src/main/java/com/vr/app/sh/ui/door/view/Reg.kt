@@ -11,6 +11,7 @@ import com.vr.app.sh.R
 import com.vr.app.sh.app.App
 import com.vr.app.sh.ui.base.RegViewModelFactory
 import com.vr.app.sh.ui.door.viewmodel.RegViewModel
+import com.vr.app.sh.ui.other.UseAlert
 
 class Reg : AppCompatActivity() {
 
@@ -39,7 +40,7 @@ class Reg : AppCompatActivity() {
             .get(RegViewModel::class.java)
 
         viewModel.errorMessage.observe(this){
-            viewModel.errorMessage(it,this)
+            UseAlert.errorMessage(it,this)
         }
 
         viewModel.statusRegistration.observe(this){

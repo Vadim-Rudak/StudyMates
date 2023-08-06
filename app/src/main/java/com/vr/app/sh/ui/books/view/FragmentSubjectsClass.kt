@@ -21,6 +21,7 @@ import com.vr.app.sh.app.App
 import com.vr.app.sh.ui.base.BooksViewModelFactory
 import com.vr.app.sh.ui.books.adapter.RecyclerViewAdapter
 import com.vr.app.sh.ui.books.viewmodel.SubjectsViewModel
+import com.vr.app.sh.ui.other.UseAlert
 import kotlinx.coroutines.*
 import java.io.File
 
@@ -78,7 +79,7 @@ class FragmentSubjectsClass() : Fragment() {
         }
 
         viewModel.errorMessage.observe(viewLifecycleOwner){
-            viewModel.errorMessage(it,requireContext())
+            UseAlert.errorMessage(it,requireContext())
         }
 
         viewModel.download.observe(viewLifecycleOwner){

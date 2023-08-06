@@ -18,16 +18,6 @@ class AllSubjectsViewModel(val getListTestsInternet: GetListTestsInternet,val sa
     val errorMessage = MutableLiveData<String>()
     var job: Job? = null
 
-    fun errorMessage(textMessage:String,context: Context){
-        val alertDialog = AlertDialog.Builder(context)
-        alertDialog.setTitle("Ошибка")
-        alertDialog.setMessage(textMessage)
-        alertDialog.setPositiveButton("OK", DialogInterface.OnClickListener { dialogInterface, i ->
-            dialogInterface.dismiss()
-        })
-        alertDialog.show()
-    }
-
     fun getAllTests(subject:String){
         if (internetConnection.UseInternet()){
             sub.value = subject

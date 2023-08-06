@@ -30,16 +30,6 @@ class AddBookViewModel(val getAllBookListInternet: GetAllBookListInternet,val sa
     val send = MutableLiveData<Boolean>()
     val errorMessage = MutableLiveData<String>()
 
-    fun errorMessage(textMessage:String,context: Context){
-        val alertDialog = AlertDialog.Builder(context)
-        alertDialog.setTitle("Ошибка")
-        alertDialog.setMessage(textMessage)
-        alertDialog.setPositiveButton("OK", DialogInterface.OnClickListener { dialogInterface, i ->
-            dialogInterface.dismiss()
-        })
-        alertDialog.show()
-    }
-
     fun sendFile(name_book:String,num_class:Int){
         if(internetConnection.UseInternet()){
             vizibileProgressBar.value = true
