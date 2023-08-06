@@ -1,21 +1,29 @@
 package com.vr.app.sh.ui.tests.viewmodel
 
-import android.app.AlertDialog
-import android.content.Context
-import android.content.DialogInterface
+import android.content.res.Resources
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.vr.app.sh.R
 import com.vr.app.sh.data.model.ResultTest
 import com.vr.app.sh.domain.UseCase.GetUserBD
 import com.vr.app.sh.domain.UseCase.InternetConnection
 import com.vr.app.sh.domain.UseCase.SendResult
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONObject
 
-class ResultViewModel(private val internetConnection: InternetConnection,private val getUserBD: GetUserBD,private val sendResult: SendResult): ViewModel() {
+class ResultViewModel(
+    private val resources: Resources,
+    private val internetConnection: InternetConnection,
+    private val getUserBD: GetUserBD,
+    private val sendResult: SendResult
+): ViewModel() {
 
     val status_send = MutableLiveData<Boolean>()
     val errorMessage = MutableLiveData<String>()
@@ -30,12 +38,12 @@ class ResultViewModel(private val internetConnection: InternetConnection,private
                     if (response.isSuccessful) {
                         status_send.value = true
                     } else {
-                        errorMessage.value = "Ошибка отправки теста"
+                        errorMessage.value = resources.getString(R.string.alrErrorSendResultTest)
                     }
                 }
             }
         }else{
-            errorMessage.value = "Нет подключения к интернету"
+            errorMessage.value = resources.getString(R.string.alrNotInternetConnection)
         }
     }
 

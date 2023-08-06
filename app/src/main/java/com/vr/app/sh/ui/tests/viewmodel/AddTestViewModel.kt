@@ -3,9 +3,11 @@ package com.vr.app.sh.ui.tests.viewmodel
 import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
+import android.content.res.Resources
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.gson.Gson
+import com.vr.app.sh.R
 import com.vr.app.sh.data.model.Question
 import com.vr.app.sh.domain.UseCase.*
 import kotlinx.coroutines.*
@@ -14,9 +16,14 @@ import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONObject
 
-class AddTestViewModel(val getListTestsInternet: GetListTestsInternet,val saveTestsInBD: SaveTestsInBD,
-                       val sendTestInfo: SendTestInfo, val sendQuestions: SendQuestions,
-                       val internetConnection: InternetConnection): ViewModel() {
+class AddTestViewModel(
+    private val resources: Resources,
+    val getListTestsInternet: GetListTestsInternet,
+    val saveTestsInBD: SaveTestsInBD,
+    val sendTestInfo: SendTestInfo,
+    val sendQuestions: SendQuestions,
+    val internetConnection: InternetConnection
+    ): ViewModel() {
 
     var listQuestions:ArrayList<Question> = ArrayList()
     val errorMessage = MutableLiveData<String>()
@@ -41,12 +48,12 @@ class AddTestViewModel(val getListTestsInternet: GetListTestsInternet,val saveTe
                         }
                     } else {
                         vizibleProgressBar.value = false
-                        errorMessage.value = "Ошибка отправки теста"
+                        errorMessage.value = resources.getString(R.string.alrErrorSendTest)
                     }
                 }
             }
         }else{
-            errorMessage.value = "Нет подключения к интернету"
+            errorMessage.value = resources.getString(R.string.alrNotInternetConnection)
         }
     }
 

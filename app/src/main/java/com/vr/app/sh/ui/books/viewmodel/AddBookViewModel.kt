@@ -3,9 +3,11 @@ package com.vr.app.sh.ui.books.viewmodel
 import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
+import android.content.res.Resources
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.vr.app.sh.R
 import com.vr.app.sh.data.api.NetworkService
 import com.vr.app.sh.domain.UseCase.GetAllBookListInternet
 import com.vr.app.sh.domain.UseCase.InternetConnection
@@ -22,7 +24,7 @@ import okhttp3.RequestBody
 import java.io.File
 import java.util.concurrent.TimeUnit
 
-class AddBookViewModel(val getAllBookListInternet: GetAllBookListInternet,val saveBookListInBD: SaveBookListInBD ,val internetConnection: InternetConnection): ViewModel() {
+class AddBookViewModel(private val resources: Resources,val getAllBookListInternet: GetAllBookListInternet,val saveBookListInBD: SaveBookListInBD ,val internetConnection: InternetConnection): ViewModel() {
 
     var path_file: String? = null
     lateinit var file: File
@@ -64,7 +66,7 @@ class AddBookViewModel(val getAllBookListInternet: GetAllBookListInternet,val sa
             }
         }else{
             vizibileProgressBar.value = false
-            errorMessage.value = "Нет подключения к интернету"
+            errorMessage.value = resources.getString(R.string.alrNotInternetConnection)
         }
     }
 }

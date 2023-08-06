@@ -1,5 +1,6 @@
 package com.vr.app.sh.ui.base
 
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.vr.app.sh.domain.UseCase.GetListQuestions
@@ -9,6 +10,7 @@ import com.vr.app.sh.domain.UseCase.SaveQuestionsInBD
 import com.vr.app.sh.ui.tests.viewmodel.TestsOneClassViewModel
 
 class TestsOneClassViewModelFactory(
+    val context: Context,
     val getListTestsInClass: GetListTestsInClass,
     val getListQuestions: GetListQuestions,
     val saveQuestionsInBD: SaveQuestionsInBD,
@@ -23,7 +25,7 @@ class TestsOneClassViewModelFactory(
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         return if (modelClass.isAssignableFrom(TestsOneClassViewModel::class.java)) {
-            TestsOneClassViewModel(getListTestsInClass,getListQuestions,saveQuestionsInBD,internetConnection,num_class) as T
+            TestsOneClassViewModel(context.resources,getListTestsInClass,getListQuestions,saveQuestionsInBD,internetConnection,num_class) as T
         } else {
             throw IllegalArgumentException("ViewModel Not Found")
         }

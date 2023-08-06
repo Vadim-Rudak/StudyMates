@@ -3,9 +3,11 @@ package com.vr.app.sh.ui.door.viewmodel
 import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
+import android.content.res.Resources
 import android.text.TextUtils
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.vr.app.sh.R
 import com.vr.app.sh.app.USER_ROLE
 import com.vr.app.sh.data.model.User
 import com.vr.app.sh.domain.UseCase.Authorization
@@ -15,7 +17,7 @@ import kotlinx.coroutines.*
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 
-class AuthViewModel(val authorization: Authorization,val setUserInBD: SetUserInBD,val internetConnection: InternetConnection): ViewModel() {
+class AuthViewModel(private val resources: Resources, val authorization: Authorization, val setUserInBD: SetUserInBD, val internetConnection: InternetConnection): ViewModel() {
 
     val errorMessage = MutableLiveData<String>()
     val statusAuth = MutableLiveData<Boolean>()
@@ -38,10 +40,10 @@ class AuthViewModel(val authorization: Authorization,val setUserInBD: SetUserInB
                     }
                 }
             }else{
-                errorMessage.value = "Заполните поля"
+                errorMessage.value = resources.getString(R.string.alrNotTextInInput)
             }
         }else{
-            errorMessage.value = "Нет подключения к интернету"
+            errorMessage.value = resources.getString(R.string.alrNotInternetConnection)
         }
     }
 

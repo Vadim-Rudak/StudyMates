@@ -16,40 +16,44 @@ class AppModule(val context: Context) {
 
     @Provides
     fun provideAddBookViewModelFactory(
+        context: Context,
         getAllBookListInternet: GetAllBookListInternet,
         saveBookListInBD: SaveBookListInBD,
         internetConnection: InternetConnection
     ):AddBookViewModelFactory{
-        return AddBookViewModelFactory(getAllBookListInternet, saveBookListInBD, internetConnection)
+        return AddBookViewModelFactory(context,getAllBookListInternet, saveBookListInBD, internetConnection)
     }
 
     @Provides
     fun provideAddTestViewModelFactory(
+        context: Context,
         getInfoTests: GetListTestsInternet,
         saveTestInBD: SaveTestsInBD,
         sendTest: SendTestInfo,
         sendQuestions: SendQuestions,
         internetConnection: InternetConnection
     ):AddTestViewModelFactory{
-        return AddTestViewModelFactory(getInfoTests,saveTestInBD, sendTest, sendQuestions, internetConnection)
+        return AddTestViewModelFactory(context,getInfoTests,saveTestInBD, sendTest, sendQuestions, internetConnection)
     }
 
     @Provides
     fun provideAllSubjectsViewModelFactory(
+        context: Context,
         getListTestsInternet: GetListTestsInternet,
         saveListTestsInBD: SaveTestsInBD,
         internetConnection: InternetConnection
     ): AllSubjectsViewModelFactory {
-        return AllSubjectsViewModelFactory(getListTestsInternet, saveListTestsInBD, internetConnection)
+        return AllSubjectsViewModelFactory(context,getListTestsInternet, saveListTestsInBD, internetConnection)
     }
 
     @Provides
     fun provideAuthorizationViewModelFactory(
+        context: Context,
         authorization: Authorization,
         setUserInBD: SetUserInBD,
         internetConnection: InternetConnection
     ): AuthorizationViewModelFactory {
-        return AuthorizationViewModelFactory(authorization, setUserInBD, internetConnection)
+        return AuthorizationViewModelFactory(context,authorization, setUserInBD, internetConnection)
     }
 
     @Provides
@@ -64,38 +68,42 @@ class AppModule(val context: Context) {
 
     @Provides
     fun provideMenuViewModelFactory(
+        context: Context,
         getListBookInternet: GetAllBookListInternet,
         saveListBookInBD: SaveBookListInBD,
         internetConnection: InternetConnection
     ):MenuViewModelFactory{
-        return MenuViewModelFactory(getListBookInternet, saveListBookInBD, internetConnection)
+        return MenuViewModelFactory(context,getListBookInternet, saveListBookInBD, internetConnection)
     }
 
     @Provides
     fun provideRegViewModelFactory(
+        context: Context,
         registration: Registration,
         internetConnection: InternetConnection
     ):RegViewModelFactory{
-        return RegViewModelFactory(registration, internetConnection)
+        return RegViewModelFactory(context,registration, internetConnection)
     }
 
     @Provides
     fun provideResultViewModelFactory(
+        context: Context,
         sendResult: SendResult,
         getUser: GetUserBD,
         internetConnection: InternetConnection
     ):ResultViewModelFactory{
-        return ResultViewModelFactory(sendResult, getUser, internetConnection)
+        return ResultViewModelFactory(context,sendResult, getUser, internetConnection)
     }
 
     @Provides
     fun provideTestsOneClassViewModelFactory(
+        context: Context,
         getListTestsInClass: GetListTestsInClass,
         getListQuestions: GetListQuestions,
         saveQuestionsInBD: SaveQuestionsInBD,
         internetConnection: InternetConnection,
     ):TestsOneClassViewModelFactory{
-        return TestsOneClassViewModelFactory(getListTestsInClass, getListQuestions, saveQuestionsInBD, internetConnection)
+        return TestsOneClassViewModelFactory(context,getListTestsInClass, getListQuestions, saveQuestionsInBD, internetConnection)
     }
 
     @Provides

@@ -3,17 +3,19 @@ package com.vr.app.sh.ui.menu.viewModel
 import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
+import android.content.res.Resources
 import android.os.Environment
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.vr.app.sh.R
 import com.vr.app.sh.domain.UseCase.GetAllBookListInternet
 import com.vr.app.sh.domain.UseCase.InternetConnection
 import com.vr.app.sh.domain.UseCase.SaveBookListInBD
 import kotlinx.coroutines.*
 import java.io.File
 
-class MenuViewModel(val getAllBookListInternet: GetAllBookListInternet,val saveBookListInBD: SaveBookListInBD,val internetConnection: InternetConnection): ViewModel() {
+class MenuViewModel(private val resources: Resources,val getAllBookListInternet: GetAllBookListInternet,val saveBookListInBD: SaveBookListInBD,val internetConnection: InternetConnection): ViewModel() {
 
     val errorMessage = MutableLiveData<String>()
     val statusListBook = MutableLiveData<Boolean>()
@@ -48,12 +50,12 @@ class MenuViewModel(val getAllBookListInternet: GetAllBookListInternet,val saveB
                         saveBookListInBD.execute(ListBooks.body()!!)
                     }else{
                         loading.postValue(false)
-                        errorMessage.value = "Ошибка получения данных"
+                        errorMessage.value = resources.getString(R.string.alrErrorGetData)
                     }
                 }
             }
         }else{
-            errorMessage.value = "Отсутствует подключение к интернету"
+            errorMessage.value = resources.getString(R.string.alrNotInternetConnection)
         }
     }
 

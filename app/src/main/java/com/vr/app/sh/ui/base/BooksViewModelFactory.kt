@@ -23,7 +23,7 @@ class BooksViewModelFactory(
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         return if (modelClass.isAssignableFrom(SubjectsViewModel::class.java)) {
-            SubjectsViewModel(context,getBookFile,getListBookInClass,internetConnection,num_class) as T
+            SubjectsViewModel(context.resources,getBookFile,getListBookInClass,internetConnection,num_class) as T
         } else {
             throw IllegalArgumentException("ViewModel Not Found")
         }

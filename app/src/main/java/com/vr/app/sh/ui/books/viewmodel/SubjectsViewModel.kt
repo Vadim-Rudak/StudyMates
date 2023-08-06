@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.content.res.Resources
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -30,7 +31,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.io.*
 
-class SubjectsViewModel(context: Context,val getBookFile: GetBookFile, val getListBookInClass: GetListBookInClass,val internetConnection: InternetConnection,val numClass:Int): ViewModel() {
+class SubjectsViewModel(private val resources: Resources,val getBookFile: GetBookFile, val getListBookInClass: GetListBookInClass,val internetConnection: InternetConnection,val numClass:Int): ViewModel() {
 
     val download = MutableLiveData<Boolean>()
     var saveFileInMemory:Boolean = false
@@ -43,7 +44,7 @@ class SubjectsViewModel(context: Context,val getBookFile: GetBookFile, val getLi
 
     fun editMenu(context: Context){
         val alertDialog = AlertDialog.Builder(context)
-        alertDialog.setTitle("Выберите функцию")
+        alertDialog.setTitle(resources.getString(R.string.editBookTitel))
 
         val inflater = LayoutInflater.from(context)
         val window:View = inflater.inflate(R.layout.edit_book_window,null)
@@ -65,7 +66,7 @@ class SubjectsViewModel(context: Context,val getBookFile: GetBookFile, val getLi
             context.startActivity(intent)
         }
 
-        alertDialog.setPositiveButton("OK", DialogInterface.OnClickListener { dialogInterface, i ->
+        alertDialog.setPositiveButton(resources.getString(R.string.editBookBtnOk), DialogInterface.OnClickListener { dialogInterface, i ->
             dialogInterface.dismiss()
         })
         alertDialog.show()
@@ -73,11 +74,11 @@ class SubjectsViewModel(context: Context,val getBookFile: GetBookFile, val getLi
 
     fun saveFileDialog(path: String,id_book: Int,context: Context){
         val alertDialog = AlertDialog.Builder(context)
-        alertDialog.setTitle("Учебник не скачан, загрузить его?")
-        alertDialog.setPositiveButton("Да", DialogInterface.OnClickListener { dialogInterface, i ->
+        alertDialog.setTitle(resources.getString(R.string.titelDownloadBook))
+        alertDialog.setPositiveButton(resources.getString(R.string.btnDownloadBookOk), DialogInterface.OnClickListener { dialogInterface, i ->
             downloadFile(path,id_book)
         })
-        alertDialog.setNegativeButton("Отмена",DialogInterface.OnClickListener { dialogInterface, i ->
+        alertDialog.setNegativeButton(resources.getString(R.string.btnDownloadBookCansel),DialogInterface.OnClickListener { dialogInterface, i ->
             dialogInterface.dismiss()
         })
         alertDialog.show()
@@ -103,7 +104,7 @@ class SubjectsViewModel(context: Context,val getBookFile: GetBookFile, val getLi
                                         file.delete()
                                     }
                                     withContext(Dispatchers.Main){
-                                        errorMessage.value = "Ошибка скачивания файла, попробуйте ещё раз"
+                                        errorMessage.value = resources.getString(R.string.alrErrorDownloadBook)
                                         download.value = false
                                     }
                                 }
@@ -122,7 +123,7 @@ class SubjectsViewModel(context: Context,val getBookFile: GetBookFile, val getLi
                 }
             })
         }else{
-            errorMessage.value = "Нет подключения к интернету"
+            errorMessage.value = resources.getString(R.string.alrNotInternetConnection)
         }
     }
     private suspend fun writeResponseBodyToDisk(body: ResponseBody?, path_book: String): Boolean {

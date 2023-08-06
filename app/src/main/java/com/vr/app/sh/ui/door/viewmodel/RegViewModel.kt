@@ -3,9 +3,11 @@ package com.vr.app.sh.ui.door.viewmodel
 import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
+import android.content.res.Resources
 import android.text.TextUtils
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.vr.app.sh.R
 import com.vr.app.sh.domain.UseCase.InternetConnection
 import com.vr.app.sh.domain.UseCase.Registration
 import kotlinx.coroutines.*
@@ -14,7 +16,7 @@ import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONObject
 
-class RegViewModel(val registration: Registration,val internetConnection: InternetConnection): ViewModel() {
+class RegViewModel(private val resources: Resources, val registration: Registration, val internetConnection: InternetConnection): ViewModel() {
 
     val errorMessage = MutableLiveData<String>()
     val statusRegistration = MutableLiveData<Boolean>()
@@ -48,13 +50,13 @@ class RegViewModel(val registration: Registration,val internetConnection: Intern
                         }
                     }
                 }else{
-                    errorMessage.value = "Пароли не совпадают"
+                    errorMessage.value = resources.getString(R.string.alrPasswordsNotEquals)
                 }
             }else{
-                errorMessage.value = "Заполните все поля"
+                errorMessage.value = resources.getString(R.string.alrNotTextInInput)
             }
         }else{
-            errorMessage.value = "Нет подключения к интернету"
+            errorMessage.value = resources.getString(R.string.alrNotInternetConnection)
         }
     }
 

@@ -1,6 +1,8 @@
 <resources>
 
     <string name="app_name">SchoolProg</string>
+
+
     <string name="door_in_btn1">Войти</string>
     <string name="door_in_btn2">Зарегистрироваться</string>
     <string name="door_in_et1">Введите имя</string>
@@ -70,9 +72,17 @@
     <string name="send_text">Подождите, выполняется загрузка файла на сервер</string>
 
     <!-- Окно для редактирования учебника -->
+    <string name="editBookTitel">Выберите функцию</string>
     <string name="btn_edit1">Редактирование информации о учебнике</string>
     <string name="btn_edit2">Обновление файла учебника</string>
     <string name="btn_edit3">Удаление учебника</string>
+    <string name="editBookBtnOk">OK</string>
+
+    <!-- Окно для подтверждения скачивания учебника -->
+    <string name="titelDownloadBook">Учебник не скачан, загрузить его?</string>
+    <string name="btnDownloadBookOk">Да</string>
+    <string name="btnDownloadBookCansel">Отмена</string>
+
 
     <!-- Окно выбора предметов -->
     <string name="toolbar_sub">Предметы</string>
@@ -150,6 +160,28 @@
     </style>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Toast Messages -->
+    <string name="toastOkReg">Пользователь успешно зарегистрирован</string>
+
+    <!-- Alert Title -->
+    <string name="wrongTitel">Ошибка</string>
+
+    <!-- Alert Button -->
+    <string name="alrBtnOk">OK</string>
+
+    <!-- Error Messages -->
+    <string name="alrNotInternetConnection">Нет подключения к интернету</string>
+    <string name="alrErrorSendResultTest">Ошибка отправки теста</string>
+    <string name="alrNotTextInInput">Заполните все поля</string>
+    <string name="alrPasswordsNotEquals">Пароли не совпадают</string>
+    <string name="alrErrorDownloadBook">Ошибка скачивания файла, попробуйте ещё раз</string>
+    <string name="alrErrorGetData">Ошибка получения данных</string>
+    <string name="alrErrorSendTest">Ошибка отправки теста</string>
+    <string name="alrErrorNotQuestions">В тесте нет вопросов</string>
+
+
+
 
 
 </resources>

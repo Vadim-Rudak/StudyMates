@@ -45,7 +45,7 @@ class Reg : AppCompatActivity() {
 
         viewModel.statusRegistration.observe(this){
             if(it){
-                Toast.makeText(this, "Пользователь успешно зарегистрирован", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, this.resources.getString(R.string.toastOkReg), Toast.LENGTH_SHORT).show()
                 finish()
             }
         }
