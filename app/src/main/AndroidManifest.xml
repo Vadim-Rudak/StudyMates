@@ -20,13 +20,17 @@
         android:theme="@style/Theme.SH"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".ui.tests.view.addTest.AddQuestion"
+            android:name=".ui.timeTable.view.TimeTable"
             android:exported="false"
             android:theme="@style/Theme.Book"/>
         <activity
+            android:name=".ui.tests.view.addTest.AddQuestion"
+            android:exported="false"
+            android:theme="@style/Theme.Book" />
+        <activity
             android:name=".ui.tests.view.addTest.AddTest"
             android:exported="false"
-            android:theme="@style/Theme.Book"/>
+            android:theme="@style/Theme.Book" />
         <activity
             android:name=".ui.tests.view.result.TestResultAct"
             android:exported="false"

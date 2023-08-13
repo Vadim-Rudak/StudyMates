@@ -16,14 +16,40 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="Theme.Book" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="Theme.Book" parent="Theme.Material3.Light.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/white</item>
-        <item name="colorPrimaryVariant">#4c7daf</item>
+        <item name="colorPrimary">@color/first_color</item>
+        <item name="colorPrimaryVariant">@color/first_color</item>
         <item name="colorOnPrimary">@color/white</item>
         <item name="android:actionMenuTextColor">@color/white</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
+        <!--window animation style-->
+        <item name="android:windowAnimationStyle">@android:style/Animation</item>
+        <!--alert dialog theme-->
+        <item name="materialAlertDialogTheme">@style/ThemeOverlay.App.MaterialAlertDialog</item>
+    </style>
+
+    <style name="ThemeOverlay.App.MaterialAlertDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorSurface">@color/white</item>
+<!--        <item name="colorOnSurface">@color/purple_700</item>-->
+        <item name="alertDialogStyle">@style/MaterialAlertDialog.App</item>
+        <item name="buttonBarPositiveButtonStyle">@style/Widget.App.Button</item>
+        <item name="buttonBarNegativeButtonStyle">@style/Widget.App.Button</item>
+    </style>
+    <!--    Theme for alert dialog -->
+    <style name="MaterialAlertDialog.App" parent="MaterialAlertDialog.Material3">
+        <item name="shapeAppearance">@style/ShapeAppearance.App.MediumComponent</item>
+        <item name="shapeAppearanceOverlay">@null</item>
+    </style>
+
+    <style name="Widget.App.Button" parent="Widget.Material3.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/first_color</item>
+    </style>
+
+    <style name="ShapeAppearance.App.MediumComponent" parent="ShapeAppearance.Material3.MediumComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">12dp</item>
     </style>
 </resources>

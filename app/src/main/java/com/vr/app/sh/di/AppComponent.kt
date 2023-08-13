@@ -10,6 +10,8 @@ import com.vr.app.sh.ui.tests.view.listTests.FragmentListTests
 import com.vr.app.sh.ui.tests.view.result.TestResultAct
 import com.vr.app.sh.ui.tests.view.subjects.FragmentAllSubjects
 import com.vr.app.sh.ui.tests.view.test.WindowTest
+import com.vr.app.sh.ui.timeTable.view.DayFragment
+import com.vr.app.sh.ui.timeTable.view.TimeTable
 import dagger.Component
 
 @Component(modules = [AppModule::class,DataModule::class,DomainModule::class])
@@ -24,4 +26,6 @@ interface AppComponent {
     fun injectResultTest(testResultAct: TestResultAct)
     fun injectFragmentListTests(fragmentListTests: FragmentListTests)
     fun injectWindowTest(windowTest: WindowTest)
+    fun injectFragmentDay(dayFragment: DayFragment)
+    fun injectTimeTable(timeTable: TimeTable)
 }

@@ -112,4 +112,18 @@ class AppModule(val context: Context) {
     ):OpenTestViewModelFactory{
         return OpenTestViewModelFactory(getListQuestionsBD)
     }
+
+    @Provides
+    fun provideDayViewModelFactory(
+        getLessonsInDay: GetLessonsInDay
+    ):DayViewModelFactory{
+        return DayViewModelFactory(getLessonsInDay)
+    }
+
+    @Provides
+    fun provideTimeTableViewModelFactory(
+        saveLessonInBD: SaveLessonInBD
+    ):TimeTableViewModelFactory{
+        return TimeTableViewModelFactory(saveLessonInBD)
+    }
 }

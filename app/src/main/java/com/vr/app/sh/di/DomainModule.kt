@@ -99,4 +99,14 @@ class DomainModule {
         return GetListQuestionsBD(questionsRepo = questionsDAO)
     }
 
+    @Provides
+    fun provideGetLessonsInDay(lessonsDAO:DAOLessons):GetLessonsInDay{
+        return GetLessonsInDay(lessonsDAO)
+    }
+
+    @Provides
+    fun provideSaveLessonInBD(lessonsDAO:DAOLessons):SaveLessonInBD{
+        return SaveLessonInBD(lessonsDAO)
+    }
+
 }

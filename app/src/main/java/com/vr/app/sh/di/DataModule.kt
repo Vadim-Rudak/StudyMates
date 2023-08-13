@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.vr.app.sh.data.api.NetworkService
 import com.vr.app.sh.data.repository.DAOBook
+import com.vr.app.sh.data.repository.DAOLessons
 import com.vr.app.sh.data.repository.DAOQuestions
 import com.vr.app.sh.data.repository.DAOTest
 import com.vr.app.sh.data.repository.DAOUser
@@ -38,6 +39,11 @@ class DataModule {
     @Provides
     fun provideDAOQuestions(context: Context): DAOQuestions {
         return RoomDB.getDatabase(context = context).questionsDAO()
+    }
+
+    @Provides
+    fun provideDAOLessons(context: Context): DAOLessons {
+        return RoomDB.getDatabase(context = context).lessonsDAO()
     }
 
 }

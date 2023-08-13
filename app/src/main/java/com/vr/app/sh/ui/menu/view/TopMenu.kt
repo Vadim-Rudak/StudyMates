@@ -21,6 +21,7 @@ import com.vr.app.sh.ui.books.view.Books
 import com.vr.app.sh.ui.menu.viewModel.MenuViewModel
 import com.vr.app.sh.ui.other.UseAlert
 import com.vr.app.sh.ui.tests.view.subjects.ActivitySubjects
+import com.vr.app.sh.ui.timeTable.view.TimeTable
 
 class TopMenu : AppCompatActivity() {
 
@@ -35,6 +36,7 @@ class TopMenu : AppCompatActivity() {
 
         val btn_book = findViewById<Button>(R.id.button8)
         val btn_test = findViewById<Button>(R.id.button5)
+        val btnTimeTable = findViewById<Button>(R.id.btnTimeTable)
         val progressBar = findViewById<CircularProgressBar>(R.id.circularProgressBar_menu)
         val text_progressBar = findViewById<TextView>(R.id.textProgress_menu)
 
@@ -85,6 +87,11 @@ class TopMenu : AppCompatActivity() {
 
         btn_test.setOnClickListener {
             val intent = Intent(this,ActivitySubjects::class.java)
+            startActivity(intent)
+        }
+
+        btnTimeTable.setOnClickListener {
+            val intent = Intent(this,TimeTable::class.java)
             startActivity(intent)
         }
     }

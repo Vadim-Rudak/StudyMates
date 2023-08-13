@@ -59,6 +59,7 @@
     <string name="text_get_books_internet">Подождите, выполняется загрузка списка учебников</string>
     <string name="TopMenu_btn1">Учебники</string>
     <string name="TopMenu_btn2">Тесты</string>
+    <string name="TopMenu_btn3">Расписание</string>
 
     <!-- Окно с выбором книг -->
     <string name="text_successful_download">Книга успешно загружена</string>
@@ -158,8 +159,6 @@
         <item name="android:theme">?attr/actionBarTheme</item>
         <item name="fontFamily">@font/fvg</item>
     </style>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- Toast Messages -->
     <string name="toastOkReg">Пользователь успешно зарегистрирован</string>
@@ -169,6 +168,7 @@
 
     <!-- Alert Button -->
     <string name="alrBtnOk">OK</string>
+    <string name="alrBtnCansel">Отмена</string>
 
     <!-- Error Messages -->
     <string name="alrNotInternetConnection">Нет подключения к интернету</string>
@@ -181,6 +181,21 @@
     <string name="alrErrorNotQuestions">В тесте нет вопросов</string>
 
 
+    <!-- Alert Add Lesson -->
+    <string name="alrAddLessonTitel">Добавление урока</string>
+    <string name="alrAddLessonMoreInfo">Заполните все поля для добавления урока в расписание</string>
+    <string name="alrAddLessonEt1">День недели</string>
+    <string name="alrAddLessonEt1_default">Понедельник</string>
+    <string-array name="numDay">
+        <item>Понедельник</item>
+        <item>Вторник</item>
+        <item>Среда</item>
+        <item>Четверг</item>
+        <item>Пятница</item>
+    </string-array>
+    <string name="alrAddLessonEt2">Название урока</string>
+    <string name="alrAddLessonEt3">Начало урока</string>
+    <string name="alrAddLessonEt4">Номер кабинета</string>
 
 
 
