@@ -56,6 +56,23 @@
 
     </style>
 
+    <!-- Menu -->
+    <string name="TopMenuTitel1">Привет,</string>
+    <string name="TopMenuTitel2">Вадим</string>
+
+    <integer-array name="topMenuViewBtn">
+        <item>@drawable/top_menu_btn1</item>
+        <item>@drawable/top_menu_btn2</item>
+        <item>@drawable/top_menu_btn3</item>
+    </integer-array>
+
+    <string-array name="nameTopFun">
+        <item>Учебники</item>
+        <item>Тесты</item>
+        <item>Расписание</item>
+    </string-array>
+
+
     <string name="text_get_books_internet">Подождите, выполняется загрузка списка учебников</string>
     <string name="TopMenu_btn1">Учебники</string>
     <string name="TopMenu_btn2">Тесты</string>

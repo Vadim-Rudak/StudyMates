@@ -46,13 +46,15 @@ class Authoriz : AppCompatActivity() {
         }
 
         btn_in.setOnClickListener{
-            if (TextUtils.isEmpty(login.text.toString().trim())){
-                login.setText("")
-            }
-            if (TextUtils.isEmpty(password.text.toString().trim())){
-                password.setText("")
-            }
-            viewModel.authorization(login.text.toString(),password.text.toString())
+            val intent = Intent(this,TopMenu::class.java)
+            startActivity(intent)
+//            if (TextUtils.isEmpty(login.text.toString().trim())){
+//                login.setText("")
+//            }
+//            if (TextUtils.isEmpty(password.text.toString().trim())){
+//                password.setText("")
+//            }
+//            viewModel.authorization(login.text.toString(),password.text.toString())
         }
 
         btn_reg.setOnClickListener {

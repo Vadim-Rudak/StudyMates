@@ -6,18 +6,21 @@ import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.mikhaellopez.circularprogressbar.CircularProgressBar
 import com.vr.app.sh.R
 import com.vr.app.sh.app.App
 import com.vr.app.sh.ui.base.MenuViewModelFactory
 import com.vr.app.sh.ui.books.view.Books
+import com.vr.app.sh.ui.menu.adapter.MenuItemDecoration
+import com.vr.app.sh.ui.menu.adapter.TopMenuAdapter
 import com.vr.app.sh.ui.menu.viewModel.MenuViewModel
 import com.vr.app.sh.ui.other.UseAlert
 import com.vr.app.sh.ui.tests.view.subjects.ActivitySubjects
@@ -34,16 +37,46 @@ class TopMenu : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_top_menu)
 
-        val btn_book = findViewById<Button>(R.id.button8)
-        val btn_test = findViewById<Button>(R.id.button5)
-        val btnTimeTable = findViewById<Button>(R.id.btnTimeTable)
-        val progressBar = findViewById<CircularProgressBar>(R.id.circularProgressBar_menu)
-        val text_progressBar = findViewById<TextView>(R.id.textProgress_menu)
-
         (applicationContext as App).appComponent.injectTopMenu(this)
 
         viewModel = ViewModelProvider(this, factory)
             .get(MenuViewModel::class.java)
+
+        viewModel.errorMessage.observe(this){
+            UseAlert.errorMessage(it,this)
+        }
+
+        val recyclerView = findViewById<RecyclerView>(R.id.recyclerTopMenu)
+        recyclerView.layoutManager = GridLayoutManager(this, 2)
+        recyclerView.adapter = viewModel.adapter
+
+        recyclerView.addItemDecoration(MenuItemDecoration(this))
+        viewModel.adapter.setListener(object : TopMenuAdapter.Listener{
+            override fun onClick(position: Int) {
+                when(position){
+                    0->{
+                        if(isStoragePermissionGranted()){
+                            viewModel.getAllBooks()
+                        }
+                    }
+                    1->{
+                        val intent = Intent(this@TopMenu, ActivitySubjects::class.java)
+                        startActivity(intent)
+
+                    }
+                    2->{
+                        val intent = Intent(this@TopMenu, TimeTable::class.java)
+                        startActivity(intent)
+                    }
+                }
+            }
+
+        })
+
+        val navMenu = findViewById<LinearLayout>(R.id.navMenu)
+        val linearLayout = findViewById<LinearLayout>(R.id.progressLayout)
+        val progressBar = findViewById<CircularProgressBar>(R.id.circularProgressBar_menu)
+        val text_progressBar = findViewById<TextView>(R.id.textProgress_menu)
 
         viewModel.statusListBook.observe(this){
             if (it){
@@ -52,14 +85,11 @@ class TopMenu : AppCompatActivity() {
             }
         }
 
-        viewModel.errorMessage.observe(this){
-            UseAlert.errorMessage(it,this)
-        }
-
         viewModel.loading.observe(this){
             if (it){
-                btn_book.visibility = View.GONE
-                btn_test.visibility = View.GONE
+                navMenu.visibility = View.GONE
+                recyclerView.visibility = View.GONE
+                linearLayout.visibility = View.VISIBLE
                 text_progressBar.visibility = View.VISIBLE
                 progressBar.visibility = View.VISIBLE
                 progressBar.apply {
@@ -72,28 +102,14 @@ class TopMenu : AppCompatActivity() {
                     indeterminateMode = true
                 }
             }else{
-                btn_book.visibility = View.VISIBLE
-                btn_test.visibility = View.VISIBLE
+                navMenu.visibility = View.VISIBLE
+                recyclerView.visibility = View.VISIBLE
+                linearLayout.visibility = View.GONE
                 progressBar.visibility = View.GONE
                 text_progressBar.visibility = View.GONE
             }
         }
 
-        btn_book.setOnClickListener {
-            if(isStoragePermissionGranted()){
-                viewModel.getAllBooks()
-            }
-        }
-
-        btn_test.setOnClickListener {
-            val intent = Intent(this,ActivitySubjects::class.java)
-            startActivity(intent)
-        }
-
-        btnTimeTable.setOnClickListener {
-            val intent = Intent(this,TimeTable::class.java)
-            startActivity(intent)
-        }
     }
 
     fun isStoragePermissionGranted(): Boolean {

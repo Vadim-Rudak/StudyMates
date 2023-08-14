@@ -12,11 +12,13 @@ import com.vr.app.sh.R
 import com.vr.app.sh.domain.UseCase.GetAllBookListInternet
 import com.vr.app.sh.domain.UseCase.InternetConnection
 import com.vr.app.sh.domain.UseCase.SaveBookListInBD
+import com.vr.app.sh.ui.menu.adapter.TopMenuAdapter
 import kotlinx.coroutines.*
 import java.io.File
 
 class MenuViewModel(private val resources: Resources,val getAllBookListInternet: GetAllBookListInternet,val saveBookListInBD: SaveBookListInBD,val internetConnection: InternetConnection): ViewModel() {
 
+    val adapter = TopMenuAdapter(resources)
     val errorMessage = MutableLiveData<String>()
     val statusListBook = MutableLiveData<Boolean>()
     val loading = MutableLiveData<Boolean>()
