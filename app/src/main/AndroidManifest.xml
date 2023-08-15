@@ -20,9 +20,13 @@
         android:theme="@style/Theme.SH"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ui.profile.view.MyProfile"
+            android:exported="false"
+            android:theme="@style/Theme.Profile"/>
+        <activity
             android:name=".ui.timeTable.view.TimeTable"
             android:exported="false"
-            android:theme="@style/Theme.Book"/>
+            android:theme="@style/Theme.Book" />
         <activity
             android:name=".ui.tests.view.addTest.AddQuestion"
             android:exported="false"

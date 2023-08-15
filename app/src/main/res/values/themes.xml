@@ -30,6 +30,16 @@
         <item name="materialAlertDialogTheme">@style/ThemeOverlay.App.MaterialAlertDialog</item>
     </style>
 
+    <style name="Theme.Profile" parent="Theme.Material3.Light.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/first_color</item>
+        <item name="colorPrimaryVariant">@color/first_color</item>
+        <!--window animation style-->
+        <item name="android:windowAnimationStyle">@android:style/Animation</item>
+        <!--alert dialog theme-->
+        <item name="materialAlertDialogTheme">@style/ThemeOverlay.App.MaterialAlertDialog</item>
+    </style>
+
     <style name="ThemeOverlay.App.MaterialAlertDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
         <item name="colorPrimary">@color/white</item>
         <item name="colorSurface">@color/white</item>

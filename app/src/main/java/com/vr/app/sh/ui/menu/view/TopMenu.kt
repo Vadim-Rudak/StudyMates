@@ -23,6 +23,7 @@ import com.vr.app.sh.ui.menu.adapter.MenuItemDecoration
 import com.vr.app.sh.ui.menu.adapter.TopMenuAdapter
 import com.vr.app.sh.ui.menu.viewModel.MenuViewModel
 import com.vr.app.sh.ui.other.UseAlert
+import com.vr.app.sh.ui.profile.view.MyProfile
 import com.vr.app.sh.ui.tests.view.subjects.ActivitySubjects
 import com.vr.app.sh.ui.timeTable.view.TimeTable
 
@@ -77,6 +78,11 @@ class TopMenu : AppCompatActivity() {
         val linearLayout = findViewById<LinearLayout>(R.id.progressLayout)
         val progressBar = findViewById<CircularProgressBar>(R.id.circularProgressBar_menu)
         val text_progressBar = findViewById<TextView>(R.id.textProgress_menu)
+
+        navMenu.setOnClickListener {
+            val intent = Intent(this,MyProfile::class.java)
+            startActivity(intent)
+        }
 
         viewModel.statusListBook.observe(this){
             if (it){
