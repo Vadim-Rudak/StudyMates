@@ -2,23 +2,24 @@ package com.vr.app.sh.ui.profile.view
 
 import android.graphics.Color
 import android.os.Bundle
-import android.util.DisplayMetrics
-import android.util.Log
-import android.util.TypedValue
 import android.view.View
-import android.widget.ImageView
-import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.WindowCompat
 import androidx.core.view.doOnLayout
-import com.google.android.material.bottomsheet.BottomSheetBehavior
+import androidx.lifecycle.ViewModelProvider
 import com.vr.app.sh.R
+import com.vr.app.sh.app.App
+import com.vr.app.sh.ui.base.MyProfileViewModelFactory
+import com.vr.app.sh.ui.profile.viewModel.MyProfileViewModel
 
 class MyProfile : AppCompatActivity() {
 
-    private lateinit var mBottomSheetBehavior: BottomSheetBehavior<*>
+    @javax.inject.Inject
+    lateinit var factory: MyProfileViewModelFactory
+
+    lateinit var viewModel: MyProfileViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,30 +28,29 @@ class MyProfile : AppCompatActivity() {
         WindowCompat.setDecorFitsSystemWindows(window,false)
         window.statusBarColor = Color.TRANSPARENT
 
-        myProfileInfo()
-    }
+        (applicationContext as App).appComponent.injectMyProfile(this)
 
-    private fun myProfileInfo(){
+        viewModel = ViewModelProvider(this, factory)
+            .get(MyProfileViewModel::class.java)
+
+        val viewBottomSheet = findViewById<ConstraintLayout>(R.id.btn_sheet_profile_info)
+        viewModel.createBottomSheet(viewBottomSheet)
 
         val backgroundView = findViewById<CoordinatorLayout>(R.id.backgroundView)
-        val viewBottomSheet: ConstraintLayout = findViewById(R.id.btn_sheet_profile_info)
-        mBottomSheetBehavior = BottomSheetBehavior.from(viewBottomSheet)
-        mBottomSheetBehavior.isHideable = false
-
-        val bgViewBottom = findViewById<View>(R.id.bg_view_bottom)
-        val heightStatusBar = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 25.toFloat(), this.resources.displayMetrics).toInt()
-        val heightTop = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 40.toFloat(), this.resources.displayMetrics).toInt()
-
-
-        viewBottomSheet.layoutParams.height = 1200
-
         backgroundView.doOnLayout {
-            mBottomSheetBehavior.maxHeight = it.measuredHeight - heightStatusBar
+            viewModel.setBottomSheetMaxHeight(it.measuredHeight)
         }
 
+        val bgViewBottom = findViewById<View>(R.id.bg_view_bottom)
         bgViewBottom.doOnLayout {
-            mBottomSheetBehavior.peekHeight = it.measuredHeight + heightTop
-            mBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+            viewModel.setBottomSheetDefaultHeight(it.height)
+        }
+
+        viewModel.heightBottomSheet.observe(this){
+            if(viewBottomSheet.layoutParams.height<it){
+                viewBottomSheet.layoutParams.height = it
+            }
+            viewModel.seeBottomSheet(it)
         }
     }
 }

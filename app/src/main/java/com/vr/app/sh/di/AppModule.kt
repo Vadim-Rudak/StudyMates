@@ -126,4 +126,9 @@ class AppModule(val context: Context) {
     ):TimeTableViewModelFactory{
         return TimeTableViewModelFactory(saveLessonInBD)
     }
+
+    @Provides
+    fun provideMyProfileViewModelFactory(context: Context):MyProfileViewModelFactory{
+        return MyProfileViewModelFactory(context)
+    }
 }
