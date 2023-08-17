@@ -37,6 +37,8 @@ android {
 
 dependencies {
 
+    implementation "dev.chrisbanes.insetter:insetter:0.6.1"
+
     //Add Room
     implementation 'androidx.room:room-runtime:2.3.0'
     implementation "androidx.room:room-ktx:2.3.0"

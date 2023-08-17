@@ -13,6 +13,7 @@ import com.vr.app.sh.R
 import com.vr.app.sh.app.App
 import com.vr.app.sh.ui.base.MyProfileViewModelFactory
 import com.vr.app.sh.ui.profile.viewModel.MyProfileViewModel
+import dev.chrisbanes.insetter.applyInsetter
 
 class MyProfile : AppCompatActivity() {
 
@@ -39,6 +40,12 @@ class MyProfile : AppCompatActivity() {
         val backgroundView = findViewById<CoordinatorLayout>(R.id.backgroundView)
         backgroundView.doOnLayout {
             viewModel.setBottomSheetMaxHeight(it.measuredHeight)
+        }
+
+        backgroundView.applyInsetter {
+            type(navigationBars = true){
+                margin()
+            }
         }
 
         val bgViewBottom = findViewById<View>(R.id.bg_view_bottom)
