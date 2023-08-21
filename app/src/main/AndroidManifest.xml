@@ -66,11 +66,11 @@
         <activity
             android:name=".ui.menu.view.TopMenu"
             android:exported="false"
-            android:theme="@style/Theme.Book" />
+            android:theme="@style/Theme.Menu" />
         <activity
             android:name=".ui.door.view.Reg"
             android:exported="false"
-            android:theme="@style/Theme.Book" />
+            android:theme="@style/Theme.Reg" />
         <activity
             android:name=".ui.door.view.Authoriz"
             android:exported="true"

@@ -20,7 +20,12 @@ class RegViewModel(private val resources: Resources, val registration: Registrat
 
     val errorMessage = MutableLiveData<String>()
     val statusRegistration = MutableLiveData<Boolean>()
+    val numFragment = MutableLiveData<Int>()
     var job: Job? = null
+
+    init {
+        numFragment.postValue(0)
+    }
 
     fun registration(
         login:String,

@@ -14,6 +14,13 @@
 
 
     <string name="reg_text_btn">Зарегистрироваться</string>
+
+    <string name="registration_titel1">Давай знакомиться</string>
+
+
+    <string name="registration_titel2">Добавь свою школу</string>
+
+
     <string name="reg_text_inp1">Логин</string>
     <string name="reg_text_inp2">Пароль</string>
     <string name="reg_text_inp3">Подтвердите пароль</string>
@@ -23,6 +30,9 @@
     <string name="reg_text_inp7">Дата рождения</string>
     <string name="reg_text_inp8">Номер класса</string>
     <string name="reg_name_page">Регистрация нового пользователя</string>
+
+    <string name="registration_btn1">Далее</string>
+    <string name="registration_btn2">Завершить</string>
 
 
     <style name="CustomToolbarReg" parent="Theme.AppCompat">
@@ -218,6 +228,8 @@
     <string name="alrAddLessonEt2">Название урока</string>
     <string name="alrAddLessonEt3">Начало урока</string>
     <string name="alrAddLessonEt4">Номер кабинета</string>
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>
