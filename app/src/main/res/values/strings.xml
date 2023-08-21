@@ -3,10 +3,15 @@
     <string name="app_name">SchoolProg</string>
 
 
+    <string name="door_text1">Вход</string>
+    <string name="door_text2">Рад видеть вас сново</string>
     <string name="door_in_btn1">Войти</string>
     <string name="door_in_btn2">Зарегистрироваться</string>
-    <string name="door_in_et1">Введите имя</string>
-    <string name="door_in_et2">Введите пароль</string>
+    <string name="door_in_et1">Логин</string>
+    <string name="door_in_et2">Пароль</string>
+    <string name="door_text3">У вас нет аккаунта?</string>
+    <string name="door_text4">Нажми для регистрации</string>
+
 
     <string name="reg_text_btn">Зарегистрироваться</string>
     <string name="reg_text_inp1">Логин</string>

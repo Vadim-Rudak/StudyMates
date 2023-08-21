@@ -22,7 +22,7 @@
         <activity
             android:name=".ui.profile.view.MyProfile"
             android:exported="false"
-            android:theme="@style/Theme.Profile"/>
+            android:theme="@style/Theme.Profile" />
         <activity
             android:name=".ui.timeTable.view.TimeTable"
             android:exported="false"
@@ -74,7 +74,7 @@
         <activity
             android:name=".ui.door.view.Authoriz"
             android:exported="true"
-            android:theme="@style/Theme.Book">
+            android:theme="@style/Theme.Auth">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

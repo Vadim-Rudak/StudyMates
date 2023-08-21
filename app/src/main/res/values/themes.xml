@@ -16,6 +16,22 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="Theme.Auth" parent="Theme.Material3.Light.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/first_color</item>
+        <item name="colorPrimaryVariant">@color/white</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="android:actionMenuTextColor">@color/white</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">#ECEDF5</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:navigationBarColor">#D2D4DD</item>
+        <!--window animation style-->
+        <item name="android:windowAnimationStyle">@android:style/Animation</item>
+        <!--alert dialog theme-->
+        <item name="materialAlertDialogTheme">@style/ThemeOverlay.App.MaterialAlertDialog</item>
+    </style>
+
     <style name="Theme.Book" parent="Theme.Material3.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/first_color</item>

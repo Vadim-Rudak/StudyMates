@@ -6,8 +6,10 @@ import android.text.TextUtils
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.textfield.TextInputEditText
 import com.vr.app.sh.R
 import com.vr.app.sh.app.App
 import com.vr.app.sh.ui.base.AuthorizationViewModelFactory
@@ -27,9 +29,9 @@ class Authoriz : AppCompatActivity() {
         setContentView(R.layout.activity_authoriz)
 
         val btn_in = findViewById<Button>(R.id.btn_in)
-        val btn_reg = findViewById<Button>(R.id.btn_reg)
-        val login = findViewById<EditText>(R.id.TextUserName)
-        val password = findViewById<EditText>(R.id.TextUserPassword)
+        val btn_reg = findViewById<TextView>(R.id.btn_reg)
+        val login = findViewById<TextInputEditText>(R.id.TextUserName)
+        val password = findViewById<TextInputEditText>(R.id.TextUserPassword)
 
         (applicationContext as App).appComponent.injectAuthoriz(this)
 
