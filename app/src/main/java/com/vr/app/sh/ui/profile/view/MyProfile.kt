@@ -3,8 +3,9 @@ package com.vr.app.sh.ui.profile.view
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageButton
+import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.WindowCompat
 import androidx.core.view.doOnLayout
@@ -34,7 +35,12 @@ class MyProfile : AppCompatActivity() {
         viewModel = ViewModelProvider(this, factory)
             .get(MyProfileViewModel::class.java)
 
-        val viewBottomSheet = findViewById<ConstraintLayout>(R.id.btn_sheet_profile_info)
+        val btnBack = findViewById<ImageButton>(R.id.myProfileBtnBack)
+        btnBack.setOnClickListener {
+            finish()
+        }
+
+        val viewBottomSheet = findViewById<LinearLayout>(R.id.btn_sheet_profile_info)
         viewModel.createBottomSheet(viewBottomSheet)
 
         val backgroundView = findViewById<CoordinatorLayout>(R.id.backgroundView)
