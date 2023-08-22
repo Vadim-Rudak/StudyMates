@@ -4,6 +4,9 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -25,6 +28,15 @@ class Reg : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reg)
 
+        val btnBack = findViewById<ImageButton>(R.id.reg_btn_back)
+        btnBack.setOnClickListener {
+            finish()
+        }
+        val titel = findViewById<TextView>(R.id.reg_text_titel)
+        val tab1 = findViewById<ImageView>(R.id.reg_image_tab1)
+        val tab2 = findViewById<ImageView>(R.id.reg_image_tab2)
+        val tab3 = findViewById<ImageView>(R.id.reg_image_tab3)
+
 //        val login = findViewById<EditText>(R.id.InputLogin)
 //        val password1 = findViewById<EditText>(R.id.InputPassword)
 //        val password2 = findViewById<EditText>(R.id.InputPassword2)
@@ -43,6 +55,20 @@ class Reg : AppCompatActivity() {
 
         viewModel.numFragment.observe(this){
             num_fragment = it
+            when(it){
+                1->{
+                    titel.setText(R.string.registration_titel2)
+                    tab2.setImageResource(R.drawable.tab_reg_true)
+                }
+                2->{
+                    titel.setText(R.string.registration_titel3)
+                    tab3.setImageResource(R.drawable.tab_reg_true)
+                }
+                else->{
+                    titel.setText(R.string.registration_titel1)
+                    tab1.setImageResource(R.drawable.tab_reg_true)
+                }
+            }
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fr_place, FragmentReg(numPage = it))
                 .commit()

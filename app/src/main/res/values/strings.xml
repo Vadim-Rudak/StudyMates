@@ -16,9 +16,25 @@
     <string name="reg_text_btn">Зарегистрироваться</string>
 
     <string name="registration_titel1">Давай знакомиться</string>
-
+    <string name="reg_fr1_text1">Как тебя зовут?</string>
+    <string name="reg_fr1_input1">Имя</string>
+    <string name="reg_fr1_input2">Фамилия</string>
+    <string name="reg_fr1_text2">Пол</string>
+    <string name="reg_fr1_gender1">Мужчина</string>
+    <string name="reg_fr1_gender2">Женщина</string>
+    <string name="reg_fr1_text3">Дата рождения</string>
+    <string name="reg_fr1_input3">Дата</string>
+    <string name="reg_fr1_text4">Город</string>
+    <string name="reg_fr1_input4">Город</string>
 
     <string name="registration_titel2">Добавь свою школу</string>
+    <string name="reg_fr2_input1">Название города</string>
+    <string name="reg_fr2_input2">Название школы</string>
+    <string name="reg_fr2_input3">Номер класса</string>
+    <string name="reg_fr2_checkBox">Выпускник</string>
+
+    <string name="registration_titel3">Загрузи своё фото</string>
+    <string name="reg_fr3_text1">Нажми на изображение для добавления фото</string>
 
 
     <string name="reg_text_inp1">Логин</string>
