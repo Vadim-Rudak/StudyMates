@@ -4,11 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.appcompat.widget.AppCompatButton
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.imageview.ShapeableImageView
 import com.vr.app.sh.R
+import com.vr.app.sh.ui.other.photoPicker.BottomSheetPickPhoto
 
 class FragmentReg(val numPage:Int) : Fragment() {
 
@@ -27,7 +30,10 @@ class FragmentReg(val numPage:Int) : Fragment() {
             2->{
                 val pickPhoto = view.findViewById<ShapeableImageView>(R.id.reg_fr3_pick_photo)
                 pickPhoto.setOnClickListener{
-
+                    val placeReg = activity?.findViewById<CoordinatorLayout>(R.id.place_reg)
+                    val viewBottomSheet = activity?.findViewById<LinearLayout>(R.id.sheet_pick_photo)
+                    val bottomSheetPickPhoto = BottomSheetPickPhoto(requireContext(), viewBottomSheet!!, placeReg!!.height)
+                    bottomSheetPickPhoto.see()
                 }
             }
             else->{

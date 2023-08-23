@@ -35,6 +35,8 @@
 
     <string name="registration_titel3">Загрузи своё фото</string>
     <string name="reg_fr3_text1">Нажми на изображение для добавления фото</string>
+    <string name="reg_fr3_btn_add_photo_cansel">Отменить</string>
+    <string name="reg_fr3_btn_add_photo">Добавить фото</string>
 
 
     <string name="reg_text_inp1">Логин</string>

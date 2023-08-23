@@ -69,6 +69,11 @@
         <item name="cornerFamily">rounded</item>
     </style>
 
+    <style name="ImageStyle_pick_photo">
+        <item name="cornerSize">4dp</item>
+        <item name="cornerFamily">rounded</item>
+    </style>
+
     <style name="Theme.Menu" parent="Theme.Material3.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/first_color</item>
