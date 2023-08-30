@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -12,9 +13,8 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.google.android.material.imageview.ShapeableImageView
 import com.vr.app.sh.R
 
-class PhotoPickerAdapter(val context:Context): RecyclerView.Adapter<PhotoPickerAdapter.ViewHolder>() {
+class PhotoPickerAdapter(val context:Context, private val selectMorePhotos:Boolean): RecyclerView.Adapter<PhotoPickerAdapter.ViewHolder>() {
 
-    var selectMorePhotos = false
     var LIST_USE_PHOTO:ArrayList<Int> = ArrayList()
     lateinit var listPhotos:ArrayList<String>
 
@@ -23,7 +23,19 @@ class PhotoPickerAdapter(val context:Context): RecyclerView.Adapter<PhotoPickerA
         notifyDataSetChanged()
     }
 
-    override fun getItemCount(): Int = listPhotos.size
+    fun getOnePhoto():String{
+        return listPhotos[LIST_USE_PHOTO[0]-1]
+    }
+
+    fun getMorePhoto():ArrayList<String>{
+        val selectPhoto:ArrayList<String> = ArrayList()
+        for (i in LIST_USE_PHOTO){
+            selectPhoto.add(listPhotos[i-1])
+        }
+        return selectPhoto
+    }
+
+    override fun getItemCount(): Int = listPhotos.size + 1 // + 1, because one item in list is use to take photo
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val cv = LayoutInflater.from(parent.context)
@@ -37,6 +49,7 @@ class PhotoPickerAdapter(val context:Context): RecyclerView.Adapter<PhotoPickerA
         val image = cardView.findViewById<ShapeableImageView>(R.id.Image_Add_Photo)
         val checkUsePhoto = cardView.findViewById<ImageView>(R.id.use_photo)
         val imgCheckOK = cardView.findViewById<ImageView>(R.id.img_ok)
+        val viewNumUsePhoto = cardView.findViewById<TextView>(R.id.num_use_photo)
 
         if (position == 0){
             image.setImageResource(R.drawable.take_photo_in_picker)
@@ -52,19 +65,19 @@ class PhotoPickerAdapter(val context:Context): RecyclerView.Adapter<PhotoPickerA
         if (LIST_USE_PHOTO.indexOf(position)!=-1){
             checkUsePhoto.setImageResource(R.drawable.img_use_photo)
             if (selectMorePhotos){
-
+                viewNumUsePhoto.visibility = View.VISIBLE
+                viewNumUsePhoto.text = (LIST_USE_PHOTO.indexOf(position) + 1).toString()
             }else{
                 imgCheckOK.visibility = View.VISIBLE
             }
         }else{
             checkUsePhoto.setImageResource(R.drawable.img_not_use_photo)
             if (selectMorePhotos){
-
+                viewNumUsePhoto.visibility = View.GONE
             }else{
                 imgCheckOK.visibility = View.GONE
             }
         }
-
 
 
         cardView.setOnClickListener {
@@ -72,7 +85,6 @@ class PhotoPickerAdapter(val context:Context): RecyclerView.Adapter<PhotoPickerA
                 //take photo
 
             }else{
-
                 if (LIST_USE_PHOTO.indexOf(position)!=-1){
                     LIST_USE_PHOTO.removeAt(LIST_USE_PHOTO.indexOf(position))
                     notifyDataSetChanged()
@@ -83,11 +95,7 @@ class PhotoPickerAdapter(val context:Context): RecyclerView.Adapter<PhotoPickerA
                         usePhotoAndLimit(1,position)
                     }
                 }
-
-
-
             }
-
         }
     }
 
