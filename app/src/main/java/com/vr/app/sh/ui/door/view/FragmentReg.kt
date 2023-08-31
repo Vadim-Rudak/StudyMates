@@ -9,6 +9,7 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.google.android.material.imageview.ShapeableImageView
 import com.vr.app.sh.R
 import com.vr.app.sh.ui.other.photoPicker.BottomSheetPickPhoto
@@ -34,6 +35,9 @@ class FragmentReg(val numPage:Int) : Fragment() {
                     val viewBottomSheet = activity?.findViewById<LinearLayout>(R.id.sheet_pick_photo)
                     val bottomSheetPickPhoto = BottomSheetPickPhoto(requireContext(), viewBottomSheet!!, placeReg!!.height)
                     bottomSheetPickPhoto.see()
+                    bottomSheetPickPhoto.onePhoto.observe(viewLifecycleOwner){
+                        Glide.with(requireContext()).load(it).into(pickPhoto)
+                    }
                 }
             }
             else->{

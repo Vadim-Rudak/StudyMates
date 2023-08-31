@@ -42,11 +42,14 @@
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/button"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
+            android:id="@+id/btn_add_photo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/reg_fr3_btn_add_photo" />
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:backgroundTint="@color/gray2"
+            android:text="@string/pick_photo_btn_cansel"
+            android:textStyle="bold"
+            android:textColor="@color/first_color" />
     </LinearLayout>
 </LinearLayout>
