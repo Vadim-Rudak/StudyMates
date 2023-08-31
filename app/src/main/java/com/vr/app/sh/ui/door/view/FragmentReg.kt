@@ -21,7 +21,8 @@ class FragmentReg(val numPage:Int) : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = when(numPage){
             1->inflater.inflate(R.layout.fragment_school_info, container, false)
-            2->inflater.inflate(R.layout.fragment_add_user_photo, container, false)
+            2->inflater.inflate(R.layout.fragment_create_login, container, false)
+            3->inflater.inflate(R.layout.fragment_add_user_photo, container, false)
             else->inflater.inflate(R.layout.fragment_as_for_me, container, false)
         }
         when(numPage){
@@ -29,6 +30,9 @@ class FragmentReg(val numPage:Int) : Fragment() {
 
             }
             2->{
+
+            }
+            3->{
                 val pickPhoto = view.findViewById<ShapeableImageView>(R.id.reg_fr3_pick_photo)
                 pickPhoto.setOnClickListener{
                     val placeReg = activity?.findViewById<CoordinatorLayout>(R.id.place_reg)

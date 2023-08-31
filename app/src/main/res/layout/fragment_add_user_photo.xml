@@ -15,7 +15,7 @@
         android:textSize="13sp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:text="@string/reg_fr3_text1" />
+        android:text="@string/reg_fr4_text1" />
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/reg_fr3_pick_photo"

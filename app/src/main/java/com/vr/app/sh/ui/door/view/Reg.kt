@@ -1,5 +1,6 @@
 package com.vr.app.sh.ui.door.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
@@ -34,16 +35,7 @@ class Reg : AppCompatActivity() {
         val tab1 = findViewById<ImageView>(R.id.reg_image_tab1)
         val tab2 = findViewById<ImageView>(R.id.reg_image_tab2)
         val tab3 = findViewById<ImageView>(R.id.reg_image_tab3)
-
-//        val login = findViewById<EditText>(R.id.InputLogin)
-//        val password1 = findViewById<EditText>(R.id.InputPassword)
-//        val password2 = findViewById<EditText>(R.id.InputPassword2)
-//        val last_name = findViewById<EditText>(R.id.InputLastName)
-//        val name = findViewById<EditText>(R.id.InputName)
-//        val patronymic = findViewById<EditText>(R.id.InputPatronymic)
-//        val date_birthday = findViewById<EditText>(R.id.InputDateBirthday)
-//        val num_class = findViewById<EditText>(R.id.InputNumClass)
-//        val btn_send = findViewById<Button>(R.id.BtnReg)
+        val tab4 = findViewById<ImageView>(R.id.reg_image_tab4)
         val btn_next = findViewById<Button>(R.id.reg_btn_next)
 
         (applicationContext as App).appComponent.injectReg(this)
@@ -61,6 +53,11 @@ class Reg : AppCompatActivity() {
                 2->{
                     titel.setText(R.string.registration_titel3)
                     tab3.setImageResource(R.drawable.tab_reg_true)
+                }
+                3->{
+                    titel.setText(R.string.registration_titel4)
+                    tab4.setImageResource(R.drawable.tab_reg_true)
+                    btn_next.setText(R.string.registration_btn2)
                 }
                 else->{
                     titel.setText(R.string.registration_titel1)
@@ -84,11 +81,14 @@ class Reg : AppCompatActivity() {
         }
 
         btn_next.setOnClickListener {
-            num_fragment++
-            if (num_fragment>2){
-                num_fragment=0
+            if (num_fragment<3){
+                num_fragment++
+                viewModel.numFragment.postValue(num_fragment)
+            }else{
+                val intent = Intent(this,Verification::class.java)
+                startActivity(intent)
+                finish()
             }
-            viewModel.numFragment.postValue(num_fragment)
         }
 
 //        btn_send.setOnClickListener {

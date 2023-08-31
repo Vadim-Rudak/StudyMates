@@ -83,14 +83,14 @@
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/verification_btn_take_photo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:text="@string/win_verification_btn1" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/verification_btn_late"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"

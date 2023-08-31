@@ -33,8 +33,14 @@
     <string name="reg_fr2_input3">Номер класса</string>
     <string name="reg_fr2_checkBox">Выпускник</string>
 
-    <string name="registration_titel3">Загрузи своё фото</string>
-    <string name="reg_fr3_text1">Нажми на изображение для добавления фото</string>
+    <string name="registration_titel3">Осталось ещё немного</string>
+    <string name="reg_fr3_text1">Придумай логин и пароль</string>
+    <string name="reg_fr3_input1">Логин</string>
+    <string name="reg_fr3_input2">Пароль</string>
+    <string name="reg_fr3_input3">Повторно пароль</string>
+
+    <string name="registration_titel4">Загрузи своё фото</string>
+    <string name="reg_fr4_text1">Нажми на изображение для добавления фото</string>
 
     <!-- Window Verification -->
     <string name="win_verification_titel">Верификация</string>
@@ -56,7 +62,7 @@
     <string name="reg_name_page">Регистрация нового пользователя</string>
 
     <string name="registration_btn1">Далее</string>
-    <string name="registration_btn2">Завершить</string>
+    <string name="registration_btn2">Завершить регистрацию</string>
 
 
     <style name="CustomToolbarReg" parent="Theme.AppCompat">
