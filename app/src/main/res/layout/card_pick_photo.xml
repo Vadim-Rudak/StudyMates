@@ -21,7 +21,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/Image_Add_Photo"
-            card_view:srcCompat="@drawable/image1" />
+            card_view:srcCompat="@drawable/bg_image_item_photo_picker" />
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/Image_Add_Photo"

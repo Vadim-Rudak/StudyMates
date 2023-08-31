@@ -4,6 +4,7 @@
     <color name="black">#FF000000</color>
     <color name="first_color">#4c7daf</color>
     <color name="second_color">#FA840E</color>
+    <color name="background_activity">#ECEDF5</color>
 
     <color name="tab_false">#F7F7F7</color>
     <color name="gray">#5C636F</color>

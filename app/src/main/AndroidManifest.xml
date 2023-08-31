@@ -20,6 +20,10 @@
         android:theme="@style/Theme.SH"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ui.door.view.Authoriz"
+            android:exported="false"
+            android:theme="@style/Theme.Auth" />
+        <activity
             android:name=".ui.profile.view.MyProfile"
             android:exported="false"
             android:theme="@style/Theme.Profile" />
@@ -72,9 +76,9 @@
             android:exported="false"
             android:theme="@style/Theme.Reg" />
         <activity
-            android:name=".ui.door.view.Authoriz"
+            android:name=".ui.door.view.Splash"
             android:exported="true"
-            android:theme="@style/Theme.Auth">
+            android:theme="@style/Theme.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
