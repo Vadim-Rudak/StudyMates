@@ -36,6 +36,14 @@
     <string name="registration_titel3">Загрузи своё фото</string>
     <string name="reg_fr3_text1">Нажми на изображение для добавления фото</string>
 
+    <!-- Window Verification -->
+    <string name="win_verification_titel">Верификация</string>
+    <string name="win_verification_text1">После успешной верификации тебе будут доступны все функции приложения. У верифицированных пользователей есть галочка.</string>
+    <string name="win_verification_text2">Сделайте фото</string>
+    <string name="win_verification_text3">Не переживайте: это фото никуда не попадет.\nОно нужно только для верификации.</string>
+    <string name="win_verification_btn1">Открыть камеру</string>
+    <string name="win_verification_btn2">Сделаю позже</string>
+
 
     <string name="reg_text_inp1">Логин</string>
     <string name="reg_text_inp2">Пароль</string>
