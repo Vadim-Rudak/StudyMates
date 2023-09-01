@@ -31,7 +31,7 @@ class AuthViewModel(private val resources: Resources, val authorization: Authori
                     val auth = authorization.execute(userInfo(login,password))
                     withContext(Dispatchers.Main){
                         if (auth.status == true){
-                            setUserInBD.execute(User(id=0,user_name = login, role = auth.role))
+                            //setUserInBD.execute(User(id=0,user_name = login, role = auth.role))
                             USER_ROLE = auth.role!!
                             statusAuth.value = true
                         }else{

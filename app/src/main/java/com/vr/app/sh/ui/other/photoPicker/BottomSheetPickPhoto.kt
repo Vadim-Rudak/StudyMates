@@ -7,14 +7,11 @@ import android.util.TypedValue
 import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.vr.app.sh.R
-import com.vr.app.sh.ui.books.adapter.RecyclerViewAdapter
-import java.util.ArrayList
 
 class BottomSheetPickPhoto(val context: Context, private val viewBottomSheet:LinearLayout, private val windowHeight:Int) {
 
@@ -31,7 +28,6 @@ class BottomSheetPickPhoto(val context: Context, private val viewBottomSheet:Lin
         val pickPhotoBottomSheet = BottomSheetBehavior.from(viewBottomSheet)
         pickPhotoBottomSheet.peekHeight = defaultHeight
         pickPhotoBottomSheet.maxHeight = windowHeight
-
 
         val recyclerView = viewBottomSheet.findViewById<RecyclerView>(R.id.list_photos)
         val btnAddPhoto = viewBottomSheet.findViewById<Button>(R.id.btn_add_photo)

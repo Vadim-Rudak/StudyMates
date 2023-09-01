@@ -50,7 +50,7 @@ class ResultViewModel(
     fun JSONResult(resultTest:ResultTest): RequestBody {
         val jsonObject = JSONObject()
         jsonObject.put("idtest", resultTest.test_id)
-        jsonObject.put("username", getUserBD.execute().user_name)
+        //jsonObject.put("username", getUserBD.execute().user_name)
         jsonObject.put("score", resultTest.all_result)
         jsonObject.put("num_correct_otv", resultTest.num_correct_answer)
         jsonObject.put("num_error_otv", resultTest.num_wrong_answer)

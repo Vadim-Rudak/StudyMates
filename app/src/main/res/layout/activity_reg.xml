@@ -110,5 +110,6 @@
     </LinearLayout>
 
     <include layout="@layout/bottom_sheet_pick_photo" />
+    <include layout="@layout/bottom_sheet_city" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

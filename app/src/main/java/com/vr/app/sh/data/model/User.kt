@@ -4,13 +4,17 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "User")
-data class User(
 
-    @PrimaryKey(autoGenerate = true) var id: Int,
-    @ColumnInfo(name = "username") var user_name:String,
-    @ColumnInfo(name = "role") var role:String?=null
-
-)
+class User(){
+    var id: Int?=0
+    var name:String?=null
+    var lastName:String?=null
+    var gender:String = "man"
+    var dateBirthday:String?=null
+    var cityLive:String?=null
+    val auth = Auth()
+    val school = School()
+    val photo = Photo()
+}
 
 

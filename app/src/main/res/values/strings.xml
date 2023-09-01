@@ -23,9 +23,21 @@
     <string name="reg_fr1_gender1">Мужчина</string>
     <string name="reg_fr1_gender2">Женщина</string>
     <string name="reg_fr1_text3">Дата рождения</string>
-    <string name="reg_fr1_input3">Дата</string>
+    <string name="reg_fr1_input3">Добавь дату рождения</string>
     <string name="reg_fr1_text4">Город</string>
-    <string name="reg_fr1_input4">Город</string>
+    <string name="reg_fr1_input4">Добавь свой город</string>
+
+    <!-- Bottom Sheet Pick City -->
+    <string name="pick_city_titel">Город</string>
+    <string-array name="cityArray">
+        <item>Минск</item>
+        <item>Витебск</item>
+        <item>Глубокое</item>
+        <item>Брест</item>
+        <item>Гомель</item>
+        <item>Полоцк</item>
+    </string-array>
+
 
     <string name="registration_titel2">Добавь свою школу</string>
     <string name="reg_fr2_input1">Название города</string>
