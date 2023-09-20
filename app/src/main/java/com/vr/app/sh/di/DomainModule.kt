@@ -50,8 +50,8 @@ class DomainModule {
     }
 
     @Provides
-    fun provideAuthSetUserInBD(daoUser: DAOUser):SetUserInBD{
-        return SetUserInBD(daoUser = daoUser)
+    fun provideAuthSetUserInBD(userPreferences: UserPreferences):SaveUser{
+        return SaveUser(userPreferences)
     }
 
     @Provides
@@ -72,11 +72,6 @@ class DomainModule {
     @Provides
     fun provideSendResult(internetRepoImpl: InternetRepoImpl):SendResult{
         return SendResult(internetRepoImpl)
-    }
-
-    @Provides
-    fun provideGetUserBD(daoUser: DAOUser):GetUserBD{
-        return GetUserBD(daoUser = daoUser)
     }
 
     @Provides

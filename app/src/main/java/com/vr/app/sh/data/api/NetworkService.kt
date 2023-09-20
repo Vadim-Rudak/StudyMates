@@ -5,6 +5,7 @@ import com.vr.app.sh.data.model.Question
 import com.vr.app.sh.data.model.Test
 import com.vr.app.sh.domain.model.*
 import com.vr.app.sh.ui.door.cookie.MyCookieJar
+import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
@@ -24,8 +25,9 @@ interface NetworkService {
     @GET("/authoriz")
     suspend fun auth(): Response<Auth>
 
-    @POST("/reg_mob")
-    suspend fun registration(@Body requestBody: RequestBody): Response<Reg>
+    @Multipart
+    @POST("/registration_mobile")
+    suspend fun registration(@Part("user") requestBody: RequestBody,@Part user_photo: MultipartBody.Part?): Response<Reg>
 
     @POST("/add_result")
     suspend fun sendResult(@Body requestBody: RequestBody): Response<ResponseBody>

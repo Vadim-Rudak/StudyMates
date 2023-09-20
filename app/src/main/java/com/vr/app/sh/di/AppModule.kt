@@ -50,10 +50,10 @@ class AppModule(val context: Context) {
     fun provideAuthorizationViewModelFactory(
         context: Context,
         authorization: Authorization,
-        setUserInBD: SetUserInBD,
+        saveUser: SaveUser,
         internetConnection: InternetConnection
     ): AuthorizationViewModelFactory {
-        return AuthorizationViewModelFactory(context,authorization, setUserInBD, internetConnection)
+        return AuthorizationViewModelFactory(context,authorization, saveUser, internetConnection)
     }
 
     @Provides
@@ -79,20 +79,20 @@ class AppModule(val context: Context) {
     @Provides
     fun provideRegViewModelFactory(
         context: Context,
+        saveUser: SaveUser,
         registration: Registration,
         internetConnection: InternetConnection
     ):RegViewModelFactory{
-        return RegViewModelFactory(context,registration, internetConnection)
+        return RegViewModelFactory(context,saveUser, registration, internetConnection)
     }
 
     @Provides
     fun provideResultViewModelFactory(
         context: Context,
         sendResult: SendResult,
-        getUser: GetUserBD,
         internetConnection: InternetConnection
     ):ResultViewModelFactory{
-        return ResultViewModelFactory(context,sendResult, getUser, internetConnection)
+        return ResultViewModelFactory(context,sendResult, internetConnection)
     }
 
     @Provides

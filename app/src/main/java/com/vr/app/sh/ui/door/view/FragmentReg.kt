@@ -1,6 +1,7 @@
 package com.vr.app.sh.ui.door.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -47,7 +48,11 @@ class FragmentReg(val numPage:Int) : Fragment() {
                 }
                 val viewNumClass = view.findViewById<TextInputEditText>(R.id.reg_fr2_num_class)
                 viewNumClass.doAfterTextChanged {
-                    school.numClass = Integer.parseInt(it.toString())
+                    if (it!!.isNotEmpty()){
+                        school.numClass = it.toString().toInt()
+                    }else{
+                        school.numClass = 0
+                    }
                 }
                 val viewEndSchool = view.findViewById<CheckBox>(R.id.checkBoxEndSchool)
                 viewEndSchool.setOnCheckedChangeListener { buttonView, isChecked ->
@@ -64,8 +69,10 @@ class FragmentReg(val numPage:Int) : Fragment() {
                 val viewPassword = view.findViewById<TextInputEditText>(R.id.reg_fr3_password)
                 val viewPassword2 = view.findViewById<TextInputEditText>(R.id.reg_fr3_password2)
                 viewPassword2.doAfterTextChanged {
-                    if (it==viewPassword.text){
+                    if (it.toString()==viewPassword.text.toString()){
                         auth.password = it.toString()
+                    }else{
+                        auth.password = null
                     }
                 }
             }
@@ -79,7 +86,9 @@ class FragmentReg(val numPage:Int) : Fragment() {
                     bottomSheetPickPhoto.see()
                 }
                 bottomSheetPickPhoto.onePhoto.observe(viewLifecycleOwner){
+                    RegistrationInfo.user.photo.path = it
                     Glide.with(requireContext()).load(it).into(pickPhoto)
+
                 }
 
             }
@@ -120,6 +129,7 @@ class FragmentReg(val numPage:Int) : Fragment() {
                     selectDate(onClick = {
                         layoutInputDateBirthday.hint = ""
                         viewDateBirthday.setText(it)
+                        RegistrationInfo.user.dateBirthday = it
                     })
                 }
 

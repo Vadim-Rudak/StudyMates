@@ -1,7 +1,8 @@
 package com.vr.app.sh.data.model
 
 class Auth {
-    var login:String = ""
-    var password:String = ""
-    var role:String?=null
+    var active = true
+    var login:String? = null
+    var password:String? = null
+    var role:String? = "USER"
 }

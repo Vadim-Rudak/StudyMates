@@ -1,6 +1,7 @@
 package com.vr.app.sh.data.model
 
 class Photo {
-    var name:String = ""
-    var res:String = ""
+    var verification = false
+    var name:String? = null
+    var path:String? = null
 }

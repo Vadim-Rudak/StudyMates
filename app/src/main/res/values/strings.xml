@@ -4,7 +4,7 @@
 
 
     <string name="door_text1">Вход</string>
-    <string name="door_text2">Рад видеть вас сново</string>
+    <string name="door_text2">Рад видеть вас снова</string>
     <string name="door_in_btn1">Войти</string>
     <string name="door_in_btn2">Зарегистрироваться</string>
     <string name="door_in_et1">Логин</string>
@@ -134,6 +134,14 @@
     <string name="TopMenu_btn1">Учебники</string>
     <string name="TopMenu_btn2">Тесты</string>
     <string name="TopMenu_btn3">Расписание</string>
+
+    <!-- Окно с профилем пользователя -->
+    <string name="profile_text_num_class">класс</string>
+    <string-array name="roles">
+        <item>Ученик</item>
+        <item>Учитель</item>
+        <item>Администратор</item>
+    </string-array>
 
     <!-- Окно с выбором книг -->
     <string name="text_successful_download">Книга успешно загружена</string>
@@ -270,6 +278,14 @@
     <string name="alrAddLessonEt2">Название урока</string>
     <string name="alrAddLessonEt3">Начало урока</string>
     <string name="alrAddLessonEt4">Номер кабинета</string>
+
+    <!-- Alert Info -->
+    <string name="alrInfoTitel">Ошибка</string>
+    <string name="alrInfoText1">Заполните все поля</string>
+
+    <!-- Alert Loading -->
+    <string name="alrLoadingTitel">Завершение регистрации</string>
+    <string name="alrLoadingText1">Выполняется отправка данных</string>
 
 
     <!-- Bottom Sheet Pick Photos -->

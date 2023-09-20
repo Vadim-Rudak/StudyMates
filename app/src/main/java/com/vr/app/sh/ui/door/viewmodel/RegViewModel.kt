@@ -1,23 +1,31 @@
 package com.vr.app.sh.ui.door.viewmodel
 
-import android.app.AlertDialog
-import android.content.Context
-import android.content.DialogInterface
 import android.content.res.Resources
-import android.text.TextUtils
+import android.os.Environment
+import android.util.Log
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.gson.Gson
 import com.vr.app.sh.R
+import com.vr.app.sh.data.repository.RegistrationInfo
 import com.vr.app.sh.domain.UseCase.InternetConnection
 import com.vr.app.sh.domain.UseCase.Registration
+import com.vr.app.sh.domain.UseCase.SaveUser
+import com.vr.app.sh.ui.other.UseAlert
+import com.vr.app.sh.ui.other.UseAlert.Companion.loading
 import kotlinx.coroutines.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
-import org.json.JSONObject
+import java.io.File
+import java.net.URLConnection
 
-class RegViewModel(private val resources: Resources, val registration: Registration, val internetConnection: InternetConnection): ViewModel() {
+class RegViewModel(private val resources: Resources,private val saveUser: SaveUser,val registration: Registration, val internetConnection: InternetConnection): ViewModel() {
 
+    val photoPath = "${Environment.getExternalStorageDirectory().path}/SchoolProg/MyProfile"
+    val loadingAlert = loading(resources.getString(R.string.alrLoadingText1))
     val errorMessage = MutableLiveData<String>()
     val statusRegistration = MutableLiveData<Boolean>()
     val numFragment = MutableLiveData<Int>()
@@ -27,56 +35,74 @@ class RegViewModel(private val resources: Resources, val registration: Registrat
         numFragment.postValue(0)
     }
 
-    fun registration(
-        login:String,
-        password1:String,
-        password2:String,
-        name:String,
-        last_name:String,
-        patronymic:String,
-        date_birthday:String,
-        num_class: Int
-    ){
+    fun registration(fragmentManager: FragmentManager,){
         if (internetConnection.UseInternet()){
-            if (!TextUtils.isEmpty(login.trim())&&!TextUtils.isEmpty(password1.trim())
-                &&!TextUtils.isEmpty(password2.trim())){
-                if (password1.equals(password2)){
-                    job = CoroutineScope(Dispatchers.IO).launch {
 
-                        val reg = registration.execute(JSONObjectUser(login,password1,name,last_name,patronymic,
-                        date_birthday,num_class))
+            loadingAlert.show(fragmentManager,"AlertLoading")
 
-                        withContext(Dispatchers.Main) {
-                            if (reg.status_reg == true) {
-                                statusRegistration.value = true
-                            } else {
-                                errorMessage.value = reg.message
-                            }
+            job = CoroutineScope(Dispatchers.IO).launch {
+
+                val fileUserPhoto = File(RegistrationInfo.user.photo.path)
+                val filePhoto:MultipartBody.Part? = prepareFilePart("user_photo",fileUserPhoto)
+                val reg = registration.execute(userInJSON(),filePhoto)
+
+                withContext(Dispatchers.Main) {
+                    if (reg.status_reg == true) {
+                        regIsSuccessful(fileUserPhoto)
+                        if (reg.user == null){
+                            errorMessage.value = "нет данных"
+                        }else{
+                            Log.d("FF4","сохранение пользователя")
+                            saveUser.execute(reg.user!!)
                         }
+
+                        delay(3000)
+                        loadingAlert.isDone()
+                        statusRegistration.value = true
+
+                    } else {
+                        errorMessage.value = reg.message
                     }
-                }else{
-                    errorMessage.value = resources.getString(R.string.alrPasswordsNotEquals)
                 }
-            }else{
-                errorMessage.value = resources.getString(R.string.alrNotTextInInput)
             }
         }else{
             errorMessage.value = resources.getString(R.string.alrNotInternetConnection)
         }
     }
 
-    fun JSONObjectUser(login:String,password:String,name:String,last_name:String,patronymic:String,date_birthday:String,num_class:Int): RequestBody {
-        val jsonObject = JSONObject()
-        jsonObject.put("login", login)
-        jsonObject.put("password", password)
-        jsonObject.put("name", name)
-        jsonObject.put("last_name", last_name)
-        jsonObject.put("patronymic", patronymic)
-        jsonObject.put("date_birthday", date_birthday)
-        jsonObject.put("num_class", num_class)
+    suspend fun regIsSuccessful(myPhoto:File){
+        createDir()
+        myPhoto.copyTo(File(photoPath,"myPhoto.${myPhoto.extension}"),true)
+    }
 
-        val jsonObjectString = jsonObject.toString()
-        return jsonObjectString.toRequestBody("application/json".toMediaTypeOrNull())
+    private fun createDir(){
+        val dir = File(photoPath)
+        if (!dir.exists()){
+            dir.mkdirs()
+        }
+    }
+
+    private fun prepareFilePart(partName: String, file: File): MultipartBody.Part? {
+        if (!file.exists()){
+            val requestFile: RequestBody = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), "")
+            // MultipartBody.Part is used to send also the actual file name
+            RegistrationInfo.user.photo.name = "myPhoto.${file.extension}"
+            return MultipartBody.Part.createFormData(partName, file.name, requestFile)
+        }else{
+            val mimeType2: String = URLConnection.guessContentTypeFromName(file.name)
+            return if (mimeType2 != null) {
+                RegistrationInfo.user.photo.name = "myPhoto.${file.extension}"
+                val requestFile: RequestBody = RequestBody.create(mimeType2.toMediaTypeOrNull(), file)
+                // MultipartBody.Part is used to send also the actual file name
+                MultipartBody.Part.createFormData(partName, file.name, requestFile)
+            } else {
+                null
+            }
+        }
+    }
+
+    fun userInJSON(): RequestBody {
+        return Gson().toJson(RegistrationInfo.user).toRequestBody("multipart/form-data".toMediaTypeOrNull())
     }
 
     override fun onCleared() {

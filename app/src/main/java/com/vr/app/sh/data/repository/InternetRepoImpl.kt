@@ -6,6 +6,7 @@ import com.vr.app.sh.data.model.Question
 import com.vr.app.sh.data.model.Test
 import com.vr.app.sh.domain.model.*
 import com.vr.app.sh.domain.repository.*
+import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -21,8 +22,8 @@ class InternetRepoImpl(private val networkService: NetworkService):DoorInSystemR
         }
     }
 
-    override suspend fun Registration(requestBody: RequestBody): Reg {
-        return networkService.registration(requestBody).body()!!
+    override suspend fun Registration(requestBody: RequestBody,user_photo: MultipartBody.Part?):Reg{
+        return networkService.registration(requestBody,user_photo).body()!!
     }
 
     override suspend fun getAllBookList(): Response<List<Book>> {

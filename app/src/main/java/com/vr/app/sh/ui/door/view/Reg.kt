@@ -6,14 +6,14 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.vr.app.sh.R
 import com.vr.app.sh.app.App
+import com.vr.app.sh.data.repository.RegistrationInfo
 import com.vr.app.sh.ui.base.RegViewModelFactory
 import com.vr.app.sh.ui.door.viewmodel.RegViewModel
-import com.vr.app.sh.ui.other.UseAlert
+import com.vr.app.sh.ui.other.UseAlert.Companion.infoMessage
 
 class Reg : AppCompatActivity() {
 
@@ -21,7 +21,8 @@ class Reg : AppCompatActivity() {
     lateinit var factory: RegViewModelFactory
 
     lateinit var viewModel: RegViewModel
-    private var num_fragment = 0
+    private var numFragment = 0
+    private val userReg = RegistrationInfo.user
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,7 +45,7 @@ class Reg : AppCompatActivity() {
             .get(RegViewModel::class.java)
 
         viewModel.numFragment.observe(this){
-            num_fragment = it
+            numFragment = it
             when(it){
                 1->{
                     titel.setText(R.string.registration_titel2)
@@ -70,40 +71,50 @@ class Reg : AppCompatActivity() {
         }
 
         viewModel.errorMessage.observe(this){
-            UseAlert.errorMessage(it,this)
+            infoMessage(supportFragmentManager,it)
         }
 
         viewModel.statusRegistration.observe(this){
             if(it){
-                Toast.makeText(this, this.resources.getString(R.string.toastOkReg), Toast.LENGTH_SHORT).show()
-                finish()
-            }
-        }
-
-        btn_next.setOnClickListener {
-            if (num_fragment<3){
-                num_fragment++
-                viewModel.numFragment.postValue(num_fragment)
-            }else{
                 val intent = Intent(this,Verification::class.java)
                 startActivity(intent)
                 finish()
             }
         }
 
-//        btn_send.setOnClickListener {
-//            if (TextUtils.isEmpty(login.text.toString().trim())){
-//                login.setText("")
-//            }
-//            if (TextUtils.isEmpty(password1.text.toString().trim())){
-//                password1.setText("")
-//            }
-//            if (TextUtils.isEmpty(password2.text.toString().trim())){
-//                password2.setText("")
-//            }
-//            viewModel.registration(login.text.toString(), password1.text.toString(),password2.text.toString(),
-//            name.text.toString(),last_name.text.toString(),patronymic.text.toString(),date_birthday.text.toString(),
-//            num_class.text.toString().toInt())
-//        }
+        btn_next.setOnClickListener {
+            when(numFragment){
+                0->{
+                    infoInEditText(
+                        !userReg.name.isNullOrEmpty()
+                        &&!userReg.lastName.isNullOrEmpty()
+                        &&!userReg.dateBirthday.isNullOrEmpty()
+                        &&!userReg.cityLive.isNullOrEmpty()
+                    )
+                }
+                1->{
+                    infoInEditText(
+                        !userReg.school.nameCity.isNullOrEmpty()
+                        &&!userReg.school.name.isNullOrEmpty()
+                        &&userReg.school.numClass != 0
+                    )
+                }
+                2->{
+                    infoInEditText(!userReg.auth.login.isNullOrEmpty()&&!userReg.auth.password.isNullOrEmpty())
+                }
+                3->{
+                    viewModel.registration(supportFragmentManager)
+                }
+            }
+        }
+    }
+
+    private fun infoInEditText(allInfo:Boolean){
+        if (allInfo){
+            numFragment++
+            viewModel.numFragment.postValue(numFragment)
+        }else{
+            infoMessage(supportFragmentManager,this.resources.getString(R.string.alrInfoText1))
+        }
     }
 }

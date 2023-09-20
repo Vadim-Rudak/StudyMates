@@ -29,7 +29,8 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/reg_fr3_login"
             android:layout_width="match_parent"
-            android:layout_height="60dp" />
+            android:layout_height="60dp"
+            android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -44,7 +45,8 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/reg_fr3_password"
             android:layout_width="match_parent"
-            android:layout_height="60dp" />
+            android:layout_height="60dp"
+            android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -59,7 +61,8 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/reg_fr3_password2"
             android:layout_width="match_parent"
-            android:layout_height="60dp" />
+            android:layout_height="60dp"
+            android:inputType="text|textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
 

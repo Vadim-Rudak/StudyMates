@@ -1,11 +1,15 @@
 package com.vr.app.sh.ui.menu.view
 
 import android.Manifest
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.os.Environment
+import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -14,18 +18,23 @@ import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.google.android.material.imageview.ShapeableImageView
 import com.mikhaellopez.circularprogressbar.CircularProgressBar
 import com.vr.app.sh.R
 import com.vr.app.sh.app.App
+import com.vr.app.sh.data.repository.RegistrationInfo
 import com.vr.app.sh.ui.base.MenuViewModelFactory
 import com.vr.app.sh.ui.books.view.Books
 import com.vr.app.sh.ui.menu.adapter.MenuItemDecoration
 import com.vr.app.sh.ui.menu.adapter.TopMenuAdapter
 import com.vr.app.sh.ui.menu.viewModel.MenuViewModel
-import com.vr.app.sh.ui.other.UseAlert
+import com.vr.app.sh.ui.other.UseAlert.Companion.errorMessage
 import com.vr.app.sh.ui.profile.view.MyProfile
 import com.vr.app.sh.ui.tests.view.subjects.ActivitySubjects
 import com.vr.app.sh.ui.timeTable.view.TimeTable
+import java.io.File
 
 class TopMenu : AppCompatActivity() {
 
@@ -43,8 +52,37 @@ class TopMenu : AppCompatActivity() {
         viewModel = ViewModelProvider(this, factory)
             .get(MenuViewModel::class.java)
 
+
+        val sharedPrefs = getSharedPreferences("user_info", Context.MODE_PRIVATE)
+
+        val myPhoto = findViewById<ShapeableImageView>(R.id.topMenuUserPhoto)
+        if (sharedPrefs.contains("photo_name")){
+            val pathMyPhoto = "${Environment.getExternalStorageDirectory().path}/SchoolProg/MyProfile/${sharedPrefs.getString("photo_name",null)}"
+            if (File(pathMyPhoto).exists()){
+                Glide.with(this)
+                    .load(pathMyPhoto)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .skipMemoryCache(true)
+                    .into(myPhoto)
+            }else{
+                //Download Photo from server
+
+            }
+        }
+
+        val viewNameUser = findViewById<TextView>(R.id.topMenuUserName)
+        if(sharedPrefs.contains("user_name")){
+            viewNameUser.text = sharedPrefs.getString("user_name"," ")
+        }
+        val listener = SharedPreferences.OnSharedPreferenceChangeListener{sharedPreferences, key ->
+            if (key == "user_name"){
+                viewNameUser.text = sharedPreferences.getString("user_name"," ")
+            }
+        }
+        sharedPrefs.registerOnSharedPreferenceChangeListener(listener)
+        
         viewModel.errorMessage.observe(this){
-            UseAlert.errorMessage(it,this)
+            errorMessage(it,this)
         }
 
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerTopMenu)

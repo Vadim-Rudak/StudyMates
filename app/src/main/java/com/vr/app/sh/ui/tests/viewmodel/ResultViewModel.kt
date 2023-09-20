@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.vr.app.sh.R
 import com.vr.app.sh.data.model.ResultTest
-import com.vr.app.sh.domain.UseCase.GetUserBD
 import com.vr.app.sh.domain.UseCase.InternetConnection
 import com.vr.app.sh.domain.UseCase.SendResult
 import kotlinx.coroutines.CoroutineScope
@@ -21,7 +20,6 @@ import org.json.JSONObject
 class ResultViewModel(
     private val resources: Resources,
     private val internetConnection: InternetConnection,
-    private val getUserBD: GetUserBD,
     private val sendResult: SendResult
 ): ViewModel() {
 

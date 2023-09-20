@@ -1,15 +1,14 @@
 package com.vr.app.sh.di
 
 import android.content.Context
-import androidx.room.Room
 import com.vr.app.sh.data.api.NetworkService
 import com.vr.app.sh.data.repository.DAOBook
 import com.vr.app.sh.data.repository.DAOLessons
 import com.vr.app.sh.data.repository.DAOQuestions
 import com.vr.app.sh.data.repository.DAOTest
-import com.vr.app.sh.data.repository.DAOUser
 import com.vr.app.sh.data.repository.InternetRepoImpl
 import com.vr.app.sh.data.repository.RoomDB
+import com.vr.app.sh.data.repository.UserPreferences
 import dagger.Module
 import dagger.Provides
 
@@ -22,8 +21,8 @@ class DataModule {
     }
 
     @Provides
-    fun provideUserRepoImpl(context: Context): DAOUser {
-        return RoomDB.getDatabase(context = context).userDAO()
+    fun provideUserPreferences(context: Context): UserPreferences {
+        return UserPreferences(context)
     }
 
     @Provides

@@ -1,10 +1,14 @@
 package com.vr.app.sh.ui.other
 
-import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
+import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.vr.app.sh.R
+import com.vr.app.sh.ui.door.view.Authoriz
+import com.vr.app.sh.ui.other.customAlert.infoAlert
+import com.vr.app.sh.ui.other.customAlert.loadingAlert
 
 class UseAlert{
     companion object {
@@ -17,5 +21,15 @@ class UseAlert{
             })
             alertDialog.show()
         }
+
+        fun infoMessage(fragmentManager: FragmentManager,textMessage: String){
+            val alertInfo = infoAlert(textMessage)
+            alertInfo.show(fragmentManager,"AlertInfo")
+        }
+
+        fun loading(textMessage: String):loadingAlert{
+            return loadingAlert(textMessage)
+        }
+
     }
 }
