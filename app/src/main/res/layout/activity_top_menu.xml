@@ -57,7 +57,7 @@
         </LinearLayout>
 
         <ImageButton
-            android:id="@+id/imageButton"
+            android:id="@+id/btnSettings"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:background="#00FFFFFF"

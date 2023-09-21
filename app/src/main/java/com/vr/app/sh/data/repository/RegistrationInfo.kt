@@ -4,6 +4,6 @@ import com.vr.app.sh.data.model.User
 
 class RegistrationInfo {
     companion object{
-        val user = User()
+        var user = User()
     }
 }

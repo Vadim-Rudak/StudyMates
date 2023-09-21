@@ -27,8 +27,8 @@ class UseAlert{
             alertInfo.show(fragmentManager,"AlertInfo")
         }
 
-        fun loading(textMessage: String):loadingAlert{
-            return loadingAlert(textMessage)
+        fun loading(textTitel:String,textMessage: String):loadingAlert{
+            return loadingAlert(textTitel,textMessage)
         }
 
     }

@@ -16,8 +16,8 @@ import dagger.Provides
 class DataModule {
 
     @Provides
-    fun provideInternetRepoImpl(): InternetRepoImpl {
-        return InternetRepoImpl(NetworkService.getInstance())
+    fun provideInternetRepoImpl(context: Context): InternetRepoImpl {
+        return InternetRepoImpl(context,NetworkService.getInstance(context))
     }
 
     @Provides

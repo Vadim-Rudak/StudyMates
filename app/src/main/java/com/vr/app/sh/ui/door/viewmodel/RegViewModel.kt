@@ -25,7 +25,7 @@ import java.net.URLConnection
 class RegViewModel(private val resources: Resources,private val saveUser: SaveUser,val registration: Registration, val internetConnection: InternetConnection): ViewModel() {
 
     val photoPath = "${Environment.getExternalStorageDirectory().path}/SchoolProg/MyProfile"
-    val loadingAlert = loading(resources.getString(R.string.alrLoadingText1))
+    val loadingAlert = loading(resources.getString(R.string.alrLoadingSendTitel),resources.getString(R.string.alrLoadingSendText1))
     val errorMessage = MutableLiveData<String>()
     val statusRegistration = MutableLiveData<Boolean>()
     val numFragment = MutableLiveData<Int>()

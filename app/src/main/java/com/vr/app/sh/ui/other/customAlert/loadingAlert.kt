@@ -14,7 +14,7 @@ import com.airbnb.lottie.LottieDrawable
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.vr.app.sh.R
 
-class loadingAlert(private val textInfo:String): DialogFragment() {
+class loadingAlert(private val textTitel:String,private val textInfo:String): DialogFragment() {
 
     private lateinit var dialog: AlertDialog
 
@@ -31,7 +31,7 @@ class loadingAlert(private val textInfo:String): DialogFragment() {
         viewAnimation.playAnimation()
 
         val viewTitel = window.findViewById<TextView>(R.id.al_loading_view_titel)
-        viewTitel.text = context?.getText(R.string.alrLoadingTitel)
+        viewTitel.text = textTitel
         val viewInfo = window.findViewById<TextView>(R.id.al_loading_view_info)
         viewInfo.text = textInfo
 

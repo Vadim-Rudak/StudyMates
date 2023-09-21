@@ -1,5 +1,6 @@
 package com.vr.app.sh.data.repository
 
+import android.content.Context
 import com.vr.app.sh.data.api.NetworkService
 import com.vr.app.sh.data.model.Book
 import com.vr.app.sh.data.model.Question
@@ -12,13 +13,13 @@ import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Response
 
-class InternetRepoImpl(private val networkService: NetworkService):DoorInSystemRepo,BookInternetRepo,TestsInternetRepo,QuestionsInternetRepo,ResultInternetRepo {
+class InternetRepoImpl(val context: Context,private val networkService: NetworkService):DoorInSystemRepo,BookInternetRepo,TestsInternetRepo,QuestionsInternetRepo,ResultInternetRepo,PhotoInternetRepo {
 
     override suspend fun Authorization(requestBody: RequestBody): Auth {
-        if(NetworkService.getInstance().loginInServ(requestBody).isSuccessful){
+        if(NetworkService.getInstance(context = context).loginInServ(requestBody).isSuccessful){
             return networkService.auth().body()!!
         }else{
-            return Auth("","Ошибка подключения к серверу",false,"")
+            return Auth(false,"Ошибка подключения к серверу",null)
         }
     }
 
@@ -52,5 +53,9 @@ class InternetRepoImpl(private val networkService: NetworkService):DoorInSystemR
 
     override suspend fun sendResult(requestBody: RequestBody): Response<ResponseBody> {
         return networkService.sendResult(requestBody)
+    }
+
+    override fun downloadPhoto(userId: Int): Call<ResponseBody> {
+        return networkService.downloadUserPhoto(userId)
     }
 }

@@ -135,6 +135,11 @@
     <string name="TopMenu_btn2">Тесты</string>
     <string name="TopMenu_btn3">Расписание</string>
 
+    <!-- Окно с настройками -->
+    <string name="TitelSettings">Настройки</string>
+    <string name="btnExitInSettings">Выход</string>
+
+
     <!-- Окно с профилем пользователя -->
     <string name="profile_text_num_class">класс</string>
     <string-array name="roles">
@@ -284,8 +289,11 @@
     <string name="alrInfoText1">Заполните все поля</string>
 
     <!-- Alert Loading -->
-    <string name="alrLoadingTitel">Завершение регистрации</string>
-    <string name="alrLoadingText1">Выполняется отправка данных</string>
+    <string name="alrLoadingAuthTitel">Авторизация</string>
+    <string name="alrLoadingAuthText1">Выполняется вход пользователя</string>
+
+    <string name="alrLoadingSendTitel">Завершение регистрации</string>
+    <string name="alrLoadingSendText1">Выполняется отправка данных</string>
 
 
     <!-- Bottom Sheet Pick Photos -->

@@ -104,4 +104,14 @@ class DomainModule {
         return SaveLessonInBD(lessonsDAO)
     }
 
+    @Provides
+    fun provideDownloadPhoto(internetRepoImpl: InternetRepoImpl):DownloadUserPhoto{
+        return DownloadUserPhoto(internetRepoImpl)
+    }
+
+    @Provides
+    fun provideClearUser(userPreferences: UserPreferences):ClearUser{
+        return ClearUser(userPreferences)
+    }
+
 }
