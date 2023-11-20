@@ -2,6 +2,17 @@
 
     <string name="app_name">SchoolProg</string>
 
+    <!-- Alert Permissions -->
+    <string name="titel_memory">Память</string>
+    <string name="info_memory">Для работы приложения необходим доступ к памяти</string>
+
+    <string name="titel_camera">Камера</string>
+    <string name="info_camera">Для работы приложения необходим доступ к камере</string>
+
+    <string name="btn_permission_ok">Разрешить</string>
+    <string name="btn_permission_cansel">Позже</string>
+
+    <!-- //////////////////////////////////////////////// -->
 
     <string name="door_text1">Вход</string>
     <string name="door_text2">Рад видеть вас снова</string>

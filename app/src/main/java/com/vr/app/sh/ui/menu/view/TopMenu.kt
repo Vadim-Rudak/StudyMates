@@ -32,6 +32,7 @@ import com.vr.app.sh.ui.menu.adapter.MenuItemDecoration
 import com.vr.app.sh.ui.menu.adapter.TopMenuAdapter
 import com.vr.app.sh.ui.menu.viewModel.MenuViewModel
 import com.vr.app.sh.ui.other.UseAlert.Companion.errorMessage
+import com.vr.app.sh.ui.other.permissions.Permissions
 import com.vr.app.sh.ui.profile.view.MyProfile
 import com.vr.app.sh.ui.tests.view.subjects.ActivitySubjects
 import com.vr.app.sh.ui.timeTable.view.TimeTable
@@ -81,6 +82,8 @@ class TopMenu : AppCompatActivity() {
             }
         }
         sharedPrefs.registerOnSharedPreferenceChangeListener(listener)
+
+        Permissions.checkPermissions(supportFragmentManager,this)
 
         val btnSettings = findViewById<ImageButton>(R.id.btnSettings)
         btnSettings.setOnClickListener {

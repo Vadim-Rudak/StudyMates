@@ -16,10 +16,7 @@ import com.vr.app.sh.data.repository.RegistrationInfo
 import com.vr.app.sh.ui.base.AuthorizationViewModelFactory
 import com.vr.app.sh.ui.door.viewmodel.AuthViewModel
 import com.vr.app.sh.ui.menu.view.TopMenu
-import com.vr.app.sh.ui.other.UseAlert
-import com.vr.app.sh.ui.other.UseAlert.Companion.errorMessage
 import com.vr.app.sh.ui.other.UseAlert.Companion.infoMessage
-import com.vr.app.sh.ui.other.UseAlert.Companion.loading
 
 class Authoriz : AppCompatActivity() {
 

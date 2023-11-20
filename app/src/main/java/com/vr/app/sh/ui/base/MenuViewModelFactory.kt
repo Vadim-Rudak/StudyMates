@@ -17,7 +17,7 @@ class MenuViewModelFactory(
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         return if (modelClass.isAssignableFrom(MenuViewModel::class.java)) {
-            MenuViewModel(context.resources,getListBookInternet,saveListBookInBD,internetConnection) as T
+            MenuViewModel(context,getListBookInternet,saveListBookInBD,internetConnection) as T
         } else {
             throw IllegalArgumentException("ViewModel Not Found")
         }
