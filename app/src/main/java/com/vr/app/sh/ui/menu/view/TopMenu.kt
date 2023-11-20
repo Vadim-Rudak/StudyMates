@@ -60,16 +60,15 @@ class TopMenu : AppCompatActivity() {
         val myPhoto = findViewById<ShapeableImageView>(R.id.topMenuUserPhoto)
         if (sharedPrefs.contains("photo_name")){
             val pathMyPhoto = "${Environment.getExternalStorageDirectory().path}/SchoolProg/MyProfile/${sharedPrefs.getString("photo_name",null)}"
-            if (File(pathMyPhoto).exists()){
-                Glide.with(this)
-                    .load(pathMyPhoto)
-                    .diskCacheStrategy(DiskCacheStrategy.NONE)
-                    .skipMemoryCache(true)
-                    .into(myPhoto)
-            }else{
+            if (!File(pathMyPhoto).exists()){
                 //Download Photo from server
-
+                viewModel.downloadUserPhoto(sharedPrefs.getInt("id",0),pathMyPhoto)
             }
+            Glide.with(this)
+                .load(pathMyPhoto)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .skipMemoryCache(true)
+                .into(myPhoto)
         }
 
         val viewNameUser = findViewById<TextView>(R.id.topMenuUserName)

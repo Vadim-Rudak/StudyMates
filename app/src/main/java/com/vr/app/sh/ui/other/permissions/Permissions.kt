@@ -2,17 +2,18 @@ package com.vr.app.sh.ui.other.permissions
 
 import android.content.Context
 import android.content.pm.PackageManager
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.FragmentManager
 import com.vr.app.sh.R
 import com.vr.app.sh.app.PERMISSIONS
 import com.vr.app.sh.ui.other.UseAlert.Companion.permissionMsg
-import com.vr.app.sh.ui.other.customAlert.permissionAlert
 
 class Permissions {
 
     companion object{
-        fun checkPermissions(fragmentManager: FragmentManager,context: Context){
+        fun checkPermissions(fragmentManager: FragmentManager, context: Context){
             for (i in PERMISSIONS.indices){
                 if(ActivityCompat.checkSelfPermission(context, PERMISSIONS[i]) != PackageManager.PERMISSION_GRANTED){
                     when(i){

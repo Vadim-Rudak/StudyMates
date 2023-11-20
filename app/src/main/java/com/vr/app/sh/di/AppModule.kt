@@ -73,9 +73,10 @@ class AppModule(val context: Context) {
         context: Context,
         getListBookInternet: GetAllBookListInternet,
         saveListBookInBD: SaveBookListInBD,
-        internetConnection: InternetConnection
+        internetConnection: InternetConnection,
+        downloadUserPhoto: DownloadUserPhoto
     ):MenuViewModelFactory{
-        return MenuViewModelFactory(context,getListBookInternet, saveListBookInBD, internetConnection)
+        return MenuViewModelFactory(context,getListBookInternet, saveListBookInBD, internetConnection,downloadUserPhoto)
     }
 
     @Provides
