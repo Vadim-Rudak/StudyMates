@@ -42,7 +42,15 @@
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/verificationAnim"
             android:layout_width="280dp"
-            android:layout_height="280dp" />
+            android:layout_height="280dp"
+            android:visibility="visible"/>
+
+        <androidx.camera.view.PreviewView
+            android:id="@+id/viewFinder"
+            android:layout_width="300dp"
+            android:layout_height="360dp"
+            app:scaleType="fitCenter"
+            android:visibility="gone"/>
 
         <TextView
             android:id="@+id/textView8"

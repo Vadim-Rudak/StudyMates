@@ -25,6 +25,8 @@ interface NetworkService {
     @GET("/authoriz")
     suspend fun auth(): Response<Auth>
 
+    @POST("/Verification")
+    suspend fun verificationUserInServer(@Query("id") user_id:Int): Response<ResponseBody>
     @Streaming
     @GET("/Photo")
     fun downloadUserPhoto(@Query("id") id:Int): Call<ResponseBody>

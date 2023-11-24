@@ -114,4 +114,9 @@ class DomainModule {
         return ClearUser(userPreferences)
     }
 
+    @Provides
+    fun provideVerificationUser(internetRepoImpl: InternetRepoImpl):VerificationUserInServer{
+        return VerificationUserInServer(internetRepoImpl)
+    }
+
 }

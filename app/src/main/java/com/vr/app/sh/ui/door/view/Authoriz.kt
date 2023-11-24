@@ -61,8 +61,7 @@ class Authoriz : AppCompatActivity() {
             RegistrationInfo.user = User()
             val intent = Intent(this,Reg::class.java)
             startActivity(intent)
-            login.setText("")
-            password.setText("")
+            finish()
         }
     }
 }

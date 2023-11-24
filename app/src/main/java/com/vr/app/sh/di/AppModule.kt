@@ -142,4 +142,12 @@ class AppModule(val context: Context) {
     fun provideMyProfileViewModelFactory(context: Context):MyProfileViewModelFactory{
         return MyProfileViewModelFactory(context)
     }
+
+    @Provides
+    fun provideVerificationViewModelFactory(
+        context: Context,
+        verificationUserInServer: VerificationUserInServer
+    ):VerificationViewModelFactory{
+        return VerificationViewModelFactory(context,verificationUserInServer)
+    }
 }

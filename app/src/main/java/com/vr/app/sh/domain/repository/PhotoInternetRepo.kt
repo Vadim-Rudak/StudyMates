@@ -5,4 +5,5 @@ import retrofit2.Call
 
 interface PhotoInternetRepo {
     fun downloadPhoto(userId: Int): Call<ResponseBody>
+    suspend fun verificationUser(userId: Int)
 }

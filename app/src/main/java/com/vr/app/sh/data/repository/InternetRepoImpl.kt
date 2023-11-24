@@ -59,4 +59,8 @@ class InternetRepoImpl(val context: Context,private val networkService: NetworkS
     override fun downloadPhoto(userId: Int): Call<ResponseBody> {
         return networkService.downloadUserPhoto(userId)
     }
+
+    override suspend fun verificationUser(userId: Int) {
+        networkService.verificationUserInServer(userId)
+    }
 }

@@ -31,7 +31,9 @@ import com.vr.app.sh.ui.books.view.Books
 import com.vr.app.sh.ui.menu.adapter.MenuItemDecoration
 import com.vr.app.sh.ui.menu.adapter.TopMenuAdapter
 import com.vr.app.sh.ui.menu.viewModel.MenuViewModel
+import com.vr.app.sh.ui.other.UseAlert
 import com.vr.app.sh.ui.other.UseAlert.Companion.errorMessage
+import com.vr.app.sh.ui.other.UseAlert.Companion.verificationMsg
 import com.vr.app.sh.ui.other.permissions.Permissions
 import com.vr.app.sh.ui.profile.view.MyProfile
 import com.vr.app.sh.ui.tests.view.subjects.ActivitySubjects
@@ -54,6 +56,13 @@ class TopMenu : AppCompatActivity() {
         viewModel = ViewModelProvider(this, factory)
             .get(MenuViewModel::class.java)
 
+        if (intent.extras?.getBoolean("verification") == true){
+            verificationMsg(
+                nameAnim = "verification_ok.json",
+                textTitel = this.resources.getString(R.string.win_verification_info_msg_t1),
+                textMessage = this.resources.getString(R.string.win_verification_info_msg_info1)
+            ).show(supportFragmentManager,"verification alert")
+        }
 
         val sharedPrefs = getSharedPreferences("user_info", Context.MODE_PRIVATE)
 

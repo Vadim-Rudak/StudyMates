@@ -4,6 +4,7 @@ import com.vr.app.sh.ui.books.view.AddBook
 import com.vr.app.sh.ui.books.view.FragmentSubjectsClass
 import com.vr.app.sh.ui.door.view.Authoriz
 import com.vr.app.sh.ui.door.view.Reg
+import com.vr.app.sh.ui.door.view.Verification
 import com.vr.app.sh.ui.menu.view.Settings
 import com.vr.app.sh.ui.menu.view.TopMenu
 import com.vr.app.sh.ui.profile.view.MyProfile
@@ -32,4 +33,6 @@ interface AppComponent {
     fun injectTimeTable(timeTable: TimeTable)
     fun injectMyProfile(myProfile: MyProfile)
     fun injectSettings(settings: Settings)
+
+    fun injectVerification(verification: Verification)
 }

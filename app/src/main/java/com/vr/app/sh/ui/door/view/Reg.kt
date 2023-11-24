@@ -30,6 +30,8 @@ class Reg : AppCompatActivity() {
 
         val btnBack = findViewById<ImageButton>(R.id.reg_btn_back)
         btnBack.setOnClickListener {
+            val intent = Intent(this,Authoriz::class.java)
+            startActivity(intent)
             finish()
         }
         val titel = findViewById<TextView>(R.id.reg_text_titel)
