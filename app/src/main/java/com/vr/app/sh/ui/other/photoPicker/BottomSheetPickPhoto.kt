@@ -1,6 +1,8 @@
 package com.vr.app.sh.ui.other.photoPicker
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.database.Cursor
 import android.provider.MediaStore
 import android.util.TypedValue
@@ -15,6 +17,7 @@ import com.vr.app.sh.R
 
 class BottomSheetPickPhoto(val context: Context, private val viewBottomSheet:LinearLayout, private val windowHeight:Int) {
 
+    private val pickPhotoBottomSheet = BottomSheetBehavior.from(viewBottomSheet)
     var pickMorePhoto = false
     val onePhoto = MutableLiveData<String>()
     val morePhotos = MutableLiveData<ArrayList<String>>()
@@ -25,7 +28,6 @@ class BottomSheetPickPhoto(val context: Context, private val viewBottomSheet:Lin
 
 
     fun see(){
-        val pickPhotoBottomSheet = BottomSheetBehavior.from(viewBottomSheet)
         pickPhotoBottomSheet.peekHeight = defaultHeight
         pickPhotoBottomSheet.maxHeight = windowHeight
 
@@ -47,6 +49,12 @@ class BottomSheetPickPhoto(val context: Context, private val viewBottomSheet:Lin
                     editButton(viewButton = btnAddPhoto,click = false)
                 }else{
                     editButton(viewButton = btnAddPhoto,click = true)
+                }
+            }
+
+            override fun takePhoto() {
+                Intent(context,CameraAct::class.java).also {
+                    context.startActivity(it)
                 }
             }
         })
@@ -77,6 +85,12 @@ class BottomSheetPickPhoto(val context: Context, private val viewBottomSheet:Lin
         })
     }
 
+    fun updatePhotos(){
+        adapter.setPhotos(getGalleryImages(context))
+    }
+
+    fun visiblePicker():Boolean = pickPhotoBottomSheet.peekHeight>0
+
     private fun editButton(viewButton: Button,click:Boolean){
         if (click){
             viewButton.setText(R.string.pick_photo_btn_add)
@@ -89,8 +103,7 @@ class BottomSheetPickPhoto(val context: Context, private val viewBottomSheet:Lin
         }
     }
 
-    fun getGalleryImages(context: Context): ArrayList<String> {
-        val galleryImageUrls: ArrayList<String>
+    private fun getGalleryImages(context: Context): ArrayList<String> {
         val columns = arrayOf(MediaStore.Images.Media.DATA, MediaStore.Images.Media._ID) //get all columns of type images
 
         val orderBy = MediaStore.Images.Media.DATE_TAKEN //order data by date
@@ -98,7 +111,7 @@ class BottomSheetPickPhoto(val context: Context, private val viewBottomSheet:Lin
             MediaStore.Images.Media.EXTERNAL_CONTENT_URI, columns, null,
             null, "$orderBy DESC"
         )!! //get all data in Cursor by sorting in DESC order
-        galleryImageUrls = ArrayList()
+        val galleryImageUrls: ArrayList<String> = ArrayList()
         imagecursor.moveToFirst()
         while (!imagecursor.isAfterLast()) {
             val dataColumnIndex: Int =

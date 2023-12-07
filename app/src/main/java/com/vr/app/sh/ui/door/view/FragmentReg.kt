@@ -26,6 +26,7 @@ import com.vr.app.sh.ui.other.photoPicker.BottomSheetPickPhoto
 class FragmentReg(val numPage:Int) : Fragment() {
 
     private val userProfile = RegistrationInfo.user
+    private var bottomSheetPickPhoto:BottomSheetPickPhoto? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = when(numPage){
@@ -79,13 +80,13 @@ class FragmentReg(val numPage:Int) : Fragment() {
             3->{
                 val placeReg = activity?.findViewById<CoordinatorLayout>(R.id.place_reg)
                 val viewBottomSheet = activity?.findViewById<LinearLayout>(R.id.sheet_pick_photo)
-                val bottomSheetPickPhoto = BottomSheetPickPhoto(requireContext(), viewBottomSheet!!, placeReg!!.height)
+                bottomSheetPickPhoto = BottomSheetPickPhoto(requireContext(), viewBottomSheet!!, placeReg!!.height)
 
                 val pickPhoto = view.findViewById<ShapeableImageView>(R.id.reg_fr3_pick_photo)
                 pickPhoto.setOnClickListener{
-                    bottomSheetPickPhoto.see()
+                    bottomSheetPickPhoto!!.see()
                 }
-                bottomSheetPickPhoto.onePhoto.observe(viewLifecycleOwner){
+                bottomSheetPickPhoto!!.onePhoto.observe(viewLifecycleOwner){
                     RegistrationInfo.user.photo.path = it
                     Glide.with(requireContext()).load(it).into(pickPhoto)
 
@@ -150,6 +151,16 @@ class FragmentReg(val numPage:Int) : Fragment() {
             }
         }
         return view
+    }
+
+    override fun onStart() {
+        super.onStart()
+        if(numPage==3&&bottomSheetPickPhoto!=null){
+            if (bottomSheetPickPhoto!!.visiblePicker()){
+                Log.d("FFF","ok")
+                bottomSheetPickPhoto!!.updatePhotos()
+            }
+        }
     }
 
     private fun selectDate(onClick:(String) -> Unit){

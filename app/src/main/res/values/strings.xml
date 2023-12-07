@@ -26,7 +26,7 @@
 
     <string name="reg_text_btn">Зарегистрироваться</string>
 
-    <string name="registration_titel1">Давай знакомиться</string>
+    <string name="registration_titel1">Привет</string>
     <string name="reg_fr1_text1">Как тебя зовут?</string>
     <string name="reg_fr1_input1">Имя</string>
     <string name="reg_fr1_input2">Фамилия</string>

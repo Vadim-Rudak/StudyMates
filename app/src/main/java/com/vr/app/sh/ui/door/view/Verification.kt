@@ -25,8 +25,6 @@ class Verification : AppCompatActivity() {
 
     lateinit var viewModel: VerificationViewModel
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_verification)

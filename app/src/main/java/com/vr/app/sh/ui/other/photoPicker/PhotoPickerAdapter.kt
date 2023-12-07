@@ -22,6 +22,7 @@ class PhotoPickerAdapter(val context:Context, private val selectMorePhotos:Boole
 
     interface Listener {
         fun clickItem(numSelectedPhotos:Int)
+        fun takePhoto()
     }
 
     fun setListener(listener: Listener) {
@@ -95,7 +96,7 @@ class PhotoPickerAdapter(val context:Context, private val selectMorePhotos:Boole
         cardView.setOnClickListener {
             if (position==0){
                 //take photo
-
+                listener!!.takePhoto()
             }else{
                 if (listSelectPhoto.indexOf(position)!=-1){
                     listSelectPhoto.removeAt(listSelectPhoto.indexOf(position))
