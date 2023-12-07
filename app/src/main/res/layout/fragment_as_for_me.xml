@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="8dp"
+    android:orientation="vertical"
+    android:background="#ECEDF5"
+    tools:context=".ui.door.view.FragmentReg">
+
+    <TextView
+        style="@style/small_titel"
+        android:text="@string/reg_fr1_text1" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginRight="16dp"
+        android:hint="@string/reg_fr1_input1">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/reg_fr1_name"
+            android:layout_width="match_parent"
+            android:layout_height="60dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="16dp"
+        android:hint="@string/reg_fr1_input2">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/reg_fr1_last_name"
+            android:layout_width="match_parent"
+            android:layout_height="60dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/textView14"
+        style="@style/small_titel"
+        android:layout_marginTop="12dp"
+        android:text="@string/reg_fr1_text2" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/reg_btn_man"
+            style="@style/button_gender"
+            android:layout_width="wrap_content"
+            android:layout_height="39dp"
+            android:background="@drawable/btn_gender_bg_true"
+            android:paddingLeft="18dp"
+            android:paddingRight="18dp"
+            android:text="@string/reg_fr1_gender1"
+            android:textColor="@color/white" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/reg_btn_women"
+            style="@style/button_gender"
+            android:layout_width="wrap_content"
+            android:layout_height="39dp"
+            android:layout_marginStart="8dp"
+            android:paddingLeft="18dp"
+            android:paddingRight="18dp"
+            android:background="@drawable/btn_gender_bg_false"
+            android:text="@string/reg_fr1_gender2"
+            android:textColor="#5C636F" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView16"
+        style="@style/small_titel"
+        android:layout_marginTop="12dp"
+        android:text="@string/reg_fr1_text3" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+        android:id="@+id/layoutDateInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="16dp"
+        android:hint="@string/reg_fr1_input3">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/reg_fr1_date"
+            android:layout_width="match_parent"
+            android:layout_height="60dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/textView17"
+        style="@style/small_titel"
+        android:layout_marginTop="8dp"
+        android:text="@string/reg_fr1_text4" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+        android:id="@+id/layoutCityInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginRight="16dp"
+        android:hint="@string/reg_fr1_input4">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/reg_fr1_city"
+            android:layout_width="match_parent"
+            android:layout_height="60dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+</LinearLayout>

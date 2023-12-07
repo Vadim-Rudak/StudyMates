@@ -2,13 +2,85 @@
 
     <string name="app_name">SchoolProg</string>
 
+    <!-- Alert Permissions -->
+    <string name="titel_memory">Память</string>
+    <string name="info_memory">Для работы приложения необходим доступ к памяти</string>
 
+    <string name="titel_camera">Камера</string>
+    <string name="info_camera">Для работы приложения необходим доступ к камере</string>
+
+    <string name="btn_permission_ok">Разрешить</string>
+    <string name="btn_permission_cansel">Позже</string>
+
+    <!-- //////////////////////////////////////////////// -->
+
+    <string name="door_text1">Вход</string>
+    <string name="door_text2">Рад видеть вас снова</string>
     <string name="door_in_btn1">Войти</string>
     <string name="door_in_btn2">Зарегистрироваться</string>
-    <string name="door_in_et1">Введите имя</string>
-    <string name="door_in_et2">Введите пароль</string>
+    <string name="door_in_et1">Логин</string>
+    <string name="door_in_et2">Пароль</string>
+    <string name="door_text3">У вас нет аккаунта?</string>
+    <string name="door_text4">Нажми для регистрации</string>
+
 
     <string name="reg_text_btn">Зарегистрироваться</string>
+
+    <string name="registration_titel1">Привет</string>
+    <string name="reg_fr1_text1">Как тебя зовут?</string>
+    <string name="reg_fr1_input1">Имя</string>
+    <string name="reg_fr1_input2">Фамилия</string>
+    <string name="reg_fr1_text2">Пол</string>
+    <string name="reg_fr1_gender1">Мужчина</string>
+    <string name="reg_fr1_gender2">Женщина</string>
+    <string name="reg_fr1_text3">Дата рождения</string>
+    <string name="reg_fr1_input3">Добавь дату рождения</string>
+    <string name="reg_fr1_text4">Город</string>
+    <string name="reg_fr1_input4">Добавь свой город</string>
+
+    <!-- Bottom Sheet Pick City -->
+    <string name="pick_city_titel">Город</string>
+    <string-array name="cityArray">
+        <item>Минск</item>
+        <item>Витебск</item>
+        <item>Глубокое</item>
+        <item>Брест</item>
+        <item>Гомель</item>
+        <item>Полоцк</item>
+    </string-array>
+
+
+    <string name="registration_titel2">Добавь свою школу</string>
+    <string name="reg_fr2_input1">Название города</string>
+    <string name="reg_fr2_input2">Название школы</string>
+    <string name="reg_fr2_input3">Номер класса</string>
+    <string name="reg_fr2_checkBox">Выпускник</string>
+
+    <string name="registration_titel3">Осталось ещё немного</string>
+    <string name="reg_fr3_text1">Придумай логин и пароль</string>
+    <string name="reg_fr3_input1">Логин</string>
+    <string name="reg_fr3_input2">Пароль</string>
+    <string name="reg_fr3_input3">Повторно пароль</string>
+
+    <string name="registration_titel4">Загрузи своё фото</string>
+    <string name="reg_fr4_text1">Нажми на изображение для добавления фото</string>
+
+    <!-- Window Verification -->
+    <string name="win_verification_titel">Верификация</string>
+    <string name="win_verification_text1">После успешной верификации тебе будут доступны все функции приложения. У верифицированных пользователей есть галочка.</string>
+    <string name="win_verification_text2">Сделайте фото</string>
+    <string name="win_verification_text3">Не переживайте: это фото никуда не попадет.\nОно нужно только для верификации.</string>
+    <string name="win_verification_btn1">Открыть камеру</string>
+    <string name="win_verification_btn1_1">Сделать фото</string>
+    <string name="win_verification_btn2">Сделаю позже</string>
+    <string name="win_verification_info_msg">Пожалуйста, подождите</string>
+
+    <string name="win_verification_info_msg_t1">Успех</string>
+    <string name="win_verification_info_msg_info1">верификация проведена успешна</string>
+    <string name="win_verification_info_msg_t2">Ошибка</string>
+    <string name="win_verification_info_msg_info2">ошибка верификации</string>
+
+
     <string name="reg_text_inp1">Логин</string>
     <string name="reg_text_inp2">Пароль</string>
     <string name="reg_text_inp3">Подтвердите пароль</string>
@@ -18,6 +90,9 @@
     <string name="reg_text_inp7">Дата рождения</string>
     <string name="reg_text_inp8">Номер класса</string>
     <string name="reg_name_page">Регистрация нового пользователя</string>
+
+    <string name="registration_btn1">Далее</string>
+    <string name="registration_btn2">Завершить регистрацию</string>
 
 
     <style name="CustomToolbarReg" parent="Theme.AppCompat">
@@ -56,10 +131,40 @@
 
     </style>
 
+    <!-- Menu -->
+    <string name="TopMenuTitel1">Привет,</string>
+    <string name="TopMenuTitel2">Вадим</string>
+
+    <integer-array name="topMenuViewBtn">
+        <item>@drawable/top_menu_btn1</item>
+        <item>@drawable/top_menu_btn2</item>
+        <item>@drawable/top_menu_btn3</item>
+    </integer-array>
+
+    <string-array name="nameTopFun">
+        <item>Учебники</item>
+        <item>Тесты</item>
+        <item>Расписание</item>
+    </string-array>
+
+
     <string name="text_get_books_internet">Подождите, выполняется загрузка списка учебников</string>
     <string name="TopMenu_btn1">Учебники</string>
     <string name="TopMenu_btn2">Тесты</string>
     <string name="TopMenu_btn3">Расписание</string>
+
+    <!-- Окно с настройками -->
+    <string name="TitelSettings">Настройки</string>
+    <string name="btnExitInSettings">Выход</string>
+
+
+    <!-- Окно с профилем пользователя -->
+    <string name="profile_text_num_class">класс</string>
+    <string-array name="roles">
+        <item>Ученик</item>
+        <item>Учитель</item>
+        <item>Администратор</item>
+    </string-array>
 
     <!-- Окно с выбором книг -->
     <string name="text_successful_download">Книга успешно загружена</string>
@@ -197,6 +302,21 @@
     <string name="alrAddLessonEt3">Начало урока</string>
     <string name="alrAddLessonEt4">Номер кабинета</string>
 
+    <!-- Alert Info -->
+    <string name="alrInfoTitel">Ошибка</string>
+    <string name="alrInfoText1">Заполните все поля</string>
+
+    <!-- Alert Loading -->
+    <string name="alrLoadingAuthTitel">Авторизация</string>
+    <string name="alrLoadingAuthText1">Выполняется вход пользователя</string>
+
+    <string name="alrLoadingSendTitel">Завершение регистрации</string>
+    <string name="alrLoadingSendText1">Выполняется отправка данных</string>
+
+
+    <!-- Bottom Sheet Pick Photos -->
+    <string name="pick_photo_btn_cansel">Отменить</string>
+    <string name="pick_photo_btn_add">Добавить фото</string>
 
 
 </resources>

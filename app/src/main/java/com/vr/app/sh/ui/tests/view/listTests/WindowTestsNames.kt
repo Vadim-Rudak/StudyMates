@@ -10,8 +10,6 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.vr.app.sh.R
 import com.vr.app.sh.app.USER_ROLE
-import com.vr.app.sh.data.repository.RoomDB
-import com.vr.app.sh.domain.UseCase.GetUserBD
 import com.vr.app.sh.ui.tests.adapter.PagerTestsAdapter
 import com.vr.app.sh.ui.tests.view.addTest.AddTest
 

@@ -1,10 +1,12 @@
 package com.vr.app.sh.data.api
 
+import android.content.Context
 import com.vr.app.sh.data.model.Book
 import com.vr.app.sh.data.model.Question
 import com.vr.app.sh.data.model.Test
+import com.vr.app.sh.data.repository.CookiePreferences
 import com.vr.app.sh.domain.model.*
-import com.vr.app.sh.ui.door.cookie.MyCookieJar
+import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
@@ -13,7 +15,6 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
-import java.net.URI.create
 import java.util.concurrent.TimeUnit
 
 interface NetworkService {
@@ -24,8 +25,15 @@ interface NetworkService {
     @GET("/authoriz")
     suspend fun auth(): Response<Auth>
 
-    @POST("/reg_mob")
-    suspend fun registration(@Body requestBody: RequestBody): Response<Reg>
+    @POST("/Verification")
+    suspend fun verificationUserInServer(@Query("id") user_id:Int): Response<ResponseBody>
+    @Streaming
+    @GET("/Photo")
+    fun downloadUserPhoto(@Query("id") id:Int): Call<ResponseBody>
+
+    @Multipart
+    @POST("/registration_mobile")
+    suspend fun registration(@Part("user") requestBody: RequestBody,@Part user_photo: MultipartBody.Part?): Response<Reg>
 
     @POST("/add_result")
     suspend fun sendResult(@Body requestBody: RequestBody): Response<ResponseBody>
@@ -55,10 +63,10 @@ interface NetworkService {
 
         var BASE_URL = "http://192.168.100.4:8080"
 
-        fun getInstance() : NetworkService {
+        fun getInstance(context: Context) : NetworkService {
             if (networkService == null){
                 val builder = OkHttpClient.Builder()
-                builder.cookieJar(MyCookieJar())
+                builder.cookieJar(CookiePreferences(context))
                 builder.connectTimeout(60, TimeUnit.SECONDS)
                 builder.readTimeout(60, TimeUnit.SECONDS)
                 builder.writeTimeout(60, TimeUnit.SECONDS)

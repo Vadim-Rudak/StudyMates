@@ -50,8 +50,8 @@ class DomainModule {
     }
 
     @Provides
-    fun provideAuthSetUserInBD(daoUser: DAOUser):SetUserInBD{
-        return SetUserInBD(daoUser = daoUser)
+    fun provideAuthSetUserInBD(userPreferences: UserPreferences):SaveUser{
+        return SaveUser(userPreferences)
     }
 
     @Provides
@@ -72,11 +72,6 @@ class DomainModule {
     @Provides
     fun provideSendResult(internetRepoImpl: InternetRepoImpl):SendResult{
         return SendResult(internetRepoImpl)
-    }
-
-    @Provides
-    fun provideGetUserBD(daoUser: DAOUser):GetUserBD{
-        return GetUserBD(daoUser = daoUser)
     }
 
     @Provides
@@ -107,6 +102,21 @@ class DomainModule {
     @Provides
     fun provideSaveLessonInBD(lessonsDAO:DAOLessons):SaveLessonInBD{
         return SaveLessonInBD(lessonsDAO)
+    }
+
+    @Provides
+    fun provideDownloadPhoto(internetRepoImpl: InternetRepoImpl):DownloadUserPhoto{
+        return DownloadUserPhoto(internetRepoImpl)
+    }
+
+    @Provides
+    fun provideClearUser(userPreferences: UserPreferences):ClearUser{
+        return ClearUser(userPreferences)
+    }
+
+    @Provides
+    fun provideVerificationUser(internetRepoImpl: InternetRepoImpl):VerificationUserInServer{
+        return VerificationUserInServer(internetRepoImpl)
     }
 
 }

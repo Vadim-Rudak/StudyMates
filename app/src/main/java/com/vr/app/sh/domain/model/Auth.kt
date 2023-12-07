@@ -2,29 +2,29 @@ package com.vr.app.sh.domain.model
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import com.vr.app.sh.data.model.User
 
 class Auth {
 
-    constructor(name_user: String?, message: String?, status: Boolean?, role: String?) {
-        this.name_user = name_user
-        this.message = message
+    constructor(status: Boolean?, message: String?, user: User?) {
         this.status = status
-        this.role = role
+        this.message = message
+        this.user = user
     }
-
-    @SerializedName("name_user")
-    @Expose
-    var name_user: String? = null
-
-    @SerializedName("message")
-    @Expose
-    var message: String? = null
 
     @SerializedName("status")
     @Expose
     var status:Boolean? = false
 
-    @SerializedName("role")
+    @SerializedName("message")
     @Expose
-    var role: String? = ""
+    var message: String? = null
+
+    @SerializedName("userMod")
+    @Expose
+    var user: User? = null
+
+    override fun toString(): String {
+        return "Auth(status=$status, message=$message, user=$user)"
+    }
 }

@@ -10,10 +10,9 @@ import com.vr.app.sh.data.model.Question
 import com.vr.app.sh.data.model.Test
 import com.vr.app.sh.data.model.User
 
-@Database(entities = arrayOf(User::class,Book::class,Test::class,Question::class,Lesson::class), version = 1, exportSchema = false)
+@Database(entities = arrayOf(Book::class,Test::class,Question::class,Lesson::class), version = 1, exportSchema = false)
 abstract class RoomDB : RoomDatabase() {
 
-    abstract fun userDAO():DAOUser
     abstract fun bookDAO():DAOBook
     abstract fun testDAO():DAOTest
     abstract fun questionsDAO():DAOQuestions

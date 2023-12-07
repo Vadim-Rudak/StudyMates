@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.vr.app.sh"
@@ -37,6 +37,26 @@ android {
 
 dependencies {
 
+    implementation "dev.chrisbanes.insetter:insetter:0.6.1"
+
+    //anim
+    implementation 'com.airbnb.android:lottie:5.2.0'
+
+    //face
+    implementation ('com.regula.face:api:+@aar') {
+        transitive = true
+    }
+
+    //cameraX
+    def camerax_version = "1.2.2"
+    implementation "androidx.camera:camera-core:${camerax_version}"
+    implementation "androidx.camera:camera-camera2:${camerax_version}"
+    implementation "androidx.camera:camera-lifecycle:${camerax_version}"
+    implementation "androidx.camera:camera-video:${camerax_version}"
+
+    implementation "androidx.camera:camera-view:${camerax_version}"
+    implementation "androidx.camera:camera-extensions:${camerax_version}"
+
     //Add Room
     implementation 'androidx.room:room-runtime:2.3.0'
     implementation "androidx.room:room-ktx:2.3.0"
@@ -62,6 +82,7 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2"
     implementation 'com.google.code.gson:gson:2.8.6'
 
+    implementation 'com.github.bumptech.glide:glide:4.13.2'
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'com.google.android.material:material:1.6.0'

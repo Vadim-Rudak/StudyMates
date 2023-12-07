@@ -49,11 +49,13 @@ class AppModule(val context: Context) {
     @Provides
     fun provideAuthorizationViewModelFactory(
         context: Context,
+        clearUser: ClearUser,
+        downloadUserPhoto: DownloadUserPhoto,
         authorization: Authorization,
-        setUserInBD: SetUserInBD,
+        saveUser: SaveUser,
         internetConnection: InternetConnection
     ): AuthorizationViewModelFactory {
-        return AuthorizationViewModelFactory(context,authorization, setUserInBD, internetConnection)
+        return AuthorizationViewModelFactory(context,clearUser,downloadUserPhoto,authorization, saveUser, internetConnection)
     }
 
     @Provides
@@ -71,28 +73,37 @@ class AppModule(val context: Context) {
         context: Context,
         getListBookInternet: GetAllBookListInternet,
         saveListBookInBD: SaveBookListInBD,
-        internetConnection: InternetConnection
+        internetConnection: InternetConnection,
+        downloadUserPhoto: DownloadUserPhoto
     ):MenuViewModelFactory{
-        return MenuViewModelFactory(context,getListBookInternet, saveListBookInBD, internetConnection)
+        return MenuViewModelFactory(context,getListBookInternet, saveListBookInBD, internetConnection,downloadUserPhoto)
+    }
+
+    @Provides
+    fun provideSettingsViewModelFactory(
+        context: Context,
+        clearUser: ClearUser
+    ):SettingsViewModelFactory{
+        return SettingsViewModelFactory(context,clearUser)
     }
 
     @Provides
     fun provideRegViewModelFactory(
         context: Context,
+        saveUser: SaveUser,
         registration: Registration,
         internetConnection: InternetConnection
     ):RegViewModelFactory{
-        return RegViewModelFactory(context,registration, internetConnection)
+        return RegViewModelFactory(context,saveUser, registration, internetConnection)
     }
 
     @Provides
     fun provideResultViewModelFactory(
         context: Context,
         sendResult: SendResult,
-        getUser: GetUserBD,
         internetConnection: InternetConnection
     ):ResultViewModelFactory{
-        return ResultViewModelFactory(context,sendResult, getUser, internetConnection)
+        return ResultViewModelFactory(context,sendResult, internetConnection)
     }
 
     @Provides
@@ -125,5 +136,18 @@ class AppModule(val context: Context) {
         saveLessonInBD: SaveLessonInBD
     ):TimeTableViewModelFactory{
         return TimeTableViewModelFactory(saveLessonInBD)
+    }
+
+    @Provides
+    fun provideMyProfileViewModelFactory(context: Context):MyProfileViewModelFactory{
+        return MyProfileViewModelFactory(context)
+    }
+
+    @Provides
+    fun provideVerificationViewModelFactory(
+        context: Context,
+        verificationUserInServer: VerificationUserInServer
+    ):VerificationViewModelFactory{
+        return VerificationViewModelFactory(context,verificationUserInServer)
     }
 }
