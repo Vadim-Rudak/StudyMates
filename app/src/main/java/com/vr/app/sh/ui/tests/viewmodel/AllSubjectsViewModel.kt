@@ -11,6 +11,8 @@ import com.vr.app.sh.R
 import com.vr.app.sh.domain.UseCase.GetListTestsInternet
 import com.vr.app.sh.domain.UseCase.InternetConnection
 import com.vr.app.sh.domain.UseCase.SaveTestsInBD
+import com.vr.app.sh.ui.tests.adapter.BtnSubjectAdapter
+import com.vr.app.sh.ui.tests.adapter.SubjectItemDecoration
 import kotlinx.coroutines.*
 
 class AllSubjectsViewModel(private val resources: Resources,val getListTestsInternet: GetListTestsInternet,val saveTestsInBD: SaveTestsInBD,val internetConnection: InternetConnection): ViewModel() {
@@ -18,7 +20,10 @@ class AllSubjectsViewModel(private val resources: Resources,val getListTestsInte
     var statusTestsInBD = MutableLiveData<Boolean>()
     val sub = MutableLiveData<String>()
     val errorMessage = MutableLiveData<String>()
+    val adapter = BtnSubjectAdapter(resources)
+    val decoration = SubjectItemDecoration(resources)
     var job: Job? = null
+
 
     fun getAllTests(subject:String){
         if (internetConnection.UseInternet()){

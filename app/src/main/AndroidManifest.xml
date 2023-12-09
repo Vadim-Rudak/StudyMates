@@ -72,7 +72,7 @@
         <activity
             android:name=".ui.tests.view.subjects.ActivitySubjects"
             android:exported="false"
-            android:theme="@style/Theme.Book" />
+            android:theme="@style/Theme.Menu" />
         <activity
             android:name=".ui.books.view.AddBook"
             android:exported="false"
