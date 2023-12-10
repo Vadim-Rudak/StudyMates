@@ -261,6 +261,9 @@
 
     <!-- Окно добавления теста -->
     <string name="window_input1">Название теста</string>
+    <string name="window_hint1">Введите название теста</string>
+    <string name="window_btn_add_name">Продолжить</string>
+    <string name="window_add_test_error">Введите название теста</string>
     <string name="window_input2">Колличество вопросов</string>
     <string name="window_input_btn">Добавить вопросы</string>
 
