@@ -264,6 +264,16 @@
     <string name="window_hint1">Введите название теста</string>
     <string name="window_btn_add_name">Продолжить</string>
     <string name="window_add_test_error">Введите название теста</string>
+
+    <string name="window_add_questions">Вопросы</string>
+    <string name="window_add_questions_title">Выбран вопрос</string>
+    <string name="window_add_questions_item">Вопрос</string>
+
+    <string name="alert_add_question_title">Добавить вопрос</string>
+    <string name="alert_btn_add1">с выбором ответа</string>
+    <string name="alert_btn_add2">с картинкой</string>
+    <string name="alert_btn_add3">с вводом ответа</string>
+
     <string name="window_input2">Колличество вопросов</string>
     <string name="window_input_btn">Добавить вопросы</string>
 
@@ -341,6 +351,8 @@
     <!-- Bottom Sheet Pick Photos -->
     <string name="pick_photo_btn_cansel">Отменить</string>
     <string name="pick_photo_btn_add">Добавить фото</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

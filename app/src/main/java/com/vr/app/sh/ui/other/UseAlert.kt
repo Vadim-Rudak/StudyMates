@@ -3,11 +3,13 @@ package com.vr.app.sh.ui.other
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
-import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.MutableLiveData
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.vr.app.sh.R
-import com.vr.app.sh.ui.door.view.Authoriz
+import com.vr.app.sh.domain.model.questions.Question
+import com.vr.app.sh.domain.model.questions.TypeQuestion
+import com.vr.app.sh.ui.other.customAlert.addQuestionAlert
 import com.vr.app.sh.ui.other.customAlert.infoAlert
 import com.vr.app.sh.ui.other.customAlert.loadingAlert
 import com.vr.app.sh.ui.other.customAlert.nameTestAlert
@@ -46,6 +48,10 @@ class UseAlert{
 
         fun writeNameTest(intent: Intent):nameTestAlert{
             return nameTestAlert(intent)
+        }
+
+        fun selectAddQuestion(fragmentManager: FragmentManager,typeQ:MutableLiveData<TypeQuestion>){
+            addQuestionAlert(typeQ).show(fragmentManager,"AddQuestions")
         }
 
     }

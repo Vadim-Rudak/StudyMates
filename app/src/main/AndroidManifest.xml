@@ -50,13 +50,9 @@
             android:exported="false"
             android:theme="@style/Theme.Book" />
         <activity
-            android:name=".ui.tests.view.addTest.AddQuestion"
+            android:name=".ui.tests.view.addTest.AddQuestions"
             android:exported="false"
-            android:theme="@style/Theme.Book" />
-        <activity
-            android:name=".ui.tests.view.addTest.AddTest"
-            android:exported="false"
-            android:theme="@style/Theme.Book" />
+            android:theme="@style/Theme.Menu" />
         <activity
             android:name=".ui.tests.view.result.TestResultAct"
             android:exported="false"

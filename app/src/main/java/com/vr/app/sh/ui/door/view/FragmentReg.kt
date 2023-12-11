@@ -89,7 +89,6 @@ class FragmentReg(val numPage:Int) : Fragment() {
                 bottomSheetPickPhoto!!.onePhoto.observe(viewLifecycleOwner){
                     RegistrationInfo.user.photo.path = it
                     Glide.with(requireContext()).load(it).into(pickPhoto)
-
                 }
 
             }

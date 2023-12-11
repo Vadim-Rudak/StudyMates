@@ -12,7 +12,7 @@ import com.vr.app.sh.R
 import com.vr.app.sh.app.USER_ROLE
 import com.vr.app.sh.ui.other.UseAlert.Companion.writeNameTest
 import com.vr.app.sh.ui.tests.adapter.PagerTestsAdapter
-import com.vr.app.sh.ui.tests.view.addTest.AddQuestion
+import com.vr.app.sh.ui.tests.view.addTest.AddQuestions
 
 class WindowTestsNames : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,7 +35,7 @@ class WindowTestsNames : AppCompatActivity() {
             addTest.visibility = View.GONE
         }
         addTest.setOnClickListener {
-            val intent = Intent(this,AddQuestion::class.java).apply {
+            val intent = Intent(this,AddQuestions::class.java).apply {
                 putExtra("subject",subject)
                 putExtra("num_class", tabLayout.selectedTabPosition + 1)
             }

@@ -8,7 +8,7 @@ import com.vr.app.sh.ui.door.view.Verification
 import com.vr.app.sh.ui.menu.view.Settings
 import com.vr.app.sh.ui.menu.view.TopMenu
 import com.vr.app.sh.ui.profile.view.MyProfile
-import com.vr.app.sh.ui.tests.view.addTest.AddQuestion
+import com.vr.app.sh.ui.tests.view.addTest.AddQuestions
 import com.vr.app.sh.ui.tests.view.listTests.FragmentListTests
 import com.vr.app.sh.ui.tests.view.result.TestResultAct
 import com.vr.app.sh.ui.tests.view.subjects.FragmentAllSubjects
@@ -20,7 +20,7 @@ import dagger.Component
 @Component(modules = [AppModule::class,DataModule::class,DomainModule::class])
 interface AppComponent {
     fun injectAddBook(addBook: AddBook)
-    fun injectAddQuestion(addQuestion: AddQuestion)
+    fun injectAddQuestion(addQuestions: AddQuestions)
     fun injectFragmentAllSubjects(fragmentAllSubjects: FragmentAllSubjects)
     fun injectAuthoriz(authoriz: Authoriz)
     fun injectFragmentSubjectsClass(fragmentSubjectsClass: FragmentSubjectsClass)

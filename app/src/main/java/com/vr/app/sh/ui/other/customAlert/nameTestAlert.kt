@@ -8,14 +8,11 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.Button
-import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
 import com.vr.app.sh.R
-import com.vr.app.sh.ui.tests.view.addTest.AddQuestion
 
 class nameTestAlert(private val intent: Intent): DialogFragment() {
 
