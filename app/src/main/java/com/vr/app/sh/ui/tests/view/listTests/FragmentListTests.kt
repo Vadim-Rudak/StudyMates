@@ -15,6 +15,7 @@ import com.vr.app.sh.app.App
 import com.vr.app.sh.ui.base.TestsOneClassViewModelFactory
 import com.vr.app.sh.ui.other.UseAlert
 import com.vr.app.sh.ui.tests.adapter.BtnTestAdapter
+import com.vr.app.sh.ui.tests.adapter.TestItemDecoration
 import com.vr.app.sh.ui.tests.view.test.WindowTest
 import com.vr.app.sh.ui.tests.viewmodel.TestsOneClassViewModel
 
@@ -32,8 +33,8 @@ class FragmentListTests(var num_class:Int) : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_list_tests, container, false) as RecyclerView
-        val layoutManager = LinearLayoutManager(activity)
-        view.layoutManager = layoutManager
+        view.layoutManager = LinearLayoutManager(activity)
+        view.addItemDecoration(TestItemDecoration(requireContext()))
 
         factory.setClass(num_class)
 
