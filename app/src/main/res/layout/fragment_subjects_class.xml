@@ -10,9 +10,11 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/subjects_recycler"
-        android:splitMotionEvents = "false"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:splitMotionEvents="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

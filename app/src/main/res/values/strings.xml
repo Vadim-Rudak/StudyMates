@@ -192,26 +192,47 @@
 
     <!-- Окно выбора предметов -->
     <string name="toolbar_sub">Предметы</string>
-    <string name="name_book_1">Беларуская мова</string>
-    <string name="name_book_2">Беларуская литаратура</string>
-    <string name="name_book_3">Русский язык</string>
-    <string name="name_book_4">Русская литература</string>
-    <string name="name_book_5">История Беларуси</string>
-    <string name="name_book_6">Английский язык</string>
-    <string name="name_book_7">Немецкий язык</string>
-    <string name="name_book_8">Французский язык</string>
-    <string name="name_book_9">Математика</string>
-    <string name="name_book_10">Информатика</string>
-    <string name="name_book_11">Человек и мир</string>
-    <string name="name_book_12">Всемирная история</string>
-    <string name="name_book_13">Обществоведение</string>
-    <string name="name_book_14">География</string>
-    <string name="name_book_15">Биология</string>
-    <string name="name_book_16">Физика</string>
-    <string name="name_book_17">Астрономия</string>
-    <string name="name_book_18">Химия</string>
-    <string name="name_book_19">Трудовое обучение</string>
-    <string name="name_book_20">Доп и мед подготовка</string>
+    <integer-array name="list_subjects_ic">
+        <item>@drawable/sub_language</item>
+        <item>@drawable/sub_lib</item>
+        <item>@drawable/sub_language</item>
+        <item>@drawable/sub_lib</item>
+        <item>@drawable/sub_history</item>
+        <item>@drawable/sub_language</item>
+        <item>@drawable/sub_language</item>
+        <item>@drawable/sub_language</item>
+        <item>@drawable/sub_math</item>
+        <item>@drawable/sub_pc</item>
+        <item>@drawable/sub_history</item>
+        <item>@drawable/sub_people</item>
+        <item>@drawable/sub_geography</item>
+        <item>@drawable/sub_bio</item>
+        <item>@drawable/sub_physics</item>
+        <item>@drawable/sub_stars</item>
+        <item>@drawable/sub_chemistry</item>
+        <item>@drawable/sub_work</item>
+    </integer-array>
+
+    <string-array name="list_subjects">
+        <item>Беларуская мова</item>
+        <item>Беларуская литаратура</item>
+        <item>Русский язык</item>
+        <item>Русская литература</item>
+        <item>История Беларуси</item>
+        <item>Английский язык</item>
+        <item>Немецкий язык</item>
+        <item>Французский язык</item>
+        <item>Математика</item>
+        <item>Информатика</item>
+        <item>Всемирная история</item>
+        <item>Обществоведение</item>
+        <item>География</item>
+        <item>Биология</item>
+        <item>Физика</item>
+        <item>Астрономия</item>
+        <item>Химия</item>
+        <item>Трудовое обучение</item>
+    </string-array>
 
     <!-- Окно вопрса -->
     <string name="text_save_res">Завершить тест</string>
@@ -240,10 +261,14 @@
 
     <!-- Окно добавления теста -->
     <string name="window_input1">Название теста</string>
+    <string name="window_hint1">Введите название теста</string>
+    <string name="window_btn_add_name">Продолжить</string>
+    <string name="window_add_test_error">Введите название теста</string>
     <string name="window_input2">Колличество вопросов</string>
     <string name="window_input_btn">Добавить вопросы</string>
 
     <!-- Окно добавления вопроса -->
+    <string name="window_add_question_title">Добавление вопроса</string>
     <string name="window_add_question_inp1">Введите вопрос</string>
     <string name="window_add_question_inp2">Введите ответ №1</string>
     <string name="window_add_question_inp3">Введите ответ №2</string>

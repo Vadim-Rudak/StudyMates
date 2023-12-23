@@ -3,6 +3,8 @@ package com.vr.app.sh.ui.books.view
 import android.graphics.pdf.PdfRenderer
 import android.os.Bundle
 import android.os.ParcelFileDescriptor
+import android.widget.ImageButton
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
@@ -23,15 +25,18 @@ class ReadPDF : AppCompatActivity() {
         val file = File(path)
         fileDescriptor = ParcelFileDescriptor.open(file,ParcelFileDescriptor.MODE_READ_ONLY)
         pdfRenderer = PdfRenderer(fileDescriptor!!)
+        val btnBack = findViewById<ImageButton>(R.id.btn_back)
+        btnBack.setOnClickListener {
+            finish()
+        }
+        val viewTitle = findViewById<TextView>(R.id.viewTitle)
+        viewTitle.text = file.nameWithoutExtension
 
         val viewPager = findViewById<ViewPager>(R.id.pager_questions)
         viewPager.adapter = ReadPDFadapter(supportFragmentManager,pdfRenderer!!.pageCount,pdfRenderer!!)
 
         val tabLayout = findViewById<TabLayout>(R.id.tabs_open_pdf)
         tabLayout.setupWithViewPager(viewPager)
-//        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-//            tab.text = "Страница ${position}"
-//        }.attach()
     }
 
     override fun onDestroy() {

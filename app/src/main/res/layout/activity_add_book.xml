@@ -5,16 +5,14 @@
     android:splitMotionEvents = "false"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background_activity"
     tools:context=".ui.books.view.AddBook">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar_add_question"
-        style="@style/CustomToolbar"
+    <include
+        layout="@layout/toolbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:title="@string/text_toolbar_AddBook"
-        app:titleTextColor="@color/white" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.mikhaellopez.circularprogressbar.CircularProgressBar
         android:id="@+id/circularProgressBar"
@@ -35,7 +33,7 @@
         android:layout_marginTop="10dp"
         android:text="@string/send_text"
         android:textAlignment="center"
-        android:textColor="#6767bb"
+        android:textColor="@color/first_color"
         android:textSize="30sp"
         android:textStyle="bold"
         android:visibility="gone"
@@ -49,14 +47,14 @@
         android:layout_width="369dp"
         android:layout_height="61dp"
         android:layout_marginTop="120dp"
-        android:backgroundTint="#6767bb"
+        android:backgroundTint="@color/first_color"
         android:ems="10"
         android:maxLength="35"
         android:hint="@string/nameBook_input_hint"
         android:inputType="textPersonName"
         android:minHeight="48dp"
-        android:textColor="#6767bb"
-        android:textColorHint="#6767bb"
+        android:textColor="@color/first_color"
+        android:textColorHint="@color/first_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -95,7 +93,7 @@
         android:layout_height="47dp"
         android:layout_marginTop="28dp"
         android:text="@string/info_to_getBook"
-        android:textColor="#6767bb"
+        android:textColor="@color/first_color"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

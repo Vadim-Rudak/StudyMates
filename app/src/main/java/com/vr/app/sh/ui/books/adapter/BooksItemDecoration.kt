@@ -1,4 +1,4 @@
-package com.vr.app.sh.ui.menu.adapter
+package com.vr.app.sh.ui.books.adapter
 
 import android.content.Context
 import android.graphics.Rect
@@ -6,7 +6,7 @@ import android.util.TypedValue
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
-class MenuItemDecoration(val context: Context) : RecyclerView.ItemDecoration()  {
+class BooksItemDecoration(val context: Context) : RecyclerView.ItemDecoration()  {
 
     var leftItem:Int = 4
     var rightItem:Int = 4

@@ -4,6 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.ImageButton
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager.widget.ViewPager
@@ -19,16 +21,25 @@ class WindowTest : AppCompatActivity() {
 
     @javax.inject.Inject
     lateinit var factory: OpenTestViewModelFactory
-
     lateinit var viewModel:OpenTestViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_window_test)
 
-        setSupportActionBar(findViewById(R.id.toolbar_active_test))
-        val actionBar = supportActionBar
-        actionBar?.title = intent.extras?.getString("name_test")
+        val btnBack = findViewById<ImageButton>(R.id.btn_back)
+        btnBack.setOnClickListener {
+            finish()
+        }
+        val btnDoneTest = findViewById<TextView>(R.id.click_done_test)
+        btnDoneTest.setOnClickListener{
+            val intent = Intent(this,TestResultAct::class.java)
+            intent.putExtra("objTestResult",viewModel.getTestResult())
+            startActivity(intent)
+            finish()
+        }
+        val viewTitle = findViewById<TextView>(R.id.viewTitle)
+        viewTitle.text = intent.extras?.getString("name_test")
         val viewPager = findViewById<ViewPager>(R.id.pager_questions)
         val tabLayout = findViewById<TabLayout>(R.id.tabs_active_test)
         tabLayout.setupWithViewPager(viewPager)
@@ -43,26 +54,5 @@ class WindowTest : AppCompatActivity() {
             viewPager.adapter = ActiveTestAdapter(supportFragmentManager,it,viewModel.arrayAnswers,tabLayout)
         }
 
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_act_test,menu)
-        return super.onCreateOptionsMenu(menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId){
-            R.id.item_menu_res ->{
-                val intent = Intent(this,TestResultAct::class.java)
-                intent.putExtra("objTestResult",viewModel.getTestResult())
-                startActivity(intent)
-                finish()
-                true
-            }
-
-            else ->{
-                super.onOptionsItemSelected(item)
-            }
-        }
     }
 }

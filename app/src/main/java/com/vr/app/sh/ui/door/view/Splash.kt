@@ -42,8 +42,6 @@ class Splash : AppCompatActivity() {
             Intent(this,Authoriz::class.java)
         }
 
-//        val intent = Intent(this,CameraAct::class.java)
-
         job = CoroutineScope(Dispatchers.IO).launch {
             delay(1600)
             startActivity(intent)

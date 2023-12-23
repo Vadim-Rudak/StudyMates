@@ -25,6 +25,7 @@ import com.google.android.material.imageview.ShapeableImageView
 import com.mikhaellopez.circularprogressbar.CircularProgressBar
 import com.vr.app.sh.R
 import com.vr.app.sh.app.App
+import com.vr.app.sh.app.USER_ROLE
 import com.vr.app.sh.data.repository.RegistrationInfo
 import com.vr.app.sh.ui.base.MenuViewModelFactory
 import com.vr.app.sh.ui.books.view.Books
@@ -79,6 +80,8 @@ class TopMenu : AppCompatActivity() {
                 .skipMemoryCache(true)
                 .into(myPhoto)
         }
+
+        USER_ROLE = sharedPrefs.getString("role","USER")
 
         val viewNameUser = findViewById<TextView>(R.id.topMenuUserName)
         if(sharedPrefs.contains("user_name")){

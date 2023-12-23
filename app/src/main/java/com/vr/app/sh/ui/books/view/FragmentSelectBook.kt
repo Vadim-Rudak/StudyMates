@@ -19,13 +19,14 @@ import com.mikhaellopez.circularprogressbar.CircularProgressBar
 import com.vr.app.sh.R
 import com.vr.app.sh.app.App
 import com.vr.app.sh.ui.base.BooksViewModelFactory
+import com.vr.app.sh.ui.books.adapter.BooksItemDecoration
 import com.vr.app.sh.ui.books.adapter.RecyclerViewAdapter
 import com.vr.app.sh.ui.books.viewmodel.SubjectsViewModel
 import com.vr.app.sh.ui.other.UseAlert
 import kotlinx.coroutines.*
 import java.io.File
 
-class FragmentSubjectsClass() : Fragment() {
+class FragmentSelectBook() : Fragment() {
 
     @javax.inject.Inject
     lateinit var factory: BooksViewModelFactory
@@ -47,8 +48,8 @@ class FragmentSubjectsClass() : Fragment() {
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_subjects_class, container, false)
         val recyclerView = view.findViewById<RecyclerView>(R.id.subjects_recycler)
-        val layoutManager = GridLayoutManager(activity, 2)
-        recyclerView.layoutManager = layoutManager
+        recyclerView.layoutManager = GridLayoutManager(activity, 2)
+        recyclerView.addItemDecoration(BooksItemDecoration(requireActivity()))
 
         Log.d("FFF","акт")
         val infoDowload = view.findViewById<TextView>(R.id.textInfoDowload)

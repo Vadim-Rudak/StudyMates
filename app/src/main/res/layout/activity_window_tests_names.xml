@@ -4,26 +4,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:splitMotionEvents = "false"
     android:layout_width="match_parent"
+    android:background="@color/background_activity"
     android:layout_height="match_parent">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
         android:layout_height="wrap_content"
-        android:layout_width="match_parent">
+        android:layout_width="match_parent"
+        android:background="@color/background_activity">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar_active_test"
-            style="@style/CustomToolbar"
-            app:title="@string/TopMenu_btn2"
-            app:titleTextColor="@color/white"></androidx.appcompat.widget.Toolbar>
+        <include layout="@layout/toolbar" />
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabs_active_test"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabTextColor="#6767bb"
-            app:tabIndicatorColor="#6767bb"
+            app:tabTextColor="@color/first_color"
+            app:tabIndicatorColor="@color/first_color"
             app:tabMode="scrollable"
+            android:background="@color/background_activity"
             tools:ignore="SpeakableTextPresentCheck" />
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -62,6 +61,7 @@
         android:layout_margin="16dp"
         android:clickable="true"
         app:srcCompat="@drawable/image_fab"
-        android:backgroundTint="#6767bb"/>
+        app:tint="@null"
+        android:backgroundTint="@color/first_color"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

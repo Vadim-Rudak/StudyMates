@@ -11,21 +11,19 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar_windows_timeTable"
-            style="@style/CustomToolbar"
-            app:title="@string/TopMenu_btn3"
-            app:titleTextColor="@color/white" />
+        android:layout_height="wrap_content"
+        android:elevation="2dp"
+        android:background="@color/background_activity">
+        <include layout="@layout/toolbar" />
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabs_windows_timeTable"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabIndicatorColor="#6767bb"
+            android:background="#ECEDF5"
+            app:tabIndicatorColor="@color/first_color"
             app:tabMode="fixed"
-            app:tabTextColor="#6767bb"
+            app:tabTextColor="@color/first_color"
             tools:ignore="SpeakableTextPresentCheck"></com.google.android.material.tabs.TabLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -48,7 +46,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:layout_margin="16dp"
-        android:backgroundTint="#6767bb"
+        android:backgroundTint="@color/first_color"
         android:clickable="true"
         android:visibility="visible"
         app:tint="@null"
