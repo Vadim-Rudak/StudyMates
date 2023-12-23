@@ -1,7 +1,7 @@
 package com.vr.app.sh.di
 
 import com.vr.app.sh.ui.books.view.AddBook
-import com.vr.app.sh.ui.books.view.FragmentSubjectsClass
+import com.vr.app.sh.ui.books.view.FragmentSelectBook
 import com.vr.app.sh.ui.door.view.Authoriz
 import com.vr.app.sh.ui.door.view.Reg
 import com.vr.app.sh.ui.door.view.Verification
@@ -23,7 +23,7 @@ interface AppComponent {
     fun injectAddQuestion(addQuestion: AddQuestion)
     fun injectFragmentAllSubjects(fragmentAllSubjects: FragmentAllSubjects)
     fun injectAuthoriz(authoriz: Authoriz)
-    fun injectFragmentSubjectsClass(fragmentSubjectsClass: FragmentSubjectsClass)
+    fun injectFragmentSubjectsClass(fragmentSelectBook: FragmentSelectBook)
     fun injectTopMenu(topMenu: TopMenu)
     fun injectReg(reg: Reg)
     fun injectResultTest(testResultAct: TestResultAct)
