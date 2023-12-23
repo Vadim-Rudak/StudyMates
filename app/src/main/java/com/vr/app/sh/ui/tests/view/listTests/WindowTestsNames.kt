@@ -3,6 +3,8 @@ package com.vr.app.sh.ui.tests.view.listTests
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageButton
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -18,6 +20,13 @@ class WindowTestsNames : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_window_tests_names)
+
+        val btnBack = findViewById<ImageButton>(R.id.btn_back)
+        btnBack.setOnClickListener {
+            finish()
+        }
+        val viewTitle = findViewById<TextView>(R.id.viewTitle)
+        viewTitle.text = resources.getString(R.string.TopMenu_btn2)
 
         val viewPager = findViewById<ViewPager2>(R.id.pager_questions)
         viewPager.adapter = PagerTestsAdapter(this)

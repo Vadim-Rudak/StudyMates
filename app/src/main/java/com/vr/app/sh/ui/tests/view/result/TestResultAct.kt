@@ -2,6 +2,7 @@ package com.vr.app.sh.ui.tests.view.result
 
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -28,7 +29,13 @@ class TestResultAct : AppCompatActivity() {
         val viewCorrectAnswer = findViewById<TextView>(R.id.res_text_correct)
         val viewWrongAnswer = findViewById<TextView>(R.id.res_text_err)
         val viewNotAnswer = findViewById<TextView>(R.id.res_text_n)
-        val viewAllResult = findViewById<TextView>(R.id.TextAllResult)
+        val viewAllResult = findViewById<TextView>(R.id.textAllResult)
+        val btnBack = findViewById<ImageButton>(R.id.btn_back)
+        btnBack.setOnClickListener {
+            finish()
+        }
+        val viewTitle = findViewById<TextView>(R.id.viewTitle)
+        viewTitle.text = resources.getString(R.string.toolbar_result)
 
         if (testResult!=null){
             viewCorrectAnswer.text = testResult.num_correct_answer.toString()

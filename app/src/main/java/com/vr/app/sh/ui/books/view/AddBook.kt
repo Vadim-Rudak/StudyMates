@@ -12,6 +12,7 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -46,6 +47,12 @@ class AddBook : AppCompatActivity() {
         val progressbar = findViewById<CircularProgressBar>(R.id.circularProgressBar)
         val textProgress = findViewById<TextView>(R.id.textProgress)
         pathBook = findViewById(R.id.textViewNameFile)
+        val btnBack = findViewById<ImageButton>(R.id.btn_back)
+        btnBack.setOnClickListener {
+            finish()
+        }
+        val viewTitle = findViewById<TextView>(R.id.viewTitle)
+        viewTitle.text = resources.getString(R.string.text_toolbar_AddBook)
 
         viewModel = ViewModelProvider(this,factory)
             .get(AddBookViewModel::class.java)

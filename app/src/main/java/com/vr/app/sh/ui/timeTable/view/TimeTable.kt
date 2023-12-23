@@ -9,6 +9,8 @@ import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.EditText
+import android.widget.ImageButton
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -46,6 +48,12 @@ class TimeTable : AppCompatActivity() {
 
         val viewPager = findViewById<ViewPager2>(R.id.pager_windows_timeTable)
         viewPager.adapter = PagerTimeTableAdapter(this)
+        val btnBack = findViewById<ImageButton>(R.id.btn_back)
+        btnBack.setOnClickListener {
+            finish()
+        }
+        val viewTitle = findViewById<TextView>(R.id.viewTitle)
+        viewTitle.text = resources.getString(R.string.TopMenu_btn3)
 
         val tabLayout = findViewById<TabLayout>(R.id.tabs_windows_timeTable)
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->

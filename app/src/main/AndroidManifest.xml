@@ -48,27 +48,23 @@
         <activity
             android:name=".ui.timeTable.view.TimeTable"
             android:exported="false"
-            android:theme="@style/Theme.Book" />
+            android:theme="@style/Theme.Menu" />
         <activity
             android:name=".ui.tests.view.addTest.AddQuestion"
             android:exported="false"
-            android:theme="@style/Theme.Book" />
-        <activity
-            android:name=".ui.tests.view.addTest.AddTest"
-            android:exported="false"
-            android:theme="@style/Theme.Book" />
+            android:theme="@style/Theme.Menu" />
         <activity
             android:name=".ui.tests.view.result.TestResultAct"
             android:exported="false"
-            android:theme="@style/Theme.Book" />
+            android:theme="@style/Theme.Menu" />
         <activity
             android:name=".ui.tests.view.test.WindowTest"
             android:exported="false"
-            android:theme="@style/Theme.Book" />
+            android:theme="@style/Theme.Menu" />
         <activity
             android:name=".ui.tests.view.listTests.WindowTestsNames"
             android:exported="false"
-            android:theme="@style/Theme.Book" />
+            android:theme="@style/Theme.Menu" />
         <activity
             android:name=".ui.tests.view.subjects.ActivitySubjects"
             android:exported="false"
@@ -76,15 +72,15 @@
         <activity
             android:name=".ui.books.view.AddBook"
             android:exported="false"
-            android:theme="@style/Theme.Book" />
+            android:theme="@style/Theme.Menu" />
         <activity
             android:name=".ui.books.view.ReadPDF"
             android:exported="false"
-            android:theme="@style/Theme.Book" />
+            android:theme="@style/Theme.Menu" />
         <activity
             android:name=".ui.books.view.Books"
             android:exported="false"
-            android:theme="@style/Theme.Book" />
+            android:theme="@style/Theme.Menu" />
         <activity
             android:name=".ui.menu.view.TopMenu"
             android:exported="false"

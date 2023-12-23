@@ -7,6 +7,8 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.ImageButton
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.viewpager2.widget.ViewPager2
@@ -33,9 +35,14 @@ class Books : AppCompatActivity() {
             tab.text = "${(position + 1)} КЛАСС"
         }.attach()
 
-        val fab = findViewById<FloatingActionButton>(R.id.FabBook)
+        val btnBack = findViewById<ImageButton>(R.id.btn_back)
+        btnBack.setOnClickListener {
+            finish()
+        }
+        val viewTitle = findViewById<TextView>(R.id.viewTitle)
+        viewTitle.text = resources.getString(R.string.TopMenu_btn1)
 
-        Log.d("FFF", " 111 $USER_ROLE")
+        val fab = findViewById<FloatingActionButton>(R.id.FabBook)
         if (USER_ROLE == "ADMIN"){
             fab.visibility = View.VISIBLE
         }else{

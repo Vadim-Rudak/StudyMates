@@ -6,6 +6,7 @@ import android.text.TextUtils
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -31,6 +32,13 @@ class AddQuestion : AppCompatActivity() {
         setContentView(R.layout.activity_add_question)
 
         (applicationContext as App).appComponent.injectAddQuestion(this)
+
+        val btnBack = findViewById<ImageButton>(R.id.btn_back)
+        btnBack.setOnClickListener {
+            finish()
+        }
+        val viewTitle = findViewById<TextView>(R.id.viewTitle)
+        viewTitle.text = resources.getString(R.string.window_add_question_title)
 
         val TextQuestion = findViewById<EditText>(R.id.InputQuestion)
         val TextOtv1 = findViewById<EditText>(R.id.InputOtv1)
