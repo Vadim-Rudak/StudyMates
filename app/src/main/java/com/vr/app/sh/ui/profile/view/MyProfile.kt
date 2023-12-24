@@ -2,6 +2,7 @@ package com.vr.app.sh.ui.profile.view
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
@@ -61,6 +62,10 @@ class MyProfile : AppCompatActivity() {
             }
         }
 
+        val btnEditProfile = viewBottomSheet.findViewById<ImageButton>(R.id.btn_edit_profile)
+        btnEditProfile.setOnClickListener{
+            startActivity(Intent(this,EditProfile::class.java))
+        }
         val viewUserName = viewBottomSheet.findViewById<TextView>(R.id.profile_name)
         if (sharedPrefs.contains("user_name")&&sharedPrefs.contains("user_last_name")){
             viewUserName.text = "${sharedPrefs.getString("user_name",null)} ${sharedPrefs.getString("user_last_name",null)}"

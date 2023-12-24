@@ -153,11 +153,6 @@
     <string name="TopMenu_btn2">Тесты</string>
     <string name="TopMenu_btn3">Расписание</string>
 
-    <!-- Окно с настройками -->
-    <string name="TitelSettings">Настройки</string>
-    <string name="btnExitInSettings">Выход</string>
-
-
     <!-- Окно с профилем пользователя -->
     <string name="profile_text_num_class">класс</string>
     <string-array name="roles">
@@ -165,6 +160,26 @@
         <item>Учитель</item>
         <item>Администратор</item>
     </string-array>
+
+    <!-- Окно с редактированием пользователя -->
+    <string name="editProfileTitle">Редактирование профиля</string>
+    <string name="editProfileInput1">Имя</string>
+    <string name="editProfileInput2">Фамилия</string>
+    <string name="editProfileInput3">Дата рождения</string>
+    <string name="editProfileInput4">Город проживания</string>
+    <string name="editProfileBtnSave">Обновить</string>
+
+    <string name="editProfileTitle2">Редактирование</string>
+    <string name="editProfileAuthInp1">Логин</string>
+    <string name="editProfileAuthInp2">Новый пароль</string>
+    <string name="editProfileAuthInp3">Ещё раз пароль</string>
+
+    <string name="editProfileTitle3">Редактирование школы</string>
+    <string name="editProfileInp1">Название</string>
+    <string name="editProfileInp2">Город расположения</string>
+    <string name="editProfileInp3">Класс</string>
+    <string name="editProfileInp4">Закончил школу</string>
+    <string name="editProfileSchoolBtn">Обновить</string>
 
     <!-- Окно с выбором книг -->
     <string name="text_successful_download">Книга успешно загружена</string>

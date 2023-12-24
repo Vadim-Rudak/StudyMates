@@ -25,14 +25,22 @@
         android:theme="@style/Theme.SH"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ui.profile.view.EditSchoolInfo"
+            android:exported="false"
+            android:theme="@style/Theme.Menu"/>
+        <activity
+            android:name=".ui.profile.view.EditAuthInfo"
+            android:exported="false"
+            android:theme="@style/Theme.Menu"/>
+        <activity
+            android:name=".ui.profile.view.EditProfile"
+            android:exported="false"
+            android:theme="@style/Theme.Menu" />
+        <activity
             android:name=".ui.other.photoPicker.CameraAct"
             android:exported="false"
             android:hardwareAccelerated="true"
-            android:theme="@style/Theme.Camera"/>
-        <activity
-            android:name=".ui.menu.view.Settings"
-            android:exported="false"
-            android:theme="@style/Theme.Menu" />
+            android:theme="@style/Theme.Camera" />
         <activity
             android:name=".ui.door.view.Verification"
             android:exported="false"

@@ -84,6 +84,11 @@
         <item name="android:stateListAnimator">@null</item>
     </style>
 
+    <style name="Image_Style_In_Edit_Profile">
+        <item name="cornerSize">50%</item>
+        <item name="cornerFamily">rounded</item>
+    </style>
+
     <style name="ImageStyle_Corners_Rounded">
         <item name="cornerSize">20dp</item>
         <item name="cornerFamily">rounded</item>
