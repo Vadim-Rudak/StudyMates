@@ -21,12 +21,13 @@ class WindowTestsNames : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_window_tests_names)
 
+        val subject = intent.extras?.getString("sub")
         val btnBack = findViewById<ImageButton>(R.id.btn_back)
         btnBack.setOnClickListener {
             finish()
         }
         val viewTitle = findViewById<TextView>(R.id.viewTitle)
-        viewTitle.text = resources.getString(R.string.TopMenu_btn2)
+        viewTitle.text = subject
 
         val viewPager = findViewById<ViewPager2>(R.id.pager_questions)
         viewPager.adapter = PagerTestsAdapter(this)
@@ -36,7 +37,6 @@ class WindowTestsNames : AppCompatActivity() {
             tab.text = "${(position + 1)} КЛАСС"
         }.attach()
 
-        val subject = intent.extras?.getString("sub")
         val addTest = findViewById<FloatingActionButton>(R.id.AddTest)
         if (USER_ROLE == "ADMIN"){
             addTest.visibility = View.VISIBLE

@@ -15,10 +15,13 @@ class TestItemDecoration(val context: Context) : RecyclerView.ItemDecoration()  
 
     override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
         val itemPosition = parent.getChildAdapterPosition(view)
+        val lastItem = state.itemCount - 1
         outRect.top = getSize(
-            if (itemPosition == 0||itemPosition == 1){ 8 }else{ topItem }
+            if (itemPosition == 0){ 8 }else{ topItem }
         )
-        outRect.bottom = getSize(bottomItem)
+        outRect.bottom = getSize(
+            if (itemPosition == lastItem){16}else{bottomItem}
+        )
         outRect.left = getSize(leftItem)
         outRect.right = getSize(rightItem)
     }
