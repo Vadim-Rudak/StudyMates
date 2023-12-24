@@ -2,6 +2,7 @@ package com.vr.app.sh.di
 
 import android.content.Context
 import com.vr.app.sh.data.api.NetworkService
+import com.vr.app.sh.data.repository.CookiePreferences
 import com.vr.app.sh.data.repository.DAOBook
 import com.vr.app.sh.data.repository.DAOLessons
 import com.vr.app.sh.data.repository.DAOQuestions
@@ -18,6 +19,11 @@ class DataModule {
     @Provides
     fun provideInternetRepoImpl(context: Context): InternetRepoImpl {
         return InternetRepoImpl(context,NetworkService.getInstance(context))
+    }
+
+    @Provides
+    fun provideCookiePreferences(context: Context):CookiePreferences{
+        return CookiePreferences(context)
     }
 
     @Provides

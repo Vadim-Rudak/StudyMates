@@ -49,13 +49,13 @@ class AppModule(val context: Context) {
     @Provides
     fun provideAuthorizationViewModelFactory(
         context: Context,
-        clearUser: ClearUser,
+        cleanUser: CleanUser,
         downloadUserPhoto: DownloadUserPhoto,
         authorization: Authorization,
         saveUser: SaveUser,
         internetConnection: InternetConnection
     ): AuthorizationViewModelFactory {
-        return AuthorizationViewModelFactory(context,clearUser,downloadUserPhoto,authorization, saveUser, internetConnection)
+        return AuthorizationViewModelFactory(context,cleanUser,downloadUserPhoto,authorization, saveUser, internetConnection)
     }
 
     @Provides
@@ -74,17 +74,11 @@ class AppModule(val context: Context) {
         getListBookInternet: GetAllBookListInternet,
         saveListBookInBD: SaveBookListInBD,
         internetConnection: InternetConnection,
-        downloadUserPhoto: DownloadUserPhoto
+        downloadUserPhoto: DownloadUserPhoto,
+        cleanUser: CleanUser,
+        cleanCookie: CleanCookie
     ):MenuViewModelFactory{
-        return MenuViewModelFactory(context,getListBookInternet, saveListBookInBD, internetConnection,downloadUserPhoto)
-    }
-
-    @Provides
-    fun provideSettingsViewModelFactory(
-        context: Context,
-        clearUser: ClearUser
-    ):SettingsViewModelFactory{
-        return SettingsViewModelFactory(context,clearUser)
+        return MenuViewModelFactory(context,getListBookInternet, saveListBookInBD, internetConnection,downloadUserPhoto,cleanUser, cleanCookie)
     }
 
     @Provides

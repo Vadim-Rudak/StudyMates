@@ -6,11 +6,12 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.vr.app.sh.domain.repository.CookieRepo
 import okhttp3.Cookie
 import okhttp3.CookieJar
 import okhttp3.HttpUrl
 
-class CookiePreferences(context: Context) : CookieJar {
+class CookiePreferences(context: Context) : CookieJar,CookieRepo {
 
     private val PREFS_NAME = "cookie"
     val sharedPref: SharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
@@ -34,5 +35,10 @@ class CookiePreferences(context: Context) : CookieJar {
         val arrayInString = Gson().toJson(cookies)
         editor.putString("cookie",arrayInString)
         editor!!.commit()
+    }
+
+    @SuppressLint("ApplySharedPref")
+    override fun clean() {
+        sharedPref.edit().clear().commit()
     }
 }

@@ -110,8 +110,13 @@ class DomainModule {
     }
 
     @Provides
-    fun provideClearUser(userPreferences: UserPreferences):ClearUser{
-        return ClearUser(userPreferences)
+    fun provideClearUser(userPreferences: UserPreferences):CleanUser{
+        return CleanUser(userPreferences)
+    }
+
+    @Provides
+    fun provideClearCookie(cookiePreferences: CookiePreferences):CleanCookie{
+        return CleanCookie(cookiePreferences)
     }
 
     @Provides

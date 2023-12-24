@@ -10,7 +10,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.vr.app.sh.R
 import com.vr.app.sh.domain.UseCase.Authorization
-import com.vr.app.sh.domain.UseCase.ClearUser
+import com.vr.app.sh.domain.UseCase.CleanUser
 import com.vr.app.sh.domain.UseCase.DownloadUserPhoto
 import com.vr.app.sh.domain.UseCase.InternetConnection
 import com.vr.app.sh.domain.UseCase.SaveUser
@@ -28,7 +28,7 @@ import java.io.IOException
 import java.io.InputStream
 import java.io.OutputStream
 
-class AuthViewModel(private val resources: Resources,private val clearUser: ClearUser,private val downloadUserPhoto: DownloadUserPhoto,val authorization: Authorization, private val saveUser: SaveUser, val internetConnection: InternetConnection): ViewModel() {
+class AuthViewModel(private val resources: Resources, private val cleanUser: CleanUser, private val downloadUserPhoto: DownloadUserPhoto, val authorization: Authorization, private val saveUser: SaveUser, val internetConnection: InternetConnection): ViewModel() {
 
     val loadingAlert = UseAlert.loading(
         resources.getString(R.string.alrLoadingAuthTitel),
@@ -40,7 +40,7 @@ class AuthViewModel(private val resources: Resources,private val clearUser: Clea
     var job: Job? = null
 
     fun authorization(context: Context,fragmentManager: FragmentManager,login:String,password:String){
-        clearUser.execute()
+        cleanUser.execute()
         if (internetConnection.UseInternet()){
             if (!TextUtils.isEmpty(login.trim())&&!TextUtils.isEmpty(password.trim())){
                 loadingAlert.show(fragmentManager,"AlertLoading")

@@ -61,7 +61,7 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:background="#00FFFFFF"
-            app:srcCompat="@drawable/baseline_menu_24" />
+            app:srcCompat="@drawable/logout" />
 
     </LinearLayout>
 
