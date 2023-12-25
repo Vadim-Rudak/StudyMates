@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.vr.app.sh.R
-import com.vr.app.sh.data.repository.RegistrationInfo
+import com.vr.app.sh.ui.other.RegistrationInfo
 
 class CityAdapter : RecyclerView.Adapter<CityAdapter.ViewHolder>() {
 

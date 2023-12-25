@@ -8,8 +8,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.gson.Gson
 import com.vr.app.sh.R
-import com.vr.app.sh.data.model.Question
+import com.vr.app.sh.domain.model.Question
 import com.vr.app.sh.domain.UseCase.*
+import com.vr.app.sh.ui.other.InternetConnection
 import kotlinx.coroutines.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody
@@ -17,12 +18,12 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONObject
 
 class AddTestViewModel(
-    private val resources: Resources,
+    private val context: Context,
     val getListTestsInternet: GetListTestsInternet,
     val saveTestsInBD: SaveTestsInBD,
     val sendTestInfo: SendTestInfo,
     val sendQuestions: SendQuestions,
-    val internetConnection: InternetConnection
+    private val internetConnect:Boolean
     ): ViewModel() {
 
     var listQuestions:ArrayList<Question> = ArrayList()
@@ -31,7 +32,7 @@ class AddTestViewModel(
     var job: Job? = null
 
     fun sendTestWithQuestions(name_subject:String,num_class:Int,name_test: String){
-        if (internetConnection.UseInternet()){
+        if (internetConnect){
             vizibleProgressBar.value = true
             job = CoroutineScope(Dispatchers.IO).launch {
                 val response = sendTestInfo.execute(getJSONTest(name_subject,num_class, name_test,listQuestions.size))
@@ -48,12 +49,12 @@ class AddTestViewModel(
                         }
                     } else {
                         vizibleProgressBar.value = false
-                        errorMessage.value = resources.getString(R.string.alrErrorSendTest)
+                        errorMessage.value = context.resources.getString(R.string.alrErrorSendTest)
                     }
                 }
             }
         }else{
-            errorMessage.value = resources.getString(R.string.alrNotInternetConnection)
+            errorMessage.value = context.resources.getString(R.string.alrNotInternetConnection)
         }
     }
 

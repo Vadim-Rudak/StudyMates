@@ -12,9 +12,9 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayout
 import com.vr.app.sh.R
-import com.vr.app.sh.data.model.Question
+import com.vr.app.sh.domain.model.Question
 
-class FragmentQuestion(var num_question:Int,var listQuestions: List<Question>, var info_questions:Array<Int>,var tabLayout: TabLayout) : Fragment(), View.OnClickListener {
+class FragmentQuestion(var num_question:Int, var listQuestions: List<Question>, var info_questions:Array<Int>, var tabLayout: TabLayout) : Fragment(), View.OnClickListener {
 
     lateinit var textQuestion:TextView
     lateinit var btnOtv1:Button

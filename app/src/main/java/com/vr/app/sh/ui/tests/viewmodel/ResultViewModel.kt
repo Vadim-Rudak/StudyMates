@@ -4,9 +4,8 @@ import android.content.res.Resources
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.vr.app.sh.R
-import com.vr.app.sh.data.model.ResultTest
-import com.vr.app.sh.domain.UseCase.InternetConnection
 import com.vr.app.sh.domain.UseCase.SendResult
+import com.vr.app.sh.domain.model.ResultTest
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -19,16 +18,16 @@ import org.json.JSONObject
 
 class ResultViewModel(
     private val resources: Resources,
-    private val internetConnection: InternetConnection,
-    private val sendResult: SendResult
+    private val sendResult: SendResult,
+    private val internetConnect:Boolean
 ): ViewModel() {
 
     val status_send = MutableLiveData<Boolean>()
     val errorMessage = MutableLiveData<String>()
     var job: Job? = null
 
-    fun sendResult(result:ResultTest){
-        if (internetConnection.UseInternet()){
+    fun sendResult(result: ResultTest){
+        if (internetConnect){
             job = CoroutineScope(Dispatchers.IO).launch {
                 val response = sendResult.execute(JSONResult(result))
 
@@ -45,7 +44,7 @@ class ResultViewModel(
         }
     }
 
-    fun JSONResult(resultTest:ResultTest): RequestBody {
+    fun JSONResult(resultTest: ResultTest): RequestBody {
         val jsonObject = JSONObject()
         jsonObject.put("idtest", resultTest.test_id)
         //jsonObject.put("username", getUserBD.execute().user_name)

@@ -9,37 +9,51 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.vr.app.sh.R
-import com.vr.app.sh.data.model.Book
-import com.vr.app.sh.data.repository.RoomDB
 import com.vr.app.sh.domain.UseCase.GetBookFile
 import com.vr.app.sh.domain.UseCase.GetListBookInClass
-import com.vr.app.sh.domain.UseCase.InternetConnection
+import com.vr.app.sh.domain.model.Book
 import com.vr.app.sh.ui.books.adapter.RecyclerViewAdapter
 import com.vr.app.sh.ui.books.view.AddBook
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collectIndexed
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.io.*
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
+import java.io.InputStream
+import java.io.OutputStream
 
-class SubjectsViewModel(private val resources: Resources,val getBookFile: GetBookFile, val getListBookInClass: GetListBookInClass,val internetConnection: InternetConnection,val numClass:Int): ViewModel() {
+class SubjectsViewModel(private val resources: Resources,val getBookFile: GetBookFile, val getListBookInClass: GetListBookInClass,val numClass:Int,private val internetConnect:Boolean): ViewModel() {
 
     val download = MutableLiveData<Boolean>()
     var saveFileInMemory:Boolean = false
     var progress = MutableLiveData<Long>()
     val adapter = RecyclerViewAdapter()
     val errorMessage = MutableLiveData<String>()
-    var listBooks: LiveData<List<Book>> = getListBookInClass.execute(numClass)
-    //var job: Job? = null
+    var listBooks = MutableLiveData<List<Book>>()
+    var job: Job? = null
+
+    init {
+        fetchListBooks()
+    }
+
+    private fun fetchListBooks () {
+        job = CoroutineScope(Dispatchers.IO).launch {
+            getListBookInClass.execute(numClass).collectIndexed { index, value ->
+                listBooks.postValue(value)
+            }
+        }
+    }
 
 
     fun editMenu(context: Context){
@@ -85,7 +99,7 @@ class SubjectsViewModel(private val resources: Resources,val getBookFile: GetBoo
     }
 
     fun downloadFile(path: String,id_book:Int) {
-        if(internetConnection.UseInternet()){
+        if(internetConnect){
             download.postValue(true)
             Log.d("downloadFile", "start")
             val call = getBookFile.execute(id_book)
@@ -168,8 +182,8 @@ class SubjectsViewModel(private val resources: Resources,val getBookFile: GetBoo
         }
     }
 
-//    override fun onCleared() {
-//        super.onCleared()
-//        job?.cancel()
-//    }
+    override fun onCleared() {
+        super.onCleared()
+        job?.cancel()
+    }
 }

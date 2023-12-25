@@ -1,15 +1,15 @@
 package com.vr.app.sh.di
 
 import android.content.Context
+import com.vr.app.sh.data.api.InternetRepoImpl
 import com.vr.app.sh.data.api.NetworkService
-import com.vr.app.sh.data.repository.CookiePreferences
-import com.vr.app.sh.data.repository.DAOBook
-import com.vr.app.sh.data.repository.DAOLessons
-import com.vr.app.sh.data.repository.DAOQuestions
-import com.vr.app.sh.data.repository.DAOTest
-import com.vr.app.sh.data.repository.InternetRepoImpl
-import com.vr.app.sh.data.repository.RoomDB
-import com.vr.app.sh.data.repository.UserPreferences
+import com.vr.app.sh.data.storage.room.RoomDB
+import com.vr.app.sh.data.storage.room.repo.BookRepoImpl
+import com.vr.app.sh.data.storage.room.repo.LessonsRepoImpl
+import com.vr.app.sh.data.storage.room.repo.QuestionsRepoImpl
+import com.vr.app.sh.data.storage.room.repo.TestRepoImpl
+import com.vr.app.sh.data.storage.sharedprefs.CookiePreferences
+import com.vr.app.sh.data.storage.sharedprefs.UserPreferences
 import dagger.Module
 import dagger.Provides
 
@@ -18,11 +18,11 @@ class DataModule {
 
     @Provides
     fun provideInternetRepoImpl(context: Context): InternetRepoImpl {
-        return InternetRepoImpl(context,NetworkService.getInstance(context))
+        return InternetRepoImpl(context, NetworkService.getInstance(context))
     }
 
     @Provides
-    fun provideCookiePreferences(context: Context):CookiePreferences{
+    fun provideCookiePreferences(context: Context): CookiePreferences {
         return CookiePreferences(context)
     }
 
@@ -32,23 +32,28 @@ class DataModule {
     }
 
     @Provides
-    fun provideBookRepoImpl(context: Context):DAOBook{
-        return RoomDB.getDatabase(context = context).bookDAO()
+    fun provideRoom(context: Context):RoomDB{
+        return RoomDB.getDatabase(context = context)
     }
 
     @Provides
-    fun provideTestsRepoImpl(context: Context): DAOTest {
-        return RoomDB.getDatabase(context = context).testDAO()
+    fun provideBookRepoImpl(roomDB: RoomDB): BookRepoImpl {
+        return BookRepoImpl(roomDB.bookDAO())
     }
 
     @Provides
-    fun provideDAOQuestions(context: Context): DAOQuestions {
-        return RoomDB.getDatabase(context = context).questionsDAO()
+    fun provideLessonsRepoImpl(roomDB: RoomDB):LessonsRepoImpl{
+        return LessonsRepoImpl(roomDB.lessonsDAO())
     }
 
     @Provides
-    fun provideDAOLessons(context: Context): DAOLessons {
-        return RoomDB.getDatabase(context = context).lessonsDAO()
+    fun provideQuestionsRepoImpl(roomDB: RoomDB):QuestionsRepoImpl{
+        return QuestionsRepoImpl(roomDB.questionsDAO())
+    }
+
+    @Provides
+    fun provideTestRepoImpl(roomDB: RoomDB):TestRepoImpl{
+        return TestRepoImpl(roomDB.testDAO())
     }
 
 }

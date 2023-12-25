@@ -9,7 +9,7 @@ import androidx.annotation.RequiresApi
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.vr.app.sh.R
-import com.vr.app.sh.data.model.Lesson
+import com.vr.app.sh.domain.model.Lesson
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.LocalTime

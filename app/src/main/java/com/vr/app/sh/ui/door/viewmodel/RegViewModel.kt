@@ -8,11 +8,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.gson.Gson
 import com.vr.app.sh.R
-import com.vr.app.sh.data.repository.RegistrationInfo
-import com.vr.app.sh.domain.UseCase.InternetConnection
 import com.vr.app.sh.domain.UseCase.Registration
 import com.vr.app.sh.domain.UseCase.SaveUser
-import com.vr.app.sh.ui.other.UseAlert
+import com.vr.app.sh.ui.other.RegistrationInfo
 import com.vr.app.sh.ui.other.UseAlert.Companion.loading
 import kotlinx.coroutines.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -22,7 +20,7 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
 import java.net.URLConnection
 
-class RegViewModel(private val resources: Resources,private val saveUser: SaveUser,val registration: Registration, val internetConnection: InternetConnection): ViewModel() {
+class RegViewModel(private val resources: Resources,private val saveUser: SaveUser,val registration: Registration,private val internetConnect:Boolean): ViewModel() {
 
     val photoPath = "${Environment.getExternalStorageDirectory().path}/SchoolProg/MyProfile"
     val loadingAlert = loading(resources.getString(R.string.alrLoadingSendTitel),resources.getString(R.string.alrLoadingSendText1))
@@ -36,7 +34,7 @@ class RegViewModel(private val resources: Resources,private val saveUser: SaveUs
     }
 
     fun registration(fragmentManager: FragmentManager,){
-        if (internetConnection.UseInternet()){
+        if (internetConnect){
 
             loadingAlert.show(fragmentManager,"AlertLoading")
 

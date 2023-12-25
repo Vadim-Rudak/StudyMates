@@ -19,7 +19,7 @@ import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.vr.app.sh.R
-import com.vr.app.sh.data.repository.RegistrationInfo
+import com.vr.app.sh.ui.other.RegistrationInfo
 import com.vr.app.sh.ui.other.cityPicker.BottomSheetPickCity
 import com.vr.app.sh.ui.other.photoPicker.BottomSheetPickPhoto
 

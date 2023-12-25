@@ -9,7 +9,7 @@ class TimeTableViewModelFactory(
     private val saveLessonInBD: SaveLessonInBD
 ): ViewModelProvider.Factory {
 
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return if (modelClass.isAssignableFrom(TimeTableViewModel::class.java)) {
             TimeTableViewModel(saveLessonInBD) as T
         } else {

@@ -11,7 +11,7 @@ class MyProfileViewModelFactory(
     val context: Context
 ): ViewModelProvider.Factory {
 
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return if (modelClass.isAssignableFrom(MyProfileViewModel::class.java)) {
             MyProfileViewModel(context.resources) as T
         } else {

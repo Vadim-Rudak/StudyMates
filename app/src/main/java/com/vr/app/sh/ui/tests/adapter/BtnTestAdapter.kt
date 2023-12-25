@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.vr.app.sh.R
-import com.vr.app.sh.data.model.Test
+import com.vr.app.sh.domain.model.Test
 
 class BtnTestAdapter : RecyclerView.Adapter<BtnTestAdapter.ViewHolder>() {
     private var listener: Listener? = null

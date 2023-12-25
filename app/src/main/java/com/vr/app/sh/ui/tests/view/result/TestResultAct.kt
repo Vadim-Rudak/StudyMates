@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.vr.app.sh.R
 import com.vr.app.sh.app.App
-import com.vr.app.sh.data.model.ResultTest
+import com.vr.app.sh.domain.model.ResultTest
 import com.vr.app.sh.ui.base.ResultViewModelFactory
 import com.vr.app.sh.ui.other.UseAlert
 import com.vr.app.sh.ui.tests.viewmodel.ResultViewModel

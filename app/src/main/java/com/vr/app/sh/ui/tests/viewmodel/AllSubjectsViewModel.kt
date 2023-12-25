@@ -1,21 +1,20 @@
 package com.vr.app.sh.ui.tests.viewmodel
 
-import android.app.AlertDialog
-import android.content.Context
-import android.content.DialogInterface
 import android.content.res.Resources
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.vr.app.sh.R
 import com.vr.app.sh.domain.UseCase.GetListTestsInternet
-import com.vr.app.sh.domain.UseCase.InternetConnection
 import com.vr.app.sh.domain.UseCase.SaveTestsInBD
 import com.vr.app.sh.ui.tests.adapter.BtnSubjectAdapter
 import com.vr.app.sh.ui.tests.adapter.SubjectItemDecoration
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-class AllSubjectsViewModel(private val resources: Resources,val getListTestsInternet: GetListTestsInternet,val saveTestsInBD: SaveTestsInBD,val internetConnection: InternetConnection): ViewModel() {
+class AllSubjectsViewModel(private val resources: Resources,val getListTestsInternet: GetListTestsInternet,val saveTestsInBD: SaveTestsInBD,private val internetConnect:Boolean): ViewModel() {
 
     var statusTestsInBD = MutableLiveData<Boolean>()
     val sub = MutableLiveData<String>()
@@ -26,7 +25,7 @@ class AllSubjectsViewModel(private val resources: Resources,val getListTestsInte
 
 
     fun getAllTests(subject:String){
-        if (internetConnection.UseInternet()){
+        if (internetConnect){
             sub.value = subject
             job = CoroutineScope(Dispatchers.IO).launch {
                 withContext(Dispatchers.Main){

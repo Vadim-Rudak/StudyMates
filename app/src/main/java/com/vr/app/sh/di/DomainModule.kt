@@ -1,7 +1,8 @@
 package com.vr.app.sh.di
 
-import android.content.Context
-import com.vr.app.sh.data.repository.*
+import com.vr.app.sh.data.api.InternetRepoImpl
+import com.vr.app.sh.data.storage.room.repo.*
+import com.vr.app.sh.data.storage.sharedprefs.*
 import com.vr.app.sh.domain.UseCase.*
 import dagger.Module
 import dagger.Provides
@@ -10,13 +11,8 @@ import dagger.Provides
 class DomainModule {
 
     @Provides
-    fun provideInternetConnection(context: Context):InternetConnection{
-        return InternetConnection(context = context)
-    }
-
-    @Provides
-    fun provideSaveBookListInBD(daoBook: DAOBook):SaveBookListInBD{
-        return SaveBookListInBD(daoBook)
+    fun provideSaveBookListInBD(bookRepoImpl: BookRepoImpl):SaveBookListInBD{
+        return SaveBookListInBD(bookRepoImpl)
     }
 
     @Provides
@@ -25,8 +21,8 @@ class DomainModule {
     }
 
     @Provides
-    fun provideSaveTestsInBD(daoTest: DAOTest):SaveTestsInBD{
-        return SaveTestsInBD(daoTest)
+    fun provideSaveTestsInBD(testRepoImpl: TestRepoImpl):SaveTestsInBD{
+        return SaveTestsInBD(testRepoImpl)
     }
 
     @Provides
@@ -55,8 +51,8 @@ class DomainModule {
     }
 
     @Provides
-    fun provideGetListBookInClass(daoBook: DAOBook):GetListBookInClass{
-        return GetListBookInClass(daoBook)
+    fun provideGetListBookInClass(bookRepoImpl: BookRepoImpl):GetListBookInClass{
+        return GetListBookInClass(bookRepoImpl)
     }
 
     @Provides
@@ -75,8 +71,8 @@ class DomainModule {
     }
 
     @Provides
-    fun provideGetListTestsInClass(daoTest: DAOTest):GetListTestsInClass{
-        return GetListTestsInClass(daoTest)
+    fun provideGetListTestsInClass(testRepoImpl: TestRepoImpl):GetListTestsInClass{
+        return GetListTestsInClass(testRepoImpl)
     }
 
     @Provides
@@ -85,23 +81,23 @@ class DomainModule {
     }
 
     @Provides
-    fun provideSaveQuestionsInBD(questionsDAO:DAOQuestions):SaveQuestionsInBD{
-        return SaveQuestionsInBD(questionsDAO)
+    fun provideSaveQuestionsInBD(questionsRepoImpl: QuestionsRepoImpl):SaveQuestionsInBD{
+        return SaveQuestionsInBD(questionsRepoImpl)
     }
 
     @Provides
-    fun provideGetQuestionsFromBD(questionsDAO:DAOQuestions):GetListQuestionsBD{
-        return GetListQuestionsBD(questionsRepo = questionsDAO)
+    fun provideGetQuestionsFromBD(questionsRepoImpl: QuestionsRepoImpl):GetListQuestionsBD{
+        return GetListQuestionsBD(questionsRepoImpl)
     }
 
     @Provides
-    fun provideGetLessonsInDay(lessonsDAO:DAOLessons):GetLessonsInDay{
-        return GetLessonsInDay(lessonsDAO)
+    fun provideGetLessonsInDay(lessonsRepoImpl: LessonsRepoImpl):GetLessonsInDay{
+        return GetLessonsInDay(lessonsRepoImpl)
     }
 
     @Provides
-    fun provideSaveLessonInBD(lessonsDAO:DAOLessons):SaveLessonInBD{
-        return SaveLessonInBD(lessonsDAO)
+    fun provideSaveLessonInBD(lessonsRepoImpl: LessonsRepoImpl):SaveLessonInBD{
+        return SaveLessonInBD(lessonsRepoImpl)
     }
 
     @Provides
@@ -123,5 +119,4 @@ class DomainModule {
     fun provideVerificationUser(internetRepoImpl: InternetRepoImpl):VerificationUserInServer{
         return VerificationUserInServer(internetRepoImpl)
     }
-
 }

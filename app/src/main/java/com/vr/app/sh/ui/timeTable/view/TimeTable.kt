@@ -24,7 +24,7 @@ import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import com.vr.app.sh.R
 import com.vr.app.sh.app.App
-import com.vr.app.sh.data.model.Lesson
+import com.vr.app.sh.domain.model.Lesson
 import com.vr.app.sh.ui.base.DayViewModelFactory
 import com.vr.app.sh.ui.base.TimeTableViewModelFactory
 import com.vr.app.sh.ui.timeTable.adapter.PagerTimeTableAdapter

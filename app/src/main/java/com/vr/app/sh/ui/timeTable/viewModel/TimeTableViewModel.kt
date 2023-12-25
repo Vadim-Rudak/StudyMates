@@ -15,7 +15,7 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import com.vr.app.sh.R
-import com.vr.app.sh.data.model.Lesson
+import com.vr.app.sh.domain.model.Lesson
 import com.vr.app.sh.domain.UseCase.SaveLessonInBD
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -31,7 +31,7 @@ class TimeTableViewModel(val saveLessonInBD: SaveLessonInBD):ViewModel() {
 
 
     fun openAlertAddLesson(context: Context){
-        val objLesson = Lesson(id=0)
+        val objLesson = Lesson()
         val altAddLesson = MaterialAlertDialogBuilder(context)
         altAddLesson.setTitle(context.resources.getString(R.string.alrAddLessonTitel))
         altAddLesson.setMessage(context.resources.getString(R.string.alrAddLessonMoreInfo))

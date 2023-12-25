@@ -11,7 +11,7 @@ class VerificationViewModelFactory(
     val verificationUserInServer: VerificationUserInServer
 ): ViewModelProvider.Factory  {
 
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return if (modelClass.isAssignableFrom(VerificationViewModel::class.java)) {
             VerificationViewModel(context,verificationUserInServer) as T
         } else {

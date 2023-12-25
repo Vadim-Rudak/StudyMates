@@ -9,7 +9,6 @@ import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
-import android.util.Log
 import android.view.View
 import android.widget.ImageButton
 import android.widget.LinearLayout
@@ -26,14 +25,12 @@ import com.mikhaellopez.circularprogressbar.CircularProgressBar
 import com.vr.app.sh.R
 import com.vr.app.sh.app.App
 import com.vr.app.sh.app.USER_ROLE
-import com.vr.app.sh.data.repository.RegistrationInfo
 import com.vr.app.sh.ui.base.MenuViewModelFactory
 import com.vr.app.sh.ui.books.view.Books
 import com.vr.app.sh.ui.door.view.Authoriz
 import com.vr.app.sh.ui.menu.adapter.MenuItemDecoration
 import com.vr.app.sh.ui.menu.adapter.TopMenuAdapter
 import com.vr.app.sh.ui.menu.viewModel.MenuViewModel
-import com.vr.app.sh.ui.other.UseAlert
 import com.vr.app.sh.ui.other.UseAlert.Companion.errorMessage
 import com.vr.app.sh.ui.other.UseAlert.Companion.verificationMsg
 import com.vr.app.sh.ui.other.permissions.Permissions

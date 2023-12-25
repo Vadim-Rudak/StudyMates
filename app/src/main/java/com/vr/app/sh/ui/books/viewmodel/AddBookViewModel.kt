@@ -1,16 +1,11 @@
 package com.vr.app.sh.ui.books.viewmodel
 
-import android.app.AlertDialog
-import android.content.Context
-import android.content.DialogInterface
 import android.content.res.Resources
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.vr.app.sh.R
-import com.vr.app.sh.data.api.NetworkService
 import com.vr.app.sh.domain.UseCase.GetAllBookListInternet
-import com.vr.app.sh.domain.UseCase.InternetConnection
 import com.vr.app.sh.domain.UseCase.SaveBookListInBD
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -24,7 +19,7 @@ import okhttp3.RequestBody
 import java.io.File
 import java.util.concurrent.TimeUnit
 
-class AddBookViewModel(private val resources: Resources,val getAllBookListInternet: GetAllBookListInternet,val saveBookListInBD: SaveBookListInBD ,val internetConnection: InternetConnection): ViewModel() {
+class AddBookViewModel(private val resources: Resources,val getAllBookListInternet: GetAllBookListInternet,val saveBookListInBD: SaveBookListInBD,private val internetConnection:Boolean): ViewModel() {
 
     var path_file: String? = null
     lateinit var file: File
@@ -33,7 +28,7 @@ class AddBookViewModel(private val resources: Resources,val getAllBookListIntern
     val errorMessage = MutableLiveData<String>()
 
     fun sendFile(name_book:String,num_class:Int){
-        if(internetConnection.UseInternet()){
+        if(internetConnection){
             vizibileProgressBar.value = true
             CoroutineScope(Dispatchers.IO).launch {
                 val builder: OkHttpClient.Builder = OkHttpClient.Builder()
@@ -48,7 +43,7 @@ class AddBookViewModel(private val resources: Resources,val getAllBookListIntern
                     .addFormDataPart("numclass",num_class.toString())
                     .build()
 
-                val request: Request = Request.Builder().url("${NetworkService.BASE_URL}/AddNewFileAndroid").post(formBody).build()
+                val request: Request = Request.Builder().url("${com.vr.app.sh.data.api.NetworkService.BASE_URL}/AddNewFileAndroid").post(formBody).build()
                 val response = client.newCall(request).execute()
                 Log.d("FFF", response.message)
                 Log.d("FFF", response.isSuccessful.toString())

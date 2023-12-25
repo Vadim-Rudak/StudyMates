@@ -6,22 +6,28 @@ import androidx.lifecycle.ViewModelProvider
 import com.vr.app.sh.domain.UseCase.Authorization
 import com.vr.app.sh.domain.UseCase.CleanUser
 import com.vr.app.sh.domain.UseCase.DownloadUserPhoto
-import com.vr.app.sh.domain.UseCase.InternetConnection
 import com.vr.app.sh.domain.UseCase.SaveUser
 import com.vr.app.sh.ui.door.viewmodel.AuthViewModel
+import com.vr.app.sh.ui.other.InternetConnection
 
 class AuthorizationViewModelFactory(
     val context: Context,
     val cleanUser: CleanUser,
     val downloadUserPhoto: DownloadUserPhoto,
     val authorization: Authorization,
-    val saveUser: SaveUser,
-    val internetConnection: InternetConnection
+    val saveUser: SaveUser
 ): ViewModelProvider.Factory  {
 
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return if (modelClass.isAssignableFrom(AuthViewModel::class.java)) {
-            AuthViewModel(context.resources,cleanUser,downloadUserPhoto,authorization,saveUser,internetConnection) as T
+            AuthViewModel(
+                resources = context.resources,
+                cleanUser = cleanUser,
+                downloadUserPhoto = downloadUserPhoto,
+                authorization = authorization,
+                saveUser = saveUser,
+                internetConnect = InternetConnection.useInternet(context)
+            ) as T
         } else {
             throw IllegalArgumentException("ViewModel Not Found")
         }

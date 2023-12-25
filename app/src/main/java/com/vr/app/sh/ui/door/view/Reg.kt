@@ -10,9 +10,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.vr.app.sh.R
 import com.vr.app.sh.app.App
-import com.vr.app.sh.data.repository.RegistrationInfo
 import com.vr.app.sh.ui.base.RegViewModelFactory
 import com.vr.app.sh.ui.door.viewmodel.RegViewModel
+import com.vr.app.sh.ui.other.RegistrationInfo
 import com.vr.app.sh.ui.other.UseAlert.Companion.infoMessage
 
 class Reg : AppCompatActivity() {

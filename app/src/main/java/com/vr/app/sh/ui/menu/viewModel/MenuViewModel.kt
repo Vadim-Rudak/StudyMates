@@ -11,7 +11,6 @@ import com.vr.app.sh.domain.UseCase.CleanCookie
 import com.vr.app.sh.domain.UseCase.CleanUser
 import com.vr.app.sh.domain.UseCase.DownloadUserPhoto
 import com.vr.app.sh.domain.UseCase.GetAllBookListInternet
-import com.vr.app.sh.domain.UseCase.InternetConnection
 import com.vr.app.sh.domain.UseCase.SaveBookListInBD
 import com.vr.app.sh.ui.menu.adapter.TopMenuAdapter
 import kotlinx.coroutines.*
@@ -29,10 +28,10 @@ class MenuViewModel(
     context: Context,
     val getAllBookListInternet: GetAllBookListInternet,
     val saveBookListInBD: SaveBookListInBD,
-    val internetConnection: InternetConnection,
     val downloadUserPhoto: DownloadUserPhoto,
     private val cleanUser: CleanUser,
-    private val cleanCookie: CleanCookie
+    private val cleanCookie: CleanCookie,
+    private val internetConnect:Boolean
 ): ViewModel() {
 
     val res: Resources = context.resources
@@ -64,7 +63,7 @@ class MenuViewModel(
 
     fun downloadUserPhoto(userId:Int,pathPhoto:String){
         Log.d("FFF","$userId  fdsf=> $pathPhoto")
-        if(internetConnection.UseInternet()){
+        if(internetConnect){
             Log.d("download", "download user photo start")
             val call = downloadUserPhoto.execute(userId)
             call.enqueue(object : Callback<ResponseBody> {
@@ -147,7 +146,7 @@ class MenuViewModel(
 
 
     fun getAllBooks(){
-        if (internetConnection.UseInternet()){
+        if (internetConnect){
             job = CoroutineScope(Dispatchers.IO).launch {
                 loading.postValue(true)
                 statusListBook.postValue(false)

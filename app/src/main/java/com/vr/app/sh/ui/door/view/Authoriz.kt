@@ -11,11 +11,11 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.textfield.TextInputEditText
 import com.vr.app.sh.R
 import com.vr.app.sh.app.App
-import com.vr.app.sh.data.model.User
-import com.vr.app.sh.data.repository.RegistrationInfo
+import com.vr.app.sh.domain.model.User
 import com.vr.app.sh.ui.base.AuthorizationViewModelFactory
 import com.vr.app.sh.ui.door.viewmodel.AuthViewModel
 import com.vr.app.sh.ui.menu.view.TopMenu
+import com.vr.app.sh.ui.other.RegistrationInfo
 import com.vr.app.sh.ui.other.UseAlert.Companion.infoMessage
 
 class Authoriz : AppCompatActivity() {
