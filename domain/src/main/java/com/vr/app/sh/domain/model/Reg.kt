@@ -6,22 +6,24 @@ import com.vr.app.sh.domain.model.User
 
 class Reg() {
 
-    constructor(message: String?, status_reg: Boolean?):this() {
-        this.message = message
-        this.status_reg = status_reg
-    }
-
-
     @SerializedName("message")
     @Expose
     var message: String? = null
 
     @SerializedName("status_reg")
     @Expose
-    var status_reg:Boolean? = false
+    var statusReg:Boolean? = false
 
     @SerializedName("user")
     @Expose
     var user: User? = null
 
+    constructor(message: String?, statusReg: Boolean?):this() {
+        this.message = message
+        this.statusReg = statusReg
+    }
+
+    constructor(statusReg: Boolean?):this(){
+        this.statusReg = statusReg
+    }
 }

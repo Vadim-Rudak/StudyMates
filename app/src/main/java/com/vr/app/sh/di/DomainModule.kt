@@ -1,6 +1,7 @@
 package com.vr.app.sh.di
 
 import com.vr.app.sh.data.api.InternetRepoImpl
+import com.vr.app.sh.data.api.PhotoInternetRepoImpl
 import com.vr.app.sh.data.storage.room.repo.*
 import com.vr.app.sh.data.storage.sharedprefs.*
 import com.vr.app.sh.domain.UseCase.*
@@ -101,8 +102,8 @@ class DomainModule {
     }
 
     @Provides
-    fun provideDownloadPhoto(internetRepoImpl: InternetRepoImpl):DownloadUserPhoto{
-        return DownloadUserPhoto(internetRepoImpl)
+    fun provideDownloadPhoto(photoInternetRepoImpl: PhotoInternetRepoImpl):DownloadUserPhoto{
+        return DownloadUserPhoto(photoInternetRepoImpl)
     }
 
     @Provides
@@ -116,7 +117,7 @@ class DomainModule {
     }
 
     @Provides
-    fun provideVerificationUser(internetRepoImpl: InternetRepoImpl):VerificationUserInServer{
-        return VerificationUserInServer(internetRepoImpl)
+    fun provideVerificationUser(photoInternetRepoImpl: PhotoInternetRepoImpl):VerificationUserInServer{
+        return VerificationUserInServer(photoInternetRepoImpl)
     }
 }

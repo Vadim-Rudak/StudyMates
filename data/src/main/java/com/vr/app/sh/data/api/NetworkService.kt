@@ -30,7 +30,7 @@ interface NetworkService {
     suspend fun verificationUserInServer(@Query("id") user_id:Int): Response<ResponseBody>
     @Streaming
     @GET("/Photo")
-    fun downloadUserPhoto(@Query("id") id:Int): Call<ResponseBody>
+    suspend fun downloadUserPhoto(@Query("id") id:Int): Response<ResponseBody>
 
     @Multipart
     @POST("/registration_mobile")

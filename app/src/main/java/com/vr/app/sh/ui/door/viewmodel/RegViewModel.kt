@@ -14,11 +14,9 @@ import com.vr.app.sh.ui.other.RegistrationInfo
 import com.vr.app.sh.ui.other.UseAlert.Companion.loading
 import kotlinx.coroutines.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
-import java.net.URLConnection
 
 class RegViewModel(private val resources: Resources,private val saveUser: SaveUser,val registration: Registration,private val internetConnect:Boolean): ViewModel() {
 
@@ -41,11 +39,11 @@ class RegViewModel(private val resources: Resources,private val saveUser: SaveUs
             job = CoroutineScope(Dispatchers.IO).launch {
 
                 val fileUserPhoto = File(RegistrationInfo.user.photo.path)
-                val filePhoto:MultipartBody.Part? = prepareFilePart("user_photo",fileUserPhoto)
-                val reg = registration.execute(userInJSON(),filePhoto)
+
+                val reg = registration.execute(RegistrationInfo.user,fileUserPhoto)
 
                 withContext(Dispatchers.Main) {
-                    if (reg.status_reg == true) {
+                    if (reg.statusReg == true) {
                         regIsSuccessful(fileUserPhoto)
                         if (reg.user == null){
                             errorMessage.value = "нет данных"
@@ -80,24 +78,6 @@ class RegViewModel(private val resources: Resources,private val saveUser: SaveUs
         }
     }
 
-    private fun prepareFilePart(partName: String, file: File): MultipartBody.Part? {
-        if (!file.exists()){
-            val requestFile: RequestBody = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), "")
-            // MultipartBody.Part is used to send also the actual file name
-            RegistrationInfo.user.photo.name = "myPhoto.${file.extension}"
-            return MultipartBody.Part.createFormData(partName, file.name, requestFile)
-        }else{
-            val mimeType2: String = URLConnection.guessContentTypeFromName(file.name)
-            return if (mimeType2 != null) {
-                RegistrationInfo.user.photo.name = "myPhoto.${file.extension}"
-                val requestFile: RequestBody = RequestBody.create(mimeType2.toMediaTypeOrNull(), file)
-                // MultipartBody.Part is used to send also the actual file name
-                MultipartBody.Part.createFormData(partName, file.name, requestFile)
-            } else {
-                null
-            }
-        }
-    }
 
     fun userInJSON(): RequestBody {
         return Gson().toJson(RegistrationInfo.user).toRequestBody("multipart/form-data".toMediaTypeOrNull())

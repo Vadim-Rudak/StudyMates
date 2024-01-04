@@ -3,6 +3,7 @@ package com.vr.app.sh.di
 import android.content.Context
 import com.vr.app.sh.data.api.InternetRepoImpl
 import com.vr.app.sh.data.api.NetworkService
+import com.vr.app.sh.data.api.PhotoInternetRepoImpl
 import com.vr.app.sh.data.storage.room.RoomDB
 import com.vr.app.sh.data.storage.room.repo.BookRepoImpl
 import com.vr.app.sh.data.storage.room.repo.LessonsRepoImpl
@@ -17,8 +18,18 @@ import dagger.Provides
 class DataModule {
 
     @Provides
-    fun provideInternetRepoImpl(context: Context): InternetRepoImpl {
-        return InternetRepoImpl(context, NetworkService.getInstance(context))
+    fun provideNetworkService(context: Context):NetworkService{
+        return NetworkService.getInstance(context)
+    }
+
+    @Provides
+    fun provideInternetRepoImpl(context: Context, networkService: NetworkService): InternetRepoImpl {
+        return InternetRepoImpl(context, networkService)
+    }
+
+    @Provides
+    fun providePhotoInternetRepoImpl(context: Context, networkService: NetworkService): PhotoInternetRepoImpl {
+        return PhotoInternetRepoImpl(context, networkService)
     }
 
     @Provides

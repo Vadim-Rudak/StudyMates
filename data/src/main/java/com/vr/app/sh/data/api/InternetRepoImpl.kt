@@ -1,37 +1,75 @@
 package com.vr.app.sh.data.api
 
 import android.content.Context
+import com.google.gson.Gson
 import com.vr.app.sh.domain.model.AuthorizationEntity
 import com.vr.app.sh.domain.model.Book
 import com.vr.app.sh.domain.model.Question
 import com.vr.app.sh.domain.model.Reg
 import com.vr.app.sh.domain.model.Test
+import com.vr.app.sh.domain.model.User
 import com.vr.app.sh.domain.repository.internet.BookInternetRepo
 import com.vr.app.sh.domain.repository.internet.DoorInSystemRepo
 import com.vr.app.sh.domain.repository.internet.PhotoInternetRepo
 import com.vr.app.sh.domain.repository.internet.QuestionsInternetRepo
 import com.vr.app.sh.domain.repository.internet.ResultInternetRepo
 import com.vr.app.sh.domain.repository.internet.TestsInternetRepo
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.ResponseBody
 import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.Response
+import java.io.File
+import java.net.URLConnection
 
 class InternetRepoImpl(val context: Context,private val networkService: NetworkService):
-    DoorInSystemRepo,
-    BookInternetRepo, TestsInternetRepo, QuestionsInternetRepo, ResultInternetRepo, PhotoInternetRepo {
+    DoorInSystemRepo, BookInternetRepo, TestsInternetRepo, QuestionsInternetRepo, ResultInternetRepo {
 
-    override suspend fun Authorization(requestBody: RequestBody): AuthorizationEntity {
-        if(NetworkService.getInstance(context = context).loginInServ(requestBody).isSuccessful){
+    override suspend fun authorization(login: String, password: String): AuthorizationEntity {
+        if(NetworkService.getInstance(context = context).loginInServ(authUserInfo(login,password )).isSuccessful){
             return networkService.auth().body()!!
         }else{
             return AuthorizationEntity(false,"Ошибка подключения к серверу",null)
         }
     }
 
-    override suspend fun Registration(requestBody: RequestBody,user_photo: MultipartBody.Part?): Reg {
-        return networkService.registration(requestBody,user_photo).body()!!
+    private fun authUserInfo(userName: String, password: String): RequestBody {
+        return MultipartBody.Builder()
+            .setType(MultipartBody.FORM)
+            .addFormDataPart("username", userName)
+            .addFormDataPart("password", password)
+            .build()
+    }
+
+    override suspend fun registration(user: User, fileUserPhoto: File): Reg {
+
+        val filePhoto:MultipartBody.Part? = prepareFilePart("user_photo",fileUserPhoto)
+        user.photo.name = "myPhoto.${fileUserPhoto.extension}"
+        return networkService.registration(userInJSON(user),filePhoto).body()!!
+    }
+
+    private fun userInJSON(user: User): RequestBody {
+        return Gson().toJson(user).toRequestBody("multipart/form-data".toMediaTypeOrNull())
+    }
+
+    private fun prepareFilePart(partName: String, file: File): MultipartBody.Part? {
+        if (!file.exists()){
+            val requestFile: RequestBody = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), "")
+            // MultipartBody.Part is used to send also the actual file name
+            return MultipartBody.Part.createFormData(partName, file.name, requestFile)
+        }else{
+            val mimeType2: String = URLConnection.guessContentTypeFromName(file.name)
+            return if (mimeType2 != null) {
+                val requestFile: RequestBody = RequestBody.create(mimeType2.toMediaTypeOrNull(), file)
+                // MultipartBody.Part is used to send also the actual file name
+                MultipartBody.Part.createFormData(partName, file.name, requestFile)
+            } else {
+                null
+            }
+        }
     }
 
     override suspend fun getAllBookList(): Response<List<Book>> {
@@ -60,13 +98,5 @@ class InternetRepoImpl(val context: Context,private val networkService: NetworkS
 
     override suspend fun sendResult(requestBody: RequestBody): Response<ResponseBody> {
         return networkService.sendResult(requestBody)
-    }
-
-    override fun downloadPhoto(userId: Int): Call<ResponseBody> {
-        return networkService.downloadUserPhoto(userId)
-    }
-
-    override suspend fun verificationUser(userId: Int) {
-        networkService.verificationUserInServer(userId)
     }
 }
