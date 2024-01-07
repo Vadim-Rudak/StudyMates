@@ -1,6 +1,6 @@
 package com.vr.app.sh.domain.model.response
 
-class SendFile() {
+class SendResponse() {
 
     var success:Boolean = false
     var infoToSend:String = ""

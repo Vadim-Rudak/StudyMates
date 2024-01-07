@@ -48,10 +48,9 @@ class AddBookViewModel(private val resources: Resources,val getAllBookListIntern
                 Log.d("FFF", response.message)
                 Log.d("FFF", response.isSuccessful.toString())
 
-                val resp = getAllBookListInternet.execute()
-                if (response.isSuccessful){
-                    if (resp.isSuccessful){
-                        saveBookListInBD.execute(resp.body()!!)
+                getAllBookListInternet.execute().also {
+                    if (it.success){
+                        it.list?.let { it1 -> saveBookListInBD.execute(it1) }
                         withContext(Dispatchers.Main){
                             vizibileProgressBar.value = false
                             send.value = true

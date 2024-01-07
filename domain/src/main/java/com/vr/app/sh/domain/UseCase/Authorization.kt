@@ -8,7 +8,7 @@ class Authorization(private val doorInSystemRepo: DoorInSystemRepo) {
         return if (login.trim().isNotEmpty()&&password.trim().isNotEmpty()){
             doorInSystemRepo.authorization(login, password)
         }else{
-            AuthorizationEntity(false,"Ошибка, заполните информацию о пользователе",null)
+            AuthorizationEntity(false,"Ошибка, заполните информацию о пользователе")
         }
     }
 }

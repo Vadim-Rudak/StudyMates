@@ -1,5 +1,6 @@
 package com.vr.app.sh.di
 
+import com.vr.app.sh.data.api.BookInternetRepoImpl
 import com.vr.app.sh.data.api.InternetRepoImpl
 import com.vr.app.sh.data.api.PhotoInternetRepoImpl
 import com.vr.app.sh.data.storage.room.repo.*
@@ -17,8 +18,8 @@ class DomainModule {
     }
 
     @Provides
-    fun provideGetListAllBook(internetRepoImpl: InternetRepoImpl):GetAllBookListInternet{
-        return GetAllBookListInternet(internetRepoImpl)
+    fun provideGetListAllBook(bookInternetRepoImpl: BookInternetRepoImpl):GetAllBookListInternet{
+        return GetAllBookListInternet(bookInternetRepoImpl)
     }
 
     @Provides
@@ -57,8 +58,8 @@ class DomainModule {
     }
 
     @Provides
-    fun provideGetBookFile(internetRepoImpl: InternetRepoImpl):GetBookFile{
-        return GetBookFile(internetRepoImpl)
+    fun provideGetBookFile(bookInternetRepoImpl: BookInternetRepoImpl):GetBookFile{
+        return GetBookFile(bookInternetRepoImpl)
     }
 
     @Provides

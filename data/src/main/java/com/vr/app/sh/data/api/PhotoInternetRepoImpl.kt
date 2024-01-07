@@ -3,11 +3,11 @@ package com.vr.app.sh.data.api
 import android.content.Context
 import android.util.Log
 import com.rv.data.R
-import com.vr.app.sh.domain.model.response.SendFile
+import com.vr.app.sh.data.storage.WriteResponseToStorage
+import com.vr.app.sh.domain.model.response.DownloadFile
 import com.vr.app.sh.domain.repository.internet.PhotoInternetRepo
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import okhttp3.ResponseBody
 import java.io.File
 import java.io.FileOutputStream
@@ -17,32 +17,28 @@ import java.io.OutputStream
 
 class PhotoInternetRepoImpl(val context: Context, private val networkService: NetworkService): PhotoInternetRepo {
 
-    override suspend fun downloadPhoto(userId: Int, pathToSave:String): SendFile {
-        var sendFile = SendFile()
+    override suspend fun downloadPhoto(userId: Int, pathToSave:String): Flow<DownloadFile> = flow{
+        val response = networkService.downloadUserPhoto(userId)
+        if(response.isSuccessful){
+            val writtenToDisk = WriteResponseToStorage().write(response.body(), pathToSave)
+            Log.d("downloadFile", "sucess")
 
-        val job = CoroutineScope(Dispatchers.IO).launch {
-            val response = networkService.downloadUserPhoto(userId)
-            if(response.isSuccessful){
-                val writtenToDisk = writeResponseBodyToDisk(response.body(), pathToSave)
-                Log.d("download", "file download was a success? $writtenToDisk")
-                Log.d("downloadFile", "sucess")
-
-                sendFile = if (writtenToDisk){
-                    SendFile(true)
-                }else{
-                    val file = File(pathToSave)
-                    if (file.exists()){
-                        file.delete()
+            writtenToDisk.collect{
+                if (it.status !=null){
+                    if (it.status == true){
+                        emit(DownloadFile(true))
+                    }else{
+                        val file = File(pathToSave)
+                        if (file.exists()){
+                            file.delete()
+                        }
+                        emit(DownloadFile(false,context.resources.getString(R.string.alrErrorDownloadFile)))
                     }
-                    SendFile(false,context.resources.getString(R.string.alrErrorDownloadFile))
                 }
-            }else{
-                sendFile = SendFile(false,response.message())
             }
+        }else{
+            emit(DownloadFile(false,response.message()))
         }
-        job.join()
-        job.cancel()
-        return sendFile
     }
 
     private fun writeResponseBodyToDisk(body: ResponseBody?, filePath: String): Boolean {

@@ -6,11 +6,13 @@ import com.vr.app.sh.domain.model.AuthorizationEntity
 import com.vr.app.sh.domain.model.Book
 import com.vr.app.sh.domain.model.Question
 import com.vr.app.sh.domain.model.Reg
+import com.vr.app.sh.domain.model.ResultTest
 import com.vr.app.sh.domain.model.Test
 import com.vr.app.sh.domain.model.User
+import com.vr.app.sh.domain.model.response.ListResponse
+import com.vr.app.sh.domain.model.response.SendResponse
 import com.vr.app.sh.domain.repository.internet.BookInternetRepo
 import com.vr.app.sh.domain.repository.internet.DoorInSystemRepo
-import com.vr.app.sh.domain.repository.internet.PhotoInternetRepo
 import com.vr.app.sh.domain.repository.internet.QuestionsInternetRepo
 import com.vr.app.sh.domain.repository.internet.ResultInternetRepo
 import com.vr.app.sh.domain.repository.internet.TestsInternetRepo
@@ -19,14 +21,14 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.ResponseBody
+import org.json.JSONObject
 import retrofit2.Call
-import retrofit2.Callback
 import retrofit2.Response
 import java.io.File
 import java.net.URLConnection
 
 class InternetRepoImpl(val context: Context,private val networkService: NetworkService):
-    DoorInSystemRepo, BookInternetRepo, TestsInternetRepo, QuestionsInternetRepo, ResultInternetRepo {
+    DoorInSystemRepo, TestsInternetRepo, QuestionsInternetRepo, ResultInternetRepo {
 
     override suspend fun authorization(login: String, password: String): AuthorizationEntity {
         if(NetworkService.getInstance(context = context).loginInServ(authUserInfo(login,password )).isSuccessful){
@@ -72,31 +74,63 @@ class InternetRepoImpl(val context: Context,private val networkService: NetworkS
         }
     }
 
-    override suspend fun getAllBookList(): Response<List<Book>> {
-        return networkService.getAllBooks()
+    override suspend fun getListTestsInSub(nameSubject: String): ListResponse<Test> {
+        networkService.getAllTests(nameSubject).apply {
+            return if (isSuccessful){
+                ListResponse(true,body())
+            }else{
+                ListResponse()
+            }
+        }
     }
 
-    override fun getBookFile(id_book: Int): Call<ResponseBody> {
-        return networkService.downloadFileWithFixedUrl(id_book)
+    override suspend fun sendTest(nameSubject: String, numClass: Int, nameTest: String, size: Int): SendResponse {
+        val request = networkService.sendTest(getJSONTest(nameSubject,numClass,nameTest,size))
+        return SendResponse(success = request.isSuccessful)
     }
 
-    override suspend fun getListTestsInSub(name_subject: String): Response<List<Test>> {
-        return networkService.getAllTests(name_subject)
+    fun getJSONTest(subject:String, numClass: Int?, nameTest:String, numQuestions:Int): RequestBody {
+        val jsonObject = JSONObject().apply {
+            put("subject", subject)
+            put("numclass", numClass)
+            put("nametest", nameTest)
+            put("numquestions", numQuestions)
+        }
+
+        val jsonObjectString = jsonObject.toString()
+        return jsonObjectString.toRequestBody("application/json".toMediaTypeOrNull())
     }
 
-    override suspend fun sendTest(requestBody: RequestBody): Response<ResponseBody> {
-        return networkService.sendTest(requestBody)
+    override suspend fun getTestQuestions(numClass: Int): ListResponse<Question> {
+        networkService.getAllQuestions(numClass).apply {
+            return if (isSuccessful){
+                ListResponse(true,body())
+            }else{
+                ListResponse()
+            }
+        }
     }
 
-    override suspend fun getTestQuestions(num_class: Int): Response<List<Question>> {
-        return networkService.getAllQuestions(num_class)
+    override suspend fun sendQuestions(jsonQuestions: String): SendResponse {
+        val request = networkService.sendQuestions(jsonQuestions.toRequestBody("application/json".toMediaTypeOrNull()))
+        return SendResponse(success = request.isSuccessful)
     }
 
-    override suspend fun sendQuestions(requestBody: RequestBody): Response<ResponseBody> {
-        return networkService.sendQuestions(requestBody)
+    override suspend fun sendResult(result: ResultTest): SendResponse {
+        val response = networkService.sendResult(JSONResult(result))
+        return SendResponse(success = response.isSuccessful)
     }
 
-    override suspend fun sendResult(requestBody: RequestBody): Response<ResponseBody> {
-        return networkService.sendResult(requestBody)
+    fun JSONResult(resultTest: ResultTest): RequestBody {
+        val jsonObject = JSONObject()
+        jsonObject.put("idtest", resultTest.test_id)
+        //jsonObject.put("username", getUserBD.execute().user_name)
+        jsonObject.put("score", resultTest.all_result)
+        jsonObject.put("num_correct_otv", resultTest.num_correct_answer)
+        jsonObject.put("num_error_otv", resultTest.num_wrong_answer)
+        jsonObject.put("num_no_otv", resultTest.num_not_answer)
+
+        val jsonObjectString = jsonObject.toString()
+        return jsonObjectString.toRequestBody("application/json".toMediaTypeOrNull())
     }
 }

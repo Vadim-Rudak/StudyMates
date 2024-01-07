@@ -15,6 +15,11 @@ class AuthorizationEntity {
         this.status = status
     }
 
+    constructor(status: Boolean?, message: String?) {
+        this.status = status
+        this.message = message
+    }
+
 
     @SerializedName("status")
     @Expose

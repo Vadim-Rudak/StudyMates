@@ -29,13 +29,13 @@ class AllSubjectsViewModel(private val resources: Resources,val getListTestsInte
             sub.value = subject
             job = CoroutineScope(Dispatchers.IO).launch {
                 withContext(Dispatchers.Main){
-                    val ListTests = getListTestsInternet.execute(subject)
-
-                    if (ListTests.isSuccessful){
-                        saveTestsInBD.execute(ListTests.body()!!)
-                        statusTestsInBD.value = true
-                    }else{
-                        errorMessage.value = resources.getString(R.string.alrErrorGetData)
+                    getListTestsInternet.execute(subject).also {
+                        if (it.success){
+                            it.list?.let { it1 -> saveTestsInBD.execute(it1) }
+                            statusTestsInBD.value = true
+                        }else{
+                            errorMessage.value = resources.getString(R.string.alrErrorGetData)
+                        }
                     }
                 }
             }

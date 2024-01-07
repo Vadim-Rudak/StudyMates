@@ -49,18 +49,20 @@ class TestsOneClassViewModel(
         if (internetConnect){
             job = CoroutineScope(Dispatchers.IO).launch {
                 withContext(Dispatchers.Main){
-                    val listQuestions = getListQuestions.execute(test_id)
                     name_test = nameTest
-                    if (listQuestions.isSuccessful){
-                        saveQuestionsInBD.execute(listQuestions.body()!!)
-                        if (listQuestions.body()!!.isNotEmpty()){
-                            openTest.value = true
+                    getListQuestions.execute(test_id).also {
+                        if (it.success){
+                            it.list?.let { it1 -> saveQuestionsInBD.execute(it1) }
+                            if (it.list!!.isNotEmpty()){
+                                openTest.value = true
+                            }else{
+                                errorMessage.value = resources.getString(R.string.alrErrorNotQuestions)
+                            }
                         }else{
-                            errorMessage.value = resources.getString(R.string.alrErrorNotQuestions)
+                            errorMessage.value = resources.getString(R.string.alrErrorGetData)
                         }
-                    }else{
-                        errorMessage.value = resources.getString(R.string.alrErrorGetData)
                     }
+
                 }
             }
         }else{

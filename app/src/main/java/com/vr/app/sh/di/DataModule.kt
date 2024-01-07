@@ -1,6 +1,7 @@
 package com.vr.app.sh.di
 
 import android.content.Context
+import com.vr.app.sh.data.api.BookInternetRepoImpl
 import com.vr.app.sh.data.api.InternetRepoImpl
 import com.vr.app.sh.data.api.NetworkService
 import com.vr.app.sh.data.api.PhotoInternetRepoImpl
@@ -30,6 +31,11 @@ class DataModule {
     @Provides
     fun providePhotoInternetRepoImpl(context: Context, networkService: NetworkService): PhotoInternetRepoImpl {
         return PhotoInternetRepoImpl(context, networkService)
+    }
+
+    @Provides
+    fun provideBookInternetRepoImpl(context: Context, networkService: NetworkService): BookInternetRepoImpl {
+        return BookInternetRepoImpl(context, networkService)
     }
 
     @Provides

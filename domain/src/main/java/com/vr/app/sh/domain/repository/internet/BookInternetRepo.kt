@@ -1,11 +1,11 @@
 package com.vr.app.sh.domain.repository.internet
 
 import com.vr.app.sh.domain.model.Book
-import okhttp3.ResponseBody
-import retrofit2.Call
-import retrofit2.Response
+import com.vr.app.sh.domain.model.response.DownloadFile
+import com.vr.app.sh.domain.model.response.ListResponse
+import kotlinx.coroutines.flow.Flow
 
 interface BookInternetRepo {
-    suspend fun getAllBookList(): Response<List<Book>>
-    fun getBookFile(id_book:Int): Call<ResponseBody>
+    suspend fun getAllBookList(): ListResponse<Book>
+    suspend fun getBookFile(idBook:Int,pathToSave:String): Flow<DownloadFile>
 }

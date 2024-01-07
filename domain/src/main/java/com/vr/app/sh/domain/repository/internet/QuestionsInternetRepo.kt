@@ -1,11 +1,10 @@
 package com.vr.app.sh.domain.repository.internet
 
 import com.vr.app.sh.domain.model.Question
-import okhttp3.RequestBody
-import okhttp3.ResponseBody
-import retrofit2.Response
+import com.vr.app.sh.domain.model.response.ListResponse
+import com.vr.app.sh.domain.model.response.SendResponse
 
 interface QuestionsInternetRepo {
-    suspend fun getTestQuestions(num_class:Int): Response<List<Question>>
-    suspend fun sendQuestions(requestBody: RequestBody): Response<ResponseBody>
+    suspend fun getTestQuestions(numClass:Int): ListResponse<Question>
+    suspend fun sendQuestions(jsonQuestions: String): SendResponse
 }

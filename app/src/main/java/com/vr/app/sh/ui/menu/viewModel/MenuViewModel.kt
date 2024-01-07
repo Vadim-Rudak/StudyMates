@@ -16,6 +16,8 @@ import com.vr.app.sh.ui.menu.adapter.TopMenuAdapter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectIndexed
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.File
@@ -61,10 +63,10 @@ class MenuViewModel(
         if(internetConnect){
             Log.d("download", "download user photo start")
             job = CoroutineScope(Dispatchers.IO).launch {
-                downloadUserPhoto.execute(userId,pathPhoto).also {
+                downloadUserPhoto.execute(userId,pathPhoto).collectIndexed { _, value ->
                     withContext(Dispatchers.Main){
-                        if (!it.success){
-                            errorMessage.value = it.infoToSend
+                        if (value.success == true){
+                            errorMessage.value = value.infoToSend
                         }
                     }
                 }
@@ -79,14 +81,14 @@ class MenuViewModel(
             job = CoroutineScope(Dispatchers.IO).launch {
                 loading.postValue(true)
                 statusListBook.postValue(false)
-                withContext(Dispatchers.Main){
-                    val listBooks = getAllBookListInternet.execute()
-                    if (listBooks.isSuccessful){
-                        loading.postValue(false)
+                getAllBookListInternet.execute().also {
+                    if (it.success){
                         statusListBook.postValue(true)
-                        saveBookListInBD.execute(listBooks.body()!!)
+                        withContext(Dispatchers.Main){
+                            loading.postValue(false)
+                        }
+                        it.list?.let { it1 -> saveBookListInBD.execute(it1) }
                     }else{
-                        loading.postValue(false)
                         errorMessage.value = res.getString(R.string.alrErrorGetData)
                     }
                 }

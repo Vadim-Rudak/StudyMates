@@ -23,20 +23,11 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectIndexed
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import okhttp3.ResponseBody
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import java.io.File
-import java.io.FileOutputStream
-import java.io.IOException
-import java.io.InputStream
-import java.io.OutputStream
 
 class SubjectsViewModel(private val resources: Resources,val getBookFile: GetBookFile, val getListBookInClass: GetListBookInClass,val numClass:Int,private val internetConnect:Boolean): ViewModel() {
 
     val download = MutableLiveData<Boolean>()
-    var saveFileInMemory:Boolean = false
+    var saveFileInMemory:Boolean? = false
     var progress = MutableLiveData<Long>()
     val adapter = RecyclerViewAdapter()
     val errorMessage = MutableLiveData<String>()
@@ -102,83 +93,20 @@ class SubjectsViewModel(private val resources: Resources,val getBookFile: GetBoo
         if(internetConnect){
             download.postValue(true)
             Log.d("downloadFile", "start")
-            val call = getBookFile.execute(id_book)
-            call.enqueue(object : Callback<ResponseBody> {
-                override fun onResponse(call: Call<ResponseBody>?, response: Response<ResponseBody>?) {
-                    try {
-                        CoroutineScope(Dispatchers.IO).launch {
-                            if (response!!.isSuccessful){
-                                val writtenToDisk = writeResponseBodyToDisk(response.body(), path)
-                                Log.d("download", "file download was a success? $writtenToDisk")
-                                Log.d("downloadFile", "sucess")
-                                saveFileInMemory = writtenToDisk
-                                if (!writtenToDisk){
-                                    val file = File(path)
-                                    if (file.exists()){
-                                        file.delete()
-                                    }
-                                    withContext(Dispatchers.Main){
-                                        errorMessage.value = resources.getString(R.string.alrErrorDownloadBook)
-                                        download.value = false
-                                    }
-                                }
-                            }else{
-                                errorMessage.value = response.message()
-                            }
+            job = CoroutineScope(Dispatchers.IO).launch {
+                getBookFile.execute(id_book, path).collectIndexed { index, value ->
+                    saveFileInMemory = value.success
+                    progress.postValue(value.progress)
+                    if (value.success == false){
+                        withContext(Dispatchers.Main){
+                            errorMessage.value = resources.getString(R.string.alrErrorDownloadBook)
+                            download.value = false
                         }
-                        Log.d("onResponse", "Response came from server")
-                    } catch (e: IOException) {
-                        Log.d("onResponse", "There is an error")
-                        e.printStackTrace()
                     }
-                }
-                override fun onFailure(call: Call<ResponseBody>?, t: Throwable?) {
-                    Log.d("onFailure", t.toString())
-                }
-            })
-        }else{
-            errorMessage.value = resources.getString(R.string.alrNotInternetConnection)
-        }
-    }
-    private suspend fun writeResponseBodyToDisk(body: ResponseBody?, path_book: String): Boolean {
-        try {
-
-            var futureStudioIconFile = File(path_book)
-            var inputStream: InputStream? = null
-            var outputStream: OutputStream? = null
-
-            try {
-                val fileReader = ByteArray(4096)
-
-                val fileSize = body?.contentLength()
-                var fileSizeDownloaded: Long = 0
-
-                inputStream = body?.byteStream()
-                outputStream = FileOutputStream(futureStudioIconFile)
-
-                while (true) {
-                    val read = inputStream!!.read(fileReader)
-                    if (read == -1) {
-                        break
-                    }
-                    outputStream!!.write(fileReader, 0, read)
-                    fileSizeDownloaded += read.toLong()
-                    progress.postValue(fileSizeDownloaded*100/ fileSize!!)
-                }
-                outputStream!!.flush()
-                return true
-            } catch (e: IOException) {
-                return false
-            } finally {
-                if (inputStream != null) {
-                    inputStream!!.close()
-                }
-                if (outputStream != null) {
-                    outputStream!!.close()
                 }
             }
-        } catch (e: IOException) {
-            return false
+        }else{
+            errorMessage.value = resources.getString(R.string.alrNotInternetConnection)
         }
     }
 

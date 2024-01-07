@@ -62,13 +62,14 @@ class AuthViewModel(private val resources: Resources, private val cleanUser: Cle
         val sharedPrefs = context.getSharedPreferences("user_info", Context.MODE_PRIVATE)
         val pathSave = "${Environment.getExternalStorageDirectory().path}/SchoolProg/MyProfile/${sharedPrefs.getString("photo_name",null)}"
 
-        downloadUserPhoto.execute(userId,pathSave).also {
+        downloadUserPhoto.execute(userId,pathSave).collectIndexed { index, value ->
             withContext(Dispatchers.Main){
-                if (it.success){
+                if (value.success == true){
                     loadingAlert.isDone()
                     statusAuth.value = true
-                }else{
-                    errorMessage.value = it.infoToSend
+                }
+                if(value.success == false){
+                    errorMessage.value = value.infoToSend
                 }
             }
         }

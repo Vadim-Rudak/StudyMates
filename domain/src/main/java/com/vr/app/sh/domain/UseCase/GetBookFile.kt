@@ -1,11 +1,11 @@
 package com.vr.app.sh.domain.UseCase
 
+import com.vr.app.sh.domain.model.response.DownloadFile
 import com.vr.app.sh.domain.repository.internet.BookInternetRepo
-import okhttp3.ResponseBody
-import retrofit2.Call
+import kotlinx.coroutines.flow.Flow
 
 class GetBookFile(private val bookInternetRepo: BookInternetRepo) {
-    fun execute(idBook:Int): Call<ResponseBody> {
-        return bookInternetRepo.getBookFile(idBook)
+    suspend fun execute(idBook:Int, pathToSave:String): Flow<DownloadFile> {
+        return bookInternetRepo.getBookFile(idBook,pathToSave)
     }
 }

@@ -1,21 +1,20 @@
 package com.vr.app.sh.ui.tests.viewmodel
 
-import android.app.AlertDialog
 import android.content.Context
-import android.content.DialogInterface
-import android.content.res.Resources
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.gson.Gson
 import com.vr.app.sh.R
+import com.vr.app.sh.domain.UseCase.GetListTestsInternet
+import com.vr.app.sh.domain.UseCase.SaveTestsInBD
+import com.vr.app.sh.domain.UseCase.SendQuestions
+import com.vr.app.sh.domain.UseCase.SendTestInfo
 import com.vr.app.sh.domain.model.Question
-import com.vr.app.sh.domain.UseCase.*
-import com.vr.app.sh.ui.other.InternetConnection
-import kotlinx.coroutines.*
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.RequestBody
-import okhttp3.RequestBody.Companion.toRequestBody
-import org.json.JSONObject
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class AddTestViewModel(
     private val context: Context,
@@ -31,20 +30,19 @@ class AddTestViewModel(
     val vizibleProgressBar = MutableLiveData<Boolean>()
     var job: Job? = null
 
-    fun sendTestWithQuestions(name_subject:String,num_class:Int,name_test: String){
+    fun sendTestWithQuestions(nameSubject:String, numClass:Int, nameTest: String){
         if (internetConnect){
             vizibleProgressBar.value = true
             job = CoroutineScope(Dispatchers.IO).launch {
-                val response = sendTestInfo.execute(getJSONTest(name_subject,num_class, name_test,listQuestions.size))
-                val gs = Gson()
-                val jsonQuestions = gs.toJson(listQuestions)
-                val resp = sendQuestions.execute(jsonQuestions.toRequestBody("application/json".toMediaTypeOrNull()))
-                val resp2 = getListTestsInternet.execute(name_subject)
+                val response = sendTestInfo.execute(nameSubject,numClass,nameTest,listQuestions.size)
+                val jsonQuestions = Gson().toJson(listQuestions)
+                val responseSendQuestions = sendQuestions.execute(jsonQuestions)
+                val responseListTests = getListTestsInternet.execute(nameSubject)
 
                 withContext(Dispatchers.Main) {
-                    if (response.isSuccessful&&resp.isSuccessful) {
-                        if (resp2.isSuccessful){
-                            saveTestsInBD.execute(resp2.body()!!)
+                    if (response.success&&responseSendQuestions.success) {
+                        if (responseListTests.success){
+                            responseListTests.list?.let { saveTestsInBD.execute(it) }
                             vizibleProgressBar.value = false
                         }
                     } else {
@@ -56,17 +54,6 @@ class AddTestViewModel(
         }else{
             errorMessage.value = context.resources.getString(R.string.alrNotInternetConnection)
         }
-    }
-
-    fun getJSONTest(subject:String, num_class: Int?, name_test:String, num_questions:Int): RequestBody {
-        val jsonObject = JSONObject()
-        jsonObject.put("subject", subject)
-        jsonObject.put("numclass", num_class)
-        jsonObject.put("nametest", name_test)
-        jsonObject.put("numquestions", num_questions)
-
-        val jsonObjectString = jsonObject.toString()
-        return jsonObjectString.toRequestBody("application/json".toMediaTypeOrNull())
     }
 
     override fun onCleared() {

@@ -1,9 +1,8 @@
 package com.vr.app.sh.domain.repository.internet
 
-import okhttp3.RequestBody
-import okhttp3.ResponseBody
-import retrofit2.Response
+import com.vr.app.sh.domain.model.ResultTest
+import com.vr.app.sh.domain.model.response.SendResponse
 
 interface ResultInternetRepo {
-    suspend fun sendResult(requestBody: RequestBody): Response<ResponseBody>
+    suspend fun sendResult(result: ResultTest): SendResponse
 }

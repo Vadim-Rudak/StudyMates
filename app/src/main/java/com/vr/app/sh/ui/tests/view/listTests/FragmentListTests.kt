@@ -14,6 +14,8 @@ import com.vr.app.sh.R
 import com.vr.app.sh.app.App
 import com.vr.app.sh.ui.base.TestsOneClassViewModelFactory
 import com.vr.app.sh.ui.other.UseAlert
+import com.vr.app.sh.ui.other.UseAlert.Companion.errorMessage
+import com.vr.app.sh.ui.other.UseAlert.Companion.infoMessage
 import com.vr.app.sh.ui.tests.adapter.BtnTestAdapter
 import com.vr.app.sh.ui.tests.adapter.TestItemDecoration
 import com.vr.app.sh.ui.tests.view.test.WindowTest
@@ -51,7 +53,7 @@ class FragmentListTests(var num_class:Int) : Fragment() {
             startActivity(intent)
         }
         viewModel.errorMessage.observe(viewLifecycleOwner){
-            UseAlert.errorMessage(it,requireContext())
+            infoMessage(requireActivity().supportFragmentManager,it)
         }
         view.adapter = viewModel.adapter
         viewModel.adapter.setListener(object : BtnTestAdapter.Listener{

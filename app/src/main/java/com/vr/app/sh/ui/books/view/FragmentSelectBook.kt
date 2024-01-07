@@ -98,9 +98,10 @@ class FragmentSelectBook() : Fragment() {
                         progressbar.visibility = View.GONE
                         textProgress.visibility = View.GONE
                         infoDowload.visibility = View.VISIBLE
-                        if (viewModel.saveFileInMemory){
+                        if (viewModel.saveFileInMemory == true){
                             infoDowload.text = "Книга успешно загружена"
-                        }else{
+                        }
+                        if (viewModel.saveFileInMemory == false){
                             infoDowload.text = "Ошибка загрузки книги"
                         }
                         delay(1500)

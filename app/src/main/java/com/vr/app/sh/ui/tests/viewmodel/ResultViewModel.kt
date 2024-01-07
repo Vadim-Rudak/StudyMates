@@ -11,10 +11,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.RequestBody
-import okhttp3.RequestBody.Companion.toRequestBody
-import org.json.JSONObject
 
 class ResultViewModel(
     private val resources: Resources,
@@ -29,10 +25,10 @@ class ResultViewModel(
     fun sendResult(result: ResultTest){
         if (internetConnect){
             job = CoroutineScope(Dispatchers.IO).launch {
-                val response = sendResult.execute(JSONResult(result))
+                val response = sendResult.execute(result)
 
                 withContext(Dispatchers.Main) {
-                    if (response.isSuccessful) {
+                    if (response.success) {
                         status_send.value = true
                     } else {
                         errorMessage.value = resources.getString(R.string.alrErrorSendResultTest)
@@ -42,19 +38,6 @@ class ResultViewModel(
         }else{
             errorMessage.value = resources.getString(R.string.alrNotInternetConnection)
         }
-    }
-
-    fun JSONResult(resultTest: ResultTest): RequestBody {
-        val jsonObject = JSONObject()
-        jsonObject.put("idtest", resultTest.test_id)
-        //jsonObject.put("username", getUserBD.execute().user_name)
-        jsonObject.put("score", resultTest.all_result)
-        jsonObject.put("num_correct_otv", resultTest.num_correct_answer)
-        jsonObject.put("num_error_otv", resultTest.num_wrong_answer)
-        jsonObject.put("num_no_otv", resultTest.num_not_answer)
-
-        val jsonObjectString = jsonObject.toString()
-        return jsonObjectString.toRequestBody("application/json".toMediaTypeOrNull())
     }
 
     override fun onCleared() {
