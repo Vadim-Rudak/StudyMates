@@ -21,11 +21,11 @@ class QuestionsRepoImpl(private val questionsDAO:DAOQuestions): QuestionsRepo {
         questionsDAO.saveNewQuestions(listQuestions.map { QuestionEntity(
             id = it.id,
             question = it.question,
-            otv1 = it.otv1,
-            otv2 = it.otv2,
-            otv3 = it.otv3,
-            otv4 = it.otv4,
-            correct_otv = it.correct_otv,
+            otv1 = it.answer1,
+            otv2 = it.answer2,
+            otv3 = it.answer3,
+            otv4 = it.answer4,
+            correct_otv = it.correctAnswer,
             test_id = it.test_id
         ) })
     }

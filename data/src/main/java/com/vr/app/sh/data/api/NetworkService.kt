@@ -54,6 +54,10 @@ interface NetworkService {
     @GET("/Books")
     suspend fun downloadBook(@Query("id") id:Int): Response<ResponseBody>
 
+    @Multipart
+    @POST("/AddNewBook")
+    suspend fun addBook(@Part("numclass") numClass: Int,@Query("namebook") nameBook:String,@Part fileBook: MultipartBody.Part?): Response<ResponseBody>
+
     @GET("/AllBooks")
     suspend fun getAllBooks(): Response<List<Book>>
 

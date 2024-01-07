@@ -51,8 +51,7 @@ class FragmentSelectBook() : Fragment() {
         recyclerView.layoutManager = GridLayoutManager(activity, 2)
         recyclerView.addItemDecoration(BooksItemDecoration(requireActivity()))
 
-        Log.d("FFF","акт")
-        val infoDowload = view.findViewById<TextView>(R.id.textInfoDowload)
+        val infoDownload = view.findViewById<TextView>(R.id.textInfoDowload)
         val progressbar = view.findViewById<CircularProgressBar>(R.id.circularProgressBar)
         progressbar.apply {
             progressMax = 100f
@@ -97,15 +96,15 @@ class FragmentSelectBook() : Fragment() {
                     withContext(Dispatchers.Main){
                         progressbar.visibility = View.GONE
                         textProgress.visibility = View.GONE
-                        infoDowload.visibility = View.VISIBLE
+                        infoDownload.visibility = View.VISIBLE
                         if (viewModel.saveFileInMemory == true){
-                            infoDowload.text = "Книга успешно загружена"
+                            infoDownload.text = "Книга успешно загружена"
                         }
                         if (viewModel.saveFileInMemory == false){
-                            infoDowload.text = "Ошибка загрузки книги"
+                            infoDownload.text = "Ошибка загрузки книги"
                         }
                         delay(1500)
-                        infoDowload.visibility = View.GONE
+                        infoDownload.visibility = View.GONE
                         recyclerView.visibility = View.VISIBLE
                         activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
                     }

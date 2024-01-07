@@ -18,9 +18,10 @@ class AppModule(val context: Context) {
     fun provideAddBookViewModelFactory(
         context: Context,
         getAllBookListInternet: GetAllBookListInternet,
-        saveBookListInBD: SaveBookListInBD
+        saveBookListInBD: SaveBookListInBD,
+        sendBook: SendBook
     ):AddBookViewModelFactory{
-        return AddBookViewModelFactory(context,getAllBookListInternet, saveBookListInBD)
+        return AddBookViewModelFactory(context,getAllBookListInternet,saveBookListInBD,sendBook)
     }
 
     @Provides

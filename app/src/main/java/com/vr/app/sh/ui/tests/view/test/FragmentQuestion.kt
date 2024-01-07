@@ -80,11 +80,11 @@ class FragmentQuestion(var num_question:Int, var listQuestions: List<Question>, 
 
     fun setInfoInQuestion(){
         textQuestion.text = listQuestions[num_question].question
-        btnOtv1.text = listQuestions[num_question].otv1
-        btnOtv2.text = listQuestions[num_question].otv2
-        btnOtv3.text = listQuestions[num_question].otv3
-        btnOtv4.text = listQuestions[num_question].otv4
-        correctOtv = listQuestions[num_question].correct_otv.toString()
+        btnOtv1.text = listQuestions[num_question].answer1
+        btnOtv2.text = listQuestions[num_question].answer2
+        btnOtv3.text = listQuestions[num_question].answer3
+        btnOtv4.text = listQuestions[num_question].answer4
+        correctOtv = listQuestions[num_question].correctAnswer.toString()
     }
 
     override fun onClick(view: View?) {

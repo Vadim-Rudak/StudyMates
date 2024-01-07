@@ -43,6 +43,11 @@ class DomainModule {
     }
 
     @Provides
+    fun provideSendBook(bookInternetRepoImpl: BookInternetRepoImpl):SendBook{
+        return SendBook(bookInternetRepoImpl)
+    }
+
+    @Provides
     fun provideAuthorization(internetRepoImpl: InternetRepoImpl):Authorization{
         return Authorization(internetRepoImpl)
     }

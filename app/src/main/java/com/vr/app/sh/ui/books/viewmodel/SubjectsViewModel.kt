@@ -94,10 +94,10 @@ class SubjectsViewModel(private val resources: Resources,val getBookFile: GetBoo
             download.postValue(true)
             Log.d("downloadFile", "start")
             job = CoroutineScope(Dispatchers.IO).launch {
-                getBookFile.execute(id_book, path).collectIndexed { index, value ->
-                    saveFileInMemory = value.success
-                    progress.postValue(value.progress)
-                    if (value.success == false){
+                getBookFile.execute(id_book, path).collectIndexed { _, it ->
+                    saveFileInMemory = it.success
+                    progress.postValue(it.progress)
+                    if (it.success == false){
                         withContext(Dispatchers.Main){
                             errorMessage.value = resources.getString(R.string.alrErrorDownloadBook)
                             download.value = false

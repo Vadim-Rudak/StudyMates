@@ -3,7 +3,6 @@ package com.vr.app.sh.data.api
 import android.content.Context
 import com.google.gson.Gson
 import com.vr.app.sh.domain.model.AuthorizationEntity
-import com.vr.app.sh.domain.model.Book
 import com.vr.app.sh.domain.model.Question
 import com.vr.app.sh.domain.model.Reg
 import com.vr.app.sh.domain.model.ResultTest
@@ -11,7 +10,6 @@ import com.vr.app.sh.domain.model.Test
 import com.vr.app.sh.domain.model.User
 import com.vr.app.sh.domain.model.response.ListResponse
 import com.vr.app.sh.domain.model.response.SendResponse
-import com.vr.app.sh.domain.repository.internet.BookInternetRepo
 import com.vr.app.sh.domain.repository.internet.DoorInSystemRepo
 import com.vr.app.sh.domain.repository.internet.QuestionsInternetRepo
 import com.vr.app.sh.domain.repository.internet.ResultInternetRepo
@@ -20,10 +18,7 @@ import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
-import okhttp3.ResponseBody
 import org.json.JSONObject
-import retrofit2.Call
-import retrofit2.Response
 import java.io.File
 import java.net.URLConnection
 

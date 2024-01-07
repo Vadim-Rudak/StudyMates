@@ -10,7 +10,11 @@ import com.vr.app.sh.domain.model.response.ListResponse
 import com.vr.app.sh.domain.repository.internet.BookInternetRepo
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import java.io.File
+import java.net.URLConnection
 
 class BookInternetRepoImpl(val context: Context, private val networkService: NetworkService): BookInternetRepo {
     override suspend fun getAllBookList(): ListResponse<Book> {
@@ -48,6 +52,28 @@ class BookInternetRepoImpl(val context: Context, private val networkService: Net
             }
         }else{
             emit(DownloadFile(false,response.message()))
+        }
+    }
+
+    override suspend fun addBook(numClass: Int, nameBook: String, bookFile: File): Boolean {
+        val fileBook: MultipartBody.Part? = prepareFilePart("fileBook",bookFile)
+        return networkService.addBook(numClass, nameBook, fileBook).isSuccessful
+    }
+
+    private fun prepareFilePart(partName: String, file: File): MultipartBody.Part? {
+        if (!file.exists()){
+            val requestFile: RequestBody = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), "")
+            // MultipartBody.Part is used to send also the actual file name
+            return MultipartBody.Part.createFormData(partName, file.name, requestFile)
+        }else{
+            val mimeType2: String = URLConnection.guessContentTypeFromName(file.name)
+            return if (mimeType2 != null) {
+                val requestFile: RequestBody = RequestBody.create(mimeType2.toMediaTypeOrNull(), file)
+                // MultipartBody.Part is used to send also the actual file name
+                MultipartBody.Part.createFormData(partName, file.name, requestFile)
+            } else {
+                null
+            }
         }
     }
 }

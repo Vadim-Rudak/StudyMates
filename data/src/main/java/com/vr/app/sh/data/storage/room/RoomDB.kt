@@ -12,9 +12,6 @@ import com.vr.app.sh.data.storage.room.dao.DAOBook
 import com.vr.app.sh.data.storage.room.dao.DAOLessons
 import com.vr.app.sh.data.storage.room.dao.DAOQuestions
 import com.vr.app.sh.data.storage.room.dao.DAOTest
-import com.vr.app.sh.domain.model.Lesson
-import com.vr.app.sh.domain.model.Question
-import com.vr.app.sh.domain.model.Test
 
 @Database(entities = [BookEntity::class, LessonEntity::class, QuestionEntity::class, TestEntity::class], version = 1, exportSchema = false)
 abstract class RoomDB : RoomDatabase() {

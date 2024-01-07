@@ -67,9 +67,9 @@ class AddBook : AppCompatActivity() {
                 pathBook.visibility = View.GONE
                 btn_find.visibility = View.GONE
                 btn_sendBook.visibility = View.GONE
-                progressbar.visibility = View.VISIBLE
                 textProgress.visibility = View.VISIBLE
                 progressbar.apply {
+                    visibility = View.VISIBLE
                     progressBarWidth = 14f
                     backgroundProgressBarWidth = 2f
                     backgroundProgressBarColor = Color.parseColor("#969696")
@@ -86,9 +86,9 @@ class AddBook : AppCompatActivity() {
 
         viewModel.send.observe(this){
             if (it){
-                textProgress.setText("Файл успешно загружен")
+                textProgress.text = "Файл успешно загружен"
             }else{
-                textProgress.setText("Ошибка загрузки файла")
+                textProgress.text = "Ошибка загрузки файла"
             }
             CoroutineScope(Dispatchers.IO).launch {
                 withContext(Dispatchers.Main){
@@ -124,7 +124,7 @@ class AddBook : AppCompatActivity() {
         if (it.resultCode == Activity.RESULT_OK){
             viewModel.path_file = getRealPathFromURI(it.data?.data!!)
             viewModel.file = File(viewModel.path_file)
-            pathBook.text = "Выбранный файл: ${ viewModel.file.name.substring(0,viewModel.file.name.length-4) }"
+            pathBook.text = "Выбранный файл: ${ viewModel.file.nameWithoutExtension }"
         }
     }
 

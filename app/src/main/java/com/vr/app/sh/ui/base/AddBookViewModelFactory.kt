@@ -5,13 +5,15 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.vr.app.sh.domain.UseCase.GetAllBookListInternet
 import com.vr.app.sh.domain.UseCase.SaveBookListInBD
+import com.vr.app.sh.domain.UseCase.SendBook
 import com.vr.app.sh.ui.books.viewmodel.AddBookViewModel
 import com.vr.app.sh.ui.other.InternetConnection
 
 class AddBookViewModelFactory(
     val context: Context,
-    val getAllBookListInternet:GetAllBookListInternet,
-    val saveBookListInBD:SaveBookListInBD
+    private val getAllBookListInternet:GetAllBookListInternet,
+    private val saveBookListInBD:SaveBookListInBD,
+    private val sendBook: SendBook
 ): ViewModelProvider.Factory {
 
 
@@ -21,7 +23,8 @@ class AddBookViewModelFactory(
                 resources = context.resources,
                 getAllBookListInternet = getAllBookListInternet,
                 saveBookListInBD = saveBookListInBD,
-                internetConnection = InternetConnection.useInternet(context)
+                internetConnection = InternetConnection.useInternet(context),
+                sendBook = sendBook
             ) as T
         } else {
             throw IllegalArgumentException("ViewModel Not Found")

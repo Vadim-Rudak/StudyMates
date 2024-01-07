@@ -8,12 +8,7 @@ import com.vr.app.sh.domain.model.response.DownloadFile
 import com.vr.app.sh.domain.repository.internet.PhotoInternetRepo
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import okhttp3.ResponseBody
 import java.io.File
-import java.io.FileOutputStream
-import java.io.IOException
-import java.io.InputStream
-import java.io.OutputStream
 
 class PhotoInternetRepoImpl(val context: Context, private val networkService: NetworkService): PhotoInternetRepo {
 
@@ -38,38 +33,6 @@ class PhotoInternetRepoImpl(val context: Context, private val networkService: Ne
             }
         }else{
             emit(DownloadFile(false,response.message()))
-        }
-    }
-
-    private fun writeResponseBodyToDisk(body: ResponseBody?, filePath: String): Boolean {
-        try {
-            val futureStudioIconFile = File(filePath)
-            var inputStream: InputStream? = null
-            var outputStream: OutputStream? = null
-
-            try {
-                val fileReader = ByteArray(4096)
-
-                inputStream = body?.byteStream()
-                outputStream = FileOutputStream(futureStudioIconFile)
-
-                while (true) {
-                    val read = inputStream!!.read(fileReader)
-                    if (read == -1) {
-                        break
-                    }
-                    outputStream.write(fileReader, 0, read)
-                }
-                outputStream.flush()
-                return true
-            } catch (e: IOException) {
-                return false
-            } finally {
-                inputStream?.close()
-                outputStream?.close()
-            }
-        } catch (e: IOException) {
-            return false
         }
     }
 
