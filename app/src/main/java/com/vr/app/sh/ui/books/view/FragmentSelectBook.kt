@@ -9,11 +9,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.view.animation.AnimationUtils
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.airbnb.lottie.LottieAnimationView
 import com.mikhaellopez.circularprogressbar.CircularProgressBar
 import com.vr.app.sh.R
 import com.vr.app.sh.app.App
@@ -65,6 +68,14 @@ class FragmentSelectBook() : Fragment() {
             roundBorder = true
         }
         val textProgress = view.findViewById<TextView>(R.id.textProgress)
+        val layoutNotBooks = view.findViewById<LinearLayout>(R.id.layoutNotBooks)
+        val animationFadeIn = AnimationUtils.loadAnimation(requireActivity(), R.anim.anim_fade_in)
+        val anim = view.findViewById<LottieAnimationView>(R.id.animationView)
+        anim.apply {
+            startAnimation(animationFadeIn)
+            setAnimation("notBooks.json")
+        }.playAnimation()
+
 
         viewModel = ViewModelProvider(this, factory)
             .get(SubjectsViewModel::class.java)
@@ -114,7 +125,12 @@ class FragmentSelectBook() : Fragment() {
         }
 
         viewModel.listBooks.observe(viewLifecycleOwner){
-            viewModel.adapter.setBook(it)
+            if (it.isEmpty()){
+                layoutNotBooks.visibility = View.VISIBLE
+            }else{
+                layoutNotBooks.visibility = View.GONE
+                viewModel.adapter.setBook(it)
+            }
         }
 
         recyclerView.adapter = viewModel.adapter

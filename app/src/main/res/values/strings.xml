@@ -183,6 +183,7 @@
     <!-- Окно с выбором книг -->
     <string name="text_successful_download">Книга успешно загружена</string>
     <string name="tab_select_class">КЛАСС</string>
+    <string name="text_not_book">Увы, но книги ещё не добавлены</string>
 
     <!-- Окно чтение книги -->
     <string name="tab_book_page">Страница</string>
