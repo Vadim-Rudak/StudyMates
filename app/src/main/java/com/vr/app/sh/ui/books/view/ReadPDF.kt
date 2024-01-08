@@ -6,16 +6,17 @@ import android.os.ParcelFileDescriptor
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.viewpager.widget.ViewPager
+import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import com.vr.app.sh.R
-import com.vr.app.sh.ui.books.adapter.ReadPDFadapter
+import com.vr.app.sh.ui.books.adapter.ReadPDFAdapter
 import java.io.File
 
 class ReadPDF : AppCompatActivity() {
 
-    var pdfRenderer: PdfRenderer? = null
-    var fileDescriptor: ParcelFileDescriptor? = null
+    private var pdfRenderer: PdfRenderer? = null
+    private var fileDescriptor: ParcelFileDescriptor? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,11 +33,13 @@ class ReadPDF : AppCompatActivity() {
         val viewTitle = findViewById<TextView>(R.id.viewTitle)
         viewTitle.text = file.nameWithoutExtension
 
-        val viewPager = findViewById<ViewPager>(R.id.pager_questions)
-        viewPager.adapter = ReadPDFadapter(supportFragmentManager,pdfRenderer!!.pageCount,pdfRenderer!!)
+        val viewPager = findViewById<ViewPager2>(R.id.pager)
+        viewPager.adapter = ReadPDFAdapter(this,pdfRenderer!!.pageCount,pdfRenderer!!)
 
         val tabLayout = findViewById<TabLayout>(R.id.tabs_open_pdf)
-        tabLayout.setupWithViewPager(viewPager)
+        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+            tab.text = resources.getString(R.string.tab_book_page) + " $position"
+        }.attach()
     }
 
     override fun onDestroy() {
