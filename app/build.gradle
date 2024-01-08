@@ -38,6 +38,7 @@ android {
 dependencies {
 
     implementation "dev.chrisbanes.insetter:insetter:0.6.1"
+    implementation 'com.davemorrissey.labs:subsampling-scale-image-view-androidx:3.10.0'
 
     //anim
     implementation 'com.airbnb.android:lottie:5.2.0'

@@ -8,11 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
+import com.davemorrissey.labs.subscaleview.ImageSource
+import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView
 import com.vr.app.sh.R
 
 class FragmentPagePDF(var pageNumber: Int, private val pdfRenderer:PdfRenderer) : Fragment() {
 
-    lateinit var image:ImageView
+    lateinit var image:SubsamplingScaleImageView
     lateinit var bt:Bitmap
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -35,7 +37,7 @@ class FragmentPagePDF(var pageNumber: Int, private val pdfRenderer:PdfRenderer) 
             PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY
         )
         rendererPage.close()
-        image.setImageBitmap(bt)
+        image.setImage(ImageSource.bitmap(bt))
     }
 
     override fun onDestroyView() {

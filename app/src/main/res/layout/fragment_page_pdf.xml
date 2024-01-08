@@ -7,7 +7,7 @@
     android:background="@color/white"
     tools:context=".ui.books.view.FragmentPagePDF">
 
-    <ImageView
+    <com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView
         android:id="@+id/imageView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -17,5 +17,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:contentDescription="@string/tab_book_page" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
