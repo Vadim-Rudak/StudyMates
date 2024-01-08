@@ -182,6 +182,7 @@
 
     <!-- Окно с выбором книг -->
     <string name="text_successful_download">Книга успешно загружена</string>
+    <string name="tab_select_class">КЛАСС</string>
 
     <!-- Окно чтение книги -->
     <string name="tab_book_page">Страница</string>
@@ -193,6 +194,15 @@
     <string name="text_btn_getBook">выбрать файл</string>
     <string name="text_btn_send">Отправить</string>
     <string name="send_text">Подождите, выполняется загрузка файла на сервер</string>
+
+    <string name="file_download_done">Файл успешно загружен</string>
+    <string name="file_download_error">Ошибка загрузки файла</string>
+
+    <string name="book_download_done">Книга успешно загружена</string>
+    <string name="book_download_error">Ошибка загрузки книги</string>
+
+    <string name="file_error_select">Не выбран файл для отправки</string>
+    <string name="file_selected">Выбранный файл:</string>
 
     <!-- Окно для редактирования учебника -->
     <string name="editBookTitel">Выберите функцию</string>

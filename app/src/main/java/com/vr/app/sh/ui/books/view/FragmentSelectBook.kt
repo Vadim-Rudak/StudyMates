@@ -5,7 +5,6 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.os.Environment
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,7 +22,11 @@ import com.vr.app.sh.ui.books.adapter.BooksItemDecoration
 import com.vr.app.sh.ui.books.adapter.RecyclerViewAdapter
 import com.vr.app.sh.ui.books.viewmodel.SubjectsViewModel
 import com.vr.app.sh.ui.other.UseAlert
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.io.File
 
 class FragmentSelectBook() : Fragment() {
@@ -31,12 +34,11 @@ class FragmentSelectBook() : Fragment() {
     @javax.inject.Inject
     lateinit var factory: BooksViewModelFactory
 
-    var num_class:Int = 0
+    var numClass:Int = 0
     lateinit var viewModel: SubjectsViewModel
 
-
-    constructor(num_class:Int):this(){
-        this.num_class = num_class
+    constructor(numClass:Int):this(){
+        this.numClass = numClass
     }
 
     override fun onAttach(context: Context) {
@@ -44,8 +46,7 @@ class FragmentSelectBook() : Fragment() {
         (context.applicationContext as App).appComponent.injectFragmentSubjectsClass(this)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_subjects_class, container, false)
         val recyclerView = view.findViewById<RecyclerView>(R.id.subjects_recycler)
         recyclerView.layoutManager = GridLayoutManager(activity, 2)
@@ -65,13 +66,13 @@ class FragmentSelectBook() : Fragment() {
         }
         val textProgress = view.findViewById<TextView>(R.id.textProgress)
 
-        factory.addNumClass(num_class)
-
         viewModel = ViewModelProvider(this, factory)
             .get(SubjectsViewModel::class.java)
 
+        viewModel.fetchListBooks(numClass)
+
         viewModel.progress.observe(viewLifecycleOwner){
-            textProgress.text = "${it}%"
+            textProgress.text = "$it%"
             progressbar.progress = it.toFloat()
             if (it.toInt()==100){
                 viewModel.download.value = false
@@ -98,10 +99,10 @@ class FragmentSelectBook() : Fragment() {
                         textProgress.visibility = View.GONE
                         infoDownload.visibility = View.VISIBLE
                         if (viewModel.saveFileInMemory == true){
-                            infoDownload.text = "Книга успешно загружена"
+                            infoDownload.text = resources.getString(R.string.book_download_done)
                         }
                         if (viewModel.saveFileInMemory == false){
-                            infoDownload.text = "Ошибка загрузки книги"
+                            infoDownload.text = resources.getString(R.string.book_download_error)
                         }
                         delay(1500)
                         infoDownload.visibility = View.GONE
@@ -114,15 +115,13 @@ class FragmentSelectBook() : Fragment() {
 
         viewModel.listBooks.observe(viewLifecycleOwner){
             viewModel.adapter.setBook(it)
-            Log.d("FFF", "size ${it.size}")
         }
 
         recyclerView.adapter = viewModel.adapter
         viewModel.adapter.setListener(object : RecyclerViewAdapter.Listener{
             override fun Clicked(pos_book: Int, name_book: String, id_book: Int) {
-                val path = Environment.getExternalStorageDirectory().path + "/SchoolProg/Books/Class_" + num_class + "/" + name_book + ".pdf"
+                val path = Environment.getExternalStorageDirectory().path + "/SchoolProg/Books/Class_" + numClass + "/" + name_book + ".pdf"
                 if (File(path).exists()){
-                    Log.d("FFF","Открыта книга")
                     val intent = Intent(activity, ReadPDF::class.java)
                     intent.putExtra("path",path)
                     intent.putExtra("name_book", name_book)

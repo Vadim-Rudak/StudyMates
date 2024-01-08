@@ -21,29 +21,29 @@ class AddBookViewModel(
     private val sendBook: SendBook
 ): ViewModel() {
 
-    var path_file: String? = null
+    var pathFile: String? = null
     lateinit var file: File
-    val vizibileProgressBar = MutableLiveData<Boolean>()
+    val visibleProgressBar = MutableLiveData<Boolean>()
     val send = MutableLiveData<Boolean>()
     val errorMessage = MutableLiveData<String>()
 
     fun sendFile(nameBook:String,numClass:Int){
         if(internetConnection){
-            vizibileProgressBar.value = true
+            visibleProgressBar.value = true
             CoroutineScope(Dispatchers.IO).launch {
                 sendBook.execute(numClass,nameBook,file)
                 getAllBookListInternet.execute().also {
                     if (it.success){
                         it.list?.let { it1 -> saveBookListInBD.execute(it1) }
                         withContext(Dispatchers.Main){
-                            vizibileProgressBar.value = false
+                            visibleProgressBar.value = false
                             send.value = true
                         }
                     }
                 }
             }
         }else{
-            vizibileProgressBar.value = false
+            visibleProgressBar.value = false
             errorMessage.value = resources.getString(R.string.alrNotInternetConnection)
         }
     }

@@ -14,19 +14,12 @@ class BooksViewModelFactory(
     val getBookFile: GetBookFile
     ): ViewModelProvider.Factory  {
 
-    var num_class: Int = 0
-
-    fun addNumClass(num_class:Int){
-        this.num_class = num_class
-    }
-
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return if (modelClass.isAssignableFrom(SubjectsViewModel::class.java)) {
             SubjectsViewModel(
                 resources = context.resources,
                 getBookFile = getBookFile,
                 getListBookInClass = getListBookInClass,
-                numClass = num_class,
                 internetConnect = InternetConnection.useInternet(context)
             ) as T
         } else {

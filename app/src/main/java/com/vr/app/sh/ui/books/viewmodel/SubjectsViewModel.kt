@@ -24,7 +24,7 @@ import kotlinx.coroutines.flow.collectIndexed
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class SubjectsViewModel(private val resources: Resources,val getBookFile: GetBookFile, val getListBookInClass: GetListBookInClass,val numClass:Int,private val internetConnect:Boolean): ViewModel() {
+class SubjectsViewModel(private val resources: Resources,val getBookFile: GetBookFile, val getListBookInClass: GetListBookInClass,private val internetConnect:Boolean): ViewModel() {
 
     val download = MutableLiveData<Boolean>()
     var saveFileInMemory:Boolean? = false
@@ -34,11 +34,7 @@ class SubjectsViewModel(private val resources: Resources,val getBookFile: GetBoo
     var listBooks = MutableLiveData<List<Book>>()
     var job: Job? = null
 
-    init {
-        fetchListBooks()
-    }
-
-    private fun fetchListBooks () {
+    fun fetchListBooks (numClass: Int) {
         job = CoroutineScope(Dispatchers.IO).launch {
             getListBookInClass.execute(numClass).collectIndexed { index, value ->
                 listBooks.postValue(value)

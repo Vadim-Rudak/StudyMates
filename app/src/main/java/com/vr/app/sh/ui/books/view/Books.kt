@@ -20,18 +20,15 @@ import com.vr.app.sh.ui.books.adapter.ViewPager2Adapter
 
 class Books : AppCompatActivity() {
 
-    var num_class:Int = 0
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_books)
 
+        val tabLayout = findViewById<TabLayout>(R.id.tabs_windows_test1)
         val viewPager = findViewById<ViewPager2>(R.id.pager_windows_book)
         viewPager.adapter = ViewPager2Adapter(this)
-
-        val tabLayout = findViewById<TabLayout>(R.id.tabs_windows_test1)
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-            tab.text = "${(position + 1)} КЛАСС"
+            tab.text = "${(position + 1)} " + resources.getString(R.string.tab_select_class)
         }.attach()
 
         val btnBack = findViewById<ImageButton>(R.id.btn_back)
@@ -48,8 +45,9 @@ class Books : AppCompatActivity() {
             fab.visibility = View.GONE
         }
         fab.setOnClickListener {
-            var intent = Intent(this,AddBook::class.java)
-            intent.putExtra("num_class", tabLayout.selectedTabPosition + 1)
+            val intent = Intent(this,AddBook::class.java).apply {
+                putExtra("num_class", tabLayout.selectedTabPosition + 1)
+            }
             startActivity(intent)
         }
 
@@ -58,7 +56,7 @@ class Books : AppCompatActivity() {
 
     fun isStoragePermissionGranted(): Boolean {
         return if (Build.VERSION.SDK_INT >= 23) {
-            if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+            if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                 true
             } else {
                 ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), 1)

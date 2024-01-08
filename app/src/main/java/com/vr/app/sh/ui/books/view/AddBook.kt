@@ -28,7 +28,7 @@ import java.io.File
 
 class AddBook : AppCompatActivity() {
 
-    lateinit var pathBook:TextView
+    private lateinit var pathBook:TextView
 
     @javax.inject.Inject
     lateinit var factory:AddBookViewModelFactory
@@ -42,8 +42,8 @@ class AddBook : AppCompatActivity() {
         (applicationContext as App).appComponent.injectAddBook(this)
 
         val nameBook = findViewById<EditText>(R.id.name_book_add)
-        val btn_find = findViewById<Button>(R.id.btn_find_pdf)
-        val btn_sendBook = findViewById<Button>(R.id.btn_add_book)
+        val btnFind = findViewById<Button>(R.id.btn_find_pdf)
+        val btnSendBook = findViewById<Button>(R.id.btn_add_book)
         val progressbar = findViewById<CircularProgressBar>(R.id.circularProgressBar)
         val textProgress = findViewById<TextView>(R.id.textProgress)
         pathBook = findViewById(R.id.textViewNameFile)
@@ -61,12 +61,12 @@ class AddBook : AppCompatActivity() {
             UseAlert.errorMessage(it,this)
         }
 
-        viewModel.vizibileProgressBar.observe(this){
+        viewModel.visibleProgressBar.observe(this){
             if (it){
                 nameBook.visibility = View.GONE
                 pathBook.visibility = View.GONE
-                btn_find.visibility = View.GONE
-                btn_sendBook.visibility = View.GONE
+                btnFind.visibility = View.GONE
+                btnSendBook.visibility = View.GONE
                 textProgress.visibility = View.VISIBLE
                 progressbar.apply {
                     visibility = View.VISIBLE
@@ -86,9 +86,9 @@ class AddBook : AppCompatActivity() {
 
         viewModel.send.observe(this){
             if (it){
-                textProgress.text = "Файл успешно загружен"
+                textProgress.text = resources.getString(R.string.file_download_done)
             }else{
-                textProgress.text = "Ошибка загрузки файла"
+                textProgress.text = resources.getString(R.string.file_download_error)
             }
             CoroutineScope(Dispatchers.IO).launch {
                 withContext(Dispatchers.Main){
@@ -99,36 +99,38 @@ class AddBook : AppCompatActivity() {
             }
         }
 
-        btn_find.setOnClickListener {
-            viewModel.path_file = null
+        btnFind.setOnClickListener {
+            viewModel.pathFile = null
             val intent = Intent("com.sec.android.app.myfiles.PICK_DATA")
             intent.putExtra("CONTENT_TYPE", "application/pdf")
             getResult.launch(intent)
         }
 
-        btn_sendBook.setOnClickListener {
+        btnSendBook.setOnClickListener {
             if (TextUtils.isEmpty(nameBook.text.toString().trim())){
-                nameBook.setText("")
-                nameBook.hint = "Введите название книги"
+                nameBook.apply {
+                    setText("")
+                    hint = resources.getString(R.string.nameBook_input_hint)
+                }
             }
-            if (viewModel.path_file==null){
-                viewModel.errorMessage.value = "Не выбран файл для отправки"
+            if (viewModel.pathFile==null){
+                viewModel.errorMessage.value = resources.getString(R.string.file_error_select)
             }
-            if (!TextUtils.isEmpty(nameBook.text.toString().trim())&&viewModel.path_file!=null){
+            if (!TextUtils.isEmpty(nameBook.text.toString().trim())&&viewModel.pathFile!=null){
                 viewModel.sendFile(nameBook.text.toString(), intent.extras?.getInt("num_class")!!)
             }
         }
     }
 
-    val getResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+    private val getResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
         if (it.resultCode == Activity.RESULT_OK){
-            viewModel.path_file = getRealPathFromURI(it.data?.data!!)
-            viewModel.file = File(viewModel.path_file)
-            pathBook.text = "Выбранный файл: ${ viewModel.file.nameWithoutExtension }"
+            viewModel.pathFile = getRealPathFromURI(it.data?.data!!)
+            viewModel.file = File(viewModel.pathFile)
+            pathBook.text = resources.getString(R.string.file_selected) + " ${viewModel.file.nameWithoutExtension}"
         }
     }
 
-    fun getRealPathFromURI(uri: Uri): String? {
+    private fun getRealPathFromURI(uri: Uri): String? {
         val cursor: Cursor? = contentResolver.query(uri, null, null, null, null)
         cursor?.moveToFirst()
         val idx: Int = cursor!!.getColumnIndex(MediaStore.Images.ImageColumns.DATA)
