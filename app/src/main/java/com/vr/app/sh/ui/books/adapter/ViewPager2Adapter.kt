@@ -7,11 +7,7 @@ import com.vr.app.sh.ui.books.view.FragmentSelectBook
 
 class ViewPager2Adapter(fm: FragmentActivity) : FragmentStateAdapter(fm) {
 
-    override fun getItemCount(): Int {
-        return 11
-    }
+    override fun getItemCount(): Int = 11
 
-    override fun createFragment(position: Int): Fragment {
-        return FragmentSelectBook(position+1)
-    }
+    override fun createFragment(position: Int): Fragment = FragmentSelectBook(position+1)
 }

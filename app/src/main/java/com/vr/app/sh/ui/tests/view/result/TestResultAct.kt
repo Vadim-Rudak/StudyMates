@@ -1,9 +1,11 @@
 package com.vr.app.sh.ui.tests.view.result
 
+import android.os.Build
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.vr.app.sh.R
@@ -20,11 +22,12 @@ class TestResultAct : AppCompatActivity() {
 
     lateinit var viewModel:ResultViewModel
 
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_result_test)
 
-        val testResult = intent.getSerializableExtra("objTestResult") as? ResultTest
+        val testResult = intent.getSerializableExtra("objTestResult",ResultTest::class.java)
 
         val viewCorrectAnswer = findViewById<TextView>(R.id.res_text_correct)
         val viewWrongAnswer = findViewById<TextView>(R.id.res_text_err)

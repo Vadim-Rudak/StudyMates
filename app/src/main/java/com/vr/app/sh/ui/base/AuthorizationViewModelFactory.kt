@@ -12,10 +12,10 @@ import com.vr.app.sh.ui.other.InternetConnection
 
 class AuthorizationViewModelFactory(
     val context: Context,
-    val cleanUser: CleanUser,
-    val downloadUserPhoto: DownloadUserPhoto,
-    val authorization: Authorization,
-    val saveUser: SaveUser
+    private val cleanUser: CleanUser,
+    private val downloadUserPhoto: DownloadUserPhoto,
+    private val authorization: Authorization,
+    private val saveUser: SaveUser
 ): ViewModelProvider.Factory  {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {

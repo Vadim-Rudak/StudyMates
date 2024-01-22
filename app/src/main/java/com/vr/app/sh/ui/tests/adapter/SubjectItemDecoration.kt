@@ -1,6 +1,5 @@
 package com.vr.app.sh.ui.tests.adapter
 
-import android.content.Context
 import android.content.res.Resources
 import android.graphics.Rect
 import android.util.TypedValue
@@ -9,10 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 
 class SubjectItemDecoration(val resources: Resources) : RecyclerView.ItemDecoration()  {
 
-    var leftItem:Int = 4
-    var rightItem:Int = 4
-    var topItem:Int = 4
-    var bottomItem:Int = 4
+    private var leftItem:Int = 4
+    private var rightItem:Int = 4
+    private var topItem:Int = 4
+    private var bottomItem:Int = 4
 
     override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
         val itemPosition = parent.getChildAdapterPosition(view)

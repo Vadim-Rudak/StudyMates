@@ -10,8 +10,8 @@ import com.vr.app.sh.ui.other.InternetConnection
 
 class RegViewModelFactory(
     val context: Context,
-    val saveUser: SaveUser,
-    val registration: Registration
+    private val saveUser: SaveUser,
+    private val registration: Registration
 ): ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {

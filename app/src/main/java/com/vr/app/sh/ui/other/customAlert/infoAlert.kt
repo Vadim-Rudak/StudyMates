@@ -6,7 +6,6 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 import com.google.android.material.button.MaterialButton
@@ -20,8 +19,8 @@ class infoAlert(private val textInfo:String): DialogFragment() {
         val inflater = LayoutInflater.from(context)
         val window: View = inflater.inflate(R.layout.alert_info,null)
 
-        val viewTitel = window.findViewById<TextView>(R.id.al_info_view_titel)
-        viewTitel.text = context?.getText(R.string.alrInfoTitel)
+        val viewTitle = window.findViewById<TextView>(R.id.al_info_view_titel)
+        viewTitle.text = context?.getText(R.string.alrInfoTitel)
         val viewInfo = window.findViewById<TextView>(R.id.al_info_view_info)
         viewInfo.text = textInfo
 

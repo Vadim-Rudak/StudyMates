@@ -1,7 +1,6 @@
 package com.vr.app.sh.ui.door.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,12 +28,14 @@ class FragmentReg(val numPage:Int) : Fragment() {
     private var bottomSheetPickPhoto:BottomSheetPickPhoto? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = when(numPage){
-            1->inflater.inflate(R.layout.fragment_school_info, container, false)
-            2->inflater.inflate(R.layout.fragment_create_login, container, false)
-            3->inflater.inflate(R.layout.fragment_add_user_photo, container, false)
-            else->inflater.inflate(R.layout.fragment_as_for_me, container, false)
-        }
+        val view = inflater.inflate(
+            when(numPage){
+                1->R.layout.fragment_school_info
+                2->R.layout.fragment_create_login
+                3->R.layout.fragment_add_user_photo
+                else->R.layout.fragment_as_for_me
+            }, container, false)
+
         when(numPage){
             1->{
                 val school = userProfile.school
@@ -70,10 +71,10 @@ class FragmentReg(val numPage:Int) : Fragment() {
                 val viewPassword = view.findViewById<TextInputEditText>(R.id.reg_fr3_password)
                 val viewPassword2 = view.findViewById<TextInputEditText>(R.id.reg_fr3_password2)
                 viewPassword2.doAfterTextChanged {
-                    if (it.toString()==viewPassword.text.toString()){
-                        auth.password = it.toString()
+                    auth.password = if (it.toString()==viewPassword.text.toString()){
+                        it.toString()
                     }else{
-                        auth.password = null
+                        null
                     }
                 }
             }

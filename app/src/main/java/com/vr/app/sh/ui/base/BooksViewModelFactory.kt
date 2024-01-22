@@ -10,8 +10,8 @@ import com.vr.app.sh.ui.other.InternetConnection
 
 class BooksViewModelFactory(
     val context:Context,
-    val getListBookInClass: GetListBookInClass,
-    val getBookFile: GetBookFile
+    private val getListBookInClass: GetListBookInClass,
+    private val getBookFile: GetBookFile
     ): ViewModelProvider.Factory  {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {

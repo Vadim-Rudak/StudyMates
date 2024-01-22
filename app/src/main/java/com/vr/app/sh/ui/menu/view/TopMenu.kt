@@ -58,7 +58,7 @@ class TopMenu : AppCompatActivity() {
         if (intent.extras?.getBoolean("verification") == true){
             verificationMsg(
                 nameAnim = "verification_ok.json",
-                textTitel = this.resources.getString(R.string.win_verification_info_msg_t1),
+                textTitle = this.resources.getString(R.string.win_verification_info_msg_t1),
                 textMessage = this.resources.getString(R.string.win_verification_info_msg_info1)
             ).show(supportFragmentManager,"verification alert")
         }
@@ -135,17 +135,15 @@ class TopMenu : AppCompatActivity() {
         val navMenu = findViewById<LinearLayout>(R.id.navMenu)
         val linearLayout = findViewById<LinearLayout>(R.id.progressLayout)
         val progressBar = findViewById<CircularProgressBar>(R.id.circularProgressBar_menu)
-        val text_progressBar = findViewById<TextView>(R.id.textProgress_menu)
+        val textProgressbar = findViewById<TextView>(R.id.textProgress_menu)
 
         navMenu.setOnClickListener {
-            val intent = Intent(this,MyProfile::class.java)
-            startActivity(intent)
+            startActivity(Intent(this,MyProfile::class.java))
         }
 
         viewModel.statusListBook.observe(this){
             if (it){
-                val intent = Intent(this@TopMenu, Books::class.java)
-                startActivity(intent)
+                startActivity(Intent(this@TopMenu, Books::class.java))
             }
         }
 
@@ -154,9 +152,9 @@ class TopMenu : AppCompatActivity() {
                 navMenu.visibility = View.GONE
                 recyclerView.visibility = View.GONE
                 linearLayout.visibility = View.VISIBLE
-                text_progressBar.visibility = View.VISIBLE
-                progressBar.visibility = View.VISIBLE
+                textProgressbar.visibility = View.VISIBLE
                 progressBar.apply {
+                    visibility = View.VISIBLE
                     progressBarWidth = 14f
                     backgroundProgressBarWidth = 2f
                     backgroundProgressBarColor = Color.parseColor("#969696")
@@ -170,7 +168,7 @@ class TopMenu : AppCompatActivity() {
                 recyclerView.visibility = View.VISIBLE
                 linearLayout.visibility = View.GONE
                 progressBar.visibility = View.GONE
-                text_progressBar.visibility = View.GONE
+                textProgressbar.visibility = View.GONE
             }
         }
 
@@ -178,7 +176,7 @@ class TopMenu : AppCompatActivity() {
 
     fun isStoragePermissionGranted(): Boolean {
         return if (Build.VERSION.SDK_INT >= 23) {
-            if (checkSelfPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+            if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                 true
             } else {
                 ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 1)

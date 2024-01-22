@@ -39,11 +39,7 @@ class Books : AppCompatActivity() {
         viewTitle.text = resources.getString(R.string.TopMenu_btn1)
 
         val fab = findViewById<FloatingActionButton>(R.id.FabBook)
-        if (USER_ROLE == "ADMIN"){
-            fab.visibility = View.VISIBLE
-        }else{
-            fab.visibility = View.GONE
-        }
+        fab.visibility = if (USER_ROLE == "ADMIN") View.VISIBLE else View.GONE
         fab.setOnClickListener {
             val intent = Intent(this,AddBook::class.java).apply {
                 putExtra("num_class", tabLayout.selectedTabPosition + 1)
@@ -54,7 +50,7 @@ class Books : AppCompatActivity() {
         isStoragePermissionGranted()
     }
 
-    fun isStoragePermissionGranted(): Boolean {
+    private fun isStoragePermissionGranted(): Boolean {
         return if (Build.VERSION.SDK_INT >= 23) {
             if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                 true

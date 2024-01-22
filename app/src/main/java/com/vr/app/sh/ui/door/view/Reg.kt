@@ -30,16 +30,15 @@ class Reg : AppCompatActivity() {
 
         val btnBack = findViewById<ImageButton>(R.id.reg_btn_back)
         btnBack.setOnClickListener {
-            val intent = Intent(this,Authoriz::class.java)
-            startActivity(intent)
+            startActivity(Intent(this,Authoriz::class.java))
             finish()
         }
-        val titel = findViewById<TextView>(R.id.reg_text_titel)
+        val title = findViewById<TextView>(R.id.reg_text_titel)
         val tab1 = findViewById<ImageView>(R.id.reg_image_tab1)
         val tab2 = findViewById<ImageView>(R.id.reg_image_tab2)
         val tab3 = findViewById<ImageView>(R.id.reg_image_tab3)
         val tab4 = findViewById<ImageView>(R.id.reg_image_tab4)
-        val btn_next = findViewById<Button>(R.id.reg_btn_next)
+        val btnNext = findViewById<Button>(R.id.reg_btn_next)
 
         (applicationContext as App).appComponent.injectReg(this)
 
@@ -50,20 +49,20 @@ class Reg : AppCompatActivity() {
             numFragment = it
             when(it){
                 1->{
-                    titel.setText(R.string.registration_titel2)
+                    title.setText(R.string.registration_titel2)
                     tab2.setImageResource(R.drawable.tab_reg_true)
                 }
                 2->{
-                    titel.setText(R.string.registration_titel3)
+                    title.setText(R.string.registration_titel3)
                     tab3.setImageResource(R.drawable.tab_reg_true)
                 }
                 3->{
-                    titel.setText(R.string.registration_titel4)
+                    title.setText(R.string.registration_titel4)
                     tab4.setImageResource(R.drawable.tab_reg_true)
-                    btn_next.setText(R.string.registration_btn2)
+                    btnNext.setText(R.string.registration_btn2)
                 }
                 else->{
-                    titel.setText(R.string.registration_titel1)
+                    title.setText(R.string.registration_titel1)
                     tab1.setImageResource(R.drawable.tab_reg_true)
                 }
             }
@@ -78,13 +77,12 @@ class Reg : AppCompatActivity() {
 
         viewModel.statusRegistration.observe(this){
             if(it){
-                val intent = Intent(this,Verification::class.java)
-                startActivity(intent)
+                startActivity(Intent(this,Verification::class.java))
                 finish()
             }
         }
 
-        btn_next.setOnClickListener {
+        btnNext.setOnClickListener {
             when(numFragment){
                 0->{
                     infoInEditText(

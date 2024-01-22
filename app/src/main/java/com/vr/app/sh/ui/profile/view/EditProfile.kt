@@ -57,9 +57,9 @@ class EditProfile : AppCompatActivity() {
         if(sharedPrefs.contains("user_last_name")){
             inputLastName.setText(sharedPrefs.getString("user_last_name"," "))
         }
-        val inputDateBithday = findViewById<TextInputEditText>(R.id.TextUserDateBithday)
+        val inputDateBirthday = findViewById<TextInputEditText>(R.id.TextUserDateBithday)
         if (sharedPrefs.contains("user_date_bithday")){
-            inputDateBithday.setText(sharedPrefs.getString("user_date_bithday",null))
+            inputDateBirthday.setText(sharedPrefs.getString("user_date_bithday",null))
         }
         val inputCityLive = findViewById<TextInputEditText>(R.id.TextCityLive)
         if (sharedPrefs.contains("user_city_live")){

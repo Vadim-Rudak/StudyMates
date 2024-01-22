@@ -1,5 +1,6 @@
 package com.vr.app.sh.ui.books.adapter
 
+import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.util.Base64
@@ -15,8 +16,9 @@ import com.vr.app.sh.domain.model.Book
 
 class RecyclerViewAdapter : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
     private var listener: Listener? = null
-    var bookList:List<Book> = listOf()
+    private var bookList:List<Book> = listOf()
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setBook(books: List<Book>) {
         this.bookList = books
         notifyDataSetChanged()
@@ -50,20 +52,20 @@ class RecyclerViewAdapter : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>
         if(bookList[position].image!=null){
             imageView.setImageBitmap(Base64ToBitmap(bookList[position].image!!))
         }
-        val id_book = cardView.findViewById<View>(R.id.text_id_book) as TextView
-        id_book.text = bookList[position].id.toString()
-        val name_book = cardView.findViewById<View>(R.id.text_btn_sub) as TextView
-        name_book.text = bookList[position].name
+        val idBook = cardView.findViewById<View>(R.id.text_id_book) as TextView
+        idBook.text = bookList[position].id.toString()
+        val nameBook = cardView.findViewById<View>(R.id.text_btn_sub) as TextView
+        nameBook.text = bookList[position].name
 
         cardView.setOnClickListener {
             if (listener != null) {
-                listener!!.Clicked(position,name_book.text.toString(), Integer.parseInt(id_book.text.toString()))
+                listener!!.Clicked(position,nameBook.text.toString(), Integer.parseInt(idBook.text.toString()))
             }
         }
 
         cardView.setOnLongClickListener {
             if (listener != null) {
-                listener!!.LongClicked(position,name_book.text.toString(), Integer.parseInt(id_book.text.toString()))
+                listener!!.LongClicked(position,nameBook.text.toString(), Integer.parseInt(idBook.text.toString()))
             }
             true
         }

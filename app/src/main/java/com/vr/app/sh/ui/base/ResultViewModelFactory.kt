@@ -9,7 +9,7 @@ import com.vr.app.sh.ui.tests.viewmodel.ResultViewModel
 
 class ResultViewModelFactory(
     val context: Context,
-    val sendResult: SendResult
+    private val sendResult: SendResult
 ): ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {

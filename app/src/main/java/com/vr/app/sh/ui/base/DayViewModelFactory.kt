@@ -12,7 +12,7 @@ class DayViewModelFactory(
     private val getLessonsInDay: GetLessonsInDay
 ): ViewModelProvider.Factory {
 
-    var numDay:Int = 0
+    private var numDay:Int = 0
 
     fun setDay(numDay: Int){
         this.numDay = numDay

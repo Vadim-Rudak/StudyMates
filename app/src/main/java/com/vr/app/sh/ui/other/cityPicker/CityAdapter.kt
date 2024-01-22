@@ -1,5 +1,6 @@
 package com.vr.app.sh.ui.other.cityPicker
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -12,8 +13,9 @@ import com.vr.app.sh.ui.other.RegistrationInfo
 class CityAdapter : RecyclerView.Adapter<CityAdapter.ViewHolder>() {
 
     private var listener: Listener? = null
-    lateinit var itemList:Array<String>
+    private lateinit var itemList:Array<String>
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setItems(items: Array<String>) {
         this.itemList = items
         notifyDataSetChanged()

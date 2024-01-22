@@ -6,13 +6,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import com.davemorrissey.labs.subscaleview.ImageSource
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView
 import com.vr.app.sh.R
 
-class FragmentPagePDF(var pageNumber: Int, private val pdfRenderer:PdfRenderer) : Fragment() {
+class FragmentPagePDF(private var pageNumber: Int, private val pdfRenderer:PdfRenderer) : Fragment() {
 
     lateinit var image:SubsamplingScaleImageView
     lateinit var bt:Bitmap

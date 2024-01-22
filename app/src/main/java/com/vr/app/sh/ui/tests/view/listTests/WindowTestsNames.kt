@@ -34,7 +34,7 @@ class WindowTestsNames : AppCompatActivity() {
 
         val tabLayout = findViewById<TabLayout>(R.id.tabs_active_test)
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-            tab.text = "${(position + 1)} КЛАСС"
+            tab.text = "${(position + 1)} " + resources.getString(R.string.tab_tests_in_class)
         }.attach()
 
         val addTest = findViewById<FloatingActionButton>(R.id.AddTest)

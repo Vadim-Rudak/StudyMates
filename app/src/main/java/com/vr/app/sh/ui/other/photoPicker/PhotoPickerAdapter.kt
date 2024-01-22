@@ -1,5 +1,6 @@
 package com.vr.app.sh.ui.other.photoPicker
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -12,13 +13,12 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.google.android.material.imageview.ShapeableImageView
 import com.vr.app.sh.R
-import com.vr.app.sh.ui.books.adapter.RecyclerViewAdapter
 
 class PhotoPickerAdapter(val context:Context, private val selectMorePhotos:Boolean): RecyclerView.Adapter<PhotoPickerAdapter.ViewHolder>() {
 
     private var listener: Listener? = null
     private var listSelectPhoto:ArrayList<Int> = ArrayList()
-    lateinit var listAllPhotos:ArrayList<String>
+    private lateinit var listAllPhotos:ArrayList<String>
 
     interface Listener {
         fun clickItem(numSelectedPhotos:Int)
@@ -31,6 +31,7 @@ class PhotoPickerAdapter(val context:Context, private val selectMorePhotos:Boole
 
     fun numSelectedPhotos():Int = listSelectPhoto.size
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setPhotos(items: ArrayList<String>?) {
         this.listAllPhotos = items!!
         notifyDataSetChanged()
@@ -115,7 +116,8 @@ class PhotoPickerAdapter(val context:Context, private val selectMorePhotos:Boole
         }
     }
 
-    fun usePhotoAndLimit(limit:Int,position: Int){
+    @SuppressLint("NotifyDataSetChanged")
+    private fun usePhotoAndLimit(limit:Int, position: Int){
         if (numSelectedPhotos()<limit){
             listSelectPhoto.add(position)
             notifyDataSetChanged()

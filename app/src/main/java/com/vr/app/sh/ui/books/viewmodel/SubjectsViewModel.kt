@@ -51,13 +51,13 @@ class SubjectsViewModel(private val resources: Resources,val getBookFile: GetBoo
         val window:View = inflater.inflate(R.layout.edit_book_window,null)
         alertDialog.setView(window)
 
-        val btn_edit_book_info = window.findViewById<Button>(R.id.btn_edit_info)
-        btn_edit_book_info.setOnClickListener {
+        val btnEditBookInfo = window.findViewById<Button>(R.id.btn_edit_info)
+        btnEditBookInfo.setOnClickListener {
 
         }
 
-        val btn_up_file = window.findViewById<Button>(R.id.btn_up_file)
-        btn_up_file.setOnClickListener {
+        val btnUpFile = window.findViewById<Button>(R.id.btn_up_file)
+        btnUpFile.setOnClickListener {
 
         }
 
@@ -73,11 +73,11 @@ class SubjectsViewModel(private val resources: Resources,val getBookFile: GetBoo
         alertDialog.show()
     }
 
-    fun saveFileDialog(path: String,id_book: Int,context: Context){
+    fun saveFileDialog(path: String, idBook: Int, context: Context){
         val alertDialog = AlertDialog.Builder(context)
         alertDialog.setTitle(resources.getString(R.string.titelDownloadBook))
         alertDialog.setPositiveButton(resources.getString(R.string.btnDownloadBookOk), DialogInterface.OnClickListener { dialogInterface, i ->
-            downloadFile(path,id_book)
+            downloadFile(path,idBook)
         })
         alertDialog.setNegativeButton(resources.getString(R.string.btnDownloadBookCansel),DialogInterface.OnClickListener { dialogInterface, i ->
             dialogInterface.dismiss()
@@ -85,7 +85,7 @@ class SubjectsViewModel(private val resources: Resources,val getBookFile: GetBoo
         alertDialog.show()
     }
 
-    fun downloadFile(path: String,id_book:Int) {
+    private fun downloadFile(path: String, id_book:Int) {
         if(internetConnect){
             download.postValue(true)
             Log.d("downloadFile", "start")

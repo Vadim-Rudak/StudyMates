@@ -13,11 +13,11 @@ import com.vr.app.sh.ui.other.InternetConnection
 
 class MenuViewModelFactory(
     val context: Context,
-    val getListBookInternet: GetAllBookListInternet,
-    val saveListBookInBD: SaveBookListInBD,
-    val downloadUserPhoto: DownloadUserPhoto,
-    val cleanUser: CleanUser,
-    val cleanCookie: CleanCookie
+    private val getListBookInternet: GetAllBookListInternet,
+    private val saveListBookInBD: SaveBookListInBD,
+    private val downloadUserPhoto: DownloadUserPhoto,
+    private val cleanUser: CleanUser,
+    private val cleanCookie: CleanCookie
 ): ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {

@@ -2,12 +2,10 @@ package com.vr.app.sh.ui.timeTable.viewModel
 
 import android.content.Context
 import android.content.DialogInterface
-import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -15,8 +13,8 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import com.vr.app.sh.R
-import com.vr.app.sh.domain.model.Lesson
 import com.vr.app.sh.domain.UseCase.SaveLessonInBD
+import com.vr.app.sh.domain.model.Lesson
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -25,7 +23,7 @@ import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 
 
-class TimeTableViewModel(val saveLessonInBD: SaveLessonInBD):ViewModel() {
+class TimeTableViewModel(private val saveLessonInBD: SaveLessonInBD):ViewModel() {
 
     var job: Job? = null
 

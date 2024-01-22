@@ -2,8 +2,6 @@ package com.vr.app.sh.ui.other.permissions
 
 import android.content.Context
 import android.content.pm.PackageManager
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.FragmentManager
 import com.vr.app.sh.R
@@ -22,7 +20,7 @@ class Permissions {
                             permissionMsg(
                                 fragmentManager = fragmentManager,
                                 id=0,
-                                titel = context.getString(R.string.titel_memory),
+                                title = context.getString(R.string.titel_memory),
                                 info = context.getString(R.string.info_memory),
                                 nameAnim = "memory-permission.json"
                             )
@@ -32,7 +30,7 @@ class Permissions {
                             permissionMsg(
                                 fragmentManager = fragmentManager,
                                 id=1,
-                                titel = context.getString(R.string.titel_camera),
+                                title = context.getString(R.string.titel_camera),
                                 info = context.getString(R.string.info_camera),
                                 nameAnim = "permission-camera.json"
                             )

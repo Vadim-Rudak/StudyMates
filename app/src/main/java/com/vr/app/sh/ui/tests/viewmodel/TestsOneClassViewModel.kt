@@ -1,14 +1,13 @@
 package com.vr.app.sh.ui.tests.viewmodel
 
 import android.content.res.Resources
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.vr.app.sh.R
-import com.vr.app.sh.domain.model.Test
 import com.vr.app.sh.domain.UseCase.GetListQuestions
 import com.vr.app.sh.domain.UseCase.GetListTestsInClass
 import com.vr.app.sh.domain.UseCase.SaveQuestionsInBD
+import com.vr.app.sh.domain.model.Test
 import com.vr.app.sh.ui.tests.adapter.BtnTestAdapter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -39,7 +38,7 @@ class TestsOneClassViewModel(
 
     private fun fetchTests () {
         job = CoroutineScope(Dispatchers.IO).launch {
-            getListTestsInClass.execute(numClass).collectIndexed { i, value ->
+            getListTestsInClass.execute(numClass).collectIndexed { _, value ->
                 listTests.postValue(value)
             }
         }

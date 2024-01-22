@@ -60,16 +60,17 @@ class Verification : AppCompatActivity() {
             }
         }
 
-        viewModel.status_verification.observe(this){
+        viewModel.statusVerification.observe(this){
             if(it){
-                val intent = Intent(this,TopMenu::class.java)
-                intent.putExtra("verification",true)
+                val intent = Intent(this,TopMenu::class.java).apply {
+                    putExtra("verification",true)
+                }
                 startActivity(intent)
                 finish()
             }else{
                 verificationMsg(
                     nameAnim = "verification_error.json",
-                    textTitel = this.resources.getString(R.string.win_verification_info_msg_t2),
+                    textTitle = this.resources.getString(R.string.win_verification_info_msg_t2),
                     textMessage = this.resources.getString(R.string.win_verification_info_msg_info2)
                 ).show(supportFragmentManager,"verification alert")
             }
@@ -87,8 +88,7 @@ class Verification : AppCompatActivity() {
         }
 
         btnLate.setOnClickListener {
-            val intent = Intent(this,TopMenu::class.java)
-            startActivity(intent)
+            startActivity(Intent(this,TopMenu::class.java))
             finish()
         }
     }

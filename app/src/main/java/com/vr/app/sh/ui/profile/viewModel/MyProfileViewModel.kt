@@ -11,8 +11,8 @@ class MyProfileViewModel(resources: Resources):ViewModel() {
 
     private lateinit var profileInfoBottomSheet:BottomSheetBehavior<*>
     val heightBottomSheet = MutableLiveData<Int>()
-    val heightStatusBar = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 25.toFloat(), resources.displayMetrics).toInt()
-    val heightTopDefault = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 40.toFloat(), resources.displayMetrics).toInt()
+    private val heightStatusBar = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 25.toFloat(), resources.displayMetrics).toInt()
+    private val heightTopDefault = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 40.toFloat(), resources.displayMetrics).toInt()
 
     fun createBottomSheet(view:View){
         profileInfoBottomSheet = BottomSheetBehavior.from(view)
@@ -28,7 +28,9 @@ class MyProfileViewModel(resources: Resources):ViewModel() {
     }
 
     fun seeBottomSheet(defaultHeight:Int){
-        profileInfoBottomSheet.peekHeight = defaultHeight
-        profileInfoBottomSheet.state = BottomSheetBehavior.STATE_COLLAPSED
+        profileInfoBottomSheet.apply {
+            peekHeight = defaultHeight
+            BottomSheetBehavior.STATE_COLLAPSED
+        }
     }
 }

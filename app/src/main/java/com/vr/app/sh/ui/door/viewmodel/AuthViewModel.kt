@@ -17,14 +17,13 @@ import com.vr.app.sh.ui.other.UseAlert
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectIndexed
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class AuthViewModel(private val resources: Resources, private val cleanUser: CleanUser, private val downloadUserPhoto: DownloadUserPhoto, val authorization: Authorization, private val saveUser: SaveUser,private val internetConnect:Boolean): ViewModel() {
 
-    val loadingAlert = UseAlert.loading(
+    private val loadingAlert = UseAlert.loading(
         resources.getString(R.string.alrLoadingAuthTitel),
         resources.getString(R.string.alrLoadingAuthText1)
     )
@@ -64,12 +63,13 @@ class AuthViewModel(private val resources: Resources, private val cleanUser: Cle
 
         downloadUserPhoto.execute(userId,pathSave).collectIndexed { index, value ->
             withContext(Dispatchers.Main){
-                if (value.success == true){
-                    loadingAlert.isDone()
-                    statusAuth.value = true
-                }
-                if(value.success == false){
-                    errorMessage.value = value.infoToSend
+                if (value.success != null){
+                    if (value.success == true){
+                        loadingAlert.isDone()
+                        statusAuth.value = true
+                    }else{
+                        errorMessage.value = value.infoToSend
+                    }
                 }
             }
         }

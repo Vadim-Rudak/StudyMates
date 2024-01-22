@@ -4,13 +4,11 @@ import android.Manifest
 import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.DialogFragment
@@ -30,14 +28,14 @@ class permissionAlert(private val idPermission:Int,private val textTitel:String,
         val window: View = inflater.inflate(R.layout.alert_permission,null)
 
         val viewAnimation = window.findViewById<LottieAnimationView>(R.id.al_loading_anim)
+        viewAnimation.apply {
+            repeatCount = LottieDrawable.INFINITE
+            repeatMode = LottieDrawable.RESTART
+            setAnimation(nameAnim)
+        }.playAnimation()
 
-        viewAnimation.repeatCount = LottieDrawable.INFINITE
-        viewAnimation.repeatMode = LottieDrawable.RESTART
-        viewAnimation.setAnimation(nameAnim)
-        viewAnimation.playAnimation()
-
-        val viewTitel = window.findViewById<TextView>(R.id.al_loading_view_titel)
-        viewTitel.text = textTitel
+        val viewTitle = window.findViewById<TextView>(R.id.al_loading_view_titel)
+        viewTitle.text = textTitel
         val viewInfo = window.findViewById<TextView>(R.id.al_loading_view_info)
         viewInfo.text = textInfo
 

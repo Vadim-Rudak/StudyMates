@@ -24,14 +24,14 @@ class loadingAlert(private val textTitel:String,private val textInfo:String): Di
         val window: View = inflater.inflate(R.layout.alert_loading,null)
 
         val viewAnimation = window.findViewById<LottieAnimationView>(R.id.al_loading_anim)
+        viewAnimation.apply {
+            repeatCount = LottieDrawable.INFINITE
+            repeatMode = LottieDrawable.RESTART
+            setAnimation("gear.json")
+        }.playAnimation()
 
-        viewAnimation.repeatCount = LottieDrawable.INFINITE
-        viewAnimation.repeatMode = LottieDrawable.RESTART
-        viewAnimation.setAnimation("gear.json")
-        viewAnimation.playAnimation()
-
-        val viewTitel = window.findViewById<TextView>(R.id.al_loading_view_titel)
-        viewTitel.text = textTitel
+        val viewTitle = window.findViewById<TextView>(R.id.al_loading_view_titel)
+        viewTitle.text = textTitel
         val viewInfo = window.findViewById<TextView>(R.id.al_loading_view_info)
         viewInfo.text = textInfo
 

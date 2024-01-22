@@ -17,8 +17,6 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.WindowCompat
 import androidx.core.view.doOnLayout
 import androidx.lifecycle.ViewModelProvider
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.vr.app.sh.R
 import com.vr.app.sh.app.App
 import com.vr.app.sh.ui.base.MyProfileViewModelFactory
@@ -72,11 +70,12 @@ class MyProfile : AppCompatActivity() {
         }
         val viewUserRole = viewBottomSheet.findViewById<TextView>(R.id.profile_role)
         if (sharedPrefs.contains("role")){
-            when(sharedPrefs.getString("role",null)){
-                "USER"->{viewUserRole.text = this.resources.getStringArray(R.array.roles)[0]}
-                "TEACHER"->{viewUserRole.text = this.resources.getStringArray(R.array.roles)[1]}
-                "ADMIN"->{viewUserRole.text = this.resources.getStringArray(R.array.roles)[2]}
+            val numRole = when(sharedPrefs.getString("role",null)){
+                "TEACHER"->1
+                "ADMIN"->2
+                else->0 // USER and other
             }
+            viewUserRole.text = this.resources.getStringArray(R.array.roles)[numRole]
         }
         val viewUserLocate = viewBottomSheet.findViewById<TextView>(R.id.profile_locate)
         if (sharedPrefs.contains("user_city_live")){
@@ -95,7 +94,6 @@ class MyProfile : AppCompatActivity() {
         btnBack.setOnClickListener {
             finish()
         }
-
 
         val backgroundView = findViewById<CoordinatorLayout>(R.id.backgroundView)
         backgroundView.doOnLayout {

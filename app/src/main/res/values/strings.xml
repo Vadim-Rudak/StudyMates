@@ -94,6 +94,8 @@
     <string name="registration_btn1">Далее</string>
     <string name="registration_btn2">Завершить регистрацию</string>
 
+    <string name="reg_error">нет данных</string>
+
 
     <style name="CustomToolbarReg" parent="Theme.AppCompat">
 
@@ -262,6 +264,9 @@
         <item>Трудовое обучение</item>
     </string-array>
 
+    <!-- Окно выбором теста-->
+    <string name="tab_tests_in_class">КЛАСС</string>
+
     <!-- Окно вопрса -->
     <string name="tab_test_question">Вопрос</string>
     <string name="text_save_res">Завершить тест</string>
@@ -298,6 +303,7 @@
 
     <!-- Окно добавления вопроса -->
     <string name="window_add_question_title">Добавление вопроса</string>
+    <string name="window_add_question_btn_add_next">Добавить ещё вопрос</string>
     <string name="window_add_question_inp1">Введите вопрос</string>
     <string name="window_add_question_inp2">Введите ответ №1</string>
     <string name="window_add_question_inp3">Введите ответ №2</string>
@@ -307,6 +313,8 @@
     <string name="window_add_question_btn1">Добавить вопрос</string>
     <string name="window_add_question_btn2">Завершить</string>
     <string name="send_text_add_test">Подождите, выполняется загрузка теста на сервер</string>
+    <string name="test_added">Тест успешно добавлен</string>
+    <string name="window_add_question_error">Пустой список вопросов</string>
 
 
     <style name="CustomToolbar" parent="Theme.AppCompat">

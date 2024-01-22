@@ -60,7 +60,6 @@ class AddQuestion : AppCompatActivity() {
         val textProgress = findViewById<TextView>(R.id.textProgressAddTest)
         val AddInServer = findViewById<Button>(R.id.BtnSave)
 
-
         viewModel = ViewModelProvider(this, factory)
             .get(AddTestViewModel::class.java)
 
@@ -68,7 +67,7 @@ class AddQuestion : AppCompatActivity() {
             UseAlert.errorMessage(it,this)
         }
 
-        viewModel.vizibleProgressBar.observe(this){
+        viewModel.visibleProgressBar.observe(this){
             if (it){
                 TextQuestion.visibility = View.GONE
                 TextOtv1.visibility = View.GONE
@@ -84,7 +83,7 @@ class AddQuestion : AppCompatActivity() {
                 CoroutineScope(Dispatchers.IO).launch {
                     withContext(Dispatchers.Main) {
                         progressBar.visibility = View.GONE
-                        textProgress.setText("Тест успешно добавлен")
+                        textProgress.text = resources.getString(R.string.test_added)
                         delay(1000)
                         finish()
                     }
@@ -106,32 +105,32 @@ class AddQuestion : AppCompatActivity() {
                 TextOtv3.setText("")
                 TextOtv4.setText("")
                 TextCorrectOtv.setText("")
-                AddNextQuestion.setText("Добавить ещё вопрос")
+                AddNextQuestion.text = resources.getString(R.string.window_add_question_btn_add_next)
                 AddInServer.visibility = View.VISIBLE
             }else{
                 if (TextUtils.isEmpty(TextQuestion.text.toString().trim())){
                     TextQuestion.setText("")
-                    TextQuestion.hint = "Добавьте вопрос"
+                    TextQuestion.hint = resources.getString(R.string.window_add_question_inp1)
                 }
                 if (TextUtils.isEmpty(TextOtv1.text.toString().trim())){
                     TextOtv1.setText("")
-                    TextOtv1.hint = "Добавьте ответ №1"
+                    TextOtv1.hint = resources.getString(R.string.window_add_question_inp2)
                 }
                 if (TextUtils.isEmpty(TextOtv2.text.toString().trim())){
                     TextOtv2.setText("")
-                    TextOtv2.hint = "Добавьте ответ №2"
+                    TextOtv2.hint = resources.getString(R.string.window_add_question_inp3)
                 }
                 if (TextUtils.isEmpty(TextOtv3.text.toString().trim())){
                     TextOtv3.setText("")
-                    TextOtv3.hint = "Добавьте ответ №3"
+                    TextOtv3.hint = resources.getString(R.string.window_add_question_inp4)
                 }
                 if (TextUtils.isEmpty(TextOtv4.text.toString().trim())){
                     TextOtv4.setText("")
-                    TextOtv4.hint = "Добавьте ответ №4"
+                    TextOtv4.hint = resources.getString(R.string.window_add_question_inp5)
                 }
                 if (TextUtils.isEmpty(TextCorrectOtv.text.toString().trim())){
                     TextCorrectOtv.setText("")
-                    TextCorrectOtv.hint = "Добавьте правильный ответ"
+                    TextCorrectOtv.hint = resources.getString(R.string.window_add_question_inp6)
                 }
             }
         }
@@ -140,7 +139,7 @@ class AddQuestion : AppCompatActivity() {
                 viewModel.sendTestWithQuestions(intent.extras?.getString("subject").toString(),
                     intent.extras?.getInt("num_class")!!,intent.extras?.getString("name_test")!!)
             }else{
-                viewModel.errorMessage.value = "Пустой список вопросов"
+                viewModel.errorMessage.value = resources.getString(R.string.window_add_question_error)
             }
         }
     }

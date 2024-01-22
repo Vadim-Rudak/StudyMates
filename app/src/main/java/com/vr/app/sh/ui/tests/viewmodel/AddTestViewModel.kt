@@ -27,12 +27,12 @@ class AddTestViewModel(
 
     var listQuestions:ArrayList<Question> = ArrayList()
     val errorMessage = MutableLiveData<String>()
-    val vizibleProgressBar = MutableLiveData<Boolean>()
+    val visibleProgressBar = MutableLiveData<Boolean>()
     var job: Job? = null
 
     fun sendTestWithQuestions(nameSubject:String, numClass:Int, nameTest: String){
         if (internetConnect){
-            vizibleProgressBar.value = true
+            visibleProgressBar.value = true
             job = CoroutineScope(Dispatchers.IO).launch {
                 val response = sendTestInfo.execute(nameSubject,numClass,nameTest,listQuestions.size)
                 val jsonQuestions = Gson().toJson(listQuestions)
@@ -43,10 +43,10 @@ class AddTestViewModel(
                     if (response.success&&responseSendQuestions.success) {
                         if (responseListTests.success){
                             responseListTests.list?.let { saveTestsInBD.execute(it) }
-                            vizibleProgressBar.value = false
+                            visibleProgressBar.value = false
                         }
                     } else {
-                        vizibleProgressBar.value = false
+                        visibleProgressBar.value = false
                         errorMessage.value = context.resources.getString(R.string.alrErrorSendTest)
                     }
                 }

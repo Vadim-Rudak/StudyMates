@@ -18,14 +18,13 @@ class EditSchoolInfo : AppCompatActivity() {
         setContentView(R.layout.activity_edit_school_info)
 
         val animationView = findViewById<LottieAnimationView>(R.id.animationView)
-
         val animationFadeIn = AnimationUtils.loadAnimation(this, R.anim.anim_fade_in)
-        animationView.startAnimation(animationFadeIn)
-
-        animationView.repeatCount = LottieDrawable.INFINITE
-        animationView.repeatMode = LottieDrawable.RESTART
-        animationView.setAnimation("edit_school.json")
-        animationView.playAnimation()
+        animationView.apply {
+            startAnimation(animationFadeIn)
+            repeatCount = LottieDrawable.INFINITE
+            repeatMode = LottieDrawable.RESTART
+            setAnimation("edit_school.json")
+        }.playAnimation()
 
         val btnBack = findViewById<ImageButton>(R.id.btn_back)
         btnBack.setOnClickListener {

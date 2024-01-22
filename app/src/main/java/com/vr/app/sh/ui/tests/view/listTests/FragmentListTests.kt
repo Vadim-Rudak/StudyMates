@@ -13,8 +13,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.vr.app.sh.R
 import com.vr.app.sh.app.App
 import com.vr.app.sh.ui.base.TestsOneClassViewModelFactory
-import com.vr.app.sh.ui.other.UseAlert
-import com.vr.app.sh.ui.other.UseAlert.Companion.errorMessage
 import com.vr.app.sh.ui.other.UseAlert.Companion.infoMessage
 import com.vr.app.sh.ui.tests.adapter.BtnTestAdapter
 import com.vr.app.sh.ui.tests.adapter.TestItemDecoration
@@ -33,10 +31,13 @@ class FragmentListTests(var num_class:Int) : Fragment() {
         (context.applicationContext as App).appComponent.injectFragmentListTests(this)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val view = inflater.inflate(R.layout.fragment_list_tests, container, false) as RecyclerView
-        view.layoutManager = LinearLayoutManager(activity)
-        view.addItemDecoration(TestItemDecoration(requireContext()))
+        view.apply {
+            layoutManager = LinearLayoutManager(activity)
+            addItemDecoration(TestItemDecoration(requireContext()))
+            adapter = viewModel.adapter
+        }
 
         factory.setClass(num_class)
 
@@ -48,14 +49,13 @@ class FragmentListTests(var num_class:Int) : Fragment() {
         }
 
         viewModel.openTest.observe(viewLifecycleOwner){
-            val intent = Intent(activity, WindowTest::class.java)
-            intent.putExtra("name_test",viewModel.name_test)
-            startActivity(intent)
+            startActivity(Intent(activity, WindowTest::class.java).apply {
+                putExtra("name_test",viewModel.name_test)
+            })
         }
         viewModel.errorMessage.observe(viewLifecycleOwner){
             infoMessage(requireActivity().supportFragmentManager,it)
         }
-        view.adapter = viewModel.adapter
         viewModel.adapter.setListener(object : BtnTestAdapter.Listener{
             override fun Clicked(name_test: String?, id_test: Int, index: Int) {
                 viewModel.saveQuestionsInDB(id_test, name_test!!)

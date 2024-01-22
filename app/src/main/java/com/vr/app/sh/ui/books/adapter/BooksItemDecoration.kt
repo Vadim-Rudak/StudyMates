@@ -8,10 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 
 class BooksItemDecoration(val context: Context) : RecyclerView.ItemDecoration()  {
 
-    var leftItem:Int = 4
-    var rightItem:Int = 4
-    var topItem:Int = 4
-    var bottomItem:Int = 4
+    private var leftItem:Int = 4
+    private var rightItem:Int = 4
+    private var topItem:Int = 4
+    private var bottomItem:Int = 4
 
     override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
         val itemPosition = parent.getChildAdapterPosition(view)

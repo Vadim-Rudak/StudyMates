@@ -10,8 +10,8 @@ import com.vr.app.sh.ui.tests.viewmodel.AllSubjectsViewModel
 
 class AllSubjectsViewModelFactory(
     val context: Context,
-    val getListTestsInternet: GetListTestsInternet,
-    val saveListTestsInBD: SaveTestsInBD
+    private val getListTestsInternet: GetListTestsInternet,
+    private val saveListTestsInBD: SaveTestsInBD
 ): ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {

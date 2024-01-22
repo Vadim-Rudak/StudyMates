@@ -16,16 +16,16 @@ import com.vr.app.sh.domain.model.Question
 
 class FragmentQuestion(var num_question:Int, var listQuestions: List<Question>, var info_questions:Array<Int>, var tabLayout: TabLayout) : Fragment(), View.OnClickListener {
 
-    lateinit var textQuestion:TextView
-    lateinit var btnOtv1:Button
-    lateinit var btnOtv2:Button
-    lateinit var btnOtv3:Button
-    lateinit var btnOtv4:Button
-    lateinit var btnConfirm:Button
-    var correctOtv:String = ""
-    var num_click_btn:Int = 0
-    lateinit var Ok_image: ImageView
-    lateinit var Ok_text:TextView
+    private lateinit var textQuestion:TextView
+    private lateinit var btnOtv1:Button
+    private lateinit var btnOtv2:Button
+    private lateinit var btnOtv3:Button
+    private lateinit var btnOtv4:Button
+    private lateinit var btnConfirm:Button
+    private var correctOtv:String = ""
+    private var num_click_btn:Int = 0
+    private lateinit var Ok_image: ImageView
+    private lateinit var Ok_text:TextView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val v = inflater.inflate(R.layout.fragment_question, container, false)
@@ -54,7 +54,7 @@ class FragmentQuestion(var num_question:Int, var listQuestions: List<Question>, 
         }
     }
 
-    fun ViewUseThisQuestion(){
+    private fun ViewUseThisQuestion(){
         if (tabLayout.getTabAt(num_question)?.text.toString().equals("✓")||
             tabLayout.getTabAt(num_question)?.text.toString().equals("X")){
 
@@ -78,7 +78,7 @@ class FragmentQuestion(var num_question:Int, var listQuestions: List<Question>, 
         }
     }
 
-    fun setInfoInQuestion(){
+    private fun setInfoInQuestion(){
         textQuestion.text = listQuestions[num_question].question
         btnOtv1.text = listQuestions[num_question].answer1
         btnOtv2.text = listQuestions[num_question].answer2

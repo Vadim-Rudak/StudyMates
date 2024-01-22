@@ -1,5 +1,6 @@
 package com.vr.app.sh.ui.tests.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,7 @@ class BtnTestAdapter : RecyclerView.Adapter<BtnTestAdapter.ViewHolder>() {
     private var listener: Listener? = null
     var listTests:List<Test> = listOf()
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setTests(tests: List<Test>) {
         this.listTests = tests
         notifyDataSetChanged()
@@ -37,10 +39,10 @@ class BtnTestAdapter : RecyclerView.Adapter<BtnTestAdapter.ViewHolder>() {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val cardView = holder.cardView
         val textView = cardView.findViewById<View>(R.id.text_btn_test) as TextView
-        textView.setText(listTests[position].name_test)
-        val num_test = cardView.findViewById<View>(R.id.num_test) as TextView
+        textView.text = listTests[position].name_test
+        val numTest = cardView.findViewById<View>(R.id.num_test) as TextView
         val num = position + 1
-        num_test.text = num.toString()
+        numTest.text = num.toString()
         cardView.setOnClickListener {
             if (listener != null) {
                 listener!!.Clicked(textView.text.toString(), listTests[position].id, position)

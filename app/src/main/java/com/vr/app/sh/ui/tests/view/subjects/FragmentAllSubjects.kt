@@ -47,9 +47,10 @@ class FragmentAllSubjects : Fragment() {
 
         viewModel.statusTestsInBD.observe(viewLifecycleOwner) {
             if (it) {
-                val intent = Intent(activity, WindowTestsNames::class.java)
-                intent.putExtra("sub", viewModel.sub.value.toString())
-                startActivity(intent)
+                startActivity(Intent(activity, WindowTestsNames::class.java).apply {
+                    putExtra("sub", viewModel.sub.value.toString())
+                })
+
                 viewModel.statusTestsInBD.value = false
             }
         }

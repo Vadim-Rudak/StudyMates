@@ -51,7 +51,7 @@ class WindowTest : AppCompatActivity() {
             viewModel.setInfoQuestions(it)
             viewPager2.adapter = ActiveTestAdapter(this,it,viewModel.arrayAnswers,tabLayout)
             TabLayoutMediator(tabLayout, viewPager2) { tab, position ->
-                tab.text = resources.getString(R.string.tab_test_question) + " $position"
+                tab.text = resources.getString(R.string.tab_test_question) + " ${position + 1}"
             }.attach()
         }
     }

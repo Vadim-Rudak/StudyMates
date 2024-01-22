@@ -24,8 +24,10 @@ class BottomSheetPickCity(val context: Context, private val viewBottomSheet: Lin
     fun see(){
         val listSortedCity = ArrayList<String>()
         val pickCityBottomSheet = BottomSheetBehavior.from(viewBottomSheet)
-        pickCityBottomSheet.peekHeight = defaultHeight
-        pickCityBottomSheet.maxHeight = windowHeight
+        pickCityBottomSheet.apply {
+            peekHeight = defaultHeight
+            maxHeight = windowHeight
+        }
 
         val btnClose = viewBottomSheet.findViewById<ImageButton>(R.id.city_btn_close)
         btnClose.setOnClickListener {

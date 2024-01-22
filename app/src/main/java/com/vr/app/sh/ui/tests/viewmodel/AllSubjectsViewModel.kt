@@ -19,7 +19,7 @@ class AllSubjectsViewModel(private val resources: Resources,val getListTestsInte
     var statusTestsInBD = MutableLiveData<Boolean>()
     val sub = MutableLiveData<String>()
     val errorMessage = MutableLiveData<String>()
-    val adapter = BtnSubjectAdapter(resources)
+    val adapter = BtnSubjectAdapter(resources = this.resources)
     val decoration = SubjectItemDecoration(resources)
     var job: Job? = null
 

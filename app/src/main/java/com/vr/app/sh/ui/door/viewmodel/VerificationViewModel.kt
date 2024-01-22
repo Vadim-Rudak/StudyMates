@@ -3,7 +3,6 @@ package com.vr.app.sh.ui.door.viewmodel
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.net.Uri
 import android.os.Environment
 import android.util.Log
 import android.util.Size
@@ -32,7 +31,6 @@ import com.vr.app.sh.ui.other.customAlert.loadingAlert
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.io.File
 import java.text.SimpleDateFormat
@@ -43,21 +41,22 @@ class VerificationViewModel(val context: Context,private val verificationUserInS
     private var imageCapture: ImageCapture?=null
     lateinit var outputDirectory: File
     var openCamera = MutableLiveData<Int>()
-    var status_verification = MutableLiveData<Boolean>()
+    var statusVerification = MutableLiveData<Boolean>()
     var job: Job? = null
 
     lateinit var photoInCameraX:Bitmap
-    val myPhotoBitmap:Bitmap = BitmapFactory.decodeFile("${Environment.getExternalStorageDirectory().path}/SchoolProg/MyProfile/myPhoto.jpg")
+    private val myPhotoBitmap:Bitmap = BitmapFactory.decodeFile("${Environment.getExternalStorageDirectory().path}/SchoolProg/MyProfile/myPhoto.jpg")
 
     init {
         openCamera.postValue(0)
     }
 
     fun setAnim(animationView: LottieAnimationView){
-        animationView.repeatCount = LottieDrawable.INFINITE
-        animationView.repeatMode = LottieDrawable.RESTART
-        animationView.setAnimation("animVerification.json")
-        animationView.playAnimation()
+        animationView.apply {
+            repeatCount = LottieDrawable.INFINITE
+            repeatMode = LottieDrawable.RESTART
+            setAnimation("animVerification.json")
+        }.playAnimation()
     }
 
 
@@ -142,14 +141,13 @@ class VerificationViewModel(val context: Context,private val verificationUserInS
 
                     verificationUserInServer.execute(userId)
                     loadingView.isDone()
-                    status_verification.postValue(true)
+                    statusVerification.postValue(true)
                 }
             }else{
                 loadingView.isDone()
-                status_verification.postValue(false)
+                statusVerification.postValue(false)
             }
         }
-
 
     }
 

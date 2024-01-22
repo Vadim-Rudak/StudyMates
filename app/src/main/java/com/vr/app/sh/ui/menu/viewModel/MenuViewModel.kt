@@ -16,7 +16,6 @@ import com.vr.app.sh.ui.menu.adapter.TopMenuAdapter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectIndexed
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -48,7 +47,7 @@ class MenuViewModel(
         cleanUser.execute()
     }
 
-    fun createDirs(){
+    private fun createDirs(){
         val path = "${Environment.getExternalStorageDirectory().path}/SchoolProg/Books/Class_"
         var fileDir:File
         for (i in 1..11){

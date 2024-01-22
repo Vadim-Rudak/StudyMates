@@ -1,7 +1,6 @@
 package com.vr.app.sh.ui.menu.adapter
 
 import android.content.res.Resources
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -13,8 +12,8 @@ import com.vr.app.sh.R
 class TopMenuAdapter(resources: Resources) : RecyclerView.Adapter<TopMenuAdapter.ViewHolder>() {
 
     private var listener: Listener? = null
-    var listView = resources.obtainTypedArray(R.array.topMenuViewBtn)
-    var listFun = resources.getStringArray(R.array.nameTopFun)
+    private var listView = resources.obtainTypedArray(R.array.topMenuViewBtn)
+    private var listFun = resources.getStringArray(R.array.nameTopFun)
 
     interface Listener{
         fun onClick(position:Int)
@@ -30,9 +29,7 @@ class TopMenuAdapter(resources: Resources) : RecyclerView.Adapter<TopMenuAdapter
         return ViewHolder(cv)
     }
 
-    override fun getItemCount(): Int {
-        return listFun.size
-    }
+    override fun getItemCount(): Int = listFun.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val cardView = holder.cardView

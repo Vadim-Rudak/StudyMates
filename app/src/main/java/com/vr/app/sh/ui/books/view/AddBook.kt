@@ -85,11 +85,7 @@ class AddBook : AppCompatActivity() {
         }
 
         viewModel.send.observe(this){
-            if (it){
-                textProgress.text = resources.getString(R.string.file_download_done)
-            }else{
-                textProgress.text = resources.getString(R.string.file_download_error)
-            }
+            textProgress.text = resources.getString(if (it) R.string.file_download_done else R.string.file_download_error)
             CoroutineScope(Dispatchers.IO).launch {
                 withContext(Dispatchers.Main){
                     delay(2000)

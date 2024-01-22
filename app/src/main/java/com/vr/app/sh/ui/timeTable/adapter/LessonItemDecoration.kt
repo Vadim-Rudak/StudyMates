@@ -8,10 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 
 class LessonItemDecoration(val context: Context) : RecyclerView.ItemDecoration()  {
 
-    var leftItem:Int = 8
-    var rightItem:Int = 8
-    var topItem:Int = 4
-    var bottomItem:Int = 4
+    private var leftItem:Int = 8
+    private var rightItem:Int = 8
+    private var topItem:Int = 4
+    private var bottomItem:Int = 4
 
     override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
         val itemPosition = parent.getChildAdapterPosition(view)

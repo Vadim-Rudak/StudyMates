@@ -1,6 +1,5 @@
 package com.vr.app.sh.ui.other.photoPicker
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.database.Cursor
@@ -18,9 +17,9 @@ import com.vr.app.sh.R
 class BottomSheetPickPhoto(val context: Context, private val viewBottomSheet:LinearLayout, private val windowHeight:Int) {
 
     private val pickPhotoBottomSheet = BottomSheetBehavior.from(viewBottomSheet)
-    var pickMorePhoto = false
+    private var pickMorePhoto = false
     val onePhoto = MutableLiveData<String>()
-    val morePhotos = MutableLiveData<ArrayList<String>>()
+    private val morePhotos = MutableLiveData<ArrayList<String>>()
     val defaultHeight = windowHeight/2
     val heightTopLine = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 12.toFloat(), context.resources.displayMetrics).toInt()
     val heightBottomLine = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 60.toFloat(), context.resources.displayMetrics).toInt()
@@ -92,14 +91,16 @@ class BottomSheetPickPhoto(val context: Context, private val viewBottomSheet:Lin
     fun visiblePicker():Boolean = pickPhotoBottomSheet.peekHeight>0
 
     private fun editButton(viewButton: Button,click:Boolean){
-        if (click){
-            viewButton.setText(R.string.pick_photo_btn_add)
-            viewButton.setTextColor(context.getColor(R.color.white))
-            viewButton.background.setTint(context.getColor(R.color.first_color))
-        }else{
-            viewButton.setText(R.string.pick_photo_btn_cansel)
-            viewButton.setTextColor(context.getColor(R.color.first_color))
-            viewButton.background.setTint(context.getColor(R.color.gray2))
+        viewButton.apply {
+            if (click){
+                setText(R.string.pick_photo_btn_add)
+                setTextColor(context.getColor(R.color.white))
+                background.setTint(context.getColor(R.color.first_color))
+            }else{
+                setText(R.string.pick_photo_btn_cansel)
+                setTextColor(context.getColor(R.color.first_color))
+                background.setTint(context.getColor(R.color.gray2))
+            }
         }
     }
 

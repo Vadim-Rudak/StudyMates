@@ -8,7 +8,7 @@ import com.vr.app.sh.ui.door.viewmodel.VerificationViewModel
 
 class VerificationViewModelFactory(
     val context: Context,
-    val verificationUserInServer: VerificationUserInServer
+    private val verificationUserInServer: VerificationUserInServer
 ): ViewModelProvider.Factory  {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {

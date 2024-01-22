@@ -11,15 +11,15 @@ import com.vr.app.sh.ui.tests.viewmodel.TestsOneClassViewModel
 
 class TestsOneClassViewModelFactory(
     val context: Context,
-    val getListTestsInClass: GetListTestsInClass,
-    val getListQuestions: GetListQuestions,
-    val saveQuestionsInBD: SaveQuestionsInBD
+    private val getListTestsInClass: GetListTestsInClass,
+    private val getListQuestions: GetListQuestions,
+    private val saveQuestionsInBD: SaveQuestionsInBD
     ): ViewModelProvider.Factory {
 
-    var num_class:Int = 0
+    private var numClass:Int = 0
 
     fun setClass(num_class: Int){
-        this.num_class = num_class
+        this.numClass = num_class
     }
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
@@ -29,7 +29,7 @@ class TestsOneClassViewModelFactory(
                 getListTestsInClass = getListTestsInClass,
                 getListQuestions = getListQuestions,
                 saveQuestionsInBD = saveQuestionsInBD,
-                numClass = num_class,
+                numClass = numClass,
                 internetConnect = InternetConnection.useInternet(context)
             ) as T
         } else {

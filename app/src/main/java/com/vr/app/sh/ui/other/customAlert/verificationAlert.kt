@@ -14,7 +14,7 @@ import com.airbnb.lottie.LottieDrawable
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.vr.app.sh.R
 
-class verificationAlert(private val nameAnim:String,private val textTitel:String, private val textInfo:String): DialogFragment() {
+class verificationAlert(private val nameAnim:String, private val textTitle:String, private val textInfo:String): DialogFragment() {
 
     private lateinit var dialog: AlertDialog
 
@@ -24,14 +24,14 @@ class verificationAlert(private val nameAnim:String,private val textTitel:String
         val window: View = inflater.inflate(R.layout.alert_loading,null)
 
         val viewAnimation = window.findViewById<LottieAnimationView>(R.id.al_loading_anim)
+        viewAnimation.apply {
+            repeatCount = LottieDrawable.INFINITE
+            repeatMode = LottieDrawable.RESTART
+            setAnimation(nameAnim)
+        }.playAnimation()
 
-        viewAnimation.repeatCount = LottieDrawable.INFINITE
-        viewAnimation.repeatMode = LottieDrawable.REVERSE
-        viewAnimation.setAnimation(nameAnim)
-        viewAnimation.playAnimation()
-
-        val viewTitel = window.findViewById<TextView>(R.id.al_loading_view_titel)
-        viewTitel.text = textTitel
+        val viewTitle = window.findViewById<TextView>(R.id.al_loading_view_titel)
+        viewTitle.text = textTitle
         val viewInfo = window.findViewById<TextView>(R.id.al_loading_view_info)
         viewInfo.text = textInfo
 

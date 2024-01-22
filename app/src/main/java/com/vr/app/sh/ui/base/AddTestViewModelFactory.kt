@@ -9,10 +9,10 @@ import com.vr.app.sh.ui.tests.viewmodel.AddTestViewModel
 
 class AddTestViewModelFactory(
     val context: Context,
-    val getInfoTests: GetListTestsInternet,
-    val saveTestInBD: SaveTestsInBD,
-    val sendTest: SendTestInfo,
-    val sendQuestions: SendQuestions
+    private val getInfoTests: GetListTestsInternet,
+    private val saveTestInBD: SaveTestsInBD,
+    private val sendTest: SendTestInfo,
+    private val sendQuestions: SendQuestions
 ): ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {

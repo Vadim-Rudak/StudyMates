@@ -109,12 +109,13 @@ class FragmentSelectBook() : Fragment() {
                         progressbar.visibility = View.GONE
                         textProgress.visibility = View.GONE
                         infoDownload.visibility = View.VISIBLE
-                        if (viewModel.saveFileInMemory == true){
-                            infoDownload.text = resources.getString(R.string.book_download_done)
-                        }
-                        if (viewModel.saveFileInMemory == false){
-                            infoDownload.text = resources.getString(R.string.book_download_error)
-                        }
+                        infoDownload.text = resources.getString(
+                            if (viewModel.saveFileInMemory == true){
+                                R.string.book_download_done
+                            }else{
+                                R.string.book_download_error
+                            }
+                        )
                         delay(1500)
                         infoDownload.visibility = View.GONE
                         recyclerView.visibility = View.VISIBLE
