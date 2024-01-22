@@ -29,8 +29,8 @@ class Authoriz : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_authoriz)
 
-        val btn_in = findViewById<Button>(R.id.btn_in)
-        val btn_reg = findViewById<TextView>(R.id.btn_reg)
+        val btnIn = findViewById<Button>(R.id.btn_in)
+        val btnReg = findViewById<TextView>(R.id.btn_reg)
         val login = findViewById<TextInputEditText>(R.id.TextUserName)
         val password = findViewById<TextInputEditText>(R.id.TextUserPassword)
 
@@ -49,7 +49,7 @@ class Authoriz : AppCompatActivity() {
             finish()
         }
 
-        btn_in.setOnClickListener{
+        btnIn.setOnClickListener{
             //check this
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 1)
             requestPermissions(arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE), 1)
@@ -57,7 +57,7 @@ class Authoriz : AppCompatActivity() {
             viewModel.authorization(this@Authoriz,supportFragmentManager,login.text.toString(),password.text.toString())
         }
 
-        btn_reg.setOnClickListener {
+        btnReg.setOnClickListener {
             RegistrationInfo.user = User()
             val intent = Intent(this,Reg::class.java)
             startActivity(intent)

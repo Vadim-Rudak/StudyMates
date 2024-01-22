@@ -56,7 +56,7 @@ class FragmentReg(val numPage:Int) : Fragment() {
                     }
                 }
                 val viewEndSchool = view.findViewById<CheckBox>(R.id.checkBoxEndSchool)
-                viewEndSchool.setOnCheckedChangeListener { buttonView, isChecked ->
+                viewEndSchool.setOnCheckedChangeListener { _, isChecked ->
                     school.endSchool = isChecked
                 }
             }
@@ -157,7 +157,6 @@ class FragmentReg(val numPage:Int) : Fragment() {
         super.onStart()
         if(numPage==3&&bottomSheetPickPhoto!=null){
             if (bottomSheetPickPhoto!!.visiblePicker()){
-                Log.d("FFF","ok")
                 bottomSheetPickPhoto!!.updatePhotos()
             }
         }

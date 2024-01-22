@@ -263,6 +263,7 @@
     </string-array>
 
     <!-- Окно вопрса -->
+    <string name="tab_test_question">Вопрос</string>
     <string name="text_save_res">Завершить тест</string>
     <string name="text_ot">Ответ #1</string>
     <string name="text_vb">ВЫБРАТЬ</string>

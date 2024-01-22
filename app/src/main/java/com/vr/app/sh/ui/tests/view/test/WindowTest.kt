@@ -2,14 +2,13 @@ package com.vr.app.sh.ui.tests.view.test
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import androidx.viewpager.widget.ViewPager
+import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import com.vr.app.sh.R
 import com.vr.app.sh.app.App
 import com.vr.app.sh.ui.base.OpenTestViewModelFactory
@@ -40,9 +39,8 @@ class WindowTest : AppCompatActivity() {
         }
         val viewTitle = findViewById<TextView>(R.id.viewTitle)
         viewTitle.text = intent.extras?.getString("name_test")
-        val viewPager = findViewById<ViewPager>(R.id.pager_questions)
+        val viewPager2 = findViewById<ViewPager2>(R.id.pager_questions)
         val tabLayout = findViewById<TabLayout>(R.id.tabs_active_test)
-        tabLayout.setupWithViewPager(viewPager)
 
         (applicationContext as App).appComponent.injectWindowTest(this)
 
@@ -51,8 +49,10 @@ class WindowTest : AppCompatActivity() {
 
         viewModel.listQuestions.observe(this){
             viewModel.setInfoQuestions(it)
-            viewPager.adapter = ActiveTestAdapter(supportFragmentManager,it,viewModel.arrayAnswers,tabLayout)
+            viewPager2.adapter = ActiveTestAdapter(this,it,viewModel.arrayAnswers,tabLayout)
+            TabLayoutMediator(tabLayout, viewPager2) { tab, position ->
+                tab.text = resources.getString(R.string.tab_test_question) + " $position"
+            }.attach()
         }
-
     }
 }

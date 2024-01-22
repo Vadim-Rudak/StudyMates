@@ -31,7 +31,7 @@ class RegViewModel(private val resources: Resources,private val saveUser: SaveUs
         numFragment.postValue(0)
     }
 
-    fun registration(fragmentManager: FragmentManager,){
+    fun registration(fragmentManager: FragmentManager){
         if (internetConnect){
 
             loadingAlert.show(fragmentManager,"AlertLoading")

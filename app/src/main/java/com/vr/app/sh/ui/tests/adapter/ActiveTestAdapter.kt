@@ -1,22 +1,19 @@
 package com.vr.app.sh.ui.tests.adapter
 
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
+import androidx.fragment.app.FragmentActivity
+import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayout
 import com.vr.app.sh.domain.model.Question
 import com.vr.app.sh.ui.tests.view.test.FragmentQuestion
 
-class ActiveTestAdapter(fm: FragmentManager, var listQuestions:List<Question>, var info_questions:Array<Int>, var tabLayout: TabLayout) : FragmentPagerAdapter(fm) {
-    override fun getPageTitle(position: Int): CharSequence? {
-        return "Вопрос ${position + 1}"
-    }
+class ActiveTestAdapter(
+    fa: FragmentActivity,
+    private var listQuestions:List<Question>,
+    private var infoQuestions:Array<Int>,
+    private var tabLayout: TabLayout
+) : FragmentStateAdapter(fa) {
 
-    override fun getCount(): Int {
-        return  listQuestions.size
-    }
-
-    override fun getItem(position: Int): Fragment {
-        return FragmentQuestion(position, listQuestions, info_questions,tabLayout)
-    }
+    override fun getItemCount(): Int = listQuestions.size
+    override fun createFragment(position: Int): Fragment = FragmentQuestion(position, listQuestions,infoQuestions,tabLayout)
 }
