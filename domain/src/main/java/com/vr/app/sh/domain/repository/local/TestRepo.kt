@@ -5,5 +5,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface TestRepo {
     suspend fun insertTests(listTests:List<Test>)
+    suspend fun insertNewTests(listTests:List<Test>)
     fun getTestsInOneClass(numClass:Int):Flow<List<Test>>
+    fun cleanTests()
 }

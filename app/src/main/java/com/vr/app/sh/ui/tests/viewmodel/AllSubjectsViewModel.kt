@@ -1,6 +1,7 @@
 package com.vr.app.sh.ui.tests.viewmodel
 
 import android.content.res.Resources
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.vr.app.sh.R
@@ -30,6 +31,7 @@ class AllSubjectsViewModel(private val resources: Resources,val getListTestsInte
             job = CoroutineScope(Dispatchers.IO).launch {
                 withContext(Dispatchers.Main){
                     getListTestsInternet.execute(subject).also {
+                        Log.d("FFF", it.list?.get(0)?.name_test.toString())
                         if (it.success){
                             it.list?.let { it1 -> saveTestsInBD.execute(it1) }
                             statusTestsInBD.value = true

@@ -17,12 +17,23 @@ class TestRepoImpl(private val testDAO:DAOTest): TestRepo {
             it.num_questions
         ) })
     }
-
+    override suspend fun insertNewTests(listTests: List<Test>) {
+        testDAO.saveNewTests(listTests.map { TestEntity(
+            it.id,
+            it.subject,
+            it.num_class,
+            it.name_test,
+            it.num_questions
+        ) })
+    }
     override fun getTestsInOneClass(numClass: Int): Flow<List<Test>> {
         return testDAO.getTestsInOneClass(numClass).map{
             it.map {testEntity->
                 testEntity.toTest()
             }
         }
+    }
+    override fun cleanTests() {
+        testDAO.deleteAllTests()
     }
 }

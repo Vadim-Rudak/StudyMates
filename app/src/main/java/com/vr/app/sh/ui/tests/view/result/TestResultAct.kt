@@ -27,7 +27,7 @@ class TestResultAct : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_result_test)
 
-        val testResult = intent.getSerializableExtra("objTestResult",ResultTest::class.java)
+        val testResult = intent.getSerializableExtra("objTestResult") as ResultTest
 
         val viewCorrectAnswer = findViewById<TextView>(R.id.res_text_correct)
         val viewWrongAnswer = findViewById<TextView>(R.id.res_text_err)

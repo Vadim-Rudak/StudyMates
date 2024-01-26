@@ -12,7 +12,16 @@ import com.vr.app.sh.domain.model.Lesson
 
 class LessonsAdapter : RecyclerView.Adapter<LessonsAdapter.ViewHolder>() {
 
-    var listLessons:List<Lesson> = listOf()
+    private var listener: Listener? = null
+    private var listLessons:List<Lesson> = listOf()
+
+    interface Listener {
+        fun clickMore()
+    }
+
+    fun setListener(listener:Listener) {
+        this.listener = listener
+    }
 
     @SuppressLint("NotifyDataSetChanged")
     fun setLessons(lessons: List<Lesson>){
@@ -42,7 +51,7 @@ class LessonsAdapter : RecyclerView.Adapter<LessonsAdapter.ViewHolder>() {
         numClass.text = listLessons[position].num_class
         val btnMore = cardView.findViewById<ImageButton>(R.id.btn_lesson_more)
         btnMore.setOnClickListener {
-
+            listener?.clickMore()
         }
     }
 

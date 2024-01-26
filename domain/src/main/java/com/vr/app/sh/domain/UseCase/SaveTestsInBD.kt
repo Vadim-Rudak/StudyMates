@@ -5,6 +5,6 @@ import com.vr.app.sh.domain.repository.local.TestRepo
 
 class SaveTestsInBD(private val testRepo: TestRepo) {
     suspend fun execute(listTests:List<Test>){
-        testRepo.insertTests(listTests)
+        testRepo.insertNewTests(listTests)
     }
 }
