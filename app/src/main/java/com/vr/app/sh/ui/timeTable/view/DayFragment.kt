@@ -12,7 +12,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.vr.app.sh.R
 import com.vr.app.sh.app.App
 import com.vr.app.sh.ui.base.DayViewModelFactory
+import com.vr.app.sh.ui.other.UseAlert.Companion.editLesson
 import com.vr.app.sh.ui.timeTable.adapter.LessonItemDecoration
+import com.vr.app.sh.ui.timeTable.adapter.LessonsAdapter
 import com.vr.app.sh.ui.timeTable.viewModel.DayViewModel
 
 class DayFragment(private val numDay:Int) : Fragment() {
@@ -29,19 +31,26 @@ class DayFragment(private val numDay:Int) : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_day, container, false) as RecyclerView
-        view.apply {
-            layoutManager = LinearLayoutManager(activity)
-            adapter = viewModel.adapter
-            addItemDecoration(LessonItemDecoration(requireContext()))
-        }
         factory.setDay(numDay)
 
         viewModel = ViewModelProvider(this,factory)
             .get(DayViewModel::class.java)
 
+        view.apply {
+            layoutManager = LinearLayoutManager(activity)
+            adapter = viewModel.adapter
+            addItemDecoration(LessonItemDecoration(requireContext()))
+        }
+
         viewModel.listLessons.observe(viewLifecycleOwner){
             viewModel.adapter.setLessons(it)
         }
+
+        viewModel.adapter.setListener(object :LessonsAdapter.Listener{
+            override fun clickMore() {
+                editLesson().show(childFragmentManager,"EditLesson")
+            }
+        })
 
         return view
     }

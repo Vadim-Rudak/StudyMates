@@ -6,6 +6,7 @@ import android.content.Intent
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.vr.app.sh.R
+import com.vr.app.sh.ui.other.customAlert.editLessonAlert
 import com.vr.app.sh.ui.other.customAlert.infoAlert
 import com.vr.app.sh.ui.other.customAlert.loadingAlert
 import com.vr.app.sh.ui.other.customAlert.nameTestAlert
@@ -44,6 +45,10 @@ class UseAlert{
 
         fun writeNameTest(intent: Intent):nameTestAlert{
             return nameTestAlert(intent)
+        }
+
+        fun editLesson():editLessonAlert{
+            return editLessonAlert()
         }
     }
 }

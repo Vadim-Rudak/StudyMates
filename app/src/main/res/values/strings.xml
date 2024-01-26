@@ -275,9 +275,12 @@
     <string name="text_prop">ПРОПУСТИТЬ ВОПРОС</string>
     <string name="text_ok_question">Ответ засчитан</string>
 
-    <style name="button_numb_otvet" parent="TextAppearance.AppCompat.Button">
+    <style name="button_numb_otvet" parent="Widget.MaterialComponents.Button">
 
-        <item name="android:background">#00FFFFFF</item>
+        <item name="backgroundTint">@color/not_select_answer</item>
+        <item name="cornerRadius">2dp</item>
+        <item name="android:layout_marginTop">2dp</item>
+        <item name="android:layout_marginBottom">2dp</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_weight">1</item>
@@ -363,6 +366,12 @@
     <string name="alrAddLessonEt2">Название урока</string>
     <string name="alrAddLessonEt3">Начало урока</string>
     <string name="alrAddLessonEt4">Номер кабинета</string>
+
+    <!-- Alert Edit Lesson -->
+    <string name="alrEditLessonTitle">Редактирование урока</string>
+    <string name="alrEditLessonBtnEdit">Редактировать</string>
+    <string name="alrEditLessonBtnDelete">Удалить</string>
+
 
     <!-- Alert Info -->
     <string name="alrInfoTitel">Ошибка</string>

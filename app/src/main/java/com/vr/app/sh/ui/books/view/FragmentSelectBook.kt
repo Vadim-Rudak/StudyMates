@@ -139,9 +139,10 @@ class FragmentSelectBook() : Fragment() {
             override fun Clicked(pos_book: Int, name_book: String, id_book: Int) {
                 val path = Environment.getExternalStorageDirectory().path + "/SchoolProg/Books/Class_" + numClass + "/" + name_book + ".pdf"
                 if (File(path).exists()){
-                    val intent = Intent(activity, ReadPDF::class.java)
-                    intent.putExtra("path",path)
-                    intent.putExtra("name_book", name_book)
+                    val intent = Intent(activity, ReadPDF::class.java).apply {
+                        putExtra("path",path)
+                        putExtra("name_book", name_book)
+                    }
                     startActivity(intent)
                 }else{
                     viewModel.saveFileDialog(path,id_book,requireContext())
