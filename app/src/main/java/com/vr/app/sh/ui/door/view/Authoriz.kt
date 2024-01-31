@@ -1,6 +1,7 @@
 package com.vr.app.sh.ui.door.view
 
 import android.Manifest
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -8,20 +9,29 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModelProvider
+import androidx.work.Configuration
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
 import com.google.android.material.textfield.TextInputEditText
 import com.vr.app.sh.R
 import com.vr.app.sh.app.App
 import com.vr.app.sh.domain.model.User
 import com.vr.app.sh.ui.base.AuthorizationViewModelFactory
+import com.vr.app.sh.ui.base.CustomWorkerFactory
 import com.vr.app.sh.ui.door.viewmodel.AuthViewModel
 import com.vr.app.sh.ui.menu.view.TopMenu
 import com.vr.app.sh.ui.other.RegistrationInfo
 import com.vr.app.sh.ui.other.UseAlert.Companion.infoMessage
+import com.vr.app.sh.worker.ChatWorker
+import javax.inject.Inject
 
 class Authoriz : AppCompatActivity() {
 
-    @javax.inject.Inject
+    @Inject
     lateinit var factory: AuthorizationViewModelFactory
+
+    @Inject
+    lateinit var workerFactory: CustomWorkerFactory
 
     lateinit var viewModel: AuthViewModel
 
@@ -44,6 +54,7 @@ class Authoriz : AppCompatActivity() {
         }
 
         viewModel.statusAuth.observe(this){
+            startChatWorker()
             val intent = Intent(this@Authoriz, TopMenu::class.java)
             startActivity(intent)
             finish()
@@ -63,5 +74,16 @@ class Authoriz : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+    }
+
+    private fun startChatWorker(){
+        val config = Configuration.Builder()
+            .setWorkerFactory(workerFactory)
+            .build()
+
+        WorkManager.initialize(this, config)
+
+        val  myWorkRequest = OneTimeWorkRequestBuilder<ChatWorker>().build()
+        WorkManager.getInstance(this).enqueue(myWorkRequest)
     }
 }

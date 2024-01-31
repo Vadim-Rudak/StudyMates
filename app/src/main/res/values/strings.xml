@@ -140,12 +140,14 @@
         <item>@drawable/top_menu_btn1</item>
         <item>@drawable/top_menu_btn2</item>
         <item>@drawable/top_menu_btn3</item>
+        <item>@drawable/top_menu_btn4</item>
     </integer-array>
 
     <string-array name="nameTopFun">
         <item>Учебники</item>
         <item>Тесты</item>
         <item>Расписание</item>
+        <item>Сообщения</item>
     </string-array>
 
 
@@ -324,6 +326,12 @@
     <string name="send_text_add_test">Подождите, выполняется загрузка теста на сервер</string>
     <string name="test_added">Тест успешно добавлен</string>
     <string name="window_add_question_error">Пустой список вопросов</string>
+
+
+    <!-- All Chats-->
+    <string name="chatsTitle">Сообщения</string>
+    <string name="chatsSmallTitle1">Избранные</string>
+    <string name="text_toolbar_AddChat">Добавление чата</string>
 
 
     <style name="CustomToolbar" parent="Theme.AppCompat">

@@ -31,6 +31,7 @@ import com.vr.app.sh.ui.door.view.Authoriz
 import com.vr.app.sh.ui.menu.adapter.MenuItemDecoration
 import com.vr.app.sh.ui.menu.adapter.TopMenuAdapter
 import com.vr.app.sh.ui.menu.viewModel.MenuViewModel
+import com.vr.app.sh.ui.messages.view.AllChats
 import com.vr.app.sh.ui.other.UseAlert.Companion.errorMessage
 import com.vr.app.sh.ui.other.UseAlert.Companion.verificationMsg
 import com.vr.app.sh.ui.other.permissions.Permissions
@@ -126,6 +127,11 @@ class TopMenu : AppCompatActivity() {
                     2->{
                         val intent = Intent(this@TopMenu, TimeTable::class.java)
                         startActivity(intent)
+                    }
+                    3->{
+                        Intent(this@TopMenu, AllChats::class.java).also {
+                            startActivity(it)
+                        }
                     }
                 }
             }

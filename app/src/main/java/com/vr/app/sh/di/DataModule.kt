@@ -5,6 +5,7 @@ import com.vr.app.sh.data.api.BookInternetRepoImpl
 import com.vr.app.sh.data.api.InternetRepoImpl
 import com.vr.app.sh.data.api.NetworkService
 import com.vr.app.sh.data.api.PhotoInternetRepoImpl
+import com.vr.app.sh.data.api.webSocket.WebSocketImpl
 import com.vr.app.sh.data.storage.room.RoomDB
 import com.vr.app.sh.data.storage.room.repo.BookRepoImpl
 import com.vr.app.sh.data.storage.room.repo.LessonsRepoImpl
@@ -36,6 +37,11 @@ class DataModule {
     @Provides
     fun provideBookInternetRepoImpl(context: Context, networkService: NetworkService): BookInternetRepoImpl {
         return BookInternetRepoImpl(context, networkService)
+    }
+
+    @Provides
+    fun provideWebSocketImpl():WebSocketImpl{
+        return WebSocketImpl()
     }
 
     @Provides

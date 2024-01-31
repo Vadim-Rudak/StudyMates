@@ -5,6 +5,7 @@ import com.vr.app.sh.domain.UseCase.*
 import com.vr.app.sh.ui.base.*
 import dagger.Module
 import dagger.Provides
+import javax.inject.Singleton
 
 @Module
 class AppModule(val context: Context) {
@@ -47,12 +48,20 @@ class AppModule(val context: Context) {
     @Provides
     fun provideAuthorizationViewModelFactory(
         context: Context,
+        connectToWebSocket: ConnectToWebSocket,
         cleanUser: CleanUser,
         downloadUserPhoto: DownloadUserPhoto,
         authorization: Authorization,
         saveUser: SaveUser
     ): AuthorizationViewModelFactory {
-        return AuthorizationViewModelFactory(context,cleanUser,downloadUserPhoto,authorization, saveUser)
+        return AuthorizationViewModelFactory(context,connectToWebSocket,cleanUser,downloadUserPhoto,authorization, saveUser)
+    }
+
+    @Provides
+    fun provideCustomWorkerFactory(
+        connectToWebSocket: ConnectToWebSocket
+    ):CustomWorkerFactory{
+        return CustomWorkerFactory(connectToWebSocket)
     }
 
     @Provides

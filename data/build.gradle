@@ -32,6 +32,13 @@ android {
 
 dependencies {
 
+    //workmanager
+    implementation 'androidx.work:work-runtime-ktx:2.8.1'
+
+    //add websockets
+    implementation 'tech.gusavila92:java-android-websocket-client:1.2.2'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
     //Add retrofit2 and okhttp3
     implementation "com.squareup.retrofit2:retrofit:2.9.0"
     implementation "com.squareup.okhttp3:okhttp:4.7.2"

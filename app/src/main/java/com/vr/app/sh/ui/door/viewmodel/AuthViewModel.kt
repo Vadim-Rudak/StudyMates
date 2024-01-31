@@ -8,12 +8,16 @@ import android.util.Log
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
 import com.vr.app.sh.R
 import com.vr.app.sh.domain.UseCase.Authorization
 import com.vr.app.sh.domain.UseCase.CleanUser
+import com.vr.app.sh.domain.UseCase.ConnectToWebSocket
 import com.vr.app.sh.domain.UseCase.DownloadUserPhoto
 import com.vr.app.sh.domain.UseCase.SaveUser
 import com.vr.app.sh.ui.other.UseAlert
+import com.vr.app.sh.worker.ChatWorker
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -21,7 +25,15 @@ import kotlinx.coroutines.flow.collectIndexed
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class AuthViewModel(private val resources: Resources, private val cleanUser: CleanUser, private val downloadUserPhoto: DownloadUserPhoto, val authorization: Authorization, private val saveUser: SaveUser,private val internetConnect:Boolean): ViewModel() {
+class AuthViewModel(
+    private val resources: Resources,
+    private val connectToWebSocket: ConnectToWebSocket,
+    private val cleanUser: CleanUser,
+    private val downloadUserPhoto: DownloadUserPhoto,
+    val authorization: Authorization,
+    private val saveUser: SaveUser,
+    private val internetConnect:Boolean
+): ViewModel() {
 
     private val loadingAlert = UseAlert.loading(
         resources.getString(R.string.alrLoadingAuthTitel),

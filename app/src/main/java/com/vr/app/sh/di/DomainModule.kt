@@ -3,6 +3,7 @@ package com.vr.app.sh.di
 import com.vr.app.sh.data.api.BookInternetRepoImpl
 import com.vr.app.sh.data.api.InternetRepoImpl
 import com.vr.app.sh.data.api.PhotoInternetRepoImpl
+import com.vr.app.sh.data.api.webSocket.WebSocketImpl
 import com.vr.app.sh.data.storage.room.repo.*
 import com.vr.app.sh.data.storage.sharedprefs.*
 import com.vr.app.sh.domain.UseCase.*
@@ -11,6 +12,11 @@ import dagger.Provides
 
 @Module
 class DomainModule {
+
+    @Provides
+    fun provideConnectToWebSocket(webSocketImpl: WebSocketImpl):ConnectToWebSocket{
+        return ConnectToWebSocket(webSocketImpl)
+    }
 
     @Provides
     fun provideSaveBookListInBD(bookRepoImpl: BookRepoImpl):SaveBookListInBD{

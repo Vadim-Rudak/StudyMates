@@ -37,6 +37,13 @@ android {
 
 dependencies {
 
+    //workmanager dependancies //kotlin+coroutine
+    implementation 'androidx.work:work-runtime-ktx:2.8.1'
+
+    //add websockets
+    implementation 'tech.gusavila92:java-android-websocket-client:1.2.2'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
     implementation "dev.chrisbanes.insetter:insetter:0.6.1"
     implementation 'com.davemorrissey.labs:subsampling-scale-image-view-androidx:3.10.0'
 

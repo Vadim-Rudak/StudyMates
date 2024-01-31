@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.vr.app.sh">
 
     <uses-feature
@@ -25,13 +26,21 @@
         android:theme="@style/Theme.SH"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ui.messages.view.ChatWithUser"
+            android:exported="false"
+            android:theme="@style/Theme.Chats"/>
+        <activity
+            android:name=".ui.messages.view.AllChats"
+            android:exported="false"
+            android:theme="@style/Theme.Chats" />
+        <activity
             android:name=".ui.profile.view.EditSchoolInfo"
             android:exported="false"
-            android:theme="@style/Theme.Menu"/>
+            android:theme="@style/Theme.Menu" />
         <activity
             android:name=".ui.profile.view.EditAuthInfo"
             android:exported="false"
-            android:theme="@style/Theme.Menu"/>
+            android:theme="@style/Theme.Menu" />
         <activity
             android:name=".ui.profile.view.EditProfile"
             android:exported="false"
@@ -107,6 +116,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <provider
+            android:name="androidx.startup.InitializationProvider"
+            android:authorities="com.vr.app.sh.androidx-startup"
+            android:exported="false"
+            tools:node="merge">
+            <meta-data
+                android:name="androidx.work.WorkManagerInitializer"
+                android:value="androidx.startup"
+                tools:node="remove" />
+        </provider>
+
     </application>
 
 </manifest>
