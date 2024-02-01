@@ -3,10 +3,13 @@ package com.vr.app.sh.di
 import com.vr.app.sh.data.api.BookInternetRepoImpl
 import com.vr.app.sh.data.api.InternetRepoImpl
 import com.vr.app.sh.data.api.PhotoInternetRepoImpl
+import com.vr.app.sh.data.api.UserInternetRepoImpl
 import com.vr.app.sh.data.api.webSocket.WebSocketImpl
 import com.vr.app.sh.data.storage.room.repo.*
 import com.vr.app.sh.data.storage.sharedprefs.*
 import com.vr.app.sh.domain.UseCase.*
+import com.vr.app.sh.domain.repository.internet.UserInternetRepo
+import com.vr.app.sh.domain.repository.local.user.UserRepo
 import dagger.Module
 import dagger.Provides
 
@@ -131,5 +134,10 @@ class DomainModule {
     @Provides
     fun provideVerificationUser(photoInternetRepoImpl: PhotoInternetRepoImpl):VerificationUserInServer{
         return VerificationUserInServer(photoInternetRepoImpl)
+    }
+
+    @Provides
+    fun provideGetUsersAndSaveLocal(userRepoImpl: UserRepoImpl,userInternetRepoImpl: UserInternetRepoImpl):GetUsersAndSaveLocal{
+        return GetUsersAndSaveLocal(userRepoImpl,userInternetRepoImpl)
     }
 }

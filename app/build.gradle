@@ -37,6 +37,8 @@ android {
 
 dependencies {
 
+    implementation 'com.squareup.picasso:picasso:2.8'
+
     //workmanager dependancies //kotlin+coroutine
     implementation 'androidx.work:work-runtime-ktx:2.8.1'
 

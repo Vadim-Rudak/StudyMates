@@ -1,5 +1,6 @@
 package com.vr.app.sh.ui.messages.view
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageButton
@@ -17,5 +18,11 @@ class AllChats : AppCompatActivity() {
         }
         val viewTitle = findViewById<TextView>(R.id.viewTitle)
         viewTitle.text = resources.getString(R.string.chatsTitle)
+        val btnAllUsers = findViewById<ImageButton>(R.id.btn_all_users)
+        btnAllUsers.setOnClickListener {
+            Intent(this,AllUsers::class.java).also {
+                startActivity(it)
+            }
+        }
     }
 }

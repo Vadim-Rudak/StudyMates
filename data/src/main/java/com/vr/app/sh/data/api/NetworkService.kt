@@ -7,6 +7,7 @@ import com.vr.app.sh.domain.model.Book
 import com.vr.app.sh.domain.model.Question
 import com.vr.app.sh.domain.model.Reg
 import com.vr.app.sh.domain.model.Test
+import com.vr.app.sh.domain.model.User
 import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
 import okhttp3.RequestBody
@@ -34,6 +35,9 @@ interface NetworkService {
     @Multipart
     @POST("/registration_mobile")
     suspend fun registration(@Part("user") requestBody: RequestBody,@Part user_photo: MultipartBody.Part?): Response<Reg>
+
+    @GET("/GetAllUsers")
+    suspend fun getAllUsers(): Response<List<User>>
 
     @POST("/add_result")
     suspend fun sendResult(@Body requestBody: RequestBody): Response<ResponseBody>

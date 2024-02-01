@@ -146,4 +146,9 @@ class AppModule(val context: Context) {
     ):VerificationViewModelFactory{
         return VerificationViewModelFactory(context,verificationUserInServer)
     }
+
+    @Provides
+    fun provideAllUsersViewModelFactory(context: Context,getUsersAndSaveLocal: GetUsersAndSaveLocal):AllUsersViewModelFactory{
+        return AllUsersViewModelFactory(context,getUsersAndSaveLocal)
+    }
 }

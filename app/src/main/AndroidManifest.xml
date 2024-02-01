@@ -16,7 +16,6 @@
     <application
         android:name=".app.App"
         android:allowBackup="true"
-        android:hardwareAccelerated="false"
         android:icon="@drawable/book_image"
         android:label="@string/app_name"
         android:largeHeap="true"
@@ -26,9 +25,13 @@
         android:theme="@style/Theme.SH"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ui.messages.view.AllUsers"
+            android:exported="false"
+            android:theme="@style/Theme.Chats" />
+        <activity
             android:name=".ui.messages.view.ChatWithUser"
             android:exported="false"
-            android:theme="@style/Theme.Chats"/>
+            android:theme="@style/Theme.Chats" />
         <activity
             android:name=".ui.messages.view.AllChats"
             android:exported="false"
@@ -127,7 +130,6 @@
                 android:value="androidx.startup"
                 tools:node="remove" />
         </provider>
-
     </application>
 
 </manifest>

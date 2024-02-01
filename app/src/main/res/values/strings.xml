@@ -333,6 +333,8 @@
     <string name="chatsSmallTitle1">Избранные</string>
     <string name="text_toolbar_AddChat">Добавление чата</string>
 
+    <!-- All Users -->
+    <string name="allUsersTitle">Список пользователей</string>
 
     <style name="CustomToolbar" parent="Theme.AppCompat">
 

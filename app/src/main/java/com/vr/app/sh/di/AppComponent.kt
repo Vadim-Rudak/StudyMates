@@ -3,6 +3,7 @@ package com.vr.app.sh.di
 import com.vr.app.sh.ui.books.view.*
 import com.vr.app.sh.ui.door.view.*
 import com.vr.app.sh.ui.menu.view.TopMenu
+import com.vr.app.sh.ui.messages.view.AllUsers
 import com.vr.app.sh.ui.profile.view.MyProfile
 import com.vr.app.sh.ui.tests.view.addTest.AddQuestion
 import com.vr.app.sh.ui.tests.view.listTests.FragmentListTests
@@ -29,4 +30,5 @@ interface AppComponent {
     fun injectMyProfile(myProfile: MyProfile)
 
     fun injectVerification(verification: Verification)
+    fun injectAllUsers(allUsers: AllUsers)
 }

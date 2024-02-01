@@ -5,12 +5,14 @@ import com.vr.app.sh.data.api.BookInternetRepoImpl
 import com.vr.app.sh.data.api.InternetRepoImpl
 import com.vr.app.sh.data.api.NetworkService
 import com.vr.app.sh.data.api.PhotoInternetRepoImpl
+import com.vr.app.sh.data.api.UserInternetRepoImpl
 import com.vr.app.sh.data.api.webSocket.WebSocketImpl
 import com.vr.app.sh.data.storage.room.RoomDB
 import com.vr.app.sh.data.storage.room.repo.BookRepoImpl
 import com.vr.app.sh.data.storage.room.repo.LessonsRepoImpl
 import com.vr.app.sh.data.storage.room.repo.QuestionsRepoImpl
 import com.vr.app.sh.data.storage.room.repo.TestRepoImpl
+import com.vr.app.sh.data.storage.room.repo.UserRepoImpl
 import com.vr.app.sh.data.storage.sharedprefs.CookiePreferences
 import com.vr.app.sh.data.storage.sharedprefs.UserPreferences
 import dagger.Module
@@ -37,6 +39,11 @@ class DataModule {
     @Provides
     fun provideBookInternetRepoImpl(context: Context, networkService: NetworkService): BookInternetRepoImpl {
         return BookInternetRepoImpl(context, networkService)
+    }
+
+    @Provides
+    fun provideUserInternetRepoImpl(context: Context, networkService: NetworkService): UserInternetRepoImpl {
+        return UserInternetRepoImpl(context, networkService)
     }
 
     @Provides
@@ -79,4 +86,8 @@ class DataModule {
         return TestRepoImpl(roomDB.testDAO())
     }
 
+    @Provides
+    fun provideUserRepoImpl(roomDB: RoomDB): UserRepoImpl {
+        return UserRepoImpl(roomDB.userDAO())
+    }
 }
