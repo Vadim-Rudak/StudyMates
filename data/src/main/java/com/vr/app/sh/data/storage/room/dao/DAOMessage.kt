@@ -16,7 +16,7 @@ interface DAOMessage {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertMessages(messages: List<MessageEntity>)
 
-    @Query("select * from Message WHERE chat_id = :chatId")
+    @Query("select * from Message WHERE chat_id = :chatId ORDER BY id DESC")
     fun getMessagesInChat(chatId:Int): Flow<List<MessageEntity>>
 
 }

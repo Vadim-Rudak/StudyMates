@@ -13,9 +13,17 @@ class ChatViewModelFactory(
     private val getMessagesInChat: GetMessagesInChat
 ): ViewModelProvider.Factory  {
 
+    private var idChat:Int = 0
+    private var userId:Int = 0
+
+    fun initChatId(chatId:Int,userId:Int){
+        idChat = chatId
+        this.userId = userId
+    }
+
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return if (modelClass.isAssignableFrom(ChatWithUserViewModel::class.java)) {
-            ChatWithUserViewModel(context,sendMessage,getMessagesInChat) as T
+            ChatWithUserViewModel(context,idChat,userId,sendMessage,getMessagesInChat) as T
         } else {
             throw IllegalArgumentException("ViewModel Not Found")
         }

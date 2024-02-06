@@ -1,4 +1,4 @@
-package com.vr.app.sh.ui.messages.allChats.adapter
+package com.vr.app.sh.ui.messages.chat.adapter
 
 import android.content.Context
 import android.graphics.Rect
@@ -6,7 +6,7 @@ import android.util.TypedValue
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
-class UserItemDecoration(val context: Context) : RecyclerView.ItemDecoration()  {
+class MessageItemDecoration(val context: Context) : RecyclerView.ItemDecoration()  {
 
     private var leftItem:Int = 4
     private var rightItem:Int = 4
@@ -18,7 +18,7 @@ class UserItemDecoration(val context: Context) : RecyclerView.ItemDecoration()  
         val lastItem = state.itemCount - 1
         outRect.top = topItem
         outRect.bottom = getSize(
-            if (itemPosition == lastItem){16}else{bottomItem}
+            if (itemPosition == lastItem){8}else{bottomItem}
         )
         outRect.left = getSize(leftItem)
         outRect.right = getSize(rightItem)

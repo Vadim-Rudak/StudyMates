@@ -51,6 +51,7 @@ class ChatsFragment : Fragment() {
         viewModel.adapter.setListener(object :ChatsViewAdapter.Listener{
             override fun click(userInChat: UserInChat) {
                 val intent = Intent(requireActivity(), ChatWithUser::class.java).apply {
+                    putExtra("chatId",userInChat.chatId)
                     putExtra("userId",userInChat.userId)
                     putExtra("userName",userInChat.user?.name)
                     putExtra("lastName",userInChat.user?.lastName)

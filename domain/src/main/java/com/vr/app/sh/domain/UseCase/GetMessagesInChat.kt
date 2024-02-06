@@ -6,8 +6,8 @@ import kotlinx.coroutines.flow.Flow
 
 class GetMessagesInChat(private val messageRepo: MessageRepo) {
 
-    fun execute(numDay:Int): Flow<List<Message>> {
-        return messageRepo.getMessagesInChat(numDay)
+    fun execute(idChat:Int): Flow<List<Message>> {
+        return messageRepo.getMessagesInChat(idChat)
     }
 
 }

@@ -38,7 +38,8 @@ class Message() {
         this.res = res
     }
 
-    constructor(userToSendId: Int, type: Int, res: String) : this() {
+    constructor(chatId: Int,userToSendId: Int, type: Int, res: String) : this() {
+        this.chatId = chatId
         this.userToSendId = userToSendId
         this.type = type
         this.res = res

@@ -8,9 +8,12 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.vr.app.sh.R
 import com.vr.app.sh.app.App
 import com.vr.app.sh.ui.base.ChatViewModelFactory
+import com.vr.app.sh.ui.messages.chat.adapter.MessageItemDecoration
 import com.vr.app.sh.ui.messages.chat.viewModel.ChatWithUserViewModel
 import javax.inject.Inject
 
@@ -28,8 +31,14 @@ class ChatWithUser : AppCompatActivity() {
 
         (applicationContext as App).appComponent.injectChat(this)
 
+        factory.initChatId(intent.getIntExtra("chatId",0),intent.getIntExtra("userId",0))
+
         viewModel = ViewModelProvider(this, factory)
             .get(ChatWithUserViewModel::class.java)
+
+        viewModel.listMessages.observe(this){
+            viewModel.adapter.setMessages(it)
+        }
 
         val sharedPrefs = getSharedPreferences("user_info", Context.MODE_PRIVATE)
 
@@ -41,6 +50,16 @@ class ChatWithUser : AppCompatActivity() {
         val nameUser = findViewById<TextView>(R.id.textUserName)
         nameUser.text = "${intent.extras?.getString("lastName")} ${intent.extras?.getString("userName")}"
 
+        val recyclerView = findViewById<RecyclerView>(R.id.listMessages)
+        val linearLayout = LinearLayoutManager(this)
+        linearLayout.reverseLayout = true
+        recyclerView.apply {
+            layoutManager = linearLayout
+            addItemDecoration(MessageItemDecoration(context))
+            adapter = viewModel.adapter
+        }
+
+
         val inputMessage = findViewById<EditText>(R.id.textMessage)
         val btnSend = findViewById<ImageButton>(R.id.btnSendMsg)
         btnSend.setOnClickListener {
@@ -49,6 +68,8 @@ class ChatWithUser : AppCompatActivity() {
                 sharedPrefs.getInt("id",0),
                 intent.extras!!.getInt("userId"),
                 inputMessage.text.toString())
+            inputMessage.setText("")
+            inputMessage.clearFocus()
         }
     }
 }
