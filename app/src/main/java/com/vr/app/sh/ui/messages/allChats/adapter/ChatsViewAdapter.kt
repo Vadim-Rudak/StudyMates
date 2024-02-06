@@ -1,4 +1,4 @@
-package com.vr.app.sh.ui.messages.adapter
+package com.vr.app.sh.ui.messages.allChats.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -10,24 +10,24 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.android.material.imageview.ShapeableImageView
 import com.vr.app.sh.R
-import com.vr.app.sh.data.api.NetworkService.Companion.BASE_URL
-import com.vr.app.sh.domain.model.User
+import com.vr.app.sh.data.api.NetworkService
+import com.vr.app.sh.domain.model.messages.UserInChat
 
-class UsersViewAdapter(val context: Context) : RecyclerView.Adapter<UsersViewAdapter.ViewHolder>() {
+class ChatsViewAdapter(val context: Context) : RecyclerView.Adapter<ChatsViewAdapter.ViewHolder>() {
     private var listener: Listener? = null
-    private var usersList:List<User> = listOf()
+    private var listMyChats:List<UserInChat> = listOf()
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setUsers(users: List<User>) {
-        this.usersList = users
+    fun setMyChats(listUsers: List<UserInChat>) {
+        listMyChats = listUsers
         notifyDataSetChanged()
     }
 
     interface Listener {
-        fun selectUser(idUser:Int)
+        fun click(userInChat: UserInChat)
     }
 
-    override fun getItemCount(): Int = usersList.size
+    override fun getItemCount(): Int = listMyChats.size
 
 
     fun setListener(listener: Listener?) {
@@ -36,7 +36,7 @@ class UsersViewAdapter(val context: Context) : RecyclerView.Adapter<UsersViewAda
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val cv = LayoutInflater.from(parent.context)
-            .inflate(R.layout.card_button_user, parent, false) as CardView
+            .inflate(R.layout.card_item_my_chat, parent, false) as CardView
         return ViewHolder(cv)
     }
 
@@ -48,15 +48,15 @@ class UsersViewAdapter(val context: Context) : RecyclerView.Adapter<UsersViewAda
         val userName = cardView.findViewById<TextView>(R.id.textName)
 
         Glide.with(context)
-            .load(BASE_URL + "/Photo?id=" + usersList[position].id)
+            .load(NetworkService.BASE_URL + "/Photo?id=" + listMyChats[position].userId)
             .placeholder(R.drawable.bg_with_radius_12dp)
             .into(userPhoto)
 
-        userName.text = "${usersList[position].lastName} ${usersList[position].name}"
+        userName.text = "${listMyChats[position].user?.lastName} ${listMyChats[position].user?.name}"
 
         cardView.setOnClickListener {
             if (listener != null) {
-                listener!!.selectUser(usersList[position].id)
+                listener!!.click(listMyChats[position])
             }
         }
     }

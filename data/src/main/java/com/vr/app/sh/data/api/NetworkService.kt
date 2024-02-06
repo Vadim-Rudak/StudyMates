@@ -8,6 +8,8 @@ import com.vr.app.sh.domain.model.Question
 import com.vr.app.sh.domain.model.Reg
 import com.vr.app.sh.domain.model.Test
 import com.vr.app.sh.domain.model.User
+import com.vr.app.sh.domain.model.messages.Message
+import com.vr.app.sh.domain.model.response.InfoChat
 import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
 import okhttp3.RequestBody
@@ -64,6 +66,15 @@ interface NetworkService {
 
     @GET("/AllBooks")
     suspend fun getAllBooks(): Response<List<Book>>
+
+    @POST("/sendMessage")
+    suspend fun sendMessage(@Query("name_chat") nameChat:String,@Query("id_user_create") idUserCreate:Int,@Body requestBody: RequestBody): Response<Message>
+
+    @GET("/getChatsInfo")
+    suspend fun getInfoChat(@Query("user_id") userId:Int,@Query("id_last_message") idLastMessage:Int): Response<InfoChat>
+
+    @GET("/SelectUsers")
+    suspend fun getSelectedUsers(@Query("list") userListId:ArrayList<Int>): Response<List<User>>
 
     companion object {
 

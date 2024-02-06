@@ -5,7 +5,6 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
-import com.vr.app.sh.data.storage.model.QuestionEntity
 import com.vr.app.sh.data.storage.model.users.UserEntity
 import kotlinx.coroutines.flow.Flow
 
@@ -20,6 +19,9 @@ interface DAOUser {
 
     @Query("DELETE FROM User")
     fun deleteAllRow()
+
+    @Query("select * from User WHERE id = :userId")
+    fun findUser(userId:Int): UserEntity
 
     @Transaction
     suspend fun saveNewUsers(listUsers: List<UserEntity>){

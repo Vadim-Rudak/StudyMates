@@ -4,8 +4,7 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.vr.app.sh.domain.UseCase.GetUsersAndSaveLocal
-import com.vr.app.sh.ui.books.viewmodel.SubjectsViewModel
-import com.vr.app.sh.ui.messages.viewmodel.AllUsersViewModel
+import com.vr.app.sh.ui.messages.allUsers.viewModel.AllUsersViewModel
 
 class AllUsersViewModelFactory(
     private val context: Context,

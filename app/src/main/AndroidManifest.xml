@@ -25,15 +25,15 @@
         android:theme="@style/Theme.SH"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".ui.messages.view.AllUsers"
+            android:name=".ui.messages.allUsers.view.AllUsers"
             android:exported="false"
             android:theme="@style/Theme.Chats" />
         <activity
-            android:name=".ui.messages.view.ChatWithUser"
+            android:name=".ui.messages.chat.view.ChatWithUser"
             android:exported="false"
             android:theme="@style/Theme.Chats" />
         <activity
-            android:name=".ui.messages.view.AllChats"
+            android:name=".ui.messages.allChats.view.AllChats"
             android:exported="false"
             android:theme="@style/Theme.Chats" />
         <activity

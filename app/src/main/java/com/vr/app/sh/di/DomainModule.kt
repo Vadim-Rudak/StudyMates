@@ -1,6 +1,7 @@
 package com.vr.app.sh.di
 
 import com.vr.app.sh.data.api.BookInternetRepoImpl
+import com.vr.app.sh.data.api.ChatInternetRepoImpl
 import com.vr.app.sh.data.api.InternetRepoImpl
 import com.vr.app.sh.data.api.PhotoInternetRepoImpl
 import com.vr.app.sh.data.api.UserInternetRepoImpl
@@ -139,5 +140,20 @@ class DomainModule {
     @Provides
     fun provideGetUsersAndSaveLocal(userRepoImpl: UserRepoImpl,userInternetRepoImpl: UserInternetRepoImpl):GetUsersAndSaveLocal{
         return GetUsersAndSaveLocal(userRepoImpl,userInternetRepoImpl)
+    }
+
+    @Provides
+    fun provideSendMessage(chatInternetRepoImpl: ChatInternetRepoImpl):SendMessage{
+        return SendMessage(chatInternetRepoImpl)
+    }
+
+    @Provides
+    fun provideGetMyChats(usersInChatRepoImpl: UsersInChatRepoImpl):GetMyChats{
+        return GetMyChats(usersInChatRepoImpl)
+    }
+
+    @Provides
+    fun provideGetMessagesInChat(messagesRepoImpl: MessagesRepoImpl):GetMessagesInChat{
+        return GetMessagesInChat(messagesRepoImpl)
     }
 }

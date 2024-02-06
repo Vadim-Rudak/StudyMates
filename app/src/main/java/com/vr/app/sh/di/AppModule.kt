@@ -3,9 +3,9 @@ package com.vr.app.sh.di
 import android.content.Context
 import com.vr.app.sh.domain.UseCase.*
 import com.vr.app.sh.ui.base.*
+
 import dagger.Module
 import dagger.Provides
-import javax.inject.Singleton
 
 @Module
 class AppModule(val context: Context) {
@@ -150,5 +150,22 @@ class AppModule(val context: Context) {
     @Provides
     fun provideAllUsersViewModelFactory(context: Context,getUsersAndSaveLocal: GetUsersAndSaveLocal):AllUsersViewModelFactory{
         return AllUsersViewModelFactory(context,getUsersAndSaveLocal)
+    }
+
+    @Provides
+    fun provideChatWithUserViewModelFactory(
+        context: Context,
+        sendMessage: SendMessage,
+        getMessagesInChat: GetMessagesInChat
+    ):ChatViewModelFactory{
+        return ChatViewModelFactory(context,sendMessage,getMessagesInChat)
+    }
+
+    @Provides
+    fun provideMyChatsViewModelFactory(
+        context: Context,
+        getMyChats: GetMyChats
+    ):MyChatsViewModelFactory{
+        return MyChatsViewModelFactory(context,getMyChats)
     }
 }

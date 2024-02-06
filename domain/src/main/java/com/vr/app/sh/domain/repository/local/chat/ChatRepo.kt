@@ -6,5 +6,4 @@ interface ChatRepo {
 
     suspend fun insertChat(chat:Chat)
     suspend fun insertChats(listChats:List<Chat>)
-
 }

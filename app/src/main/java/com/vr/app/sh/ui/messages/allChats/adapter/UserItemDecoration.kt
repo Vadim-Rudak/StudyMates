@@ -1,4 +1,4 @@
-package com.vr.app.sh.ui.messages.adapter
+package com.vr.app.sh.ui.messages.allChats.adapter
 
 import android.content.Context
 import android.graphics.Rect

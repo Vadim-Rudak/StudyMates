@@ -8,15 +8,20 @@ import com.vr.app.sh.data.storage.model.BookEntity
 import com.vr.app.sh.data.storage.model.LessonEntity
 import com.vr.app.sh.data.storage.model.QuestionEntity
 import com.vr.app.sh.data.storage.model.TestEntity
+import com.vr.app.sh.data.storage.model.chat.MessageEntity
+import com.vr.app.sh.data.storage.model.chat.UsersInChatEntity
 import com.vr.app.sh.data.storage.model.users.UserEntity
 import com.vr.app.sh.data.storage.room.dao.DAOBook
 import com.vr.app.sh.data.storage.room.dao.DAOLessons
+import com.vr.app.sh.data.storage.room.dao.DAOMessage
 import com.vr.app.sh.data.storage.room.dao.DAOQuestions
 import com.vr.app.sh.data.storage.room.dao.DAOTest
+import com.vr.app.sh.data.storage.room.dao.DAOUsersInChat
 import com.vr.app.sh.data.storage.room.dao.user.DAOUser
 
 @Database(
-    entities = [BookEntity::class, LessonEntity::class, QuestionEntity::class, TestEntity::class,UserEntity::class],
+    entities = [BookEntity::class, LessonEntity::class, QuestionEntity::class, TestEntity::class,UserEntity::class,
+               UsersInChatEntity::class,MessageEntity::class],
     version = 1,
     exportSchema = false
 )
@@ -27,6 +32,8 @@ abstract class RoomDB : RoomDatabase() {
     abstract fun questionsDAO(): DAOQuestions
     abstract fun lessonsDAO(): DAOLessons
     abstract fun userDAO(): DAOUser
+    abstract fun usersInChatDAO(): DAOUsersInChat
+    abstract fun messagesDAO(): DAOMessage
 
     companion object {
         // Singleton prevents multiple instances of database opening at the
