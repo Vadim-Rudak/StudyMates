@@ -1,27 +1,16 @@
 package com.vr.app.sh.data.storage.room
 
 import android.content.Context
-import androidx.room.Database
-import androidx.room.Room
-import androidx.room.RoomDatabase
-import com.vr.app.sh.data.storage.model.BookEntity
-import com.vr.app.sh.data.storage.model.LessonEntity
-import com.vr.app.sh.data.storage.model.QuestionEntity
-import com.vr.app.sh.data.storage.model.TestEntity
-import com.vr.app.sh.data.storage.model.chat.MessageEntity
-import com.vr.app.sh.data.storage.model.chat.UsersInChatEntity
+import androidx.room.*
+import com.vr.app.sh.data.storage.model.*
+import com.vr.app.sh.data.storage.model.chat.*
 import com.vr.app.sh.data.storage.model.users.UserEntity
-import com.vr.app.sh.data.storage.room.dao.DAOBook
-import com.vr.app.sh.data.storage.room.dao.DAOLessons
-import com.vr.app.sh.data.storage.room.dao.DAOMessage
-import com.vr.app.sh.data.storage.room.dao.DAOQuestions
-import com.vr.app.sh.data.storage.room.dao.DAOTest
-import com.vr.app.sh.data.storage.room.dao.DAOUsersInChat
+import com.vr.app.sh.data.storage.room.dao.*
 import com.vr.app.sh.data.storage.room.dao.user.DAOUser
 
 @Database(
     entities = [BookEntity::class, LessonEntity::class, QuestionEntity::class, TestEntity::class,UserEntity::class,
-               UsersInChatEntity::class,MessageEntity::class],
+               UsersInChatEntity::class,MessageEntity::class,FavoriteUserEntity::class],
     version = 1,
     exportSchema = false
 )
@@ -34,6 +23,7 @@ abstract class RoomDB : RoomDatabase() {
     abstract fun userDAO(): DAOUser
     abstract fun usersInChatDAO(): DAOUsersInChat
     abstract fun messagesDAO(): DAOMessage
+    abstract fun favoriteUserDAO(): DAOFavoriteUser
 
     companion object {
         // Singleton prevents multiple instances of database opening at the

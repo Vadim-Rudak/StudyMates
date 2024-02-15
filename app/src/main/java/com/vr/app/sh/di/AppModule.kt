@@ -168,4 +168,11 @@ class AppModule(val context: Context) {
     ):MyChatsViewModelFactory{
         return MyChatsViewModelFactory(context,getMyChats)
     }
+
+    @Provides
+    fun provideSelectChatsViewModelFactory(
+        context: Context
+    ):SelectChatsViewModelFactory{
+        return SelectChatsViewModelFactory(context)
+    }
 }

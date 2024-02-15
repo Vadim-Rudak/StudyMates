@@ -7,17 +7,38 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.vr.app.sh.R
+import com.vr.app.sh.app.App
+import com.vr.app.sh.ui.base.MyChatsViewModelFactory
+import com.vr.app.sh.ui.base.SelectChatsViewModelFactory
+import com.vr.app.sh.ui.menu.viewModel.MenuViewModel
 import com.vr.app.sh.ui.messages.allChats.adapter.ChatsPagerAdapter
+import com.vr.app.sh.ui.messages.allChats.adapter.SelectedUsersItemDecoration
+import com.vr.app.sh.ui.messages.allChats.viewModel.AllChatsViewModel
+import com.vr.app.sh.ui.messages.allChats.viewModel.MyChatsViewModel
 import com.vr.app.sh.ui.messages.allUsers.view.AllUsers
 
 class AllChats : AppCompatActivity() {
+
+    @javax.inject.Inject
+    lateinit var factory: SelectChatsViewModelFactory
+
+    lateinit var viewModel: AllChatsViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_all_chats)
+
+        (applicationContext as App).appComponent.injectAllChats(this)
+
+        viewModel = ViewModelProvider(this, factory)
+            .get(AllChatsViewModel::class.java)
 
         val btnBack = findViewById<ImageButton>(R.id.btn_back)
         btnBack.setOnClickListener {
@@ -30,6 +51,13 @@ class AllChats : AppCompatActivity() {
             Intent(this, AllUsers::class.java).also {
                 startActivity(it)
             }
+        }
+
+        val recyclerSelectedUsers = findViewById<RecyclerView>(R.id.listSelectedUsers)
+        recyclerSelectedUsers.apply {
+            layoutManager = LinearLayoutManager(context,RecyclerView.HORIZONTAL, false)
+            addItemDecoration(SelectedUsersItemDecoration(context))
+            adapter = viewModel.adapterSelectedUsers
         }
 
         val tabBtnMyChats = findViewById<MaterialButton>(R.id.tapBtnChats)
