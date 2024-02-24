@@ -1,4 +1,4 @@
-# Project SH
+# Project StudyMates
 
 This project is designed for school students.
 
