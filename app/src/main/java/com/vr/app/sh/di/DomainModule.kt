@@ -1,16 +1,10 @@
 package com.vr.app.sh.di
 
-import com.vr.app.sh.data.api.BookInternetRepoImpl
-import com.vr.app.sh.data.api.ChatInternetRepoImpl
-import com.vr.app.sh.data.api.InternetRepoImpl
-import com.vr.app.sh.data.api.PhotoInternetRepoImpl
-import com.vr.app.sh.data.api.UserInternetRepoImpl
+import com.vr.app.sh.data.api.*
 import com.vr.app.sh.data.api.webSocket.WebSocketImpl
 import com.vr.app.sh.data.storage.room.repo.*
 import com.vr.app.sh.data.storage.sharedprefs.*
 import com.vr.app.sh.domain.UseCase.*
-import com.vr.app.sh.domain.repository.internet.UserInternetRepo
-import com.vr.app.sh.domain.repository.local.user.UserRepo
 import dagger.Module
 import dagger.Provides
 
@@ -18,167 +12,69 @@ import dagger.Provides
 class DomainModule {
 
     @Provides
-    fun provideConnectToWebSocket(webSocketImpl: WebSocketImpl):ConnectToWebSocket{
-        return ConnectToWebSocket(webSocketImpl)
-    }
-
+    fun provideConnectToWebSocket(webSocketImpl: WebSocketImpl) = ConnectToWebSocket(webSocketImpl)
     @Provides
-    fun provideSaveBookListInBD(bookRepoImpl: BookRepoImpl):SaveBookListInBD{
-        return SaveBookListInBD(bookRepoImpl)
-    }
-
+    fun provideSaveBookListInBD(bookRepoImpl: BookRepoImpl) = SaveBookListInBD(bookRepoImpl)
     @Provides
-    fun provideGetListAllBook(bookInternetRepoImpl: BookInternetRepoImpl):GetAllBookListInternet{
-        return GetAllBookListInternet(bookInternetRepoImpl)
-    }
-
+    fun provideGetListAllBook(bookInternetRepoImpl: BookInternetRepoImpl) = GetAllBookListInternet(bookInternetRepoImpl)
     @Provides
-    fun provideSaveTestsInBD(testRepoImpl: TestRepoImpl):SaveTestsInBD{
-        return SaveTestsInBD(testRepoImpl)
-    }
-
+    fun provideSaveTestsInBD(testRepoImpl: TestRepoImpl) = SaveTestsInBD(testRepoImpl)
     @Provides
-    fun provideGetInfoTests(internetRepoImpl: InternetRepoImpl):GetListTestsInternet{
-        return GetListTestsInternet(internetRepoImpl)
-    }
-
+    fun provideGetInfoTests(internetRepoImpl: InternetRepoImpl) = GetListTestsInternet(internetRepoImpl)
     @Provides
-    fun provideSendTest(internetRepoImpl: InternetRepoImpl):SendTestInfo{
-        return SendTestInfo(internetRepoImpl)
-    }
-
+    fun provideSendTest(internetRepoImpl: InternetRepoImpl) = SendTestInfo(internetRepoImpl)
     @Provides
-    fun provideSendQuestions(internetRepoImpl: InternetRepoImpl):SendQuestions{
-        return SendQuestions(internetRepoImpl)
-    }
-
+    fun provideSendQuestions(internetRepoImpl: InternetRepoImpl) = SendQuestions(internetRepoImpl)
     @Provides
-    fun provideSendBook(bookInternetRepoImpl: BookInternetRepoImpl):SendBook{
-        return SendBook(bookInternetRepoImpl)
-    }
-
+    fun provideSendBook(bookInternetRepoImpl: BookInternetRepoImpl) = SendBook(bookInternetRepoImpl)
     @Provides
-    fun provideAuthorization(internetRepoImpl: InternetRepoImpl):Authorization{
-        return Authorization(internetRepoImpl)
-    }
-
+    fun provideAuthorization(internetRepoImpl: InternetRepoImpl) = Authorization(internetRepoImpl)
     @Provides
-    fun provideAuthSetUserInBD(userPreferences: UserPreferences):SaveUser{
-        return SaveUser(userPreferences)
-    }
-
+    fun provideAuthSetUserInBD(userPreferences: UserPreferences) = SaveUser(userPreferences)
     @Provides
-    fun provideGetListBookInClass(bookRepoImpl: BookRepoImpl):GetListBookInClass{
-        return GetListBookInClass(bookRepoImpl)
-    }
-
+    fun provideGetListBookInClass(bookRepoImpl: BookRepoImpl) = GetListBookInClass(bookRepoImpl)
     @Provides
-    fun provideGetBookFile(bookInternetRepoImpl: BookInternetRepoImpl):GetBookFile{
-        return GetBookFile(bookInternetRepoImpl)
-    }
-
+    fun provideGetBookFile(bookInternetRepoImpl: BookInternetRepoImpl) = GetBookFile(bookInternetRepoImpl)
     @Provides
-    fun provideRegistration(internetRepoImpl: InternetRepoImpl):Registration{
-        return Registration(internetRepoImpl)
-    }
-
+    fun provideRegistration(internetRepoImpl: InternetRepoImpl) = Registration(internetRepoImpl)
     @Provides
-    fun provideSendResult(internetRepoImpl: InternetRepoImpl):SendResult{
-        return SendResult(internetRepoImpl)
-    }
-
+    fun provideSendResult(internetRepoImpl: InternetRepoImpl) = SendResult(internetRepoImpl)
     @Provides
-    fun provideGetListTestsInClass(testRepoImpl: TestRepoImpl):GetListTestsInClass{
-        return GetListTestsInClass(testRepoImpl)
-    }
-
+    fun provideGetListTestsInClass(testRepoImpl: TestRepoImpl) = GetListTestsInClass(testRepoImpl)
     @Provides
-    fun provideGetListQuestions(internetRepoImpl: InternetRepoImpl):GetListQuestions{
-        return GetListQuestions(internetRepoImpl)
-    }
-
+    fun provideGetListQuestions(internetRepoImpl: InternetRepoImpl) = GetListQuestions(internetRepoImpl)
     @Provides
-    fun provideSaveQuestionsInBD(questionsRepoImpl: QuestionsRepoImpl):SaveQuestionsInBD{
-        return SaveQuestionsInBD(questionsRepoImpl)
-    }
-
+    fun provideSaveQuestionsInBD(questionsRepoImpl: QuestionsRepoImpl) = SaveQuestionsInBD(questionsRepoImpl)
     @Provides
-    fun provideGetQuestionsFromBD(questionsRepoImpl: QuestionsRepoImpl):GetListQuestionsBD{
-        return GetListQuestionsBD(questionsRepoImpl)
-    }
-
+    fun provideGetQuestionsFromBD(questionsRepoImpl: QuestionsRepoImpl) = GetListQuestionsBD(questionsRepoImpl)
     @Provides
-    fun provideGetLessonsInDay(lessonsRepoImpl: LessonsRepoImpl):GetLessonsInDay{
-        return GetLessonsInDay(lessonsRepoImpl)
-    }
-
+    fun provideGetLessonsInDay(lessonsRepoImpl: LessonsRepoImpl) = GetLessonsInDay(lessonsRepoImpl)
     @Provides
-    fun provideSaveLessonInBD(lessonsRepoImpl: LessonsRepoImpl):SaveLessonInBD{
-        return SaveLessonInBD(lessonsRepoImpl)
-    }
-
+    fun provideSaveLessonInBD(lessonsRepoImpl: LessonsRepoImpl) = SaveLessonInBD(lessonsRepoImpl)
     @Provides
-    fun provideDownloadPhoto(photoInternetRepoImpl: PhotoInternetRepoImpl):DownloadUserPhoto{
-        return DownloadUserPhoto(photoInternetRepoImpl)
-    }
-
+    fun provideDownloadPhoto(photoInternetRepoImpl: PhotoInternetRepoImpl) = DownloadUserPhoto(photoInternetRepoImpl)
     @Provides
-    fun provideClearUser(userPreferences: UserPreferences):CleanUser{
-        return CleanUser(userPreferences)
-    }
-
+    fun provideClearUser(userPreferences: UserPreferences) = CleanUser(userPreferences)
     @Provides
-    fun provideClearCookie(cookiePreferences: CookiePreferences):CleanCookie{
-        return CleanCookie(cookiePreferences)
-    }
-
+    fun provideClearCookie(cookiePreferences: CookiePreferences) = CleanCookie(cookiePreferences)
     @Provides
-    fun provideVerificationUser(photoInternetRepoImpl: PhotoInternetRepoImpl):VerificationUserInServer{
-        return VerificationUserInServer(photoInternetRepoImpl)
-    }
-
+    fun provideVerificationUser(photoInternetRepoImpl: PhotoInternetRepoImpl) = VerificationUserInServer(photoInternetRepoImpl)
     @Provides
-    fun provideGetUsersAndSaveLocal(userRepoImpl: UserRepoImpl,userInternetRepoImpl: UserInternetRepoImpl):GetUsersAndSaveLocal{
-        return GetUsersAndSaveLocal(userRepoImpl,userInternetRepoImpl)
-    }
-
+    fun provideGetUsersAndSaveLocal(userRepoImpl: UserRepoImpl,userInternetRepoImpl: UserInternetRepoImpl) = GetUsersAndSaveLocal(userRepoImpl,userInternetRepoImpl)
     @Provides
-    fun provideSendMessage(chatInternetRepoImpl: ChatInternetRepoImpl):SendMessage{
-        return SendMessage(chatInternetRepoImpl)
-    }
-
+    fun provideSendMessage(chatInternetRepoImpl: ChatInternetRepoImpl) = SendMessage(chatInternetRepoImpl)
     @Provides
-    fun provideGetMyChats(usersInChatRepoImpl: UsersInChatRepoImpl):GetMyChats{
-        return GetMyChats(usersInChatRepoImpl)
-    }
-
+    fun provideGetMyChats(usersInChatRepoImpl: UsersInChatRepoImpl) = GetMyChats(usersInChatRepoImpl)
     @Provides
-    fun provideGetMessagesInChat(messagesRepoImpl: MessagesRepoImpl):GetMessagesInChat{
-        return GetMessagesInChat(messagesRepoImpl)
-    }
-
+    fun provideGetMessagesInChat(messagesRepoImpl: MessagesRepoImpl) = GetMessagesInChat(messagesRepoImpl)
     @Provides
-    fun provideAddFavoriteUsers(favoriteRepoImpl: FavoriteRepoImpl):AddFavoriteUser{
-        return AddFavoriteUser(favoriteRepoImpl)
-    }
-
+    fun provideAddFavoriteUsers(favoriteRepoImpl: FavoriteRepoImpl) = AddFavoriteUser(favoriteRepoImpl)
     @Provides
-    fun provideGetFavoriteUsers(favoriteRepoImpl: FavoriteRepoImpl):GetFavoriteUsers{
-        return GetFavoriteUsers(favoriteRepoImpl)
-    }
-
+    fun provideGetFavoriteUsers(favoriteRepoImpl: FavoriteRepoImpl) = GetFavoriteUsers(favoriteRepoImpl)
     @Provides
-    fun provideGetUsersToSelect(favoriteRepoImpl: FavoriteRepoImpl):GetUsersToSelect{
-        return GetUsersToSelect(favoriteRepoImpl)
-    }
-
+    fun provideGetUsersToSelect(favoriteRepoImpl: FavoriteRepoImpl) = GetUsersToSelect(favoriteRepoImpl)
     @Provides
-    fun provideDeleteFavoriteUser(favoriteRepoImpl: FavoriteRepoImpl):DeleteFavoriteUser{
-        return DeleteFavoriteUser(favoriteRepoImpl)
-    }
-
+    fun provideDeleteFavoriteUser(favoriteRepoImpl: FavoriteRepoImpl) = DeleteFavoriteUser(favoriteRepoImpl)
     @Provides
-    fun provideGetChatIdByUser(usersInChatRepoImpl: UsersInChatRepoImpl):GetChatIdByUser{
-        return GetChatIdByUser(usersInChatRepoImpl)
-    }
+    fun provideGetChatIdByUser(usersInChatRepoImpl: UsersInChatRepoImpl) = GetChatIdByUser(usersInChatRepoImpl)
 }
