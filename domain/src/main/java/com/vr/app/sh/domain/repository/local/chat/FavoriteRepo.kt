@@ -6,4 +6,6 @@ import kotlinx.coroutines.flow.Flow
 interface FavoriteRepo {
     suspend fun insert(favoriteUser: FavoriteUser)
     fun getAll(): Flow<List<FavoriteUser>>
+    fun getToSelect():Flow<List<FavoriteUser>>
+    fun deleteByUserId(id:Int)
 }

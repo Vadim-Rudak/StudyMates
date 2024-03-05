@@ -24,4 +24,7 @@ interface DAOUsersInChat {
             "User.gender as _usergender,User.datebirthday as _userdatebirthday, User.citylive as _usercitylive " +
             "from UsersInChat u inner join User on u.user_id = User.id;")
     fun getAllChatsWithUsers(): Flow<List<UsersInChatEntity>>
+
+    @Query("select u.chat_id from UsersInChat u where u.user_id = :userId;")
+    fun getChatId(userId:Int):Int?=null
 }

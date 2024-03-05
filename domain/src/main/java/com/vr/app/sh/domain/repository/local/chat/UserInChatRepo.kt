@@ -12,4 +12,6 @@ interface UserInChatRepo {
 
     fun getChatsWithUsers(): Flow<List<UserInChat>>
 
+    fun getChatIdByUser(userId:Int):Int?=null
+
 }

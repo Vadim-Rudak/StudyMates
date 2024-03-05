@@ -10,9 +10,9 @@ import com.vr.app.sh.domain.model.messages.UserInChat
 
 @Entity(tableName = "UsersInChat")
 class UsersInChatEntity(
-    @PrimaryKey(autoGenerate = false) val id:Int = 0,
-    @ColumnInfo(name = "chat_id") val chatId:Int = 0,
-    @ColumnInfo(name = "user_id") val userId:Int = 0,
+    @PrimaryKey(autoGenerate = false) val id:Int? = null,
+    @ColumnInfo(name = "chat_id") val chatId:Int? = null,
+    @ColumnInfo(name = "user_id") val userId:Int? = null,
     @ColumnInfo(name = "group") val group:Int? = 0,
     @Embedded (prefix = "_user") var userEntity: UserEntity? = null
 ){

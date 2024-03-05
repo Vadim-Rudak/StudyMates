@@ -62,8 +62,8 @@ class ClientWebSocket(
                     //see users in local bd and download from server
                     val listIds:ArrayList<Int> = arrayListOf()
                     listChats.forEach {
-                        if (daoUser.findUser(it.userId)==null){
-                            listIds.add(it.userId)
+                        if (daoUser.findUser(it.userId!!)==null){
+                            listIds.add(it.userId!!)
                         }
                     }
 

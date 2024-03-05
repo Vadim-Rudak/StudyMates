@@ -8,7 +8,7 @@ import com.vr.app.sh.data.storage.model.users.UserEntity
 
 @Entity(tableName = "FavoriteUser")
 data class FavoriteUserEntity(
-    @PrimaryKey(autoGenerate = true) val id:Int = 0,
-    @ColumnInfo(name = "user_id") val userId:Int = 0,
+    @PrimaryKey(autoGenerate = true) val id:Int? = null,
+    @ColumnInfo(name = "user_id") val userId:Int? = null,
     @Embedded(prefix = "_user") var userEntity: UserEntity? = null
 )

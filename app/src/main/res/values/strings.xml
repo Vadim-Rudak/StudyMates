@@ -357,6 +357,9 @@
         <item name="android:layout_weight">1</item>
     </style>
 
+    <!-- Add favorite users -->
+    <string name="favoriteUsersTitle">Добавление в избранные</string>
+
 
     <!-- All Users -->
     <string name="allUsersTitle">Список пользователей</string>

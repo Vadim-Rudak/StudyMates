@@ -171,8 +171,20 @@ class AppModule(val context: Context) {
 
     @Provides
     fun provideSelectChatsViewModelFactory(
-        context: Context
+        context: Context,
+        getFavoriteUsers: GetFavoriteUsers,
+        getChatIdByUser: GetChatIdByUser
     ):SelectChatsViewModelFactory{
-        return SelectChatsViewModelFactory(context)
+        return SelectChatsViewModelFactory(context,getFavoriteUsers,getChatIdByUser)
+    }
+
+    @Provides
+    fun provideFavoriteUsersViewModelFactory(
+        context: Context,
+        getUsersToSelect: GetUsersToSelect,
+        addFavoriteUser: AddFavoriteUser,
+        deleteFavoriteUser: DeleteFavoriteUser
+    ):FavoriteUsersViewModelFactory{
+        return FavoriteUsersViewModelFactory(context,getUsersToSelect,addFavoriteUser,deleteFavoriteUser)
     }
 }

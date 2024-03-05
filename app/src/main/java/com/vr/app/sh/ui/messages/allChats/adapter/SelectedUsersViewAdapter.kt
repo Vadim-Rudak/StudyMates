@@ -7,13 +7,16 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.google.android.material.imageview.ShapeableImageView
 import com.vr.app.sh.R
+import com.vr.app.sh.data.api.NetworkService
 import com.vr.app.sh.domain.model.User
+import com.vr.app.sh.domain.model.messages.FavoriteUser
 
 class SelectedUsersViewAdapter(val context: Context) : RecyclerView.Adapter<SelectedUsersViewAdapter.ViewHolder>() {
     private var listener: Listener? = null
-    private var listUsers:List<User> = listOf(User(),User(), User())
+    private var listUsers:List<FavoriteUser> = listOf()
 
     companion object {
         private const val TYPE_USER = 0
@@ -21,26 +24,24 @@ class SelectedUsersViewAdapter(val context: Context) : RecyclerView.Adapter<Sele
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setUsers(listUsers: List<User>) {
+    fun setUsers(listUsers: List<FavoriteUser>) {
         this.listUsers = listUsers
         notifyDataSetChanged()
     }
 
     interface Listener {
-        fun click(user: User)
+        fun click(user:User)
         fun selectUser()
     }
 
-    override fun getItemCount(): Int = listUsers.size + 1
+    override fun getItemCount() = listUsers.size + 1
 
 
     fun setListener(listener: Listener?) {
         this.listener = listener
     }
 
-    override fun getItemViewType(position: Int): Int {
-        return if (position==0) TYPE_ADD else TYPE_USER
-    }
+    override fun getItemViewType(position: Int) = if (position==0) TYPE_ADD else TYPE_USER
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutRes = if (viewType==1) R.layout.card_item_add_user else R.layout.card_item_select_user
@@ -57,10 +58,12 @@ class SelectedUsersViewAdapter(val context: Context) : RecyclerView.Adapter<Sele
             val userPhoto = cardView.findViewById<ShapeableImageView>(R.id.userPhoto)
             val userName = cardView.findViewById<TextView>(R.id.textName)
 
-//        Glide.with(context)
-//            .load(NetworkService.BASE_URL + "/Photo?id=" + listUsers[position].id)
-//            .placeholder(R.drawable.bg_with_radius_12dp)
-//            .into(userPhoto)
+            userName.text = listUsers[position-1].user?.name
+
+            Glide.with(context)
+                .load(NetworkService.BASE_URL + "/Photo?id=" + (listUsers[position-1].user?.id ?: 0))
+                .placeholder(R.drawable.bg_with_radius_12dp)
+                .into(userPhoto)
         }
 
         cardView.setOnClickListener {
@@ -68,7 +71,7 @@ class SelectedUsersViewAdapter(val context: Context) : RecyclerView.Adapter<Sele
                 if (position==0){
                     listener!!.selectUser()
                 }else{
-                    listener!!.click(listUsers[position])
+                    listener!!.click(listUsers[position-1].user!!)
                 }
             }
         }

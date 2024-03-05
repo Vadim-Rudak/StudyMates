@@ -25,6 +25,10 @@
         android:theme="@style/Theme.SH"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ui.messages.allChats.view.AddFavoriteUsers"
+            android:exported="false"
+            android:theme="@style/Theme.Chats"/>
+        <activity
             android:name=".ui.messages.allUsers.view.AllUsers"
             android:exported="false"
             android:theme="@style/Theme.Chats" />

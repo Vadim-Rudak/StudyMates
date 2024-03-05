@@ -15,13 +15,10 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.vr.app.sh.R
 import com.vr.app.sh.app.App
-import com.vr.app.sh.ui.base.MyChatsViewModelFactory
 import com.vr.app.sh.ui.base.SelectChatsViewModelFactory
-import com.vr.app.sh.ui.menu.viewModel.MenuViewModel
 import com.vr.app.sh.ui.messages.allChats.adapter.ChatsPagerAdapter
 import com.vr.app.sh.ui.messages.allChats.adapter.SelectedUsersItemDecoration
 import com.vr.app.sh.ui.messages.allChats.viewModel.AllChatsViewModel
-import com.vr.app.sh.ui.messages.allChats.viewModel.MyChatsViewModel
 import com.vr.app.sh.ui.messages.allUsers.view.AllUsers
 
 class AllChats : AppCompatActivity() {
@@ -58,6 +55,10 @@ class AllChats : AppCompatActivity() {
             layoutManager = LinearLayoutManager(context,RecyclerView.HORIZONTAL, false)
             addItemDecoration(SelectedUsersItemDecoration(context))
             adapter = viewModel.adapterSelectedUsers
+        }
+
+        viewModel.openNewActivity.observe(this){
+            startActivity(it)
         }
 
         val tabBtnMyChats = findViewById<MaterialButton>(R.id.tapBtnChats)

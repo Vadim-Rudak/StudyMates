@@ -42,4 +42,5 @@ class UsersInChatRepoImpl(private val daoUsersInChat: DAOUsersInChat):UserInChat
         }
     }
 
+    override fun getChatIdByUser(userId: Int) = daoUsersInChat.getChatId(userId)
 }

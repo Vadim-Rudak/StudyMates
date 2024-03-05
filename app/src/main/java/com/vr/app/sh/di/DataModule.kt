@@ -11,6 +11,7 @@ import com.vr.app.sh.data.api.webSocket.ClientWebSocket
 import com.vr.app.sh.data.api.webSocket.WebSocketImpl
 import com.vr.app.sh.data.storage.room.RoomDB
 import com.vr.app.sh.data.storage.room.repo.BookRepoImpl
+import com.vr.app.sh.data.storage.room.repo.FavoriteRepoImpl
 import com.vr.app.sh.data.storage.room.repo.LessonsRepoImpl
 import com.vr.app.sh.data.storage.room.repo.MessagesRepoImpl
 import com.vr.app.sh.data.storage.room.repo.QuestionsRepoImpl
@@ -108,6 +109,11 @@ class DataModule {
     @Provides
     fun provideMessagesRepoImpl(roomDB: RoomDB): MessagesRepoImpl {
         return MessagesRepoImpl(roomDB.messagesDAO())
+    }
+
+    @Provides
+    fun provideFavoriteRepoImpl(roomDB: RoomDB): FavoriteRepoImpl {
+        return FavoriteRepoImpl(roomDB.favoriteUserDAO())
     }
 
     @Provides

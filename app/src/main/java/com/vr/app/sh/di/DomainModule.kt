@@ -156,4 +156,29 @@ class DomainModule {
     fun provideGetMessagesInChat(messagesRepoImpl: MessagesRepoImpl):GetMessagesInChat{
         return GetMessagesInChat(messagesRepoImpl)
     }
+
+    @Provides
+    fun provideAddFavoriteUsers(favoriteRepoImpl: FavoriteRepoImpl):AddFavoriteUser{
+        return AddFavoriteUser(favoriteRepoImpl)
+    }
+
+    @Provides
+    fun provideGetFavoriteUsers(favoriteRepoImpl: FavoriteRepoImpl):GetFavoriteUsers{
+        return GetFavoriteUsers(favoriteRepoImpl)
+    }
+
+    @Provides
+    fun provideGetUsersToSelect(favoriteRepoImpl: FavoriteRepoImpl):GetUsersToSelect{
+        return GetUsersToSelect(favoriteRepoImpl)
+    }
+
+    @Provides
+    fun provideDeleteFavoriteUser(favoriteRepoImpl: FavoriteRepoImpl):DeleteFavoriteUser{
+        return DeleteFavoriteUser(favoriteRepoImpl)
+    }
+
+    @Provides
+    fun provideGetChatIdByUser(usersInChatRepoImpl: UsersInChatRepoImpl):GetChatIdByUser{
+        return GetChatIdByUser(usersInChatRepoImpl)
+    }
 }

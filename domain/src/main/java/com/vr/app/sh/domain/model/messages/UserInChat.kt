@@ -8,15 +8,15 @@ class UserInChat() {
 
     @SerializedName("id")
     @Expose
-    var id:Int = 0
+    var id:Int? = 0
 
     @SerializedName("chatid")
     @Expose
-    var chatId:Int = 0
+    var chatId:Int? = 0
 
     @SerializedName("userid")
     @Expose
-    var userId:Int = 0
+    var userId:Int? = 0
 
     @SerializedName("gr")
     @Expose
@@ -24,7 +24,7 @@ class UserInChat() {
 
     var user:User? = null
 
-    constructor(id: Int, chatId: Int, userId: Int, group: Int?) : this() {
+    constructor(id: Int?, chatId: Int?, userId: Int?, group: Int?) : this() {
         this.id = id
         this.chatId = chatId
         this.userId = userId

@@ -3,6 +3,7 @@ package com.vr.app.sh.di
 import com.vr.app.sh.ui.books.view.*
 import com.vr.app.sh.ui.door.view.*
 import com.vr.app.sh.ui.menu.view.TopMenu
+import com.vr.app.sh.ui.messages.allChats.view.AddFavoriteUsers
 import com.vr.app.sh.ui.messages.allChats.view.AllChats
 import com.vr.app.sh.ui.messages.allChats.view.ChatsFragment
 import com.vr.app.sh.ui.messages.allUsers.view.AllUsers
@@ -37,4 +38,5 @@ interface AppComponent {
     fun injectChat(chatWithUser: ChatWithUser)
     fun injectMyChats(chatsFragment: ChatsFragment)
     fun injectAllChats(allChats: AllChats)
+    fun injectFavoriteUsers(addFavoriteUsers: AddFavoriteUsers)
 }
