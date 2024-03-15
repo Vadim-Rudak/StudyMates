@@ -58,13 +58,6 @@ class AppModule(val context: Context) {
     }
 
     @Provides
-    fun provideCustomWorkerFactory(
-        connectToWebSocket: ConnectToWebSocket
-    ):CustomWorkerFactory{
-        return CustomWorkerFactory(connectToWebSocket)
-    }
-
-    @Provides
     fun provideBooksViewModelFactory(
         context: Context,
         getListBookInClass: GetListBookInClass,

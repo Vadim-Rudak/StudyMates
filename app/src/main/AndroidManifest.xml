@@ -113,6 +113,9 @@
             android:name=".ui.door.view.Reg"
             android:exported="false"
             android:theme="@style/Theme.Reg" />
+        <service
+            android:name=".worker.WebSocketForegroundService"
+            android:exported="false" />
         <activity
             android:name=".ui.door.view.Splash"
             android:exported="true"
