@@ -378,6 +378,13 @@
     <string name="chatNotMsg">Напиши первый</string>
     <string name="chatHintInput">Сообщение</string>
 
+    <!-- Group chats -->
+    <string name="groupChatTitle">Новая группа</string>
+    <string name="groupChatInputName">Название группы</string>
+    <string name="groupChatBtnAddUsers">+ добавить участников</string>
+    <string name="groupChatBtnSave">создать</string>
+
+
     <!-- Toast Messages -->
     <string name="toastOkReg">Пользователь успешно зарегистрирован</string>
 

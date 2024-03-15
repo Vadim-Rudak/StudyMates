@@ -20,6 +20,7 @@ import com.vr.app.sh.ui.messages.allChats.adapter.ChatsPagerAdapter
 import com.vr.app.sh.ui.messages.allChats.adapter.SelectedUsersItemDecoration
 import com.vr.app.sh.ui.messages.allChats.viewModel.AllChatsViewModel
 import com.vr.app.sh.ui.messages.allUsers.view.AllUsers
+import com.vr.app.sh.ui.other.customAlert.addGroupAlert
 
 class AllChats : AppCompatActivity() {
 
@@ -64,6 +65,9 @@ class AllChats : AppCompatActivity() {
         val tabBtnMyChats = findViewById<MaterialButton>(R.id.tapBtnChats)
         val tabBtnMyGroups = findViewById<MaterialButton>(R.id.tapBtnGroups)
         val fab = findViewById<FloatingActionButton>(R.id.FabChats)
+        fab.setOnClickListener {
+            addGroupAlert(intent).show(supportFragmentManager,"AlertAddGroupChat")
+        }
 
         val viewPager = findViewById<ViewPager2>(R.id.pager_chats)
         viewPager.adapter = ChatsPagerAdapter(this)
