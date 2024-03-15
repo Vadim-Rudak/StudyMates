@@ -11,7 +11,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.work.Configuration
 import androidx.work.Constraints
 import androidx.work.OneTimeWorkRequestBuilder
-import androidx.work.PeriodicWorkRequest
 import androidx.work.WorkManager
 import com.google.android.material.textfield.TextInputEditText
 import com.vr.app.sh.R
@@ -23,7 +22,6 @@ import com.vr.app.sh.ui.menu.view.TopMenu
 import com.vr.app.sh.ui.other.RegistrationInfo
 import com.vr.app.sh.ui.other.UseAlert.Companion.infoMessage
 import com.vr.app.sh.worker.ChatWorker
-import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class Authoriz : AppCompatActivity() {

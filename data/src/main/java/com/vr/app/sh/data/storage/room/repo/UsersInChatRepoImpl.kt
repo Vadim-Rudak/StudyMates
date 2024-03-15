@@ -1,5 +1,6 @@
 package com.vr.app.sh.data.storage.room.repo
 
+import android.util.Log
 import com.vr.app.sh.data.storage.model.chat.UsersInChatEntity
 import com.vr.app.sh.data.storage.room.dao.DAOUsersInChat
 import com.vr.app.sh.domain.model.messages.UserInChat
@@ -42,7 +43,7 @@ class UsersInChatRepoImpl(private val daoUsersInChat: DAOUsersInChat):UserInChat
         }
     }
 
-    override fun getChatIdByUser(userId: Int):UserInChat{
-        return daoUsersInChat.getChatId(userId).toUserInChat()
+    override fun getChatIdByUser(userId: Int):UserInChat?{
+        return daoUsersInChat.getChatId(userId)?.toUserInChat()
     }
 }

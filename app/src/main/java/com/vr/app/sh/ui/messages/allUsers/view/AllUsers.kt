@@ -1,6 +1,5 @@
 package com.vr.app.sh.ui.messages.allUsers.view
 
-import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.TextView
@@ -10,11 +9,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.vr.app.sh.R
 import com.vr.app.sh.app.App
-import com.vr.app.sh.domain.model.User
 import com.vr.app.sh.ui.base.AllUsersViewModelFactory
 import com.vr.app.sh.ui.messages.allUsers.adapter.UserItemDecoration
-import com.vr.app.sh.ui.messages.allUsers.adapter.UsersViewAdapter
-import com.vr.app.sh.ui.messages.chat.view.ChatWithUser
 import com.vr.app.sh.ui.messages.allUsers.viewModel.AllUsersViewModel
 import javax.inject.Inject
 
@@ -52,16 +48,8 @@ class AllUsers : AppCompatActivity() {
             viewModel.adapter.setUsers(it)
         }
 
-        viewModel.adapter.setListener(object : UsersViewAdapter.Listener{
-            override fun selectUser(user: User) {
-                val intent = Intent(this@AllUsers, ChatWithUser::class.java).apply {
-                    putExtra("userId",user.id)
-                    putExtra("userName",user.name)
-                    putExtra("lastName",user.lastName)
-                }
-                startActivity(intent)
-            }
-        })
-
+        viewModel.openChat.observe(this){
+            startActivity(it)
+        }
     }
 }

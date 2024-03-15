@@ -41,9 +41,9 @@ class AllChatsViewModel(
         }
         adapterSelectedUsers.setListener(object:SelectedUsersViewAdapter.Listener{
             override fun click(user: User) {
-                CoroutineScope(Dispatchers.IO).launch {
+                job = CoroutineScope(Dispatchers.IO).launch {
                     val intent = Intent(context, ChatWithUser::class.java).apply {
-                        putExtra("chatId",getChatIdByUser.execute(user.id).chatId)
+                        putExtra("chatId", getChatIdByUser.execute(user.id)?.chatId)
                         putExtra("userId",user.id)
                         putExtra("userName",user.name)
                         putExtra("lastName",user.lastName)

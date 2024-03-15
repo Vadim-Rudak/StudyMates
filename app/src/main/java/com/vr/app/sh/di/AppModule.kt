@@ -141,8 +141,12 @@ class AppModule(val context: Context) {
     }
 
     @Provides
-    fun provideAllUsersViewModelFactory(context: Context,getUsersAndSaveLocal: GetUsersAndSaveLocal):AllUsersViewModelFactory{
-        return AllUsersViewModelFactory(context,getUsersAndSaveLocal)
+    fun provideAllUsersViewModelFactory(
+        context: Context,
+        getUsersAndSaveLocal: GetUsersAndSaveLocal,
+        getChatIdByUser: GetChatIdByUser
+    ):AllUsersViewModelFactory{
+        return AllUsersViewModelFactory(context,getUsersAndSaveLocal,getChatIdByUser)
     }
 
     @Provides
