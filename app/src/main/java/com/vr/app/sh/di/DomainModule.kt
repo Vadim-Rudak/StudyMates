@@ -77,4 +77,6 @@ class DomainModule {
     fun provideDeleteFavoriteUser(favoriteRepoImpl: FavoriteRepoImpl) = DeleteFavoriteUser(favoriteRepoImpl)
     @Provides
     fun provideGetChatIdByUser(usersInChatRepoImpl: UsersInChatRepoImpl) = GetChatIdByUser(usersInChatRepoImpl)
+    @Provides
+    fun provideSaveMessage(messagesRepoImpl: MessagesRepoImpl) = SaveMessage(messagesRepoImpl)
 }

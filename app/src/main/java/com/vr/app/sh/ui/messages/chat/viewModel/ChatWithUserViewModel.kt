@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.vr.app.sh.domain.UseCase.GetMessagesInChat
+import com.vr.app.sh.domain.UseCase.SaveMessage
 import com.vr.app.sh.domain.UseCase.SendMessage
 import com.vr.app.sh.domain.model.messages.Message
 import com.vr.app.sh.ui.messages.chat.adapter.ChatViewAdapter
@@ -15,9 +16,10 @@ import kotlinx.coroutines.launch
 
 class ChatWithUserViewModel(
     context: Context,
-    private val chatId:Int,
+    private var chatId:Int,
     userId:Int,
     private val sendMessage: SendMessage,
+    private val saveMessage: SaveMessage,
     private val getMessagesInChat: GetMessagesInChat
 ):ViewModel() {
 
@@ -31,14 +33,22 @@ class ChatWithUserViewModel(
 
     fun sendMessage(nameChat:String, idUser:Int, idUserToSend:Int, text:String){
         val message = Message(chatId,idUserToSend,1,text)
+        if (chatId == 0){
+            job?.cancel()
+        }
         job = CoroutineScope(Dispatchers.IO).launch {
-            sendMessage.execute(nameChat,idUser,message)
+            val msg = sendMessage.execute(nameChat,idUser,message)
+            if (chatId == 0){
+                message.chatId = msg.chatId
+                chatId = msg.chatId
+                getMsgInChat()
+            }
         }
     }
 
     private fun getMsgInChat(){
         job = CoroutineScope(Dispatchers.IO).launch {
-            getMessagesInChat.execute(chatId).collectIndexed { index, value ->
+            getMessagesInChat.execute(chatId).collectIndexed { _, value ->
                 listMessages.postValue(value)
             }
         }

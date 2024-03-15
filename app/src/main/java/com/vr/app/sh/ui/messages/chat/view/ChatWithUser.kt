@@ -3,13 +3,18 @@ package com.vr.app.sh.ui.messages.chat.view
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
+import android.view.View
+import android.view.animation.AnimationUtils
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.airbnb.lottie.LottieAnimationView
+import com.airbnb.lottie.LottieDrawable
 import com.vr.app.sh.R
 import com.vr.app.sh.app.App
 import com.vr.app.sh.ui.base.ChatViewModelFactory
@@ -36,7 +41,33 @@ class ChatWithUser : AppCompatActivity() {
         viewModel = ViewModelProvider(this, factory)
             .get(ChatWithUserViewModel::class.java)
 
+        val layoutNotMsg = findViewById<LinearLayout>(R.id.layoutNotMsg)
+        val animationFadeIn = AnimationUtils.loadAnimation(this, R.anim.anim_fade_in)
+        val anim = findViewById<LottieAnimationView>(R.id.animationView)
+        anim.apply {
+            startAnimation(animationFadeIn)
+            repeatCount = LottieDrawable.INFINITE
+            repeatMode = LottieDrawable.REVERSE
+            setAnimation("not_msg.json")
+        }.playAnimation()
+
+        val recyclerView = findViewById<RecyclerView>(R.id.listMessages)
+        val linearLayout = LinearLayoutManager(this)
+        linearLayout.reverseLayout = true
+        recyclerView.apply {
+            layoutManager = linearLayout
+            addItemDecoration(MessageItemDecoration(context))
+            adapter = viewModel.adapter
+        }
+
         viewModel.listMessages.observe(this){
+            if (it.isEmpty()){
+                layoutNotMsg.visibility = View.VISIBLE
+                recyclerView.visibility = View.GONE
+            }else{
+                layoutNotMsg.visibility = View.GONE
+                recyclerView.visibility = View.VISIBLE
+            }
             viewModel.adapter.setMessages(it)
         }
 
@@ -50,14 +81,6 @@ class ChatWithUser : AppCompatActivity() {
         val nameUser = findViewById<TextView>(R.id.textUserName)
         nameUser.text = "${intent.extras?.getString("lastName")} ${intent.extras?.getString("userName")}"
 
-        val recyclerView = findViewById<RecyclerView>(R.id.listMessages)
-        val linearLayout = LinearLayoutManager(this)
-        linearLayout.reverseLayout = true
-        recyclerView.apply {
-            layoutManager = linearLayout
-            addItemDecoration(MessageItemDecoration(context))
-            adapter = viewModel.adapter
-        }
 
 
         val inputMessage = findViewById<EditText>(R.id.textMessage)

@@ -374,6 +374,10 @@
         <item name="fontFamily">@font/fvg</item>
     </style>
 
+    <!-- Chat -->
+    <string name="chatNotMsg">Напиши первый</string>
+    <string name="chatHintInput">Сообщение</string>
+
     <!-- Toast Messages -->
     <string name="toastOkReg">Пользователь успешно зарегистрирован</string>
 

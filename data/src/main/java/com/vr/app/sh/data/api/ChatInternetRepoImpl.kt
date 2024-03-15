@@ -10,8 +10,8 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONObject
 
 class ChatInternetRepoImpl(val context: Context, private val networkService: NetworkService): ChatInternetRepo {
-    override suspend fun sendMessage(nameChat:String, idUserCreate:Int, message: Message) {
-        networkService.sendMessage(nameChat,idUserCreate,jsonMessage(message))
+    override suspend fun sendMessage(nameChat:String, idUserCreate:Int, message: Message):Message {
+        return networkService.sendMessage(nameChat,idUserCreate,jsonMessage(message)).body()!!
     }
 
     override suspend fun getChatsInfo(userId: Int, idLastMessage: Int): InfoChat {

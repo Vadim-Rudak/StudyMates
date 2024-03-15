@@ -153,9 +153,10 @@ class AppModule(val context: Context) {
     fun provideChatWithUserViewModelFactory(
         context: Context,
         sendMessage: SendMessage,
+        saveMessage: SaveMessage,
         getMessagesInChat: GetMessagesInChat
     ):ChatViewModelFactory{
-        return ChatViewModelFactory(context,sendMessage,getMessagesInChat)
+        return ChatViewModelFactory(context,sendMessage,saveMessage,getMessagesInChat)
     }
 
     @Provides
