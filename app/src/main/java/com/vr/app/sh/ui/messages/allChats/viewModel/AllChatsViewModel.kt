@@ -2,6 +2,7 @@ package com.vr.app.sh.ui.messages.allChats.viewModel
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.vr.app.sh.domain.UseCase.GetChatIdByUser
@@ -15,6 +16,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectIndexed
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class AllChatsViewModel(
     val context: Context,
@@ -39,13 +41,17 @@ class AllChatsViewModel(
         }
         adapterSelectedUsers.setListener(object:SelectedUsersViewAdapter.Listener{
             override fun click(user: User) {
-                val intent = Intent(context, ChatWithUser::class.java).apply {
-                    putExtra("chatId",getChatIdByUser.execute(user.id))
-                    putExtra("userId",user.id)
-                    putExtra("userName",user.name)
-                    putExtra("lastName",user.lastName)
+                CoroutineScope(Dispatchers.IO).launch {
+                    val intent = Intent(context, ChatWithUser::class.java).apply {
+                        putExtra("chatId",getChatIdByUser.execute(user.id).chatId)
+                        putExtra("userId",user.id)
+                        putExtra("userName",user.name)
+                        putExtra("lastName",user.lastName)
+                    }
+                    withContext(Dispatchers.Main) {
+                        openNewActivity.postValue(intent)
+                    }
                 }
-                openNewActivity.postValue(intent)
             }
 
             override fun selectUser() {
